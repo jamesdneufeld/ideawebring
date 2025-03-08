@@ -1,4 +1,4 @@
-gsap.registerPlugin(Draggable, InertiaPlugin);
+gsap.registerPlugin(Draggable);
 
 Draggable.create(".navigation-link", {
   type: "x,y",
