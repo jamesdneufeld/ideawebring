@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="./reset.css" />
     <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/Draggable.min.js"></script>
   </head>
   <body>
     <section class="hero">
@@ -16,10 +17,33 @@
     </section>
     <section class="main-section">
       <h2>Explore the ring!</h2>
-      <ul>
-        <li class="navigation-link">👋<a href="james/">James N.</a></li>
-        <li class="navigation-link">👋<a href="andy/">Andy P.</a></li>
-      </ul>
+      <div class="container">
+        <ul>
+          <li class="navigation-link">👋<a href="james/">James N.</a></li>
+          <li class="navigation-link">👋<a href="andy/">Andy P.</a></li>
+        </ul>
+        <div class="wrapper">
+          <div class="flair flair--4b">dfdf</div>
+        </div>
+      </div>
     </section>
+    <script>
+      gsap.registerPlugin(Draggable, InertiaPlugin);
+
+      Draggable.create(".flair--1", {
+        type: "x",
+        bounds: ".container",
+      });
+
+      Draggable.create(".flair--3b", {
+        type: "rotation",
+        inertia: true,
+      });
+
+      Draggable.create(".flair--4b", {
+        bounds: ".container",
+        inertia: true,
+      });
+    </script>
   </body>
 </html>
