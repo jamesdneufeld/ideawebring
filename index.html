@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="./reset.css" />
     <link rel="stylesheet" href="./style.css" />
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/Draggable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js" integrity="sha512-G7Wpe/pbg+zjyyM9HgQY6kacLAy+580lmA8DUXmZtioTI5FkaCRoLOaCLoeblrZABs7KZFD03cfSV9j7nmwxfw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </head>
   <body>
     <section class="hero">
@@ -17,33 +18,16 @@
     </section>
     <section class="main-section">
       <h2>Explore the ring!</h2>
-      <div class="container">
+      <div id="container" class="container">
         <ul>
-          <li class="navigation-link">👋<a href="james/">James N.</a></li>
-          <li class="navigation-link">👋<a href="andy/">Andy P.</a></li>
+          <li class="navigation-link" id="navigation-link">👋<a href="james/">James N.</a></li>
+          <li class="navigation-link" id="navigation-link">👋<a href="andy/">Andy P.</a></li>
         </ul>
         <div class="wrapper">
           <div class="flair flair--4b">dfdf</div>
         </div>
       </div>
     </section>
-    <script>
-      gsap.registerPlugin(Draggable, InertiaPlugin);
-
-      Draggable.create(".flair--1", {
-        type: "x",
-        bounds: ".container",
-      });
-
-      Draggable.create(".flair--3b", {
-        type: "rotation",
-        inertia: true,
-      });
-
-      Draggable.create(".flair--4b", {
-        bounds: ".container",
-        inertia: true,
-      });
-    </script>
+    <script src="./functions.js"></script>
   </body>
 </html>

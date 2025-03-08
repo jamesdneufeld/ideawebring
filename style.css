@@ -122,14 +122,6 @@ p {
 
 /* Test */
 
-html,
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-}
-
 .container {
   position: relative;
   width: 90vw;
@@ -143,7 +135,6 @@ body {
 }
 
 h4 {
-  /*   color: var(--mid); */
   position: absolute;
   width: 100%;
   left: 0;
