@@ -41,13 +41,24 @@ h1 {
   margin-bottom: 1.5rem;
 }
 
+h2 {
+  font-size: 3rem;
+  font-family: var(--main-heading);
+  margin-bottom: 1.5rem;
+}
+
 p {
   font-size: 1.625rem;
   font-family: var(--body-typeface);
   margin-bottom: 0.2rem;
   line-height: 1.2;
 }
-
+.navigation-link {
+  font-size: 1.325rem;
+  font-family: var(--body-typeface);
+  margin-bottom: 0.2rem;
+  line-height: 1.2;
+}
 .hero-headline {
   color: white;
 }
@@ -98,4 +109,12 @@ p {
   justify-content: center;
   text-align: center;
   width: 85%;
+}
+
+.main-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

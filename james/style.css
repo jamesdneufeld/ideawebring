@@ -41,6 +41,12 @@ h1 {
   margin-bottom: 1.5rem;
 }
 
+h2 {
+  font-size: 3rem;
+  font-family: var(--main-heading);
+  margin-bottom: 1.5rem;
+}
+
 p {
   font-size: 1.625rem;
   font-family: var(--body-typeface);
