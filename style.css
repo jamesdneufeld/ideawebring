@@ -16,7 +16,7 @@ html {
   --accent-color: #555;
   --body-typeface: "Rubik", sans-serif;
   --main-heading: "Staatliches", cursive;
-  --gradient: linear-gradient(45deg, #24aadb, #0c779e);
+  --gradient: linear-gradient(45deg, rgb(36, 170, 219), #0c779e);
 }
 
 body {
@@ -58,6 +58,10 @@ p {
   font-family: var(--body-typeface);
   margin-bottom: 0.2rem;
   line-height: 1.2;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  border: 3px solid white;
+  background: rgba(36, 170, 219, 1);
 }
 .hero-headline {
   color: white;
@@ -68,9 +72,6 @@ a {
   text-decoration: none;
   color: #000;
   font-weight: 600;
-}
-a:hover {
-  text-decoration: underline;
 }
 
 p {
@@ -124,38 +125,10 @@ p {
 
 .container {
   position: relative;
-  width: 90vw;
-  height: 90vh;
-  max-width: 90vh;
-  max-height: 90vw;
+  width: 90%;
+  height: 80vh;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: space-around;
-  border-radius: 9px;
-}
-
-h4 {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  right: 0;
-  bottom: 1rem;
-  text-align: center;
-  pointer-events: none;
-}
-
-.flair {
-  cursor: pointer;
-  width: 70px;
-  height: 70px;
-  max-height: 15vh;
-  max-width: 15vh;
-}
-
-.flair--3b {
-  background-image: url(https://assets.codepen.io/16327/ui-flair-2.png);
-}
-
-.flair--4b {
-  background-image: url(https://assets.codepen.io/16327/ui-flair-4.png);
+  justify-content: space-evenly;
 }
