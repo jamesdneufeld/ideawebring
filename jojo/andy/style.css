@@ -16,12 +16,12 @@ html {
   --accent-color: #555;
   --body-typeface: "Rubik", sans-serif;
   --main-heading: "Staatliches", cursive;
-  --gradient: linear-gradient(45deg, rgb(36, 170, 219), #0c779e);
+  --gradient: linear-gradient(45deg, #f17c58, #e94584, #24aadb, #27dbb1, #ffdc18, #ff3706);
 }
 
 body {
   font-family: var(--body-typeface);
-  color: #222;
+  color: black;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -41,35 +41,13 @@ h1 {
   margin-bottom: 1.5rem;
 }
 
-h2 {
-  font-size: 3.5rem;
-  font-family: var(--main-heading);
-  margin-bottom: 1.5rem;
-  color: white;
+p {
+  font-size: 1.625rem;
+  font-family: var(--body-typeface);
+  margin-bottom: 0.2rem;
+  line-height: 1.2;
 }
 
-p {
-  font-size: 1.325rem;
-  font-family: var(--body-typeface);
-  margin-bottom: 0.2rem;
-  line-height: 1.2;
-}
-.navigation-link {
-  font-size: 1.325rem;
-  font-family: var(--body-typeface);
-  margin-bottom: 0.2rem;
-  line-height: 1.2;
-  padding: 1rem 2rem;
-  border-radius: 2rem;
-  border: 3px solid white;
-  background: rgba(36, 170, 219, 1);
-  width: 15rem;
-  text-align: center;
-}
-.navigation-link:hover {
-  background: white;
-  border: 3px solid rgba(36, 170, 219, 1);
-}
 .hero-headline {
   color: white;
 }
@@ -77,8 +55,10 @@ p {
 /* Hyperlink Styles */
 a {
   text-decoration: none;
-  color: #000;
-  font-weight: 600;
+  color: #444;
+}
+a:hover {
+  color: #111;
 }
 
 p {
@@ -116,27 +96,5 @@ p {
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 85%;
-}
-
-.main-section {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #ffc83d;
-  padding: 3rem;
-}
-
-/* Test */
-
-.container {
-  width: 90%;
-  height: 80vh;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-evenly;
+  width: 80%;
 }
