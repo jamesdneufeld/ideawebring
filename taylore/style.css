@@ -1,5 +1,5 @@
 /* Typography imported from Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 
 html {
   box-sizing: border-box;
@@ -14,14 +14,13 @@ html {
 /* Styling Variables */
 :root {
   --accent-color: #555;
-  --body-typeface: "Rubik", sans-serif;
-  --main-heading: "Staatliches", cursive;
+  --body-typeface: "Space Grotesk", sans-serif;
   --gradient: linear-gradient(45deg, #f17c58, #e94584, #24aadb, #27dbb1, #ffdc18, #ff3706);
 }
 
 body {
   font-family: var(--body-typeface);
-  color: black;
+  color: white;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -37,8 +36,10 @@ img {
 
 h1 {
   font-size: 5rem;
-  font-family: var(--main-heading);
+  font-family: var(--body-typeface);
   margin-bottom: 1.5rem;
+  font-weight: 800;
+  text-transform: lowercase;
 }
 
 p {
@@ -46,19 +47,21 @@ p {
   font-family: var(--body-typeface);
   margin-bottom: 0.2rem;
   line-height: 1.2;
+  
 }
 
 .hero-headline {
   color: white;
+
 }
 
 /* Hyperlink Styles */
 a {
   text-decoration: none;
-  color: #444;
+  color: white;
 }
 a:hover {
-  color: #111;
+  color: rgb(197, 197, 197);
 }
 
 p {
@@ -96,5 +99,6 @@ p {
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 80%;
+  width: 40%;
+  
 }
