@@ -21,7 +21,6 @@ html {
     #ffcdbd,
     #ffe9f1,
     #24aadb,
-    hsl(166, 46%, 73%),
     #ca5b00,
     #a3604f
   );
@@ -49,6 +48,13 @@ h1 {
   font-size: 5rem;
   font-family: var(--main-heading);
   margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+  writing-mode: vertical-rl;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 p {
