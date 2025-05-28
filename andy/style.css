@@ -13,15 +13,23 @@ html {
 
 /* Styling Variables */
 :root {
-  --accent-color: #555;
-  --body-typeface: "Rubik", sans-serif;
-  --main-heading: "Staatliches", cursive;
-  --gradient: linear-gradient(45deg, #f17c58, #e94584, #24aadb, #27dbb1, #ffdc18, #ff3706);
+  --accent-color: #00799b;
+  --body-typeface: serif;
+  --main-heading: serif;
+  --gradient: linear-gradient(
+    45deg,
+    #ffcdbd,
+    #ffe9f1,
+    #24aadb,
+    hsl(166, 46%, 73%),
+    #ca5b00,
+    #a3604f
+  );
 }
 
 body {
   font-family: var(--body-typeface);
-  color: black;
+  color: rgb(135, 54, 0);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -49,7 +57,7 @@ p {
 }
 
 .hero-headline {
-  color: white;
+  color: rgb(0, 100, 181);
 }
 
 /* Hyperlink Styles */
