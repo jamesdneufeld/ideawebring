@@ -117,18 +117,25 @@ p {
 }
 
 
-.main-wrapper{
+.box-wrapper{
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: left; 
+  flex-direction: row;
+  justify-content: left;
+  align-items: flex-end; 
 
 }
 
 .box{ 
-  margin-bottom: 200px;
+   margin-bottom: 200px;
   padding: 15px;
   width: 19%;
   background-color: white
+}
+
+.pictures-wrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center; 
 }
