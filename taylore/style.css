@@ -45,11 +45,19 @@ h1 {
 }
 
 h2 {
-  font-size: 1.625rem;
-  margin-bottom: 0.2rem;
+  font-size: 1.7rem;
+  margin-bottom: 0.6rem;
   line-height: 1.2;
   font-weight: 400;
   
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  font-weight: 400;
+  color: rgb(218, 219, 194);
 }
 
 p {
@@ -99,6 +107,10 @@ p {
   }
 }
 
+.hero-top{
+margin-top: 30px;
+}
+
 .hero-headline-wrapper {
   display: flex;
   flex-direction: column;
@@ -122,7 +134,7 @@ p {
   border: solid 2px red;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
   justify-content: left;
   width: 23%;
 }
@@ -130,6 +142,7 @@ p {
 .box{ 
   border: solid 2px red;
   padding: 15px;
+  margin-bottom: 120px;
   background-color: white
 }
 
@@ -138,6 +151,6 @@ p {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: right;
+  justify-content: center;
   width: 100%;
 }
