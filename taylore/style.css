@@ -72,7 +72,7 @@ a:hover {
 }
 
 p {
-  margin-bottom: 0rem;
+  margin-bottom: auto;
 }
 
 /* Work Page Layout */
@@ -112,30 +112,32 @@ p {
 
 .main {
   min-height: 100vh;
+  display: flex;
+  flex-direction: row;
   background-size: cover;
   background-image: url(assets/grass.jpg);
 }
 
-
 .box-wrapper{
-  min-height: 100vh;
+  border: solid 2px red;
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: left;
-  align-items: flex-end; 
-
+  width: 23%;
 }
 
 .box{ 
-   margin-bottom: 200px;
+  border: solid 2px red;
   padding: 15px;
-  width: 19%;
   background-color: white
 }
 
 .pictures-wrapper{
+  border: solid 2px red;
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: right;
-  align-items: center; 
+  width: 100%;
 }
