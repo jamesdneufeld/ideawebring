@@ -114,6 +114,9 @@ margin-top: 2rem;
 .pictures1-wrapper{
   border: solid 2px red;
   width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 5rem;
 }
 
 .hero-headline-wrapper {
@@ -122,7 +125,8 @@ margin-top: 2rem;
   flex-direction: column;
   flex: 1;
   align-items: center;
-  justify-content: center;
+  justify-content: flext-start;
+  padding-top: 2rem;
   text-align: center;
   width: 40%;
 }
