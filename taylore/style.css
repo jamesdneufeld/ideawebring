@@ -111,7 +111,12 @@ p {
 margin-top: 30px;
 }
 
+.pictures1-wrapper{
+  border: solid 2px red;
+}
+
 .hero-headline-wrapper {
+  border: solid 2px red;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -119,7 +124,6 @@ margin-top: 30px;
   justify-content: center;
   text-align: center;
   width: 40%;
-  
 }
 
 .main {
@@ -146,7 +150,7 @@ margin-top: 30px;
   background-color: white
 }
 
-.pictures-wrapper{
+.pictures3-wrapper{
   border: solid 2px red;
   display: flex;
   flex-direction: row;
