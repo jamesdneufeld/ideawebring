@@ -16,7 +16,7 @@ html {
   --accent-color: #555;
   --body-typeface: "Rubik", sans-serif;
   --main-heading: "Staatliches", cursive;
-  --gradient: linear-gradient(45deg, #f17c58, #e94584, #24aadb, #27dbb1, #ffdc18, #ff3706);
+  --gradient: linear-gradient(45deg, #b8b8b8, #f3eaed, #464646);
 }
 
 body {
@@ -77,7 +77,7 @@ p {
   justify-content: center;
   background-size: 600%;
   background-image: var(--gradient);
-  animation: bg-animation 120s infinite alternate;
+  animation: bg-animation 30s infinite alternate;
 }
 
 @keyframes bg-animation {

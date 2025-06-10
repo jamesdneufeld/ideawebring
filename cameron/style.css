@@ -9,7 +9,9 @@ html {
 *:before,
 *:after {
   box-sizing: inherit;
+
 }
+
 
 /* Styling Variables */
 :root {
@@ -39,6 +41,7 @@ h1 {
   font-size: 5rem;
   font-family: var(--main-heading);
   margin-bottom: 1.5rem;
+
 }
 
 p {
@@ -55,20 +58,32 @@ p {
 /* Hyperlink Styles */
 a {
   text-decoration: none;
-  color: #444;
+  color: tomato; 
 }
 a:hover {
-  color: #111;
+  color: teal;
 }
 
 p {
   margin-bottom: 1rem;
+  color: darkslateblue;
 }
 
 /* Work Page Layout */
 
 /* Hero */
+.social-media{
+  display: flex; 
+  flex-direction: row;
+  justify-content: space-between;
+  align-items:center; 
+  width: 30%; 
+  border: solid 2px red;
+}
 
+.hero-headline{
+  color:darkslateblue; 
+}
 .hero {
   min-height: 100vh;
   display: flex;
@@ -76,8 +91,11 @@ p {
   align-items: center;
   justify-content: center;
   background-size: 600%;
-  background-image: var(--gradient);
-  animation: bg-animation 120s infinite alternate;
+  background-image: url(https://media1.tenor.com/m/nANqORN7qhQAAAAd/explosion-explode.gif);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  animation: bg-animation 6s ease-in-out;
 }
 
 @keyframes bg-animation {

@@ -1,5 +1,6 @@
 /* Typography imported from Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 html {
   box-sizing: border-box;
@@ -14,14 +15,14 @@ html {
 /* Styling Variables */
 :root {
   --accent-color: #555;
-  --body-typeface: "Rubik", sans-serif;
-  --main-heading: "Staatliches", cursive;
+  --body-typeface: "Space Mono", sans-serif;
+  --heading-typeface: "Space Grotesk", sans-serif;
   --gradient: linear-gradient(45deg, #f17c58, #e94584, #24aadb, #27dbb1, #ffdc18, #ff3706);
 }
 
 body {
   font-family: var(--body-typeface);
-  color: black;
+  color: white;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -37,32 +38,49 @@ img {
 
 h1 {
   font-size: 5rem;
-  font-family: var(--main-heading);
+  font-family: var(--heading-typeface);
   margin-bottom: 1.5rem;
+  font-weight: 800;
+  text-transform: lowercase;
+}
+
+h2 {
+  font-size: 1.7rem;
+  margin-bottom: 0.6rem;
+  line-height: 1.2;
+  font-weight: 400;
+  
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  font-weight: 400;
+  color: rgb(218, 219, 194);
 }
 
 p {
-  font-size: 1.625rem;
-  font-family: var(--body-typeface);
-  margin-bottom: 0.2rem;
-  line-height: 1.2;
+  color: #588013;
+  font-size: 1.2rem;
 }
 
 .hero-headline {
   color: white;
+
 }
 
 /* Hyperlink Styles */
 a {
   text-decoration: none;
-  color: #444;
+  color: white;
 }
 a:hover {
-  color: #111;
+  color: rgb(197, 197, 197);
 }
 
 p {
-  margin-bottom: 1rem;
+  margin-bottom: auto;
 }
 
 /* Work Page Layout */
@@ -75,9 +93,9 @@ p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-size: 600%;
-  background-image: var(--gradient);
-  animation: bg-animation 120s infinite alternate;
+  background-size: cover;
+  background-image: url(assets/moss.jpg);
+
 }
 
 @keyframes bg-animation {
@@ -89,12 +107,59 @@ p {
   }
 }
 
+.hero-top{
+margin-top: 2rem;
+}
+
+.pictures1-wrapper{
+  border: solid 2px red;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 5rem;
+}
+
 .hero-headline-wrapper {
+  border: solid 2px red;
   display: flex;
   flex-direction: column;
   flex: 1;
   align-items: center;
-  justify-content: center;
+  justify-content: flext-start;
+  padding-top: 2rem;
   text-align: center;
-  width: 80%;
+  width: 40%;
+}
+
+.main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  background-size: cover;
+  background-image: url(assets/grass2.jpg);
+}
+
+.box-wrapper{
+  border: solid 2px red;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width: 23%;
+}
+
+.box{ 
+  border: solid 2px red;
+  padding: 15px;
+  margin-bottom: 120px;
+  background-color: white
+}
+
+.pictures3-wrapper{
+  border: solid 2px red;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
