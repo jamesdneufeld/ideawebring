@@ -99,15 +99,16 @@ a:hover {
   color: black;
 }
 
-p {
+p,
+li {
   margin-bottom: 1rem;
 }
 
 /* Work Page Layout */
 
-/* Hero */
+/* Intro Section */
 
-.hero {
+.intro-section {
   min-height: 95vh;
   display: flex;
   flex-direction: column;
@@ -138,7 +139,7 @@ p {
   color: white;
 }
 
-.main-section {
+.explore-ring {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -148,7 +149,45 @@ p {
   padding: 3rem;
 }
 
-.main-header {
+.student-hub {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  padding: 3rem;
+}
+
+.what-is-webring {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: var(--gradient);
+  padding: 3rem;
+}
+.about-project {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #ffc83d;
+  padding: 3rem;
+}
+.how-it-works {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: var(--gradient);
+  padding: 3rem;
+}
+
+.text-section {
   display: flex;
   flex-direction: column;
   flex: 1;
