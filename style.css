@@ -55,7 +55,8 @@ h3 {
   color: white;
 }
 
-p {
+p,
+li {
   font-size: 1.325rem;
   font-family: var(--body-typeface);
   margin-bottom: 0.2rem;
