@@ -17,15 +17,6 @@ html {
   --body-typeface: "Open Sans", sans-serif;
   --main-heading: "Londrina Sketch", sans-serif;
   --sub-heading: "Syne Mono", serif;
-  --gradient: linear-gradient(
-    45deg,
-    #f17c58,
-    #e94584,
-    #24aadb,
-    #27dbb1,
-    #ffdc18,
-    #ff3706
-  );
 }
 
 body {
@@ -88,24 +79,20 @@ em {
 
 /* Hero */
 
-.hero {
+.section-a {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-size: 600%;
-  background-image: var(--gradient);
-  animation: bg-animation 120s infinite alternate;
 }
 
-@keyframes bg-animation {
-  0% {
-    background-position: 0%;
-  }
-  100% {
-    background-position: 100%;
-  }
+.section-b {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-headline-wrapper {
@@ -116,4 +103,13 @@ em {
   justify-content: center;
   text-align: center;
   width: 80%;
+  border: 10px solid darkgreen;
+}
+
+.footer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
