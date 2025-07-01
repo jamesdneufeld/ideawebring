@@ -108,18 +108,27 @@ p {
 }
 
 .hero-top{
-margin-top: 30px;
+margin-top: 2rem;
+}
+
+.pictures1-wrapper{
+  border: solid 2px red;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 5rem;
 }
 
 .hero-headline-wrapper {
+  border: solid 2px red;
   display: flex;
   flex-direction: column;
   flex: 1;
   align-items: center;
-  justify-content: center;
+  justify-content: flext-start;
+  padding-top: 2rem;
   text-align: center;
   width: 40%;
-  
 }
 
 .main {
@@ -127,7 +136,7 @@ margin-top: 30px;
   display: flex;
   flex-direction: row;
   background-size: cover;
-  background-image: url(assets/grass.jpg);
+  background-image: url(assets/grass2.jpg);
 }
 
 .box-wrapper{
@@ -135,7 +144,7 @@ margin-top: 30px;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  justify-content: left;
+  justify-content: flex-end;
   width: 23%;
 }
 
@@ -146,7 +155,7 @@ margin-top: 30px;
   background-color: white
 }
 
-.pictures-wrapper{
+.pictures3-wrapper{
   border: solid 2px red;
   display: flex;
   flex-direction: row;

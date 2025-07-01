@@ -48,22 +48,37 @@ h2 {
   color: white;
 }
 
-p {
+h3 {
+  font-size: 2rem;
+  font-family: var(--main-heading);
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+p,
+li {
   font-size: 1.325rem;
   font-family: var(--body-typeface);
   margin-bottom: 0.2rem;
-  line-height: 1.2;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.student {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .navigation-link {
+  display: block;
   font-size: 1.225rem;
   font-family: var(--body-typeface);
-  margin-bottom: 0.2rem;
+  margin-bottom: 1rem;
   line-height: 1.2;
   padding: 1rem 2rem;
   border-radius: 2rem;
   border: 3px solid white;
   background: rgba(36, 170, 219, 1);
-  width: 15rem;
   text-align: center;
 }
 .navigation-link:hover {
@@ -77,20 +92,25 @@ p {
 /* Hyperlink Styles */
 a {
   text-decoration: none;
-  color: #000;
+  color: white;
   font-weight: 600;
 }
 
-p {
+a:hover {
+  color: black;
+}
+
+p,
+li {
   margin-bottom: 1rem;
 }
 
 /* Work Page Layout */
 
-/* Hero */
+/* Intro Section */
 
-.hero {
-  min-height: 100vh;
+.intro-section {
+  min-height: 95vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -117,9 +137,10 @@ p {
   justify-content: center;
   text-align: center;
   width: 85%;
+  color: white;
 }
 
-.main-section {
+.explore-ring {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -129,14 +150,71 @@ p {
   padding: 3rem;
 }
 
-/* Test */
+.student-hub {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  padding: 3rem;
+}
+
+.what-is-webring {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: var(--gradient);
+  padding: 3rem;
+}
+.about-project {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #ffc83d;
+  padding: 3rem;
+}
+.how-it-works {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: var(--gradient);
+  padding: 3rem;
+}
+
+.text-section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 85%;
+}
+
+.main-footer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 85%;
+}
 
 .container {
   width: 90%;
-  height: 80vh;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
+  margin-bottom: 2rem;
+  padding: 1rem;
 }

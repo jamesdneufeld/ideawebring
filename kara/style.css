@@ -16,7 +16,7 @@ html {
   --accent-color: #555;
   --body-typeface: "Rubik", sans-serif;
   --main-heading: "Staatliches", cursive;
-  --gradient: linear-gradient(45deg, #f17c58, #e94584, #24aadb, #27dbb1, #ffdc18, #ff3706);
+  --gradient: linear-gradient(45deg, #3627db, #3627db, #061fff);
 }
 
 body {
