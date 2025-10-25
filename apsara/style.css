@@ -17,11 +17,8 @@ html {
   --body-typeface: "Rubik", sans-serif;
   --main-heading: "Verdana", sans-serif;
   --gradient: linear-gradient(45deg, #f17c58, #e94584, #24aadb, #27dbb1, #ffdc18, #ff3706);
-<<<<<<< HEAD
-  --solid-bg-color: #f0dbe0;
-=======
   --dark: #111;
->>>>>>> 6eef315fe38492937bd5a0b99a9cd1801fa3a272
+  --solid-bg-color: #f0dbe0;
 }
 
 body {
