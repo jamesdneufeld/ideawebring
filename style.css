@@ -212,7 +212,8 @@ li {
   background-image: var(--gradient);
   padding: 3rem;
 }
-.about-project {
+.about-project,
+.project-log-teaser {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
