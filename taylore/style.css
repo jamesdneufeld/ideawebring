@@ -1,6 +1,6 @@
 /* Typography imported from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
 html {
   box-sizing: border-box;
@@ -49,7 +49,6 @@ h2 {
   margin-bottom: 0.6rem;
   line-height: 1.2;
   font-weight: 400;
-  
 }
 
 h3 {
@@ -67,7 +66,6 @@ p {
 
 .hero-headline {
   color: white;
-
 }
 
 /* Hyperlink Styles */
@@ -95,7 +93,6 @@ p {
   justify-content: center;
   background-size: cover;
   background-image: url(assets/moss.jpg);
-
 }
 
 @keyframes bg-animation {
@@ -107,11 +104,11 @@ p {
   }
 }
 
-.hero-top{
-margin-top: 2rem;
+.hero-top {
+  margin-top: 2rem;
 }
 
-.pictures1-wrapper{
+.pictures1-wrapper {
   border: solid 2px red;
   width: 100%;
   display: flex;
@@ -139,7 +136,7 @@ margin-top: 2rem;
   background-image: url(assets/grass2.jpg);
 }
 
-.box-wrapper{
+.box-wrapper {
   border: solid 2px red;
   display: flex;
   flex-direction: row;
@@ -148,18 +145,72 @@ margin-top: 2rem;
   width: 23%;
 }
 
-.box{ 
+.box {
   border: solid 2px red;
   padding: 15px;
   margin-bottom: 120px;
-  background-color: white
+  background-color: white;
 }
 
-.pictures3-wrapper{
+.pictures3-wrapper {
   border: solid 2px red;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+
+footer {
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* ===========================================================
+   IDEA Web Ring Banner Styles
+   --------------------------------------
+   Styles for the inline “Previous | IDEA Web Ring | Next” 
+   navigation links (web ring). 
+
+   - Use with <nav class="webring" data-members="/webring-members-coding-club.json" data-hub="/"> container
+   - Links: .webring-previous, .webring-next, .webring-hub
+   - Divider between links: .divider
+   =========================================================== */
+
+.webring {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem; /* space between items */
+  background: linear-gradient(135deg, #6a5af9, #f95a8a);
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: white;
+  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.15);
+  justify-content: center;
+}
+
+/* Individual links */
+.webring-previous,
+.webring-next,
+.webring-hub {
+  color: white;
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+  transition: background 0.3s;
+}
+
+.webring-previous:hover,
+.webring-next:hover,
+.webring-hub:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Divider between links */
+.divider {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
 }

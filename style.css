@@ -53,6 +53,13 @@ h2 {
   text-transform: uppercase;
 }
 
+strong {
+  font-weight: 600;
+}
+em {
+  font-style: italic;
+  font-weight: 400;
+}
 .subheading {
   color: black;
 }
@@ -254,4 +261,20 @@ li {
   margin-bottom: 2rem;
   padding: 1rem;
   border-bottom: 2px solid black;
+}
+
+/* Webring Footer Styles */
+.webring {
+  display: inline-flex;
+  gap: 12px;
+  background: linear-gradient(135deg, #6a5af9, #f95a8a);
+  padding: 8px 16px;
+  border-radius: 28px;
+  font-family: "Segoe UI", sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  justify-content: center;
+  margin: 20px auto;
+  text-align: center;
 }

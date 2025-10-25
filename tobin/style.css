@@ -113,3 +113,51 @@ em {
   align-items: center;
   justify-content: center;
 }
+
+/* ===========================================================
+   IDEA Web Ring Banner Styles
+   --------------------------------------
+   Styles for the inline “Previous | IDEA Web Ring | Next” 
+   navigation links (web ring). 
+
+   - Use with <nav class="webring" data-members="/webring-members-coding-club.json" data-hub="/"> container
+   - Links: .webring-previous, .webring-next, .webring-hub
+   - Divider between links: .divider
+   =========================================================== */
+
+.webring {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem; /* space between items */
+  background: linear-gradient(135deg, #6a5af9, #f95a8a);
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: white;
+  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.15);
+  justify-content: center;
+}
+
+/* Individual links */
+.webring-previous,
+.webring-next,
+.webring-hub {
+  color: white;
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+  transition: background 0.3s;
+}
+
+.webring-previous:hover,
+.webring-next:hover,
+.webring-hub:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Divider between links */
+.divider {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
+}

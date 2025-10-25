@@ -1,0 +1,200 @@
+/* Typography imported from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* Styling Variables */
+:root {
+  --accent-color: #555;
+  --body-typeface: "Rubik", sans-serif;
+  --main-heading: "Staatliches", cursive;
+  --gradient: linear-gradient(45deg, #ffdc18, #ff3706);
+}
+
+body {
+  font-family: var(--body-typeface);
+  color: #444;
+  min-height: 100vh;
+}
+
+/* Making all images responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Typography */
+
+h1 {
+  font-size: 5rem;
+  font-family: var(--main-heading);
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 3rem;
+  font-family: var(--main-heading);
+  margin-bottom: 1.5rem;
+}
+
+h3 {
+  font-size: 1.7rem;
+  font-family: var(--main-heading);
+  margin-bottom: 1.5rem;
+}
+
+p {
+  width: 100%;
+  font-size: 1.225rem;
+  font-family: var(--body-typeface);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+strong {
+  font-weight: 600;
+}
+
+/* Hyperlink Styles */
+a {
+  text-decoration: none;
+  color: #6a5af9;
+}
+a:hover {
+  color: #111;
+}
+
+ul,
+ol {
+  margin-bottom: 1rem;
+}
+ul li {
+  list-style-type: disc;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+li {
+  line-height: 1.2;
+}
+
+/* Work Page Layout */
+
+/* Hero */
+
+.hero,
+.footer {
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-size: 600%;
+  background-image: var(--gradient);
+  animation: bg-animation 120s infinite alternate;
+}
+
+.footer {
+  min-height: 20vh;
+}
+
+@keyframes bg-animation {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 100%;
+  }
+}
+
+.hero-headline-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 80%;
+}
+
+.intro,
+.resources,
+.milestones,
+.roadmap {
+  margin: 2rem auto;
+  padding: 1.5rem;
+  max-width: 70%;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+.slogan {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #333;
+  line-height: 1.3;
+  text-align: center;
+  border-left: 4px solid #6a5af9;
+  padding-left: 1.5rem;
+  max-width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===========================================================
+   IDEA Web Ring Banner Styles
+   --------------------------------------
+   Styles for the inline “Previous | IDEA Web Ring | Next” 
+   navigation links (web ring). 
+
+   - Use with <nav class="webring" data-members="/webring-members-coding-club.json" data-hub="/"> container
+   - Links: .webring-previous, .webring-next, .webring-hub
+   - Divider between links: .divider
+   =========================================================== */
+
+.webring {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem; /* space between items */
+  background: linear-gradient(135deg, #6a5af9, #f95a8a);
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: white;
+  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.15);
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+/* Individual links */
+.webring-previous,
+.webring-next,
+.webring-hub {
+  color: white;
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+  transition: background 0.3s;
+}
+
+.webring-previous:hover,
+.webring-next:hover,
+.webring-hub:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Divider between links */
+.divider {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
+}

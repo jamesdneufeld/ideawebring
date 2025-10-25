@@ -9,18 +9,16 @@ html {
 *:before,
 *:after {
   box-sizing: inherit;
-
 }
-
 
 /* Styling Variables */
 :root {
   --accent-color: #555;
-  --black: #252249; 
-  --button-red: #fe0d0d; 
+  --black: #252249;
+  --button-red: #fe0d0d;
   --off-white: #fef3e7;
-  --dark-red: #76240A;  
-  --stark-blue: #e8eaff; 
+  --dark-red: #76240a;
+  --stark-blue: #e8eaff;
   --body-typeface: "Rubik", sans-serif;
   --main-heading: "Staatliches", cursive;
   --gradient: linear-gradient(45deg, #f17c58, #e94584, #24aadb, #27dbb1, #ffdc18, #ff3706);
@@ -30,7 +28,8 @@ body {
   font-family: var(--body-typeface);
   display: flex;
   flex-direction: column;
-  min-height: 120vh;
+  overflow-x: hidden; /* hide horizontal overflow */
+  overflow-y: auto; /* allow vertical scrolling */
 }
 
 /* Making all images responsive */
@@ -45,14 +44,13 @@ h1 {
   font-size: 28vw;
   font-family: var(--main-heading);
   margin-bottom: 1.5rem;
-  font-weight: 900; 
-  line-height: .9;
-
+  font-weight: 900;
+  line-height: 0.9;
 }
-h2{
-  font-size: 3vw; 
-  color: var(--off-white); 
-  padding-bottom: 10vh; 
+h2 {
+  font-size: 3vw;
+  color: var(--off-white);
+  padding-bottom: 10vh;
 }
 
 p {
@@ -62,25 +60,21 @@ p {
   line-height: 1.2;
 }
 
-.fa-brands{
-  font-size: 5vw;  
-  color: var(--off-white); 
-
+.fa-brands {
+  font-size: 5vw;
+  color: var(--off-white);
 }
 
-.fa-house{
+.fa-house {
   font-size: 3vw;
-     background: radial-gradient( var(--button-red)20%, var(--black)); 
-    -webkit-text-fill-color: transparent;
+  background: radial-gradient(var(--button-red) 20%, var(--black));
+  -webkit-text-fill-color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
-
-  
 }
 
-
 .hero-headline {
-  background: radial-gradient(white 5%, #FFE6D0 10%, var(--button-red) 27%, var(--dark-red) 40%, #072733);
+  background: radial-gradient(white 5%, #ffe6d0 10%, var(--button-red) 27%, var(--dark-red) 40%, #072733);
   -webkit-text-fill-color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
@@ -102,19 +96,18 @@ p {
 /* Work Page Layout */
 
 /* Hero */
-.social-media{
-  display: flex; 
+.social-media {
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items:center; 
-  width: 30%; 
+  align-items: center;
+  width: 30%;
 }
 
-.hero-headline{
-  color: var(--black); 
+.hero-headline {
+  color: var(--black);
 }
 .hero {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -139,24 +132,71 @@ p {
 .hero-headline-wrapper {
   display: flex;
   flex-direction: column;
-  flex: 1;
   align-items: center;
-  justify-content: center;
   text-align: center;
   width: 80%;
+  margin-bottom: 2rem;
 }
 
-.home-button{
-   display: flex;
+.home-button {
+  display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
   text-align: flex-start;
-  width: 100%; 
-  padding: 4vw; 
-  gap: 2vw; 
+  width: 100%;
+  padding: 4vw;
+  gap: 2vw;
 }
 
-.next-page{
-  color: var(--stark-blue); 
+.next-page {
+  color: var(--stark-blue);
+}
+
+/* ===========================================================
+   IDEA Web Ring Banner Styles
+   --------------------------------------
+   Styles for the inline “Previous | IDEA Web Ring | Next” 
+   navigation links (web ring). 
+
+   - Use with <nav class="webring" data-members="/webring-members-coding-club.json" data-hub="/"> container
+   - Links: .webring-previous, .webring-next, .webring-hub
+   - Divider between links: .divider
+   =========================================================== */
+
+.webring {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem; /* space between items */
+  background: linear-gradient(135deg, #6a5af9, #f95a8a);
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: white;
+  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.15);
+  justify-content: center;
+}
+
+/* Individual links */
+.webring-previous,
+.webring-next,
+.webring-hub {
+  color: white;
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+  transition: background 0.3s;
+}
+
+.webring-previous:hover,
+.webring-next:hover,
+.webring-hub:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Divider between links */
+.divider {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
 }

@@ -21,9 +21,7 @@ html {
 
 body {
   font-family: var(--body-typeface);
-  color: black;
-  display: flex;
-  flex-direction: column;
+  color: #444;
   min-height: 100vh;
 }
 
@@ -48,42 +46,45 @@ h2 {
 }
 
 p {
-  font-size: 1.625rem;
+  width: 100%;
+  font-size: 1.225rem;
   font-family: var(--body-typeface);
-  margin-bottom: 0.2rem;
+  margin-bottom: 1rem;
   line-height: 1.2;
 }
 
-.hero-headline {
-  color: white;
+strong {
+  font-weight: 600;
 }
 
 /* Hyperlink Styles */
 a {
   text-decoration: none;
-  color: #444;
+  color: #6a5af9;
 }
 a:hover {
   color: #111;
-}
-
-p {
-  margin-bottom: 1rem;
 }
 
 /* Work Page Layout */
 
 /* Hero */
 
-.hero {
-  min-height: 100vh;
+.hero,
+.footer {
+  min-height: 55vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
   background-size: 600%;
   background-image: var(--gradient);
   animation: bg-animation 120s infinite alternate;
+}
+
+.footer {
+  min-height: 20vh;
 }
 
 @keyframes bg-animation {
@@ -103,4 +104,77 @@ p {
   justify-content: center;
   text-align: center;
   width: 80%;
+}
+
+.intro,
+.resources,
+.milestones,
+.future {
+  margin: 2rem auto;
+  padding: 1.5rem;
+  max-width: 70%;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+.slogan {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #333;
+  line-height: 1.3;
+  text-align: center;
+  border-left: 4px solid #6a5af9;
+  padding-left: 1.5rem;
+  max-width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===========================================================
+   IDEA Web Ring Banner Styles
+   --------------------------------------
+   Styles for the inline “Previous | IDEA Web Ring | Next” 
+   navigation links (web ring). 
+
+   - Use with <nav class="webring" data-members="/webring-members-coding-club.json" data-hub="/"> container
+   - Links: .webring-previous, .webring-next, .webring-hub
+   - Divider between links: .divider
+   =========================================================== */
+
+.webring {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem; /* space between items */
+  background: linear-gradient(135deg, #6a5af9, #f95a8a);
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: white;
+  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.15);
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+/* Individual links */
+.webring-previous,
+.webring-next,
+.webring-hub {
+  color: white;
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+  transition: background 0.3s;
+}
+
+.webring-previous:hover,
+.webring-next:hover,
+.webring-hub:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Divider between links */
+.divider {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
 }
