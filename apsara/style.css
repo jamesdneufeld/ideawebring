@@ -14,7 +14,7 @@ html {
 /* Styling Variables */
 :root {
   --accent-color: #555;
-  --body-typeface: "Rubik", sans-serif;
+  --body-typeface: "Verdana", sans-serif;
   --main-heading: "Verdana", sans-serif;
   --gradient: linear-gradient(45deg, #f17c58, #e94584, #24aadb, #27dbb1, #ffdc18, #ff3706);
   --dark: #111;
@@ -27,7 +27,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f0dbe0;
+  background-color: var(--solid-bg-color);
 }
 
 /* Making all images responsive */
