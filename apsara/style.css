@@ -17,11 +17,12 @@ html {
   --body-typeface: "Rubik", sans-serif;
   --main-heading: "Staatliches", cursive;
   --gradient: linear-gradient(45deg, #f17c58, #e94584, #24aadb, #27dbb1, #ffdc18, #ff3706);
+  --dark: #111;
 }
 
 body {
   font-family: var(--body-typeface);
-  color: black;
+  color: var(--dark);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -41,6 +42,10 @@ h1 {
   margin-bottom: 1.5rem;
 }
 
+.subheading {
+  color: var(--dark);
+}
+
 p {
   font-size: 1.625rem;
   font-family: var(--body-typeface);
@@ -55,10 +60,10 @@ p {
 /* Hyperlink Styles */
 a {
   text-decoration: none;
-  color: #444;
+  color: var(--dark);
 }
 a:hover {
-  color: #111;
+  color: var(--dark);
 }
 
 p {
