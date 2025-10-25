@@ -15,8 +15,9 @@ html {
 :root {
   --accent-color: #555;
   --body-typeface: "Rubik", sans-serif;
-  --main-heading: "Staatliches", cursive;
+  --main-heading: "Verdana", sans-serif;
   --gradient: linear-gradient(45deg, #f17c58, #e94584, #24aadb, #27dbb1, #ffdc18, #ff3706);
+  --solid-bg-color: #f0dbe0;
 }
 
 body {
@@ -25,6 +26,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: #f0dbe0;
 }
 
 /* Making all images responsive */
@@ -36,13 +38,13 @@ img {
 /* Typography */
 
 h1 {
-  font-size: 5rem;
+  font-size: 2rem;
   font-family: var(--main-heading);
   margin-bottom: 1.5rem;
 }
 
 p {
-  font-size: 1.625rem;
+  font-size: 1rem;
   font-family: var(--body-typeface);
   margin-bottom: 0.2rem;
   line-height: 1.2;
@@ -76,8 +78,9 @@ p {
   align-items: center;
   justify-content: center;
   background-size: 600%;
-  background-image: var(--gradient);
-  animation: bg-animation 120s infinite alternate;
+  background-color: var(--solid-bg-color);
+  /* background-image: var(--gradient); 
+   animation: bg-animation 120s infinite alternate; */
 }
 
 @keyframes bg-animation {
