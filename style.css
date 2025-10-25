@@ -47,9 +47,9 @@ h1 {
 h2 {
   font-size: 2.25rem;
   font-family: var(--subheading);
+  font-weight: 500;
   margin-bottom: 1.5rem;
-
-  color: white;
+  color: #fcf6f8;
   text-transform: uppercase;
 }
 
