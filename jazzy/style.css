@@ -1,10 +1,16 @@
 /* Typography imported from Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap');
+
+
 
 html {
   box-sizing: border-box;
   scroll-behavior: smooth;
+    background-size: 100%;
+  background-image: url(Assets/background-water-colour-texture.jpg);
 }
+
 *,
 *:before,
 *:after {
@@ -14,14 +20,13 @@ html {
 /* Styling Variables */
 :root {
   --accent-color: #555;
-  --body-typeface: "Rubik", sans-serif;
-  --main-heading: "Staatliches", cursive;
-  --gradient: linear-gradient(45deg, #f17c58, #e94584, #24aadb, #27dbb1, #ffdc18, #ff3706);
+  --body-typeface:  "ADLaM Display", system-ui;
+  --main-heading: "Chewy", system-ui;
 }
 
 body {
   font-family: var(--body-typeface);
-  color: black;
+  color: #D347D3;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -38,7 +43,19 @@ img {
 h1 {
   font-size: 5rem;
   font-family: var(--main-heading);
+    margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+  padding-top: 2rem;
+      line-height: 1.2;
+
+}
+
+.link {
+  font-size: 3rem;
+  font-family: var(--main-heading);
+  margin-bottom: 1.5rem;
+    line-height: 1.2;
+
 }
 
 p {
@@ -49,13 +66,13 @@ p {
 }
 
 .hero-headline {
-  color: white;
+  color: #D347D3;
 }
 
 /* Hyperlink Styles */
 a {
   text-decoration: none;
-  color: #444;
+  color: #D347D3;
 }
 a:hover {
   color: #111;
@@ -70,14 +87,11 @@ p {
 /* Hero */
 
 .hero {
-  min-height: 100vh;
+  min-height: 200vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-size: 600%;
-  background-image: var(--gradient);
-  animation: bg-animation 120s infinite alternate;
 }
 
 @keyframes bg-animation {
@@ -94,7 +108,6 @@ p {
   flex-direction: column;
   flex: 1;
   align-items: center;
-  justify-content: center;
   text-align: center;
   width: 80%;
 }

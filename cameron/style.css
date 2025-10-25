@@ -16,6 +16,11 @@ html {
 /* Styling Variables */
 :root {
   --accent-color: #555;
+  --black: #252249; 
+  --button-red: #fe0d0d; 
+  --off-white: #fef3e7;
+  --dark-red: #76240A;  
+  --stark-blue: #e8eaff; 
   --body-typeface: "Rubik", sans-serif;
   --main-heading: "Staatliches", cursive;
   --gradient: linear-gradient(45deg, #f17c58, #e94584, #24aadb, #27dbb1, #ffdc18, #ff3706);
@@ -23,10 +28,9 @@ html {
 
 body {
   font-family: var(--body-typeface);
-  color: black;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 120vh;
 }
 
 /* Making all images responsive */
@@ -38,35 +42,61 @@ img {
 /* Typography */
 
 h1 {
-  font-size: 5rem;
+  font-size: 28vw;
   font-family: var(--main-heading);
   margin-bottom: 1.5rem;
+  font-weight: 900; 
+  line-height: .9;
 
+}
+h2{
+  font-size: 3vw; 
+  color: var(--off-white); 
+  padding-bottom: 10vh; 
 }
 
 p {
-  font-size: 1.625rem;
+  font-size: 2vw;
   font-family: var(--body-typeface);
   margin-bottom: 0.2rem;
   line-height: 1.2;
 }
 
+.fa-brands{
+  font-size: 5vw;  
+  color: var(--off-white); 
+
+}
+
+.fa-house{
+  font-size: 3vw;
+     background: radial-gradient( var(--button-red)20%, var(--black)); 
+    -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  
+}
+
+
 .hero-headline {
-  color: white;
+  background: radial-gradient(white 5%, #FFE6D0 10%, var(--button-red) 27%, var(--dark-red) 40%, #072733);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 
 /* Hyperlink Styles */
 a {
   text-decoration: none;
-  color: tomato; 
 }
 a:hover {
-  color: teal;
+  color: white;
+  text-shadow: 0 0 1rem var(--stark-blue), 0 0 2rem #fff, 0 0 3rem;
 }
 
 p {
   margin-bottom: 1rem;
-  color: darkslateblue;
 }
 
 /* Work Page Layout */
@@ -78,11 +108,10 @@ p {
   justify-content: space-between;
   align-items:center; 
   width: 30%; 
-  border: solid 2px red;
 }
 
 .hero-headline{
-  color:darkslateblue; 
+  color: var(--black); 
 }
 .hero {
   min-height: 100vh;
@@ -115,4 +144,19 @@ p {
   justify-content: center;
   text-align: center;
   width: 80%;
+}
+
+.home-button{
+   display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  text-align: flex-start;
+  width: 100%; 
+  padding: 4vw; 
+  gap: 2vw; 
+}
+
+.next-page{
+  color: var(--stark-blue); 
 }
