@@ -1,3 +1,5 @@
+// Part of the IDEA Web Ring Toolkit — shared utilities for learning, collaboration, and open web creativity.
+//
 // IDEA Coding Club Webring System — Multi-Webring Edition
 // Version 2.1 — Supports multiple webrings with configurable hubs
 
@@ -53,3 +55,5 @@
 
   document.querySelectorAll(".webring").forEach(initWebring);
 })();
+
+// ✅ End of webring.js — multi-ring navigation complete!

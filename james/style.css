@@ -84,7 +84,7 @@ a:hover {
 }
 
 .footer {
-  min-height: 20vh;
+  padding: 1rem;
 }
 
 @keyframes bg-animation {
