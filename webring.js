@@ -29,7 +29,7 @@
     if (next) next.href = base + members[safeIndex(currentIndex + 1, members.length)];
 
     // Use the data-hub attribute if provided, otherwise fallback to root
-    const hubUrl = webring.dataset.hub || "/";
+    const hubUrl = webring.dataset.hub || "/ideawebring/";
     if (hub) hub.href = hubUrl;
   }
 
