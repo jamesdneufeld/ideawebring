@@ -103,10 +103,6 @@ li {
   animation: bg-animation 120s infinite alternate;
 }
 
-.footer {
-  min-height: 20vh;
-}
-
 @keyframes bg-animation {
   0% {
     background-position: 0%;
