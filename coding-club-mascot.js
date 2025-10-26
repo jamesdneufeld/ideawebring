@@ -7,7 +7,7 @@ const CONFIG = {
   interactionTrigger: 10, // Mouse moves before triggering first behavior
   idleChance: 0.005, // Chance per frame to start idle animation
   spriteSize: 32, // Sprite width/height in pixels
-  spritePath: "/assets/coding-club-mascot.gif", // Sprite sheet path
+  spritePath: "assets/coding-club-mascot.gif", // Sprite sheet path
   interactionTimeout: 5000, // Reset interaction counter after 5s of inactivity
   cursorYOffsetRatio: 2.5, // Vertical offset ratio of sprite size
   cursorXBufferRatio: 3, // Horizontal buffer ratio of sprite size
