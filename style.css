@@ -206,6 +206,14 @@ a:hover {
   background-image: var(--gradient);
   padding: 3rem;
 }
+.mentorship-showcase {
+  background-image: url("assets/lily-rosen--taylore-lawrence.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
 .about-project,
 .project-log-teaser {
   min-height: 100vh;
