@@ -28,13 +28,13 @@
     if (prev) prev.href = base + members[safeIndex(currentIndex - 1, members.length)];
     if (next) next.href = base + members[safeIndex(currentIndex + 1, members.length)];
 
-    // Use the data-hub attribute if provided, otherwise fallback to root
-    const hubUrl = webring.dataset.hub || "/ideawebring/";
+    // Use the data-hub attribute if provided
+    const hubUrl = webring.dataset.hub;
     if (hub) hub.href = hubUrl;
   }
 
   async function initWebring(webring) {
-    const membersUrl = webring.dataset.members || "/webring-members.json";
+    const membersUrl = webring.dataset.members;
     const members = await loadMembers(membersUrl);
     if (!members.length) return;
 
