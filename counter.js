@@ -1,30 +1,45 @@
 // Part of the IDEA Web Ring Toolkit — shared utilities for learning, collaboration, and open web creativity.
 //
 // 👁️ IDEA Web Ring Page View Counter
-// Shows how JavaScript can fetch and display real data using CountAPI.
-// Each page gets its own unique, privacy-friendly view count—simple, functional, and alive.
+// Displays real-time views using Visitor Badge API, with a localStorage fallback for reliability.
 
 document.addEventListener("DOMContentLoaded", () => {
-  const namespace = "idea-web-ring";
+  const counter = document.getElementById("viewCount");
+  if (!counter) return; // Exit if the element is missing
 
-  // Create a safe unique key for this path
+  // Generate a safe page key based on URL path
   const path = window.location.pathname.replace(/^\/|\/$/g, ""); // remove leading/trailing slashes
   const pageKey = path ? path.replace(/\//g, "-") : "home";
 
-  // Use just the pageKey (namespace is already in the URL)
-  const key = pageKey;
+  // Fallback function: increment and display localStorage counter
+  const fallbackCounter = () => {
+    const storageKey = `local-views-${pageKey}`;
+    let views = parseInt(localStorage.getItem(storageKey)) || 0;
+    views++;
+    localStorage.setItem(storageKey, views);
+    counter.textContent = views.toLocaleString() + "*"; // * indicates fallback
+  };
 
-  // Fetch count and update UI
-  fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
-    .then((res) => res.json())
-    .then((data) => {
-      const counter = document.getElementById("viewCount");
-      if (counter) counter.textContent = data.value.toLocaleString();
+  // Try fetching Visitor Badge API
+  fetch(`https://visitor-badge.laobi.icu/badge?page_id=idea-web-ring-${pageKey}`)
+    .then((response) => {
+      if (!response.ok) throw new Error("API not available");
+      return response.text();
+    })
+    .then((svgText) => {
+      // Parse the number from the SVG returned by Visitor Badge
+      const match = svgText.match(/>(\d+)<\/text>/);
+      if (match && match[1]) {
+        counter.textContent = parseInt(match[1]).toLocaleString(); // show actual number
+      } else {
+        // If parsing fails, fallback
+        fallbackCounter();
+      }
     })
     .catch(() => {
-      const counter = document.getElementById("viewCount");
-      if (counter) counter.textContent = "—";
+      // On any error, fallback to localStorage
+      fallbackCounter();
     });
 });
 
-// ✅ End of counter.js — view counter complete!
+// ✅ End of counter.js — real, student-friendly view counter complete!
