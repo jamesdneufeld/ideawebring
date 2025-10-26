@@ -264,6 +264,19 @@ li {
   border-bottom: 2px solid black;
 }
 
+.footer {
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-size: 600%;
+  background-image: var(--gradient);
+  animation: bg-animation 120s infinite alternate;
+  padding: 1rem;
+}
+
 /* ===========================================================
    IDEA Web Ring Banner Styles
    --------------------------------------
