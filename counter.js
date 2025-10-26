@@ -10,7 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Create a safe unique key for this path
   const path = window.location.pathname.replace(/^\/|\/$/g, ""); // remove leading/trailing slashes
   const pageKey = path ? path.replace(/\//g, "-") : "home";
-  const key = `${namespace}-${pageKey}`;
+
+  // Use just the pageKey (namespace is already in the URL)
+  const key = pageKey;
 
   // Fetch count and update UI
   fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
