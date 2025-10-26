@@ -49,7 +49,7 @@ h2 {
   font-family: var(--subheading);
   font-weight: 500;
   margin-bottom: 1.5rem;
-  color: #fcf6f8;
+  color: #111;
   text-transform: uppercase;
 }
 
@@ -61,6 +61,7 @@ em {
   font-weight: 400;
 }
 .subheading {
+  text-align: center;
   color: black;
 }
 
@@ -107,7 +108,8 @@ li {
   text-align: center;
 }
 
-.student {
+.student,
+.mentor {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -253,7 +255,7 @@ li {
 }
 
 .container {
-  width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -261,7 +263,6 @@ li {
   justify-content: space-evenly;
   margin-bottom: 2rem;
   padding: 1rem;
-  border-bottom: 2px solid black;
 }
 
 .footer {
@@ -275,6 +276,29 @@ li {
   background-image: var(--gradient);
   animation: bg-animation 120s infinite alternate;
   padding: 1rem;
+}
+
+/* Student groups */
+.student-group,
+.volunteer-group {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1.5rem;
+}
+
+/* Mentor group - distinct styling */
+.mentor-group {
+  width: 100%;
+  background: rgba(52, 152, 219, 0.08);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid rgba(52, 152, 219, 0.3);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1.5rem;
 }
 
 /* ===========================================================
