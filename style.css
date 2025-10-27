@@ -262,7 +262,6 @@ a:hover {
   padding: 3rem;
 }
 
-.what-is-webring,
 .methodology-section,
 .how-it-works {
   min-height: 100vh;
@@ -274,7 +273,7 @@ a:hover {
   color: var(--text-inverse);
   padding: 3rem;
 }
-
+.what-is-webring,
 .student-hub,
 .reflection-section {
   min-height: 100vh;
