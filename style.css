@@ -422,31 +422,37 @@ a:hover {
 /* ===========================================================
    IDEA Web Ring Page View Counter
    --------------------------------------
-   Global page view counter using CountAPI for persistent,
+   Global page view counter using EnhancedCounter for persistent,
    cross-device view tracking.
 
-   - Uses CountAPI (free tier) for simple, privacy-friendly tracking
+   - Uses EnhancedCounter with localStorage + API verification
    - Creates unique counters for each page path
    - Automatically increments on each page load
    - Displays count in element with ID 'viewCount'
-   - Fallback to '—' if API is unavailable
 
    Usage: Add <div class="page-counter">👁️ <span id="viewCount">—</span> views</div>
    =========================================================== */
 
 .page-counter {
-  font-size: 0.9em;
-  color: #666;
-  margin: 1rem 0;
-  text-align: center;
-  font-family: monospace;
-  opacity: 0.8;
-}
-
-.page-counter:hover {
-  opacity: 1;
-}
-
-.page-counter span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  background: linear-gradient(135deg, #6a5af9, #f95a8a);
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: white;
+  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.15);
+  justify-content: center;
+  margin-bottom: 1rem;
   font-variant-numeric: tabular-nums;
+  cursor: default;
+  user-select: none;
+  transition: background 0.3s; /* Add transition for smooth hover */
+}
+
+/* Match the webring nav hover exactly */
+.page-counter:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
