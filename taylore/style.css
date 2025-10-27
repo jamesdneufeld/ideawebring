@@ -167,6 +167,13 @@ footer {
   text-align: center;
 }
 
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 /* ===========================================================
    IDEA Web Ring Banner Styles
    --------------------------------------
