@@ -55,8 +55,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const counterElement = document.getElementById("viewCount");
   if (!counterElement) return;
 
-  // Use the EnhancedCounter
-  const webringCounter = new EnhancedCounter("ideawebring", "viewCount");
+  // Create page-specific namespace based on URL path
+  const path = window.location.pathname;
+  const pageName = path.split("/").filter(Boolean).pop() || "home";
+  const namespace = `ideawebring-${pageName}`;
+
+  // Use the EnhancedCounter with page-specific namespace
+  const webringCounter = new EnhancedCounter(namespace, "viewCount");
   webringCounter.increment();
 });
 
