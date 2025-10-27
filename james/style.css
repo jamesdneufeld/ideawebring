@@ -142,6 +142,7 @@ a:hover {
    =========================================================== */
 
 .webring {
+  font-family: "Rubik", sans-serif;
   display: inline-flex;
   align-items: center;
   gap: 0.625rem; /* space between items */

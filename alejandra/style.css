@@ -111,6 +111,7 @@ p {
    =========================================================== */
 
 .webring {
+  font-family: "Rubik", sans-serif;
   display: inline-flex;
   align-items: center;
   gap: 0.625rem; /* space between items */
@@ -146,4 +147,42 @@ p {
 .divider {
   color: rgba(255, 255, 255, 0.7);
   font-weight: 400;
+}
+
+/* ===========================================================
+   IDEA Web Ring Page View Counter
+   --------------------------------------
+   Global page view counter using EnhancedCounter for persistent,
+   cross-device view tracking.
+
+   - Uses EnhancedCounter with localStorage + API verification
+   - Creates unique counters for each page path
+   - Automatically increments on each page load
+   - Displays count in element with ID 'viewCount'
+
+   Usage: Add <div class="page-counter">👁️ <span id="viewCount">—</span> views</div>
+   =========================================================== */
+
+.page-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  background: linear-gradient(135deg, #6a5af9, #f95a8a);
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: white;
+  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.15);
+  justify-content: center;
+  margin-bottom: 1rem;
+  font-variant-numeric: tabular-nums;
+  cursor: default;
+  user-select: none;
+  transition: background 0.3s; /* Add transition for smooth hover */
+}
+
+/* Match the webring nav hover exactly */
+.page-counter:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
