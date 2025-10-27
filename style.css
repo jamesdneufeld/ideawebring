@@ -2,6 +2,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap");
 
+/* ===========================================================
+   CSS BASE STYLES
+   =========================================================== */
+
+/* Paul Irish popularized border-box, which includes padding 
+   and borders in element dimensions for more intuitive layouts. */
+
 html {
   box-sizing: border-box;
   scroll-behavior: smooth;
@@ -12,30 +19,55 @@ html {
   box-sizing: inherit;
 }
 
-/* Styling Variables */
+/* ===========================================================
+   DESIGN SYSTEM & VARIABLES
+   =========================================================== */
+
+/* CSS Variables let us reuse colors and values */
+
 :root {
   --accent-color: #555;
   --body-typeface: "Rubik", sans-serif;
   --main-heading: "Staatliches", cursive;
   --subheading: "Syne", sans-serif;
   --gradient: linear-gradient(45deg, rgb(36, 170, 219), #0c779e);
+  --color-yellow: #ffc83d;
+  --color-blue-dark: #0c779e;
+  --color-blue-light: rgb(36, 170, 219);
+  --color-white: #fff;
+  --color-black: #111;
+  --color-gray-dark: #222;
+  --color-gray-medium: #555;
+  --color-gray-light: #666;
+  --bg-primary: var(--color-white);
+  --bg-secondary: var(--color-yellow);
+  --bg-accent: var(--gradient);
+  --text-primary: var(--color-gray-dark);
+  --text-secondary: var(--color-black);
+  --text-inverse: var(--color-white);
 }
+
+/* ===========================================================
+   BASE LAYOUT & GLOBAL ELEMENTS
+   =========================================================== */
 
 body {
   font-family: var(--body-typeface);
-  color: #222;
+  color: var(--text-primary);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* Making all images responsive */
+/* Making all images responsive - they'll never overflow their container */
 img {
   max-width: 100%;
   height: auto;
 }
 
-/* Typography */
+/* ===========================================================
+   TYPOGRAPHY SYSTEM
+   =========================================================== */
 
 h1 {
   font-size: 4rem;
@@ -49,7 +81,7 @@ h2 {
   font-family: var(--subheading);
   font-weight: 500;
   margin-bottom: 1.5rem;
-  color: #111;
+  color: var(--text-secondary);
   text-transform: uppercase;
 }
 
@@ -57,7 +89,7 @@ h3 {
   font-size: 2rem;
   font-family: var(--subheading);
   margin-bottom: 1.5rem;
-  color: white;
+  color: var(--text-inverse);
 }
 
 p,
@@ -76,19 +108,43 @@ em {
   font-weight: 400;
 }
 .subheading {
-  color: black;
+  color: var(--text-secondary);
 }
 
-/* Hyperlink Styles */
+/* ===========================================================
+   INTERACTIVE ELEMENTS
+   =========================================================== */
+
 a {
   text-decoration: none;
-  color: white;
+  color: var(--text-inverse);
   font-weight: 600;
 }
 
 a:hover {
-  color: black;
+  color: var(--text-secondary);
 }
+
+.navigation-link {
+  display: block;
+  font-size: 1.225rem;
+  font-family: var(--body-typeface);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  border: 3px solid var(--color-white);
+  background: var(--color-blue-light);
+  text-align: center;
+}
+.navigation-link:hover {
+  background: var(--bg-primary);
+  border: 3px solid var(--color-blue-light);
+}
+
+/* ===========================================================
+   DECORATIVE & ANIMATED ELEMENTS
+   =========================================================== */
 
 .ornamental {
   text-align: center;
@@ -100,7 +156,6 @@ a:hover {
   animation: spin 20s linear infinite;
 }
 
-/* Optional: slight delay between each spin */
 .emoji:nth-child(2) {
   animation-delay: 0.3s;
 }
@@ -117,141 +172,15 @@ a:hover {
   }
 }
 
+/* ===========================================================
+   LAYOUT COMPONENTS
+   =========================================================== */
+
 .student,
 .mentor {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.navigation-link {
-  display: block;
-  font-size: 1.225rem;
-  font-family: var(--body-typeface);
-  margin-bottom: 1rem;
-  line-height: 1.2;
-  padding: 1rem 2rem;
-  border-radius: 2rem;
-  border: 3px solid white;
-  background: rgba(36, 170, 219, 1);
-  text-align: center;
-}
-.navigation-link:hover {
-  background: white;
-  border: 3px solid rgba(36, 170, 219, 1);
-}
-.hero-headline {
-  color: white;
-}
-
-/* Work Page Layout */
-
-/* Intro Section */
-
-.intro-section {
-  min-height: 95vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-size: 600%;
-  background-image: var(--gradient);
-  animation: bg-animation 120s infinite alternate;
-}
-
-@keyframes bg-animation {
-  0% {
-    background-position: 0%;
-  }
-  100% {
-    background-position: 100%;
-  }
-}
-
-.hero-headline-wrapper {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: 85%;
-  color: white;
-}
-
-.explore-ring {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #ffc83d;
-  padding: 3rem;
-}
-
-.student-hub {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: white;
-  padding: 3rem;
-}
-
-.what-is-webring {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-image: var(--gradient);
-  padding: 3rem;
-}
-.mentorship-showcase {
-  background-image: url("assets/lily-rosen--taylore-lawrence.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
-}
-
-.about-project,
-.project-log-teaser {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #ffc83d;
-  padding: 3rem;
-}
-.how-it-works {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-image: var(--gradient);
-  padding: 3rem;
-}
-
-.text-section {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: 85%;
-}
-
-.main-footer {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: 85%;
 }
 
 .container {
@@ -263,6 +192,109 @@ a:hover {
   justify-content: space-evenly;
   margin-bottom: 2rem;
   padding: 1rem;
+}
+
+/* Reusable content container for centered text blocks */
+.text-section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 85%;
+}
+
+/* ===========================================================
+   PAGE SECTIONS - HERO & CONTENT BLOCKS
+   =========================================================== */
+
+.intro-section {
+  min-height: 95vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-size: 600%;
+  background-image: var(--gradient);
+  animation: bg-animation 120s infinite alternate;
+  padding: 3rem;
+}
+@keyframes bg-animation {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 100%;
+  }
+}
+.hero-headline-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 85%;
+  color: var(--text-inverse);
+}
+
+.hero-headline {
+  color: var(--text-inverse);
+}
+
+/* ===========================================================
+   CONTENT SECTION GROUPS
+   =========================================================== */
+
+.explore-ring,
+.concept-section,
+.process-section,
+.about-project,
+.project-log-teaser {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  padding: 3rem;
+}
+
+.what-is-webring,
+.methodology-section,
+.how-it-works {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: var(--bg-accent);
+  color: var(--text-inverse);
+  padding: 3rem;
+}
+
+.student-hub,
+.reflection-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  padding: 3rem;
+}
+
+/* Special sections */
+
+.mentorship-showcase {
+  background-image: url("assets/lily-rosen--taylore-lawrence.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
 }
 
 .footer {
@@ -278,9 +310,34 @@ a:hover {
   padding: 1rem;
 }
 
+/* ===========================================================
+   COURSE-SPECIFIC COMPONENTS
+   =========================================================== */
+
+.course-context {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.course-outcomes {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.course-outcomes li {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 6px;
+}
+
 /* Student groups */
-.student-group,
-.volunteer-group {
+.student-group {
   width: 100%;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 12px;
@@ -300,6 +357,10 @@ a:hover {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   margin-bottom: 1.5rem;
 }
+
+/* ===========================================================
+   WEB RING COMPONENTS
+   =========================================================== */
 
 /* ===========================================================
    IDEA Web Ring Banner Styles
