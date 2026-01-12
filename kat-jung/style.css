@@ -1,7 +1,42 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap");
 
 body {
-  font-family: "Rubik", sans-serif;
+  font-family: "Unbounded", sans-serif;
   padding: 1rem;
+}
+
+h1 {
+  background: rgb(162, 156, 205);
+  padding: 2rem;
+  font-size: 5rem;
+  font-weight: 700;
+  color: rgb(100, 75, 142);
+}
+
+.education {
+  background: rgb(182, 188, 237);
+  padding: 2rem;
+  font-size: 2rem;
+  font-weight: 500;
+  color: rgb(101, 96, 165);
+}
+
+.skills {
+  background: rgb(182, 237, 237);
+  padding: 2rem;
+  font-size: 2rem;
+  font-weight: 500;
+  color: rgb(88, 155, 155);
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+li {
+  font-size: 1rem;
+  font-weight: 300;
 }
