@@ -23,8 +23,8 @@ section {
 }
 
 .paragraph-md {
-  font-size: 1.3rem;
-  color: rgb(255, 255, 255);
+  font-size: 1rem;
+  color: rgb(0, 0, 0);
 }
 .paragraph-sm {
   font-size: 0.8rem;
@@ -36,4 +36,11 @@ h1 {
   font-weight: 600;
   color: rgb(255, 255, 255);
   font-size: 5rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: white;
+  font-family: "Archivo Black", sans-serif;
 }
