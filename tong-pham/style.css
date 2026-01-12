@@ -1,7 +1,34 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 body {
-  font-family: "Rubik", sans-serif;
+  font-family: "Quicksand", sans-serif;
   padding: 1rem;
+}
+
+header{
+  background: lightblue;
+  font-family: Quicksand;
+  font-weight: 600;
+  color: lemonchiffon;
+  font-size: 4rem;
+  padding: 2rem;
+}
+.education {
+  background: teal;
+  padding: 2rem;
+}
+
+.skill {
+  background: lightpink;
+  padding: 2rem;
+}
+
+.paragraph-md {
+  font-size: 1.4rem;
+  color: white;
+}
+.paragraph-sm {
+  font-size: 0.75rem;
+  color: peachpuff;
 }
