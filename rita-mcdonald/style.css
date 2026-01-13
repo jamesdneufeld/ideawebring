@@ -1,7 +1,42 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&display=swap");
 
 body {
-  font-family: "Rubik", sans-serif;
+  font-family: "Alumni Sans Pinstripe", sans-serif;
   padding: 1rem;
+}
+
+header {
+  background: lightblue;
+  padding: 2rem;
+}
+.education {
+  background: goldenrod;
+  padding: 2rem;
+}
+
+.skills {
+  background: goldenrod;
+  padding: 2rem;
+}
+
+.experience {
+  background: lightcoral;
+  padding: 2rem;
+}
+
+h1 {
+  font-family: "Alumni Sans Pinstripe", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  font-size: 4rem;
+  color: cornflowerblue;
+}
+
+h2 {
+  font-family: "Alumni Sans Pinstripe", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 2rem;
 }
