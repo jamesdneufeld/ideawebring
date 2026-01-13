@@ -1,7 +1,46 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
 body {
   font-family: "Rubik", sans-serif;
   padding: 1rem;
+}
+
+header {
+  background: rgb(249, 73, 73);
+  padding: 2rem;
+}
+
+section {
+  background: rgb(219, 135, 76);
+  padding: 2rem;
+}
+
+.skills {
+  background: rgb(95, 55, 55);
+  padding: 2rem;
+}
+
+.paragraph-md {
+  font-size: 1rem;
+  color: rgb(0, 0, 0);
+}
+.paragraph-sm {
+  font-size: 0.8rem;
+  color: orangered;
+}
+
+h1 {
+  font-family: "Archivo Black", sans-serif;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  font-size: 5rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: white;
+  font-family: "Archivo Black", sans-serif;
 }
