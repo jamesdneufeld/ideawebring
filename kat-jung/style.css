@@ -1,7 +1,88 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap");
 
 body {
-  font-family: "Rubik", sans-serif;
+  font-family: "Unbounded", sans-serif;
   padding: 1rem;
+}
+
+header {
+  background: rgb(162, 156, 205);
+  padding: 2rem;
+  font-size: 5rem;
+  font-weight: 700;
+  color: rgb(100, 75, 142);
+}
+
+.h2-top {
+  background: rgb(162, 156, 205);
+  padding: 2rem;
+  padding-top: 0.1em;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: rgb(100, 75, 142);
+}
+
+h2 {
+  padding-bottom: 0.3em;
+  padding-top: 0.5em;
+}
+
+.education {
+  background: rgb(182, 188, 237);
+  margin: 1rem;
+  padding: 1em;
+  font-size: 2rem;
+  font-weight: 600;
+  color: rgb(101, 96, 165);
+}
+
+.skills {
+  background: rgb(182, 210, 237);
+  margin: 0.5rem;
+  padding: 2rem;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  font-size: 2rem;
+  font-weight: 600;
+  color: rgb(88, 126, 155);
+}
+
+.workex {
+  background: rgb(182, 237, 232);
+  margin: 1rem;
+  padding: 2rem;
+  font-size: 2rem;
+  font-weight: 600;
+  color: rgb(88, 155, 145);
+}
+
+h3 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  padding-top: 1rem;
+  padding-bottom: 0.4rem;
+}
+
+li {
+  font-size: 1rem;
+  font-weight: 300;
+  padding: 0.2em;
+  list-style-type: disc;
+  margin-left: 2em;
+}
+
+p {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.a-1 {
+  color: rgb(81, 67, 160);
+  font-weight: 500;
+}
+
+.a-1:hover {
+  color: rgb(101, 96, 165);
 }

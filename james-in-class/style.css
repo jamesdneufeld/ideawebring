@@ -8,24 +8,27 @@ body {
 }
 
 header {
-  background: lightpink;
+  background: lightblue;
   padding: 2rem;
-}
-.education {
-  background: whitesmoke;
-  padding: 2rem;
-}
-.skills {
-  background: rgb(244, 62, 62);
-  padding: 2rem;
-}
-.paragraph-md {
-  font-size: 2rem;
-  color: navy;
 }
 
+.education {
+  background: goldenrod;
+  padding: 2rem;
+}
+
+.skills {
+  background: hotpink;
+  padding: 2rem;
+}
+
+.paragraph-md {
+  font-size: 1.3rem;
+  color: navy;
+}
 .paragraph-sm {
   font-size: 0.8rem;
+  color: orangered;
 }
 
 h1 {
@@ -33,10 +36,26 @@ h1 {
   font-weight: 600;
   color: lemonchiffon;
   font-size: 5rem;
+  margin-bottom: 1rem;
 }
 
 h2 {
-  font-weight: 200;
-  color: rgb(244, 62, 62);
+  background: lightpink;
+  padding: 0.5rem;
+  border-radius: 1rem;
   font-size: 3rem;
+  margin-bottom: 1.5rem;
+  color: red;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol {
+  margin-bottom: 1rem;
 }
