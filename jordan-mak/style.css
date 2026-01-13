@@ -1,7 +1,51 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=News+Cycle:wght@400;700&family=Quicksand:wght@300..700&display=swap");
 
 body {
   font-family: "Rubik", sans-serif;
   padding: 1rem;
+}
+
+header {
+  background: navy;
+  padding: 3rem;
+}
+
+.education {
+  background: lightblue;
+  padding: 4rem;
+}
+
+.skills {
+  background: lightcyan;
+  padding: 4rem;
+}
+
+.contact {
+  background: lightcyan;
+  padding: 4rem;
+}
+
+h1 {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: 7rem;
+}
+
+h2 {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  color: navy;
+}
+
+h3 {
+  margin-bottom: 0.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
 }
