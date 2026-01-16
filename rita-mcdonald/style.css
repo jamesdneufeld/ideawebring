@@ -9,26 +9,26 @@ body {
 
 header {
   background: lightblue;
-  padding: 2rem;
+  padding: 3rem;
 }
 .education {
   background: cornsilk;
-  padding: 2rem;
+  padding: 3rem;
 }
 
 .skills {
   background: cornsilk;
-  padding: 2rem;
+  padding: 3rem;
 }
 
 .experience {
   background: cornsilk;
-  padding: 2rem;
+  padding: 3rem;
 }
 
 .intrests {
   background: lightseagreen;
-  padding: 2rem;
+  padding: 3rem;
 }
 
 h1 {
@@ -43,5 +43,5 @@ h2 {
   font-family: "Alumni Sans Pinstripe", sans-serif;
   font-weight: 800;
   font-style: normal;
-  font-size: 2rem;
+  font-size: 3rem;
 }
