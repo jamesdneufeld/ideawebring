@@ -8,8 +8,8 @@ body {
 }
 h1 {
   font-family: "Jost", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: <900>;
+  font-size: 5rem;
+  text-align: center;
 }
 header {
   background: lightblue;
@@ -31,4 +31,12 @@ header {
 .paragraph-sm {
   font-size: 0.8rem;
   color: blue;
+}
+.work {
+  background: hotpink;
+  padding: 2rem;
+}
+h2 {
+  font-family: "Jost", sans-serif;
+  font-size: 2rem;
 }
