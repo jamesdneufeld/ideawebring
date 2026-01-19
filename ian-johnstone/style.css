@@ -12,16 +12,16 @@ h1 {
   text-align: center;
 }
 header {
-  background: lightblue;
+  background: rgb(95, 168, 192);
   padding: 2rem;
 }
 
 .education {
-  background: goldenrod;
+  background: white;
   padding: 2rem;
 }
 .skills {
-  background: pink;
+  background: rgb(203, 232, 241);
   padding: 2rem;
 }
 .paragraph-md {
@@ -33,7 +33,7 @@ header {
   color: black;
 }
 .work {
-  background: hotpink;
+  background: white;
   padding: 2rem;
 }
 h2 {
