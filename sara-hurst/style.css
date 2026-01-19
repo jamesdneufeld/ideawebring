@@ -1,7 +1,16 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=New+Amsterdam&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=New+Amsterdam&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
 body {
   font-family: "Works Sans", sans-serif;
   padding: 1rem;
@@ -12,26 +21,41 @@ header {
   padding: 2rem;
   margin-bottom: 1rem;
 }
+.sections {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 
+.contact {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
 .education {
   background: rgb(219, 223, 235);
   padding: 2rem;
-  margin-top: 1rem;
+  width: 100%;
 }
 
 .skills {
   background: rgb(219, 223, 235);
   padding: 2rem;
+  width: 100%;
 }
 
 .experience {
   background: rgb(219, 223, 235);
   padding: 2rem;
+  width: 100%;
 }
 
 .certifications {
   background: rgb(219, 223, 235);
   padding: 2rem;
+  width: 100%;
+  min-height: 75vh;
 }
 .paragraph-md {
   font-size: 1.3rem;
@@ -43,23 +67,32 @@ header {
   font-family: "Work Sans", sans-serif;
   padding-left: 1rem;
   padding: 0.25rem;
+  text-align: center;
 }
 
 h1 {
-  font-family: "Work Sans", sans-serif;
-  font-weight: 600;
+  font-family: "Major Mono Display", monospace;
   font-size: 5rem;
-  color: rgb(11, 43, 75);
+  font-weight: 400;
+  font-style: normal;
+  text-align: center;
 }
 
 h2 {
   font-weight: 500;
   font-size: 2.5rem;
   padding: 1.5rem;
+  text-align: center;
 }
 
 h3 {
   font-weight: 600;
   font-size: 1.3rem;
   padding: 1rem;
+}
+
+.webring {
+  color: salmon;
+  display: flex;
+  justify-content: center;
 }
