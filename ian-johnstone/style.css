@@ -17,11 +17,11 @@ header {
 }
 
 .education {
-  background: goldenrod;
+  background: white;
   padding: 2rem;
 }
 .skills {
-  background: pink;
+  background: lightblue;
   padding: 2rem;
 }
 .paragraph-md {
@@ -33,7 +33,7 @@ header {
   color: black;
 }
 .work {
-  background: hotpink;
+  background: white;
   padding: 2rem;
 }
 h2 {
