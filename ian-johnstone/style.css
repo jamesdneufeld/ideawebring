@@ -30,7 +30,7 @@ header {
 }
 .paragraph-sm {
   font-size: 0.8rem;
-  color: blue;
+  color: black;
 }
 .work {
   background: hotpink;
@@ -39,4 +39,30 @@ header {
 h2 {
   font-family: "Jost", sans-serif;
   font-size: 2rem;
+  margin-bottom: 0.35rem;
+}
+.subheader {
+  font-weight: 400;
+  color: black;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+}
+.skills h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  margin-top: 0.35rem;
+}
+.education h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  margin-top: 0.35rem;
+}
+.work h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  margin-top: 0.35rem;
 }
