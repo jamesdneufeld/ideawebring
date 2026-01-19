@@ -29,9 +29,16 @@ h2 {
 h3,
 h5 {
   font-family: Josefin Sans;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 300;
   margin: 0.5rem;
+}
+
+.information {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 2rem;
 }
 
 h4 {
@@ -42,7 +49,7 @@ h4 {
 
 li {
   font-family: Josefin Sans;
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 200;
   margin-bottom: 0.5rem;
 }
@@ -50,4 +57,11 @@ li {
 ul,
 h4 {
   padding: 0.5rem;
+}
+
+.experience {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  justify-content: flex-end;
 }
