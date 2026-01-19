@@ -12,7 +12,7 @@ h1 {
   text-align: center;
 }
 header {
-  background: lightblue;
+  background: rgb(95, 168, 192);
   padding: 2rem;
 }
 
@@ -21,7 +21,7 @@ header {
   padding: 2rem;
 }
 .skills {
-  background: lightblue;
+  background: rgb(203, 232, 241);
   padding: 2rem;
 }
 .paragraph-md {
