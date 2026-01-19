@@ -18,7 +18,7 @@ section {
 }
 
 .skills {
-  background: rgb(95, 55, 55);
+  background: rgb(143, 96, 96);
   padding: 2rem;
 }
 
@@ -43,4 +43,21 @@ h2 {
   margin-bottom: 1rem;
   color: white;
   font-family: "Archivo Black", sans-serif;
+}
+
+h3 {
+  font-family: "Archivo Black", sans-serif;
+  color: rgb(137, 75, 4);
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+h4 {
+  margin-top: 0.5rem;
+}
+
+section class worktex {
+  margin-bottom: 0.5rem;
 }

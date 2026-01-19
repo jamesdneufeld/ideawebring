@@ -58,6 +58,15 @@ h2 {
   color: rgb(88, 155, 145);
 }
 
+.contact {
+  background: rgb(182, 237, 215);
+  margin: 0.5rem;
+  padding: 2rem;
+  font-size: 2rem;
+  font-weight: 600;
+  color: rgb(88, 155, 118);
+}
+
 h3 {
   font-size: 1.2rem;
   font-weight: 400;
