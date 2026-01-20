@@ -33,14 +33,35 @@ h1 {
   font-weight: 600;
   color: rgb(19, 37, 82);
   font-size: 4rem;
+  margin-bottom: 1rem;
 }
 
 h2 {
-  font-weight: 200;
+  font-weight: 500;
   color: rgb(0, 0, 0);
   font-size: 2rem;
+  margin-bottom: 1rem;
+  border: 10px dotted hotpink;
 }
-.Work-Experience {
+
+h3 {
+  border: 2px solid purple;
+  font-weight: 200;
+  font-size: 1.5rem;
+}
+
+h4 {
+  margin-bottom: 1rem;
+}
+.work-experience {
   background: whitesmoke;
   padding: 2rem;
+}
+ul {
+  list-style-type: circle;
+  list-style-position: inside;
+}
+
+li {
+  margin-bottom: 1rem;
 }
