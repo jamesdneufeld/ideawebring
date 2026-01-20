@@ -3,7 +3,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap");
 body {
   font-family: "Rubik", sans-serif;
-  padding: 1rem;
 }
 
 header {
@@ -29,7 +28,7 @@ header {
 h1 {
   font-family: "Lora", serif;
   font-weight: 600;
-  color: lemonchiffon;
+  color: lightpink;
   font-size: 5rem;
 }
 h2 {
@@ -46,4 +45,34 @@ h2 {
 .experience {
   background: pink;
   padding: 2rem;
+}
+
+/* Home page styles */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(
+    to right bottom,
+    #7b4bd2,
+    #9456d4,
+    #aa62d6,
+    #bd6fd9,
+    #cf7ddc,
+    #c28fec,
+    #b6a0f7,
+    #acafff,
+    #81c1ff,
+    #62cfff,
+    #63daef,
+    #7ee1db
+  );
+}
+.hero-title {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+  color: rgba(79, 6, 237, 0.942);
 }
