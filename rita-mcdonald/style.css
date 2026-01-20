@@ -4,7 +4,6 @@
 
 body {
   font-family: "Alumni Sans Pinstripe", sans-serif;
-  padding: 1rem;
 }
 
 header {
@@ -44,4 +43,39 @@ h2 {
   font-weight: 800;
   font-style: normal;
   font-size: 3rem;
+}
+
+.hero {
+  font-size: 2rem;
+  font-weight: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+
+  background-image: linear-gradient(
+    to right top,
+    #d16ba5,
+    #c777b9,
+    #ba83ca,
+    #aa8fd8,
+    #9a9ae1,
+    #8aa7ec,
+    #79b3f4,
+    #69bff8,
+    #52cffe,
+    #41dfff,
+    #46eefa,
+    #5ffbf1
+  );
+}
+
+.hero-heading {
+  color: white;
+  font-size: 8rem;
+}
+.hero-text {
+  color: white;
+  font-size: 2rem;
 }
