@@ -8,20 +8,20 @@ body {
 }
 h1 {
   font-family: "Jost", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: <900>;
+  font-size: 5rem;
+  text-align: center;
 }
 header {
-  background: lightblue;
+  background: rgb(95, 168, 192);
   padding: 2rem;
 }
 
 .education {
-  background: goldenrod;
+  background: white;
   padding: 2rem;
 }
 .skills {
-  background: pink;
+  background: rgb(203, 232, 241);
   padding: 2rem;
 }
 .paragraph-md {
@@ -30,5 +30,39 @@ header {
 }
 .paragraph-sm {
   font-size: 0.8rem;
-  color: blue;
+  color: black;
+}
+.work {
+  background: white;
+  padding: 2rem;
+}
+h2 {
+  font-family: "Jost", sans-serif;
+  font-size: 2rem;
+  margin-bottom: 0.35rem;
+}
+.subheader {
+  font-weight: 400;
+  color: black;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+}
+.skills h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  margin-top: 0.35rem;
+}
+.education h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  margin-top: 0.35rem;
+}
+.work h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  margin-top: 0.35rem;
 }
