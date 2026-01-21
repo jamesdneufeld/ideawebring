@@ -21,6 +21,20 @@
   .card {
     width: 30%;
   }
+  body {
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    padding: 1rem;
+  }
+  h2 {
+    font-size: 3rem;
+    font-weight: 700;
+  }
+  p,
+  li {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
 }
 header {
   background: lightblue;
@@ -30,40 +44,32 @@ header {
   align-items: center;
 }
 .education {
-  background: rgb(#fbeaff);
-  font-size: 1.25rem;
-  padding: 4rem;
   display: flex;
-  align-content: flex-end;
-  justify-content: space-between;
+  flex-direction: row;
 }
 
 .skills {
-  background: rgb(246, 223, 161);
-  font-size: 1.25rem;
-  padding: 4rem;
   display: flex;
-  align-content: flex-end;
-  justify-content: space-between;
+  flex-direction: row;
 }
 
 .experience {
-  background: rgb(126, 175, 235);
-  font-size: 1.25rem;
-  padding: 4rem;
   display: flex;
-  align-content: flex-end;
-  justify-content: space-between;
+  flex-direction: row;
 }
 
 .intrests {
-  background: white;
-  font-size: 1.25rem;
-  padding: 4rem;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 10px;
+  flex-direction: row;
+}
+
+.resume-heading {
+  width: 50%;
+  background: lemonchiffon;
+}
+.resume-content {
+  width: 50%;
+  background: lightskyblue;
 }
 
 h1 {
