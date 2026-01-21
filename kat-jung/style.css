@@ -42,9 +42,22 @@ html {
   font-weight: 200rem;
 }
 
+.index-sub {
+  padding: 1rem;
+  color: rgb(66, 186, 180);
+  font-weight: 400;
+}
+
 .index-links {
   padding: 1rem;
   color: rgb(66, 186, 180);
+  font-weight: 400;
+}
+
+.index-links:hover {
+  padding: 1rem;
+  color: rgb(101, 96, 165);
+  font-weight: 400;
 }
 
 body {
@@ -147,7 +160,7 @@ p {
 }
 
 .a-1 {
-  color: rgb(66, 186, 180);
+  color: rgb(95, 78, 144);
   font-weight: 500;
   padding: 1rem;
 }
