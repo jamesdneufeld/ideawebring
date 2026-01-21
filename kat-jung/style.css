@@ -22,17 +22,26 @@ html {
   align-items: center;
   background-image: url(saturnbg.jpg);
   background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .hero-text {
-  padding-bottom: 2rem;
-  font-size: 2rem;
   background: none;
+  color: rgb(203, 197, 248);
+  font-size: 3.5rem;
+  padding-bottom: 0.2;
+}
+
+.hero-sub {
+  background: none;
+  color: rgb(159, 140, 216);
+  font-size: 1.5rem;
+  font-weight: 200rem;
 }
 
 body {
   font-family: "Unbounded", sans-serif;
-  padding: 1rem;
 }
 
 header {
