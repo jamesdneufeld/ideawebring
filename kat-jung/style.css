@@ -14,7 +14,13 @@ html {
   box-sizing: inherit;
 }
 
-.index-header {
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-text {
   padding-bottom: 2rem;
   font-size: 2rem;
 }
