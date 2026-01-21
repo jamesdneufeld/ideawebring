@@ -1,33 +1,69 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&display=swap");
+@import url(<linkhref="https://fonts.googleapis.com/css2?family=Asset&display=swap"rel="stylesheet">);
+@import url(<linkhref="https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&display=swap"rel="stylesheet">);
 
-body {
-  font-family: "Alumni Sans Pinstripe", sans-serif;
+/* Mobile-first default */
+.card {
+  width: 100%;
 }
 
+/* Tablet */
+@media (min-width: 768px) {
+  .card {
+    width: 50%;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .card {
+    width: 30%;
+  }
+}
 header {
   background: lightblue;
-  padding: 3rem;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .education {
-  background: lightskyblue;
-  padding: 3rem;
+  background: rgb(#fbeaff);
+  font-size: 1.25rem;
+  padding: 4rem;
+  display: flex;
+  align-content: flex-end;
+  justify-content: space-between;
 }
 
 .skills {
-  background: lightskyblue;
-  padding: 3rem;
+  background: rgb(246, 223, 161);
+  font-size: 1.25rem;
+  padding: 4rem;
+  display: flex;
+  align-content: flex-end;
+  justify-content: space-between;
 }
 
 .experience {
-  background: lightskyblue;
-  padding: 3rem;
+  background: rgb(126, 175, 235);
+  font-size: 1.25rem;
+  padding: 4rem;
+  display: flex;
+  align-content: flex-end;
+  justify-content: space-between;
 }
 
 .intrests {
-  background: lightskyblue;
-  padding: 3rem;
+  background: white;
+  font-size: 1.25rem;
+  padding: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 10px;
 }
 
 h1 {
@@ -36,6 +72,7 @@ h1 {
   font-style: normal;
   font-size: 4rem;
   color: cornflowerblue;
+  align-items: center;
 }
 
 h2 {
@@ -43,30 +80,32 @@ h2 {
   font-weight: 800;
   font-style: normal;
   font-size: 3rem;
+  display: flex;
+  align-items: start;
 }
 
 .hero {
-  font-size: 2rem;
-  font-weight: 900;
+  font-size: 1.5rem;
+  font-weight: 600;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
 
-  background-image: linear-gradient(
-    to right top,
-    #d16ba5,
-    #c777b9,
-    #ba83ca,
-    #aa8fd8,
-    #9a9ae1,
-    #8aa7ec,
-    #79b3f4,
-    #69bff8,
-    #52cffe,
-    #41dfff,
-    #46eefa,
+  background-image: radial-gradient(
+    circle,
+    #efee82,
+    #ffdc96,
+    #ffd2ba,
+    #ffd2da,
+    #f4d8e9,
+    #e9dbf0,
+    #deddf4,
+    #d4e0f3,
+    #bee6ff,
+    #9eedff,
+    #79f5ff,
     #5ffbf1
   );
 }
@@ -74,8 +113,28 @@ h2 {
 .hero-heading {
   color: white;
   font-size: 8rem;
+  font-family: "Asset", serif;
 }
 .hero-text {
-  color: white;
+  color: black;
   font-size: 2rem;
+  font-weight: 200;
+  font-family: "Monsieur La Doulaise", cursive;
+  margin-bottom: 1rem;
+}
+.asset-regular {
+  font-family: "Asset", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.monsieur-la-doulaise-regular {
+  font-family: "Monsieur La Doulaise", cursive;
+  font-weight: 200;
+  font-style: normal;
+}
+a {
+  color: black;
+}
+a:hover {
+  color: lightsalmon;
 }
