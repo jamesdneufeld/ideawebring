@@ -14,6 +14,11 @@ html {
   box-sizing: inherit;
 }
 
+.index-header {
+  padding-bottom: 2rem;
+  font-size: 2rem;
+}
+
 body {
   font-family: "Unbounded", sans-serif;
   padding: 1rem;
