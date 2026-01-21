@@ -31,6 +31,8 @@ html {
   color: rgb(203, 197, 248);
   font-size: 3.5rem;
   padding-bottom: 0.2;
+  align-self: center;
+  justify-items: center;
 }
 
 .hero-sub {
@@ -38,6 +40,11 @@ html {
   color: rgb(159, 140, 216);
   font-size: 1.5rem;
   font-weight: 200rem;
+}
+
+.index-links {
+  padding: 1rem;
+  color: rgb(66, 186, 180);
 }
 
 body {
@@ -140,8 +147,9 @@ p {
 }
 
 .a-1 {
-  color: rgb(81, 67, 160);
+  color: rgb(66, 186, 180);
   font-weight: 500;
+  padding: 1rem;
 }
 
 .a-1:hover {
