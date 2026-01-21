@@ -1,7 +1,149 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sekuya&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=BBH+Bartle&display=swap");
+
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
 
 body {
   font-family: "Rubik", sans-serif;
   padding: 1rem;
+  background: rgb(239, 221, 205);
+}
+
+h3 {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+p {
+  padding-top: 0.5rem;
+}
+a {
+  color: rgb(152, 58, 58);
+}
+
+/* INDEX (Web Ring) */
+.hero {
+  padding: 2rem;
+}
+
+.hero-headline {
+  font-family: "Sekuya", regular;
+  color: beige;
+  background: rgb(152, 58, 58);
+  padding: 1.5rem;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.ring-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  font-family: "Sekuya", regular;
+}
+
+/* RESUME */
+/* header styles */
+.resume-header {
+  background: rgb(152, 58, 58);
+  padding: 2rem;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.name-header {
+  font-family: "BBH Bartle", regular;
+  font-weight: 400;
+  color: beige;
+  font-size: 3rem;
+}
+
+.position-title {
+  color: beige;
+  margin-top: 1.5rem;
+}
+
+/* education section styles */
+
+.education {
+  background: rgb(238, 181, 131);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.edu-header {
+  font-family: "BBH Bartle", regular;
+  font-weight: 400;
+  background: rgb(190, 87, 19);
+  color: rgb(238, 181, 131);
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+}
+
+.schools {
+  padding: 1.5rem;
+}
+
+.edu-years {
+  font-style: italic;
+  padding-top: 0.5rem;
+  padding-bottom: 1.25rem;
+}
+
+/* technical skills section styles */
+.tech-header {
+  font-family: "BBH Bartle", regular;
+  font-weight: 400;
+  background: rgb(164, 48, 16);
+  color: rgb(232, 139, 96);
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+}
+
+.tech-skills {
+  background: rgb(232, 139, 96);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+li {
+  /* eventually change points to a custom image? */
+  list-style: disc;
+  margin-left: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .education {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .edu-header {
+    align-content: center;
+    padding: 3rem;
+  }
+  .tech-skills {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .tech-header {
+    align-content: center;
+    padding: 3rem;
+  }
 }

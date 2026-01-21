@@ -1,7 +1,97 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
 
 body {
   font-family: "Rubik", sans-serif;
   padding: 1rem;
+}
+header {
+  background: lightblue;
+  padding: 2rem;
+}
+section {
+  background: goldenrod;
+  padding: 2rem;
+}
+.education {
+  background: cadetblue;
+  padding: 2 rem;
+}
+.skills {
+  background: hotpink;
+  padding: 2 rem;
+}
+h1 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+h2 {
+  margin-bottom: 1rem;
+}
+h3 {
+  margin-bottom: 0.3rem;
+}
+h4 {
+  margin-bottom: 1rem;
+}
+ul {
+  list-style-type: square;
+  list-style-position: inside;
+}
+h1,
+h2,
+h4,
+h5,
+h6,
+p,
+ul,
+ol {
+  margin-bottom: 1rem;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .education-heading {
+    width: 100%;
+    flex-direction: column;
+  }
+  .education-main {
+    width: 100%;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .education {
+    display: flex;
+    flex-direction: row;
+  }
+  .education-heading {
+    width: 20%;
+  }
+  .education-main {
+    width: 80%;
+    background: green;
+  }
+  .para-md {
+    font-size: 1.3rem;
+  }
+  .para-sm {
+    font-size: 0.8rem;
+  }
+}
+
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
