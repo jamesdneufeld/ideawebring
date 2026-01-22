@@ -58,3 +58,35 @@ li {
 h4 {
   margin-top: 0.5rem;
 }
+
+/*small device (mobile) tings*/
+
+@media (max-width: 992px) {
+  header {
+    font-size: 3rem;
+  }
+  /*index.html things*/
+  .hero-text {
+    text-align: center;
+    font-size: 2rem;
+  }
+  .hero-sub {
+    font-size: 1.2rem;
+  }
+  .index-links {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  /*resume.html things*/
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .hard-skills {
+    padding-bottom: 0rem;
+  }
+  .h2-top {
+    font-size: 1.5rem;
+  }
+}
