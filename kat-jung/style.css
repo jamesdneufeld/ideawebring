@@ -55,12 +55,17 @@ li {
 p {
   font-size: 1rem;
   font-weight: 300;
-  line-height: 1.2rem;
+  line-height: 1.8rem;
+  color: rgb(203, 197, 248);
+  padding-bottom: 1.8rem;
 }
 
 a {
-  color: rgb(61, 61, 61);
-  font-weight: 400;
+  color: rgb(159, 140, 216);
+}
+
+a:hover {
+  color: aliceblue;
 }
 
 /*index.html things*/
@@ -74,7 +79,6 @@ a {
   background-image: url(saturnbg.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: fixed;
 }
 
 .hero-text {
@@ -106,34 +110,53 @@ a {
 }
 
 .index-links:hover {
-  color: rgb(101, 96, 165);
+  color: rgb(203, 197, 248);
   font-weight: 400;
   font-style: normal;
 }
 
 /*resume.html things*/
+.h4 {
+  color: rgb(66, 186, 180);
+}
+
+.resumeheader {
+  background-image: url(saturnbg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .top-nav {
-  background-color: grey;
-  color: white;
+  color: rgb(203, 197, 248);
   padding: 2rem;
   padding-bottom: 1rem;
 }
 
+.h2-top {
+  color: rgb(159, 140, 216);
+}
+
 .contact {
-  background-color: grey;
-  color: white;
+  color: rgb(159, 140, 216);
   padding-bottom: 2rem;
   padding-left: 2rem;
 }
 
+.contactinfo {
+  color: rgb(66, 186, 180);
+  font-weight: 400;
+  font-style: italic;
+}
+
 .education {
-  background-color: rgb(115, 115, 115);
-  color: rgb(176, 176, 176);
+  background-color: rgb(41 33 72);
+  color: #9f8cd8;
   padding: 2rem;
 }
 
 .edutext {
   padding-bottom: 0rem;
+  color: rgb(203, 197, 248);
 }
 
 .wrapper {
@@ -141,41 +164,43 @@ a {
   flex-direction: row;
 }
 
-.hard-skills {
-  background: rgb(85, 85, 85);
+.hard-skills,
+.soft-skills {
+  background-color: rgb(19 14 36);
   padding: 2rem;
   padding-bottom: 2rem;
-  color: rgb(255, 255, 255);
+  color: rgb(159, 140, 216);
   display: flex;
   flex-direction: column;
   width: 100%;
 }
-.soft-skills {
-  background: rgb(85, 85, 85);
-  padding: 2rem;
-  color: rgb(255, 255, 255);
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+
+.bpheader {
+  color: rgb(203, 197, 248);
 }
 
 .workex {
-  background-color: rgb(115, 115, 115);
-  color: rgb(176, 176, 176);
+  background-color: rgb(41 33 72);
+  color: #9f8cd8;
   padding: 2rem;
 }
 
+.workextext {
+  color: rgb(203, 197, 248);
+}
+
 .achievements {
-  background: rgb(85, 85, 85);
+  background-color: rgb(19 14 36);
   padding: 2rem;
   padding-bottom: 2rem;
-  color: rgb(255, 255, 255);
+  color: rgb(159, 140, 216);
 }
 
 .footer {
   text-align: center;
-  background-color: grey;
-  color: white;
+  background-image: url(saturnbg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
   padding: 2rem;
 }
 
@@ -185,6 +210,11 @@ a {
   header {
     font-size: 3rem;
   }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
   /*index.html things*/
   .hero-text {
     text-align: center;
