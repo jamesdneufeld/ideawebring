@@ -14,6 +14,48 @@ html {
   box-sizing: inherit;
 }
 
+/*non-class things, for basic format*/
+
+body {
+  font-family: "Unbounded", sans-serif;
+}
+
+header {
+  background: rgb(162, 156, 205);
+  padding: 2rem;
+  padding-bottom: 0rem;
+  font-size: 5rem;
+  font-weight: 700;
+  color: rgb(100, 75, 142);
+}
+
+h2 {
+  padding-bottom: 0.3em;
+  padding-top: 0.5em;
+}
+
+h3 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  padding-top: 1rem;
+  padding-bottom: 0.4rem;
+}
+
+li {
+  font-size: 1rem;
+  font-weight: 300;
+  padding: 0.2em;
+  list-style-type: disc;
+  margin-left: 2em;
+}
+
+p {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+/*index.html things*/
+
 .hero {
   min-height: 100vh;
   display: flex;
@@ -37,7 +79,7 @@ html {
 .hero-sub {
   background: none;
   color: rgb(159, 140, 216);
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 200rem;
   padding: 1rem;
 }
@@ -60,18 +102,7 @@ html {
   font-style: normal;
 }
 
-body {
-  font-family: "Unbounded", sans-serif;
-}
-
-header {
-  background: rgb(162, 156, 205);
-  padding: 2rem;
-  padding-bottom: 0rem;
-  font-size: 5rem;
-  font-weight: 700;
-  color: rgb(100, 75, 142);
-}
+/*resume.html things*/
 
 .h2-top {
   background: rgb(162, 156, 205);
@@ -80,11 +111,6 @@ header {
   font-size: 2.5rem;
   font-weight: 600;
   color: rgb(100, 75, 142);
-}
-
-h2 {
-  padding-bottom: 0.3em;
-  padding-top: 0.5em;
 }
 
 .education {
@@ -139,26 +165,6 @@ h2 {
   color: rgb(88, 155, 118);
 }
 
-h3 {
-  font-size: 1.2rem;
-  font-weight: 400;
-  padding-top: 1rem;
-  padding-bottom: 0.4rem;
-}
-
-li {
-  font-size: 1rem;
-  font-weight: 300;
-  padding: 0.2em;
-  list-style-type: disc;
-  margin-left: 2em;
-}
-
-p {
-  font-size: 1rem;
-  font-weight: 300;
-}
-
 .a-1 {
   color: rgb(95, 78, 144);
   font-weight: 500;
@@ -169,8 +175,26 @@ p {
   color: rgb(101, 96, 165);
 }
 
-/*Large devices (desktops, 992px and up)*/
+/*small device (mobile) tings*/
+
 @media (max-width: 992px) {
+  header {
+    font-size: 3rem;
+  }
+  /*index.html things*/
+  .hero-text {
+    text-align: center;
+    font-size: 2rem;
+  }
+  .hero-sub {
+    font-size: 1.2rem;
+  }
+  .index-links {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  /*resume.html things*/
   .wrapper {
     display: flex;
     flex-direction: row;
@@ -180,17 +204,7 @@ p {
     width: 150%;
     padding-bottom: 2rem;
   }
-  header {
-    font-size: 3rem;
-  }
   .h2-top {
     font-size: 1.5rem;
-  }
-  .hero-text {
-    text-align: center;
-  }
-  .index-links {
-    font-size: 1rem;
-    text-align: center;
   }
 }
