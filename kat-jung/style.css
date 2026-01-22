@@ -50,6 +50,7 @@ li {
   padding: 0.2em;
   list-style-type: disc;
   margin-left: 2em;
+  line-height: 1.5rem;
 }
 
 p {
