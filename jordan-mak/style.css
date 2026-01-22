@@ -27,6 +27,26 @@ header {
   padding: 4rem;
 }
 
+.volunteer {
+  background: lightblue;
+  padding: 4rem;
+}
+
+.work {
+  background: lightcyan;
+  padding: 4rem;
+}
+
+.certifications {
+  background: lightblue;
+  padding: 4rem;
+}
+
+.achievements {
+  background: lightcyan;
+  padding: 4rem;
+}
+
 h1 {
   font-family: "Quicksand", sans-serif;
   font-weight: 700;
@@ -44,8 +64,18 @@ h2 {
 
 h3 {
   margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+h4 {
+  margin-bottom: 0.5rem;
 }
 
 li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+ul {
+  list-style-type: circle;
+  list-style-position: inside;
 }
