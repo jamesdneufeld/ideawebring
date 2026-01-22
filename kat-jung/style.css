@@ -21,17 +21,17 @@ body {
 }
 
 header {
-  background: rgb(162, 156, 205);
   padding: 2rem;
   padding-bottom: 0rem;
   font-size: 5rem;
   font-weight: 700;
-  color: rgb(100, 75, 142);
 }
 
 h2 {
   padding-bottom: 0.3em;
   padding-top: 0.5em;
+  font-size: 2rem;
+  font-weight: 500;
 }
 
 h3 {
@@ -104,7 +104,12 @@ p {
 
 /*resume.html things*/
 
-.h2-top {
+.top-nav {
+  background: rgb(162, 156, 205);
+  color: rgb(100, 75, 142);
+}
+
+.nav-sub {
   background: rgb(162, 156, 205);
   padding: 2rem;
   padding-top: 0.1em;
@@ -197,7 +202,7 @@ p {
   /*resume.html things*/
   .wrapper {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
   }
   .hard-skills,
   .soft-skills {
