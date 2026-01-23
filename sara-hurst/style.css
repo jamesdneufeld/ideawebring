@@ -11,52 +11,88 @@ html {
 *:after {
   box-sizing: inherit;
 }
-body {
-  font-family: "Works Sans", sans-serif;
-  padding: 1rem;
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .sections {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .contact {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .education {
+    background: rgb(219, 223, 235);
+    padding: 2rem;
+    width: 100%;
+  }
+
+  .skills {
+    background: rgb(219, 223, 235);
+    padding: 2rem;
+    width: 100%;
+  }
+
+  .experience {
+    background: rgb(219, 223, 235);
+    padding: 2rem;
+    width: 100%;
+  }
+
+  .certifications {
+    background: rgb(219, 223, 235);
+    padding: 2rem;
+    width: 100%;
+    min-height: 75vh;
+  }
 }
 
-header {
-  background: rgb(170, 181, 209);
-  padding: 2rem;
-  margin-bottom: 1rem;
-}
-.sections {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .sections {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .education {
+    background: rgb(219, 223, 235);
+    padding: 2rem;
+    width: 100%;
+  }
+
+  .skills {
+    background: rgb(219, 223, 235);
+    padding: 2rem;
+    width: 100%;
+  }
+
+  .experience {
+    background: rgb(219, 223, 235);
+    padding: 2rem;
+    width: 100%;
+  }
+
+  .certifications {
+    background: rgb(219, 223, 235);
+    padding: 2rem;
+    width: 100%;
+    min-height: 75vh;
+  }
 }
 
-.contact {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-.education {
-  background: rgb(219, 223, 235);
-  padding: 2rem;
-  width: 100%;
-}
-
-.skills {
-  background: rgb(219, 223, 235);
-  padding: 2rem;
-  width: 100%;
-}
-
-.experience {
-  background: rgb(219, 223, 235);
-  padding: 2rem;
-  width: 100%;
-}
-
-.certifications {
-  background: rgb(219, 223, 235);
-  padding: 2rem;
-  width: 100%;
-  min-height: 75vh;
-}
 .paragraph-md {
   font-size: 1.3rem;
   font-family: "Work Sans", sans-serif;
@@ -89,6 +125,17 @@ h3 {
   font-weight: 600;
   font-size: 1.3rem;
   padding: 1rem;
+}
+
+body {
+  font-family: "Works Sans", sans-serif;
+  padding: 1rem;
+}
+
+header {
+  background: rgb(170, 181, 209);
+  padding: 2rem;
+  margin-bottom: 1rem;
 }
 
 .webring {
