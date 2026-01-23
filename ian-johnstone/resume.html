@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,7 +9,13 @@
   </head>
   <body>
     <header>
-      <h1>Ian Johnstone's Resume</h1>
+      <h1>Ian Johnstone</h1>
+      <h2>Interaction Design Student</h2>
+      <section class="information">
+        <h3>Phone: (236) 888-1234</h3>
+        <h3>Email: ian.johnstone1998@gmail.com</h3>
+        <h3>Location: Vancouver, BC</h3>
+      </section>
     </header>
     <section class="education">
       <h2>Education</h2>
@@ -33,23 +39,32 @@
     </section>
     <section class="skills">
       <h2>Skills</h2>
-      <h3>Design Software</h3>
-      <ul>
-        <li>Figma</li>
-        <li>Photoshop</li>
-        <li>Illustrator</li>
-        <li>InDesign</li>
-        <li>Microsoft Office</li>
-        <li>Blender</li>
-      </ul>
-      <h3>Other Skills</h3>
-      <ul>
-        <li>3D Modeling</li>
-        <li>Technical Writing</li>
-        <li>Public Speaking</li>
-        <li>Animation</li>
-        <li>Fluent in French and English</li>
-      </ul>
+
+      <div class="skills-columns">
+        <div class="skills-col">
+          <h3>Design Software</h3>
+          <ul>
+            <li>Figma</li>
+            <li>Photoshop</li>
+            <li>Illustrator</li>
+            <li>InDesign</li>
+            <li>Microsoft Office</li>
+            <li>Blender</li>
+          </ul>
+        </div>
+
+        <div class="skills-col">
+          <h3>Other Skills</h3>
+          <ul>
+            <li>3D Modeling</li>
+            <li>Technical Writing</li>
+            <li>Public Speaking</li>
+            <li>Animation</li>
+            <li>Fluent in French and English</li>
+          </ul>
+        </div>
+      </div>
+
       <p class="paragraph-sm"></p>
     </section>
 
@@ -60,8 +75,9 @@
           <h3>Independent Contractor — Fitness Equipment Technician</h3>
           <h4 class="subheader"><time datetime="2020/2025">2020–2025</time></h4>
           <p class="paragraph-sm">
-            Managed fitness equipment maintenance contracts. Performed routine
-            inspections and repairs to ensure safety
+            Managed fitness equipment maintenance and installation contracts.
+            Performed routine safety inspections and repairs to ensure safety
+            compliance.
           </p>
         </li>
         <li>
