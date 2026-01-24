@@ -59,34 +59,27 @@ h4 {
   margin-top: 0.5rem;
 }
 
-/*small device (mobile) tings*/
+/* INDEX (Web Ring) */
+.hero {
+  padding: 2rem;
+}
 
-@media (max-width: 992px) {
-  header {
-    font-size: 3rem;
-  }
-  /*index.html things*/
-  .hero-text {
-    text-align: center;
-    font-size: 2rem;
-  }
-  .hero-sub {
-    font-size: 1.2rem;
-  }
-  .index-links {
-    font-size: 1rem;
-    text-align: center;
-  }
+.hero-text {
+  font-family: "Archivo Black", sans-serif;
+  color: rgb(255, 255, 255);
+  background: rgb(249, 73, 73);
+  padding: 1.5rem;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+}
 
-  /*resume.html things*/
-  .wrapper {
-    display: flex;
-    flex-direction: column;
-  }
-  .hard-skills {
-    padding-bottom: 0rem;
-  }
-  .h2-top {
-    font-size: 1.5rem;
-  }
+.index-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  font-size: 1.2rem;
+  font-family: "Archivo Black", sans-serif;
+  color: rgb(222, 102, 59);
 }
