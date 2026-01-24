@@ -99,17 +99,29 @@ h2 {
 }
 .education {
   background: pink;
-  padding: 2rem;
+  padding: 2 rem;
   width: 100%;
 }
 .skills {
   background: lightpink;
-  padding: 2rem;
-  width: 100%;
+  padding: 4rem;
+  width: 200%;
 }
 .experience {
   background: lightpink;
+  padding: 4rem;
+  width: 300%;
+}
+.certifications {
+  background: lightpink;
   padding: 2rem;
+  width: 200%;
+}
+.list {
+  display: flex;
+  padding: 2rem;
+  height: 300px;
+  width: 100%;
 }
 
 h3 {
