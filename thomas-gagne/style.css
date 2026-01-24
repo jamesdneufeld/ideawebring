@@ -111,3 +111,56 @@ li {
   margin-bottom: 1rem;
 }
 /* End of Lists. */
+
+/* CSS For Index */
+
+/* Sections for Index */
+.indheroheader {
+  font-size: 8rem;
+  background: orange;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.indhero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: orange;
+}
+
+.indherosubheader {
+  font-size: 5rem;
+  padding: 2rem;
+}
+
+.indsubheader {
+  font-family: "Momo Trust Display", sans-serif;
+  font-weight: 200;
+  font-size: 3rem;
+  color: blanchedalmond;
+  padding: 0.25rem;
+}
+
+.indherobody {
+  color: blanchedalmond;
+  padding: 1rem;
+}
+
+a {
+  color: blanchedalmond;
+}
+a:hover {
+  color: tomato;
+}
+a {
+  font-size: 2rem;
+}
+
+/* Break Points */
+@media (min-width: 768px);
