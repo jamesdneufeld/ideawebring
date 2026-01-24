@@ -39,6 +39,12 @@ h1 {
   background: indianred;
   padding: 2rem;
 }
+.edufooter {
+  background: darkslategray;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
 /* End of Sections* */
 
 /* Paragraph Style */
