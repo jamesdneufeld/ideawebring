@@ -3,6 +3,11 @@
 @import url("https://fonts.googleapis.com/css2?family=New+Amsterdam&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=New+Amsterdam&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
+/* Typography imported from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=New+Amsterdam&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=New+Amsterdam&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
 html {
   box-sizing: border-box;
 }
@@ -10,47 +15,6 @@ html {
 *:before,
 *:after {
   box-sizing: inherit;
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  .sections {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
-
-  .contact {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .education {
-    background: rgb(219, 223, 235);
-    padding: 2rem;
-    width: 100%;
-  }
-
-  .skills {
-    background: rgb(219, 223, 235);
-    padding: 2rem;
-    width: 100%;
-  }
-
-  .experience {
-    background: rgb(219, 223, 235);
-    padding: 2rem;
-    width: 100%;
-  }
-
-  .certifications {
-    background: rgb(219, 223, 235);
-    padding: 2rem;
-    width: 100%;
-    min-height: 75vh;
-  }
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -140,4 +104,45 @@ header {
   color: salmon;
   display: flex;
   justify-content: center;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .sections {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .contact {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .education {
+    background: rgb(219, 223, 235);
+    padding: 2rem;
+    width: 100%;
+  }
+
+  .skills {
+    background: rgb(219, 223, 235);
+    padding: 2rem;
+    width: 100%;
+  }
+
+  .experience {
+    background: rgb(219, 223, 235);
+    padding: 2rem;
+    width: 100%;
+  }
+
+  .certifications {
+    background: rgb(219, 223, 235);
+    padding: 2rem;
+    width: 100%;
+    min-height: 75vh;
+  }
 }
