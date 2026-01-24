@@ -16,6 +16,9 @@ header {
 }
 
 .Skills {
+  li {
+    margin-bottom: 1rem;
+  }
   background: lightseagreen;
   padding: 2rem;
 }
@@ -29,4 +32,18 @@ h2 {
   font-weight: 300;
   font-size: 4rem;
   margin-bottom: 1rem;
+}
+.Experience {
+  li {
+    margin-bottom: 1rem;
+  }
+  background: mediumaquamarine;
+  padding: 2rem;
+}
+.Languages {
+  li {
+    margin-bottom: 1rem;
+  }
+  background: darkseagreen;
+  padding: 2rem;
 }

@@ -65,3 +65,7 @@ h4 {
   align-content: flex-start;
   justify-content: flex-end;
 }
+
+.hero-heading {
+  color: hotpink;
+}
