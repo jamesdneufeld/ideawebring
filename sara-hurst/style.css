@@ -54,43 +54,41 @@ html {
 }
 
 /* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
-  .sections {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+.sections {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-  .contact {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .education {
-    background: rgb(219, 223, 235);
-    padding: 2rem;
-    width: 100%;
-  }
+.education {
+  background: rgb(219, 223, 235);
+  padding: 2rem;
+  width: 100%;
+}
 
-  .skills {
-    background: rgb(219, 223, 235);
-    padding: 2rem;
-    width: 100%;
-  }
+.skills {
+  background: rgb(219, 223, 235);
+  padding: 2rem;
+  width: 100%;
+}
 
-  .experience {
-    background: rgb(219, 223, 235);
-    padding: 2rem;
-    width: 100%;
-  }
+.experience {
+  background: rgb(219, 223, 235);
+  padding: 2rem;
+  width: 100%;
+}
 
-  .certifications {
-    background: rgb(219, 223, 235);
-    padding: 2rem;
-    width: 100%;
-    min-height: 75vh;
-  }
+.certifications {
+  background: rgb(219, 223, 235);
+  padding: 2rem;
+  width: 100%;
+  min-height: 75vh;
 }
 
 .paragraph-md {
