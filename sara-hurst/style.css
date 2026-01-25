@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=New+Amsterdam&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=New+Amsterdam&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Caprasimo&display=swap");
 
 html {
   box-sizing: border-box;
@@ -100,11 +101,32 @@ header {
   padding: 2rem;
   margin-bottom: 1rem;
 }
+/* Webring stuffs */
 
 .webring {
-  color: salmon;
+  color: indianred;
+  font-family: "Caprasimo", serif;
+  font-weight: 400;
+  font-style: normal;
   display: flex;
   justify-content: center;
+}
+.cherryflip {
+  font-size: 5rem;
+  margin-left: 0.3rem;
+  display: inline-block;
+  transform: scaleX(-1); /* horizontal flip */
+}
+.cherry {
+  font-size: 5rem;
+  margin-left: 0.3rem;
+}
+.webringbody {
+  color: darkgrey;
+  font-family: "Work Sans", sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 5rem;
 }
 
 /* Large devices (desktops, 992px and up) */
