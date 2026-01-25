@@ -1,16 +1,14 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Chewy&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chewy&family=DM+Serif+Text:ital@0;1&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 .resume-header {
-  background-color: lightblue;
-  padding: 2rem;
+  padding: 4rem;
   font-size: 3rem;
-  color: darkslategrey;
+  color: #000000;
   font-family: "DM Serif Text", serif;
-  font-weight: 400;
   font-style: normal;
+  text-align: center;
 }
 h2 {
   font-size: 1.8rem;
@@ -18,35 +16,51 @@ h2 {
 body {
   font-family: "Rubik", sans-serif;
   padding: 1rem;
+  background-image:
+    linear-gradient(
+      in oklch longer hue to right,
+      oklch(0.93 0.08 var(--hue1) / 50%),
+      oklch(0.93 0.08 var(--hue2) / 50%)
+    ),
+    linear-gradient(
+      in oklch longer hue to bottom,
+      oklch(0.93 0.08 var(--hue1) / 50%),
+      oklch(0.93 0.08 var(--hue2) / 50%)
+    );
+
+  background-size: 100% 100%;
+  animation-name: anim_bg;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  overscroll-behavior-x: none;
+  overscroll-behavior-y: none;
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-.objective {
-  background-color: lightskyblue;
+
+.education,
+.objective,
+.experience,
+.extracurricular,
+.skills {
   padding: 2rem;
-}
-.education {
-  background-color: lavender;
-  padding: 2rem;
-  min-height: 40vh;
+  min-height: 10vh;
   display: flex;
   flex-direction: column;
 }
-.education-main {
-  padding: 2rem;
-}
-.education-heading {
-  padding: 2rem;
-}
-.skills {
-  background-color: lightskyblue;
-  padding: 2rem;
-}
 
-.extracurricular {
-  background-color: lavender;
-  padding: 2rem;
-}
-.experience {
-  background-color: lightskyblue;
+.education-main,
+.objective-main,
+.experience-main,
+.extracurricular-main,
+.education-heading,
+.objective-heading,
+.experience-heading,
+.extracurricular-heading,
+.skills-heading,
+.skills-main {
   padding: 2rem;
 }
 
@@ -62,78 +76,14 @@ ol {
   margin-bottom: 1rem;
 }
 @media (min-width: 992px) {
-  .education {
+  .education,
+  .objective,
+  .experience,
+  .extracurricular,
+  .skills {
     flex-direction: row;
     padding: 2rem;
   }
-}
-
-/* for index.html, not refined yet, 
-found out that js seems not working, discover in the future. */
-
-/*
-CSS oklch Gradation
-Copyright (c) 2025 by Wakana Y.K. (https://codepen.io/wakana-k/pen/qEBoPoO)
-*/
-
-@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-html,
-body {
-  overscroll-behavior-x: none;
-  overscroll-behavior-y: none;
-  scroll-behavior: smooth;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-@property --hue1 {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-@property --hue2 {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-.index {
-  font-family: "Geist", sans-serif;
-  position: relative;
-  width: 100%;
-  max-width: 100vw;
-  min-height: 100vh;
-  text-align: center;
-  overflow-x: hidden;
-  background-image:
-    linear-gradient(
-      in oklch longer hue to right,
-      oklch(0.93 0.08 var(--hue1) / 50%),
-      oklch(0.93 0.08 var(--hue2) / 50%)
-    ),
-    linear-gradient(
-      in oklch longer hue to bottom,
-      oklch(0.93 0.08 var(--hue1) / 50%),
-      oklch(0.93 0.08 var(--hue2) / 50%)
-    );
-
-  background-size: 100% 100%;
-  color: PaleVioletRed;
-  font-size: 24pt;
-
-  animation-name: anim_bg;
-  animation-duration: 5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-h1 {
-  font-size: 50pt;
 }
 @keyframes anim_bg {
   0% {
@@ -146,54 +96,13 @@ h1 {
     --hue2: 660deg;
   }
 }
-/*POSITION RELATIVE MEANING?*/
-.index {
-  position: relative;
-  width: 100%;
-  height: auto;
-  min-height: 80vh;
-  display: grid;
-  place-items: center;
+@property --hue1 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
 }
-
-/*
-Import npm package from skypack.dev
-Copyright (c) by Sten Hougaard 
-(https://codepen.io/netsi1964/pen/KKMxjNy)
-
-CHECK AGAIN ON HOW TO CITE
-LEARN MORE ABOUT JS FIRST:NOT APPLYING TO ALL "BUTTONS"
-COME BACK IN THE FUTURE, LEAVE IT FOR NOW
-*/
-
-button {
-  position: relative;
-  bottom: 20%;
-  font-size: 24pt;
-  letter-spacing: 3px;
-  background: #9ec6f3;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.4s;
-  padding: 10px 20px;
-}
-
-a {
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-button:hover {
-  background: #9fb3df;
-}
-
-a:hover {
-  color: #f5efe6;
-}
-
-/* NOT UNDERSTANDED YET */
-button:focus {
-  outline: none;
+@property --hue2 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
 }
