@@ -2,6 +2,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chewy&family=DM+Serif+Text:ital@0;1&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
+/*
+CSS oklch Gradation
+Copyright (c) 2025 by Wakana Y.K. (https://codepen.io/wakana-k/pen/qEBoPoO)
+*/
+
 .resume-header {
   padding: 4rem;
   font-size: 3rem;
@@ -105,4 +110,59 @@ ol {
   syntax: "<angle>";
   inherits: false;
   initial-value: 0deg;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  font-size: 24pt;
+  letter-spacing: 3px;
+  background: #9ec6f3;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.4s;
+  padding: 10px 20px;
+  margin: 0.5rem;
+}
+
+a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #9fb3df;
+}
+
+a:hover {
+  color: #f5efe6;
+}
+
+.index {
+  background-image: url("https://framerusercontent.com/images/VNzaX4q0ao1jod6O3ISvZdE7Ws.png?scale-down-to=4096");
+
+  padding: 2rem;
+  min-height: 2rem;
+}
+.buttons {
+  padding: 2rem;
+  min-height: 20rem;
+}
+
+.name {
+  color: #9ec6f3;
+  font-family: "Rubik", sans-serif;
+  text-align: center;
+  font-size: 3rem;
+  padding: 8rem;
+}
+h1 {
+  color: white;
+  font-size: 4rem;
 }
