@@ -130,4 +130,6 @@ table {
 
 h1 {
   font-size: larger;
+  content: center;
+  background-image: -o-linear-gradient(#86A8E7#5FFBF1#5FFBF1);
 }

@@ -48,6 +48,7 @@ h2 {
 h3 {
   font-family: "Archivo Black", sans-serif;
   color: rgb(137, 75, 4);
+  margin-bottom: 0.5rem;
 }
 
 li {
@@ -56,8 +57,4 @@ li {
 
 h4 {
   margin-top: 0.5rem;
-}
-
-section class worktex {
-  margin-bottom: 0.5rem;
 }
