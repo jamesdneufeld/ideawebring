@@ -186,6 +186,10 @@ a:hover {
   padding: 2rem;
 }
 
+.work-link {
+  color: rgb(66, 186, 180);
+}
+
 .workextext {
   color: rgb(203, 197, 248);
 }
