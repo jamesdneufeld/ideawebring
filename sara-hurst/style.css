@@ -12,6 +12,101 @@ html {
   box-sizing: inherit;
 }
 
+/* Layout components */
+.sections {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.education {
+  background: rgb(219, 223, 235);
+  padding: 2rem;
+  width: 100%;
+}
+
+.skills {
+  background: rgb(219, 223, 235);
+  padding: 2rem;
+  width: 100%;
+}
+
+.experience {
+  background: rgb(219, 223, 235);
+  padding: 2rem;
+  width: 100%;
+}
+
+.certifications {
+  background: rgb(219, 223, 235);
+  padding: 2rem;
+  width: 100%;
+  min-height: 75vh;
+}
+
+/* Specific typography classes */
+
+.paragraph-md {
+  font-size: 1.3rem;
+  font-family: "Work Sans", sans-serif;
+}
+
+.paragraph-sm {
+  font-size: 1rem;
+  font-family: "Work Sans", sans-serif;
+  padding-left: 1rem;
+  padding: 0.25rem;
+  text-align: center;
+}
+
+/* Basic typography */
+
+h1 {
+  font-family: "Major Mono Display", monospace;
+  font-size: 5rem;
+  font-weight: 400;
+  font-style: normal;
+  text-align: center;
+}
+
+h2 {
+  font-weight: 500;
+  font-size: 2.5rem;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 1.3rem;
+  padding: 1rem;
+}
+
+/* Page-level elements */
+
+body {
+  font-family: "Works Sans", sans-serif;
+  padding: 1rem;
+}
+
+header {
+  background: rgb(170, 181, 209);
+  padding: 2rem;
+  margin-bottom: 1rem;
+}
+
+.webring {
+  color: salmon;
+  display: flex;
+  justify-content: center;
+}
+
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   .sections {
@@ -51,95 +146,4 @@ html {
     width: 100%;
     min-height: 75vh;
   }
-}
-
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
-  .sections {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .contact {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .education {
-    background: rgb(219, 223, 235);
-    padding: 2rem;
-    width: 100%;
-  }
-
-  .skills {
-    background: rgb(219, 223, 235);
-    padding: 2rem;
-    width: 100%;
-  }
-
-  .experience {
-    background: rgb(219, 223, 235);
-    padding: 2rem;
-    width: 100%;
-  }
-
-  .certifications {
-    background: rgb(219, 223, 235);
-    padding: 2rem;
-    width: 100%;
-    min-height: 75vh;
-  }
-}
-
-.paragraph-md {
-  font-size: 1.3rem;
-  font-family: "Work Sans", sans-serif;
-}
-
-.paragraph-sm {
-  font-size: 1rem;
-  font-family: "Work Sans", sans-serif;
-  padding-left: 1rem;
-  padding: 0.25rem;
-  text-align: center;
-}
-
-h1 {
-  font-family: "Major Mono Display", monospace;
-  font-size: 5rem;
-  font-weight: 400;
-  font-style: normal;
-  text-align: center;
-}
-
-h2 {
-  font-weight: 500;
-  font-size: 2.5rem;
-  padding: 1.5rem;
-  text-align: center;
-}
-
-h3 {
-  font-weight: 600;
-  font-size: 1.3rem;
-  padding: 1rem;
-}
-
-body {
-  font-family: "Works Sans", sans-serif;
-  padding: 1rem;
-}
-
-header {
-  background: rgb(170, 181, 209);
-  padding: 2rem;
-  margin-bottom: 1rem;
-}
-
-.webring {
-  color: salmon;
-  display: flex;
-  justify-content: center;
 }
