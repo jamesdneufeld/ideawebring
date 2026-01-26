@@ -4,11 +4,10 @@
 
 body {
   font-family: "Rubik", sans-serif;
-  padding: 1rem;
 }
 
 header {
-  background: rgb(114, 163, 238);
+  background: whitesmoke;
   padding: 2rem;
 }
 .education {
@@ -64,4 +63,82 @@ ul {
 
 li {
   margin-bottom: 1rem;
+}
+
+body {
+  font-family: "Alumni Sans Pinstripe", sans-serif;
+}
+
+header {
+  background: lightblue;
+  padding: 3rem;
+}
+.education {
+  background: whitesmoke;
+  padding: 3rem;
+}
+
+.skills {
+  background: whitesmoke;
+  padding: 3rem;
+}
+
+.experience {
+  background: lightskyblue;
+  padding: 3rem;
+}
+
+.intrests {
+  background: lightskyblue;
+  padding: 3rem;
+}
+
+h1 {
+  font-family: "Alumni Sans Pinstripe", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  font-size: 4rem;
+  color: cornflowerblue;
+}
+
+h2 {
+  font-family: "Alumni Sans Pinstripe", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 3rem;
+}
+
+.hero {
+  font-size: 2rem;
+  font-weight: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+
+  background-image: radial-gradient(
+    circle,
+    #adecb5,
+    #86e5c7,
+    #66dcda,
+    #5bd0e8,
+    #6ac2ed,
+    #6cb4eb,
+    #76a5e6,
+    #8495dc,
+    #8183d3,
+    #8170c9,
+    #845cbb,
+    #8845ab
+  );
+}
+
+.hero-heading {
+  color: white;
+  font-size: 8rem;
+}
+.hero-text {
+  color: white;
+  font-size: 2rem;
 }

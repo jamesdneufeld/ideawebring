@@ -14,6 +14,63 @@ html {
   box-sizing: inherit;
 }
 
+/*non-class things, for basic format*/
+
+body {
+  font-family: "Unbounded", sans-serif;
+}
+
+header {
+  font-size: 5rem;
+  font-weight: 700;
+  padding-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 500;
+  padding-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.3rem;
+  font-weight: 500;
+  padding-top: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+
+h4 {
+  font-size: 1rem;
+  font-weight: 500;
+  padding-bottom: 0.7rem;
+}
+
+li {
+  font-weight: 300;
+  padding: 0.2em;
+  list-style-type: disc;
+  margin-left: 2em;
+  line-height: 1.5rem;
+}
+
+p {
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.8rem;
+  color: rgb(203, 197, 248);
+  padding-bottom: 1.8rem;
+}
+
+a {
+  color: rgb(159, 140, 216);
+}
+
+a:hover {
+  color: aliceblue;
+}
+
+/*index.html things*/
+
 .hero {
   min-height: 100vh;
   display: flex;
@@ -23,14 +80,12 @@ html {
   background-image: url(saturnbg.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: fixed;
 }
 
 .hero-text {
   background: none;
   color: rgb(203, 197, 248);
   font-size: 3.5rem;
-  padding-bottom: 0.2;
   align-self: center;
   justify-items: center;
 }
@@ -38,150 +93,153 @@ html {
 .hero-sub {
   background: none;
   color: rgb(159, 140, 216);
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 200rem;
+  padding: 1rem;
 }
 
 .index-sub {
-  padding: 1rem;
   color: rgb(66, 186, 180);
   font-weight: 400;
 }
 
 .index-links {
-  padding: 1rem;
   color: rgb(66, 186, 180);
   font-weight: 400;
+  font-style: italic;
+  padding: 1rem;
 }
 
 .index-links:hover {
-  padding: 1rem;
-  color: rgb(101, 96, 165);
+  color: rgb(203, 197, 248);
   font-weight: 400;
+  font-style: normal;
 }
 
-body {
-  font-family: "Unbounded", sans-serif;
+/*resume.html things*/
+.h4 {
+  color: rgb(66, 186, 180);
 }
 
-header {
-  background: rgb(162, 156, 205);
+.resumeheader {
+  background-image: url(saturnbg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.top-nav {
+  color: rgb(203, 197, 248);
   padding: 2rem;
-  padding-bottom: 0rem;
-  font-size: 5rem;
-  font-weight: 700;
-  color: rgb(100, 75, 142);
+  padding-bottom: 1rem;
 }
 
 .h2-top {
-  background: rgb(162, 156, 205);
-  padding: 2rem;
-  padding-top: 0.1em;
-  font-size: 2.5rem;
-  font-weight: 600;
-  color: rgb(100, 75, 142);
-}
-
-h2 {
-  padding-bottom: 0.3em;
-  padding-top: 0.5em;
-}
-
-.education {
-  background: rgb(182, 188, 237);
-  margin: 1rem;
-  padding: 1em;
-  font-size: 2rem;
-  font-weight: 600;
-  color: rgb(101, 96, 165);
-}
-.wrapper {
-  border: 10px;
-}
-.hard-skills {
-  background: rgb(182, 210, 237);
-  padding: 2rem;
-  padding-bottom: 0rem;
-  font-size: 2rem;
-  font-weight: 600;
-  color: rgb(88, 126, 155);
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.soft-skills {
-  background: rgb(182, 210, 237);
-  padding: 2rem;
-  font-size: 2rem;
-  font-weight: 600;
-  color: rgb(88, 126, 155);
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.workex {
-  background: rgb(182, 237, 232);
-  margin: 1rem;
-  padding: 2rem;
-  font-size: 2rem;
-  font-weight: 600;
-  color: rgb(88, 155, 145);
+  color: rgb(159, 140, 216);
 }
 
 .contact {
-  background: rgb(182, 237, 215);
-  margin: 0.5rem;
-  padding: 2rem;
-  font-size: 2rem;
-  font-weight: 600;
-  color: rgb(88, 155, 118);
+  color: rgb(159, 140, 216);
+  padding-bottom: 2rem;
+  padding-left: 2rem;
 }
 
-h3 {
-  font-size: 1.2rem;
+.contactinfo {
+  color: rgb(66, 186, 180);
   font-weight: 400;
-  padding-top: 1rem;
-  padding-bottom: 0.4rem;
+  font-style: italic;
 }
 
-li {
-  font-size: 1rem;
-  font-weight: 300;
-  padding: 0.2em;
-  list-style-type: disc;
-  margin-left: 2em;
+.education {
+  background-color: rgb(41 33 72);
+  color: #9f8cd8;
+  padding: 2rem;
 }
 
-p {
-  font-size: 1rem;
-  font-weight: 300;
+.edutext {
+  padding-bottom: 0rem;
+  color: rgb(203, 197, 248);
 }
 
-.a-1 {
-  color: rgb(95, 78, 144);
-  font-weight: 500;
-  padding: 1rem;
+.wrapper {
+  display: flex;
+  flex-direction: row;
 }
 
-.a-1:hover {
-  color: rgb(101, 96, 165);
+.hard-skills,
+.soft-skills {
+  background-color: rgb(19 14 36);
+  padding: 2rem;
+  padding-bottom: 2rem;
+  color: rgb(159, 140, 216);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-/*Large devices (desktops, 992px and up)*/
+.bpheader {
+  color: rgb(203, 197, 248);
+}
+
+.workex {
+  background-color: rgb(41 33 72);
+  color: #9f8cd8;
+  padding: 2rem;
+}
+
+.work-link {
+  color: rgb(66, 186, 180);
+}
+
+.workextext {
+  color: rgb(203, 197, 248);
+}
+
+.achievements {
+  background-color: rgb(19 14 36);
+  padding: 2rem;
+  padding-bottom: 2rem;
+  color: rgb(159, 140, 216);
+}
+
+.footer {
+  text-align: center;
+  background-image: url(saturnbg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 2rem;
+}
+
+/*small device (mobile) tings*/
+
 @media (max-width: 992px) {
-  .wrapper {
-    display: flex;
-    flex-direction: row;
-  }
-  .hard-skills,
-  .soft-skills {
-    width: 150%;
-    padding-bottom: 2rem;
-  }
   header {
     font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  /*index.html things*/
+  .hero-text {
+    text-align: center;
+    font-size: 2rem;
+  }
+  .hero-sub {
+    font-size: 1.2rem;
+  }
+  .index-links {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  /*resume.html things*/
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .hard-skills {
+    padding-bottom: 0rem;
   }
   .h2-top {
     font-size: 1.5rem;
