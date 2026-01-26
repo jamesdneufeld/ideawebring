@@ -22,3 +22,13 @@ body {
   padding: 30px 22px;
   box-shadow: 0 16px 34px rgba(255, 127, 182, 0.25);
 }
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #ffd0e4;
+  border: 1px solid #ff7fb6;
+  color: #7a1450;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
