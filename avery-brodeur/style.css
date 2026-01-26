@@ -7,65 +7,52 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100..700&display=swap");
 
-h1 {
-  font-family: Major Mono Display;
-  font-size: 6.5rem;
-  color: whitesmoke;
+@import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap");
+
+.homepage {
+  box-sizing: border-box;
+  justify-items: center;
+  width: 100%;
 }
 
 header {
-  background-color: cornflowerblue;
-  padding: 2rem;
+  background-color: lavender;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  width: 100%;
+  justify-items: center;
 }
 
-h2 {
+#rtitle {
+  font-family: Bagel Fat One;
+  font-size: 8rem;
+  margin: 3rem;
+}
+
+#rh2 {
+  font-size: 2rem;
   font-family: Josefin Sans;
-  font-size: 3rem;
-  font-weight: 300;
-  color: cornflowerblue;
-  padding: 0.5rem;
 }
-
-h3,
-h5 {
+.linkbutton {
+  font-size: 2rem;
   font-family: Josefin Sans;
-  font-size: 1.5rem;
-  font-weight: 300;
-  margin: 0.5rem;
+  text-align: center;
+  display: inline-block;
+  padding: 1rem 2rem;
+  margin: 2rem;
+  border: 0.25rem solid lavender;
+  border-radius: 1.5rem;
+  color: black;
 }
 
-.information {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  padding: 2rem;
-}
-
-h4 {
+.linkbutton:hover {
+  font-size: 2rem;
   font-family: Josefin Sans;
-  font-size: 1.5rem;
-  font-weight: 300;
-}
-
-li {
-  font-family: Josefin Sans;
-  font-size: 1.25rem;
-  font-weight: 200;
-  margin-bottom: 0.5rem;
-}
-
-ul,
-h4 {
-  padding: 0.5rem;
-}
-
-.experience {
-  display: flex;
-  flex-direction: column;
-  align-content: flex-start;
-  justify-content: flex-end;
-}
-
-.hero-heading {
-  color: hotpink;
+  text-align: center;
+  display: inline-block;
+  padding: 1rem 2rem;
+  margin: 2rem;
+  background-color: lavender;
+  border-radius: 1.5rem;
+  color: black;
 }
