@@ -1,6 +1,95 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=New+Amsterdam&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=New+Amsterdam&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Caprasimo&display=swap");
+
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* Layout components */
+.sections {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.education {
+  background: rgb(219, 223, 235);
+  padding: 2rem;
+  width: 100%;
+}
+
+.skills {
+  background: rgb(219, 223, 235);
+  padding: 2rem;
+  width: 100%;
+}
+
+.experience {
+  background: rgb(219, 223, 235);
+  padding: 2rem;
+  width: 100%;
+}
+
+.certifications {
+  background: rgb(219, 223, 235);
+  padding: 2rem;
+  width: 100%;
+  min-height: 75vh;
+}
+
+/* Specific typography classes */
+
+.paragraph-md {
+  font-size: 1.3rem;
+  font-family: "Work Sans", sans-serif;
+}
+
+.paragraph-sm {
+  font-size: 1rem;
+  font-family: "Work Sans", sans-serif;
+  padding-left: 1rem;
+  padding: 0.25rem;
+  text-align: center;
+}
+
+/* Basic typography */
+
+h1 {
+  font-family: "Major Mono Display", monospace;
+  font-size: 5rem;
+  font-weight: 400;
+  font-style: normal;
+  text-align: center;
+}
+
+h2 {
+  font-weight: 500;
+  font-size: 2.5rem;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 1.3rem;
+  padding: 1rem;
+}
+
+/* Page-level elements */
 
 body {
   font-family: "Works Sans", sans-serif;
@@ -12,54 +101,98 @@ header {
   padding: 2rem;
   margin-bottom: 1rem;
 }
-
-.education {
-  background: rgb(219, 223, 235);
-  padding: 2rem;
-  margin-top: 1rem;
+/* Webring stuffs */
+.myindex {
+  background-image: url(finalbg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
-
-.skills {
-  background: rgb(219, 223, 235);
-  padding: 2rem;
+.webring {
+  color: indianred;
+  font-family: "Caprasimo", serif;
+  font-weight: 400;
+  font-style: normal;
+  display: flex;
+  justify-content: center;
+  margin-top: 8rem;
+  margin-bottom: 3rem;
+  text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.8);
 }
-
-.experience {
-  background: rgb(219, 223, 235);
-  padding: 2rem;
-}
-
-.certifications {
-  background: rgb(219, 223, 235);
-  padding: 2rem;
-}
-.paragraph-md {
-  font-size: 1.3rem;
-  font-family: "Work Sans", sans-serif;
-}
-
-.paragraph-sm {
-  font-size: 1rem;
-  font-family: "Work Sans", sans-serif;
-  padding-left: 1rem;
-  padding: 0.25rem;
-}
-
-h1 {
-  font-family: "Work Sans", sans-serif;
-  font-weight: 600;
+.cherryflip {
   font-size: 5rem;
-  color: rgb(11, 43, 75);
+  margin-left: 0.3rem;
+  display: inline-block;
+  transform: scaleX(-1); /* horizontal flip */
+}
+.cherry {
+  font-size: 5rem;
+  margin-left: 0.3rem;
+}
+.webringbody {
+  color: rgb(33, 58, 25);
+  font-family: "Work Sans", sans-serif;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 9.5rem;
+}
+.link {
+  display: flex;
+  justify-content: center;
+  gap: 3.5rem;
+  background-color: white;
+  padding: 1rem 2rem;
+  border: 5px solid indianred;
+  border-radius: 12px;
+  width: fit-content;
+  margin: 2rem auto 0;
+}
+.link a {
+  font-size: 1rem;
+  color: rgb(33, 58, 25);
+  padding: 0.3rem 0.5rem;
+  transition: color 0.2s;
 }
 
-h2 {
-  font-weight: 500;
-  font-size: 2.5rem;
-  padding: 1.5rem;
+.link :hover {
+  color: indianred;
 }
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .sections {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
 
-h3 {
-  font-weight: 600;
-  font-size: 1.3rem;
-  padding: 1rem;
+  .contact {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .education {
+    background: rgb(219, 223, 235);
+    padding: 2rem;
+    width: 100%;
+  }
+
+  .skills {
+    background: rgb(219, 223, 235);
+    padding: 2rem;
+    width: 100%;
+  }
+
+  .experience {
+    background: rgb(219, 223, 235);
+    padding: 2rem;
+    width: 100%;
+  }
+
+  .certifications {
+    background: rgb(219, 223, 235);
+    padding: 2rem;
+    width: 100%;
+    min-height: 75vh;
+  }
 }

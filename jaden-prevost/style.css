@@ -1,6 +1,7 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap");
 
 body {
   font-family: "Rubik", sans-serif;
@@ -18,7 +19,7 @@ section {
 }
 
 .skills {
-  background: rgb(95, 55, 55);
+  background: rgb(143, 96, 96);
   padding: 2rem;
 }
 
@@ -43,4 +44,55 @@ h2 {
   margin-bottom: 1rem;
   color: white;
   font-family: "Archivo Black", sans-serif;
+}
+
+h3 {
+  font-family: "Archivo Black", sans-serif;
+  color: rgb(137, 75, 4);
+  margin-bottom: 0.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+h4 {
+  margin-top: 0.5rem;
+}
+
+/* INDEX (Web Ring) */
+.hero {
+  padding: 2rem;
+}
+
+.hero-text {
+  font-family: "Archivo Black", sans-serif;
+  color: rgb(255, 255, 255);
+  background: rgb(249, 73, 73);
+  padding: 1.5rem;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.index-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  font-size: 1.2rem;
+  font-family: "Archivo Black", sans-serif;
+  color: rgb(249, 73, 73);
+}
+
+.hero-sub {
+  color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  font-family: "Fugaz One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2rem;
 }

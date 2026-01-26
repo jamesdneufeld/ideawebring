@@ -3,11 +3,41 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap");
 
-/* Sections */
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+/* Header Section */
 header {
   background: tomato;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+.edusummary {
+  font-family: "Momo Trust Display", sans-serif;
+  font-weight: 200;
+  font-size: 2rem;
+  color: #ffebcd;
+  padding: 0.25rem;
+  margin-bottom: 0.25rem;
+  margin-top: 2rem;
+}
+.Paragraph-mdhero {
+  font-size: 0.8rem;
+  color: blanchedalmond;
+  padding: 0.25rem;
+  margin-bottom: 2rem;
+  margin-right: 23rem;
+  margin-left: 23rem;
+}
+/* End of Header */
 h1 {
   font-family: "Momo Trust Display", sans-serif;
   font-weight: 400;
@@ -22,14 +52,27 @@ h1 {
   font-size: 1.5rem;
   background: orange;
   padding: 2rem;
+  display: flex;
 }
 .skills {
   background: blanchedalmond;
   padding: 2rem;
+  display: flex;
 }
 .experience {
   background: seagreen;
   padding: 2rem;
+  display: flex;
+}
+.educertification {
+  background: indianred;
+  padding: 2rem;
+}
+.edufooter {
+  background: darkslategray;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
 }
 /* End of Sections* */
 
@@ -51,15 +94,7 @@ h1 {
   padding: 0.25rem;
 }
 /* Section Headers */
-.edusummary {
-  font-family: "Momo Trust Display", sans-serif;
-  font-weight: 200;
-  font-size: 2rem;
-  color: #ffebcd;
-  padding: 0.25rem;
-  margin-bottom: 0.25rem;
-  margin-top: 2rem;
-}
+
 .edutitle {
   font-family: "Momo Trust Display", sans-serif;
   font-weight: 200;
@@ -104,6 +139,72 @@ h1 {
   margin-bottom: 1rem;
 }
 li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
-/* End of Lists */
+/* End of Lists. */
+
+.resume-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+.education,
+.skills,
+.experience,
+.educertification {
+  width: 50%;
+}
+/* CSS For Index */
+
+/* Sections for Index */
+.indheroheader {
+  font-size: 8rem;
+  background: orange;
+  padding: 2rem;
+}
+
+.indhero {
+  min-height: 100vh;
+  background-color: orange;
+}
+
+.indherosubheader {
+  font-size: 5rem;
+  padding: 2rem;
+}
+
+.indsubheader {
+  font-family: "Momo Trust Display", sans-serif;
+  font-weight: 200;
+  font-size: 3rem;
+  color: blanchedalmond;
+  padding: 0.25rem;
+}
+
+.indherobody {
+  color: blanchedalmond;
+  padding: 1rem;
+}
+
+a {
+  color: blanchedalmond;
+}
+a:hover {
+  color: tomato;
+}
+a {
+  font-size: 2rem;
+}
+
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+h2 {
+  font-size: 3rem;
+  font-weight: 700;
+}
