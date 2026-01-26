@@ -110,7 +110,7 @@ a:hover {
 }
 
 .index-links:hover {
-  color: rgb(203, 197, 248);
+  color: aliceblue;
   font-weight: 400;
   font-style: normal;
 }
@@ -142,7 +142,10 @@ a:hover {
   font-weight: 400;
   font-style: italic;
   font-size: 1.5rem;
-  text-decoration: none;
+}
+
+.return:hover {
+  font-style: normal;
 }
 
 .contact {
@@ -198,6 +201,12 @@ a:hover {
 
 .work-link {
   color: rgb(66, 186, 180);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.work-link:hover {
+  font-style: normal;
 }
 
 .workextext {
