@@ -118,6 +118,7 @@ a:hover {
 /*resume.html things*/
 .h4 {
   color: rgb(66, 186, 180);
+  padding-top: 0.3rem;
 }
 
 .resumeheader {
@@ -186,6 +187,7 @@ a:hover {
 
 .bpheader {
   color: rgb(203, 197, 248);
+  padding-bottom: 0.5rem;
 }
 
 .workex {
@@ -214,6 +216,7 @@ a:hover {
   background-image: url(katbg-.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   padding: 2rem;
 }
 
