@@ -29,7 +29,6 @@ header {
 h2 {
   font-size: 2rem;
   font-weight: 500;
-  padding-bottom: 1rem;
 }
 
 h3 {
@@ -111,7 +110,7 @@ a:hover {
 }
 
 .index-links:hover {
-  color: rgb(203, 197, 248);
+  color: aliceblue;
   font-weight: 400;
   font-style: normal;
 }
@@ -119,6 +118,7 @@ a:hover {
 /*resume.html things*/
 .h4 {
   color: rgb(66, 186, 180);
+  padding-top: 0.3rem;
 }
 
 .resumeheader {
@@ -137,6 +137,17 @@ a:hover {
   color: rgb(159, 140, 216);
 }
 
+.return {
+  color: rgb(66, 186, 180);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.5rem;
+}
+
+.return:hover {
+  font-style: normal;
+}
+
 .contact {
   color: rgb(159, 140, 216);
   padding-bottom: 2rem;
@@ -147,6 +158,7 @@ a:hover {
   color: rgb(66, 186, 180);
   font-weight: 400;
   font-style: italic;
+  font-size: 1rem;
 }
 
 .education {
@@ -178,6 +190,7 @@ a:hover {
 
 .bpheader {
   color: rgb(203, 197, 248);
+  padding-bottom: 0.5rem;
 }
 
 .workex {
@@ -188,6 +201,12 @@ a:hover {
 
 .work-link {
   color: rgb(66, 186, 180);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.work-link:hover {
+  font-style: normal;
 }
 
 .workextext {
@@ -206,6 +225,7 @@ a:hover {
   background-image: url(katbg-.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   padding: 2rem;
 }
 
@@ -221,6 +241,13 @@ a:hover {
   }
 
   /*index.html things*/
+  .hero {
+    min-height: 100vh;
+    background-image: url(katbg-.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: center;
+  }
   .hero-text {
     text-align: center;
     font-size: 2rem;
@@ -243,5 +270,9 @@ a:hover {
   }
   .h2-top {
     font-size: 1.5rem;
+  }
+
+  .return {
+    font-size: 1.1rem;
   }
 }
