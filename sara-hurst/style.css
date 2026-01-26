@@ -102,7 +102,11 @@ header {
   margin-bottom: 1rem;
 }
 /* Webring stuffs */
-
+.myindex {
+  background-image: url(finalbg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 .webring {
   color: indianred;
   font-family: "Caprasimo", serif;
@@ -110,6 +114,8 @@ header {
   font-style: normal;
   display: flex;
   justify-content: center;
+  margin-bottom: 1.5rem;
+  text-shadow: 2px 2px 4px black;
 }
 .cherryflip {
   font-size: 5rem;
@@ -122,13 +128,33 @@ header {
   margin-left: 0.3rem;
 }
 .webringbody {
-  color: darkgrey;
+  color: rgb(33, 58, 25);
   font-family: "Work Sans", sans-serif;
   font-size: 1.5rem;
   text-align: center;
-  margin-top: 5rem;
+  margin-bottom: 10rem;
+}
+.link {
+  display: flex;
+  justify-content: center;
+  gap: 3.5rem;
+  background-color: white;
+  padding: 1rem 2rem;
+  border: 5px solid indianred;
+  border-radius: 12px;
+  width: fit-content;
+  margin: 2rem auto 0;
+}
+.link a {
+  font-size: 1rem;
+  color: rgb(33, 58, 25);
+  padding: 0.3rem 0.5rem;
+  transition: color 0.2s;
 }
 
+.link :hover {
+  color: indianred;
+}
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   .sections {
