@@ -94,7 +94,14 @@ a:hover {
   color: rgb(159, 140, 216);
   font-size: 2rem;
   font-weight: 200rem;
-  padding: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.sub-text {
+  text-align: center;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  line-height: 1.5rem;
 }
 
 .index-sub {
@@ -137,6 +144,15 @@ a:hover {
   color: rgb(159, 140, 216);
 }
 
+.resume-h2 {
+  color: rgb(203, 197, 248);
+}
+
+.list-header {
+  color: rgb(203, 197, 248);
+  padding-bottom: 0.5rem;
+}
+
 .return {
   color: rgb(66, 186, 180);
   font-weight: 400;
@@ -167,11 +183,6 @@ a:hover {
   padding: 2rem;
 }
 
-.edutext {
-  padding-bottom: 0rem;
-  color: rgb(203, 197, 248);
-}
-
 .wrapper {
   display: flex;
   flex-direction: row;
@@ -188,11 +199,6 @@ a:hover {
   width: 100%;
 }
 
-.bpheader {
-  color: rgb(203, 197, 248);
-  padding-bottom: 0.5rem;
-}
-
 .workex {
   background-color: rgb(41 33 72);
   color: #9f8cd8;
@@ -207,10 +213,6 @@ a:hover {
 
 .work-link:hover {
   font-style: normal;
-}
-
-.workextext {
-  color: rgb(203, 197, 248);
 }
 
 .achievements {
