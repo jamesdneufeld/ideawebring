@@ -29,7 +29,6 @@ header {
 h2 {
   font-size: 2rem;
   font-weight: 500;
-  padding-bottom: 1rem;
 }
 
 h3 {
@@ -137,6 +136,14 @@ a:hover {
   color: rgb(159, 140, 216);
 }
 
+.return {
+  color: rgb(66, 186, 180);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
 .contact {
   color: rgb(159, 140, 216);
   padding-bottom: 2rem;
@@ -147,6 +154,7 @@ a:hover {
   color: rgb(66, 186, 180);
   font-weight: 400;
   font-style: italic;
+  font-size: 1rem;
 }
 
 .education {
@@ -221,6 +229,13 @@ a:hover {
   }
 
   /*index.html things*/
+  .hero {
+    min-height: 100vh;
+    background-image: url(katbg-.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: center;
+  }
   .hero-text {
     text-align: center;
     font-size: 2rem;
@@ -243,5 +258,9 @@ a:hover {
   }
   .h2-top {
     font-size: 1.5rem;
+  }
+
+  .return {
+    font-size: 1.1rem;
   }
 }
