@@ -32,3 +32,10 @@ body {
   font-weight: 600;
   margin-bottom: 14px;
 }
+..hero-name {
+  font-family: Poppins, Arial, sans-serif;
+  font-weight: 800;
+  font-size: 44px;
+  color: #c2185b;
+  margin: 0 0 8px 0;
+}
