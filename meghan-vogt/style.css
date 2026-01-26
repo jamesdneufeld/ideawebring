@@ -4,17 +4,17 @@
 body {
   font-family: "Rubik", sans-serif;
 }
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
 
 header {
   background: lightblue;
-  padding: 2rem;
-}
-.education {
-  background: pink;
-  padding: 2rem;
-}
-.skills {
-  background: lightpink;
   padding: 2rem;
 }
 .paragraph-md {
@@ -23,13 +23,14 @@ header {
 }
 .paragraph-sm {
   font-size: 1rem;
-  color: darkblue;
+  color: black;
 }
 h1 {
   font-family: "Lora", serif;
   font-weight: 600;
   color: lightpink;
   font-size: 5rem;
+  text-align: center;
 }
 h2 {
   font-family: "Lora", serif;
@@ -37,7 +38,9 @@ h2 {
   color: lemonchiffon;
   font-size: 2rem;
   margin-bottom: 2rem;
+  text-align: center;
 }
+
 .certifications {
   background: lightpink;
   padding: 2rem;
@@ -75,4 +78,55 @@ h2 {
   font-size: 5rem;
   margin-bottom: 1rem;
   color: rgba(79, 6, 237, 0.942);
+}
+
+@media only screen and (min-width: 992px) {
+  body {
+    background: black;
+    padding: 1rem;
+  }
+}
+.sections {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.paragraph-sm {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.education {
+  background: pink;
+  padding: 2 rem;
+  width: 100%;
+}
+.skills {
+  background: lightpink;
+  padding: 4rem;
+  width: 200%;
+}
+.experience {
+  background: lightpink;
+  padding: 4rem;
+  width: 300%;
+}
+.certifications {
+  background: lightpink;
+  padding: 2rem;
+  width: 200%;
+}
+.list {
+  display: flex;
+  padding: 2rem;
+  height: 300px;
+  width: 100%;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 1.3rem;
+  padding: 1rem;
+  text-align: center;
 }
