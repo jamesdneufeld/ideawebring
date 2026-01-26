@@ -5,6 +5,12 @@
 body {
   font-family: "Quicksand", sans-serif;
   padding: 1rem;
+  background: lightpink;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
 }
 
 header {
@@ -65,4 +71,36 @@ h3 {
   font-size: 0.75rem;
   color: black;
   font-weight: 100;
+}
+
+.wrapper {
+  border: 10px solid white;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  body {
+    background: lightblue;
+  }
+  h2 {
+    font-family: "quicksand", sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    background-color: rgb(250, 174, 198);
+    display: left;
+  }
+  .contactsection {
+    border-bottom: 2px solid black;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .experience {
+    border-bottom: 2px solid black;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
 }

@@ -23,6 +23,8 @@ header {
 .education {
   margin-bottom: 2rem;
   text-align: center;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
 }
 .skills {
   margin-bottom: 1rem;
@@ -84,7 +86,7 @@ a:hover {
   margin-top: 1rem;
 }
 .experience {
-  padding: 2rem;
+  margin-bottom: 2rem;
 }
 h2.job-title {
   font-size: 2rem;
@@ -111,4 +113,20 @@ ul {
 .job-title {
   text-align: center;
   font-weight: 300;
+}
+.resume-link {
+  border: none;
+  border-radius: none;
+  background: none;
+}
+.education-title {
+  margin-top: 0.75rem;
+}
+@media (min-width: 768px) {
+  .skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    justify-content: space-around;
+  }
 }
