@@ -33,7 +33,6 @@
   li {
     font-size: 1.5rem;
     font-weight: 700;
-    margin-bottom: 1rem;
   }
 }
 header {
@@ -42,6 +41,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 0.5rem;
 }
 .education {
   display: flex;
@@ -70,6 +70,7 @@ header {
 .resume-content {
   width: 50%;
   background: lightskyblue;
+  margin-bottom: 0.5rem;
 }
 
 h1 {
