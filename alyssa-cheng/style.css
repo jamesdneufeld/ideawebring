@@ -50,6 +50,10 @@ ul {
 li {
   margin-bottom: 0.5rem;
 }
+.site-header,
+.main-nav {
+  text-align: center;
+}
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
