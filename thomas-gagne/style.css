@@ -2,35 +2,86 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap");
-body {
-  font-family: "Rubik", sans-serif;
-  padding: 1rem;
+
+html {
+  box-sizing: border-box;
 }
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+/* Header Section */
 header {
   background: tomato;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-.EDUCATION {
+.edusummary {
+  font-family: "Momo Trust Display", sans-serif;
+  font-weight: 200;
+  font-size: 2rem;
+  color: #ffebcd;
+  padding: 0.25rem;
+  margin-bottom: 0.25rem;
+  margin-top: 2rem;
+}
+.Paragraph-mdhero {
+  font-size: 0.8rem;
+  color: blanchedalmond;
+  padding: 0.25rem;
+  margin-bottom: 2rem;
+  margin-right: 23rem;
+  margin-left: 23rem;
+}
+/* End of Header */
+h1 {
+  font-family: "Momo Trust Display", sans-serif;
+  font-weight: 400;
+  color: blanchedalmond;
+  font-size: 5rem;
+  font-style: normal;
+  padding: 0.25rem;
+  margin-bottom: 1rem;
+}
+/* Above is Name */
+.education {
   font-size: 1.5rem;
   background: orange;
   padding: 2rem;
+  display: flex;
 }
-.EDUHEADER {
-  font-family: "Momo Trust Display", sans-serif;
-  font-weight: 200;
-  font-size: 3;
-  color: blanchedalmond;
-  padding: 0.25rem;
-}
-.SKILLS {
+.skills {
   background: blanchedalmond;
   padding: 2rem;
+  display: flex;
 }
+.experience {
+  background: seagreen;
+  padding: 2rem;
+  display: flex;
+}
+.educertification {
+  background: indianred;
+  padding: 2rem;
+}
+.edufooter {
+  background: darkslategray;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+/* End of Sections* */
+
 /* Paragraph Style */
 .Paragraph-md {
   font-size: 0.8rem;
   color: blanchedalmond;
   padding: 0.25rem;
+  margin-bottom: 2rem;
 }
 .Paragraph-lg {
   font-size: 1rem;
@@ -43,49 +94,117 @@ header {
   padding: 0.25rem;
 }
 /* Section Headers */
-.EDUSUMMARY {
+
+.edutitle {
   font-family: "Momo Trust Display", sans-serif;
   font-weight: 200;
   font-size: 2rem;
   color: #ffebcd;
   padding: 0.25rem;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
 }
-.EDUTITLE {
-  font-family: "Momo Trust Display", sans-serif;
-  font-weight: 200;
-  font-size: 2rem;
-  color: #ffebcd;
-  padding: 0.25rem;
-}
-.EDUSKILLS {
+.eduskills {
   font-family: "Momo Trust Display", sans-serif;
   font-weight: 200;
   font-size: 2rem;
   color: orange;
   padding: 0.25rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
-.EDUEXP {
+.eduexp {
   font-family: "Momo Trust Display", sans-serif;
   font-weight: 200;
   font-size: 2rem;
   color: blanchedalmond;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 /* End of Section Headers */
-
-.EDUSKILLIST {
+/* Section Sub-Headers */
+.eduheader {
+  font-family: "Momo Trust Display", sans-serif;
+  font-weight: 200;
+  font-size: 3;
+  color: blanchedalmond;
+  padding: 0.25rem;
+}
+/* End of Section Sub-Headers */
+/* Lists */
+.eduskillist {
   font-size: 1rem;
   color: orange;
   padding: 0.25rem;
+  margin-bottom: 1rem;
 }
-h1 {
-  font-family: "Momo Trust Display", sans-serif;
-  font-weight: 400;
-  color: blanchedalmond;
+li {
+  margin-bottom: 1rem;
+}
+/* End of Lists. */
+
+.resume-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+.education,
+.skills,
+.experience,
+.educertification {
+  width: 50%;
+}
+/* CSS For Index */
+
+/* Sections for Index */
+.indheroheader {
+  font-size: 8rem;
+  background: orange;
+  padding: 2rem;
+}
+
+.indhero {
+  min-height: 100vh;
+  background-color: orange;
+}
+
+.indherosubheader {
   font-size: 5rem;
-  font-style: normal;
+  padding: 2rem;
+}
+
+.indsubheader {
+  font-family: "Momo Trust Display", sans-serif;
+  font-weight: 200;
+  font-size: 3rem;
+  color: blanchedalmond;
   padding: 0.25rem;
 }
-.EXPERIENCE {
-  background: seagreen;
-  padding: 2rem;
+
+.indherobody {
+  color: blanchedalmond;
+  padding: 1rem;
+}
+
+a {
+  color: blanchedalmond;
+}
+a:hover {
+  color: tomato;
+}
+a {
+  font-size: 2rem;
+}
+
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+h2 {
+  font-size: 3rem;
+  font-weight: 700;
 }
