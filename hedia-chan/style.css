@@ -157,7 +157,7 @@ a:hover {
 }
 
 .index {
-  background-image: url("https://framerusercontent.com/images/VNzaX4q0ao1jod6O3ISvZdE7Ws.png?scale-down-to=4096");
+  background-image: url("https://www.comedywildlifephoto.com/images/gallery/2/00001912_p.webp");
 
   padding: 2rem;
   min-height: 2rem;
@@ -168,7 +168,7 @@ a:hover {
 }
 
 .name {
-  color: #9ec6f3;
+  color: #ffc43f;
   font-family: "Rubik", sans-serif;
   text-align: center;
   font-size: 3rem;
@@ -177,7 +177,7 @@ a:hover {
 
 .glitch {
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: #fff;
