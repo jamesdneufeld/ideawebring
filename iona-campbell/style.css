@@ -81,8 +81,8 @@ header {
   padding: 3rem;
 }
 
-.experience {
-  background: lightskyblue;
+.work-experience {
+  background: whitesmoke;
   padding: 3rem;
 }
 
@@ -93,9 +93,9 @@ header {
 title {
   font-family: .ibm-plex-mono-semibold {
   font-family: "IBM Plex Mono", monospace;
-  font-weight: 600;
+  font-weight>: 600;
   font-style: normal;
-  color: #75000E;
+  color:#75000E;
 }
 }
 h1 {
@@ -124,7 +124,6 @@ h2 {
 
   background-image: background: #FF1FA9;
 background: linear-gradient(90deg, rgba(255, 31, 169, 1) 0%, rgba(255, 31, 57, 1) 50%, rgba(255, 117, 31, 1) 100%);
-  );
 }
 
 .hero-heading {
