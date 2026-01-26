@@ -14,14 +14,7 @@ html {
 
 body {
   font-family: "Rubik", sans-serif;
-  padding: 1rem;
-}
-
-h1 {
-  font-family: "BBH Bartle", regular;
-  font-weight: 400;
-  color: beige;
-  font-size: 3rem;
+  background: rgb(29, 25, 24);
 }
 
 h3 {
@@ -33,29 +26,112 @@ p {
   padding-top: 0.5rem;
 }
 
+a {
+  color: rgb(255, 209, 196);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+  background: rgb(255, 209, 196);
+  color: rgb(163, 40, 40);
+  padding: 0.25rem;
+}
+
+/* INDEX (Web Ring) */
+.hero {
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url(star-bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.hero-headline {
+  font-family: "Sekuya", regular;
+  color: rgb(255, 209, 196);
+  background: rgb(163, 40, 40);
+  padding: 1.5rem;
+  font-size: 2rem;
+  display: flex;
+  flex-flow: row, wrap;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+}
+
+.ring-links {
+  margin: 1rem;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  font-family: "Sekuya", regular;
+}
+
+.previous {
+  background: rgb(163, 40, 40);
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 25px;
+}
+
+.resume {
+  background: rgb(163, 40, 40);
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 25px;
+}
+
+.next {
+  background: rgb(163, 40, 40);
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 25px;
+}
+
+/* RESUME */
 /* header styles */
-header {
+.resume-header {
   background: rgb(152, 58, 58);
   padding: 2rem;
   font-weight: bold;
-  font-size: 2rem;
+  color: beige;
+  margin-bottom: 1rem;
+}
+
+.back-nav {
+  padding-bottom: 2rem;
+}
+
+.name {
+  font-family: "BBH Bartle", regular;
+  font-weight: 400;
+  font-size: 3rem;
 }
 
 .position-title {
-  color: beige;
+  font-size: 2rem;
   margin-top: 1.5rem;
 }
 
-/* education section styles */
-
-.education {
+/* education & project section styles */
+.eduproject-wrapper {
   background: rgb(238, 181, 131);
-  padding: 2rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
+  margin-bottom: 1rem;
 }
 
-.edu-header {
+.eduproject-header {
   font-family: "BBH Bartle", regular;
   font-weight: 400;
   background: rgb(190, 87, 19);
@@ -65,18 +141,22 @@ header {
   padding: 1rem;
 }
 
-.schools {
+.eduproject-lists {
   padding: 1.5rem;
 }
 
-.edu-years {
+.years {
   font-style: italic;
   padding-top: 0.5rem;
   padding-bottom: 1.25rem;
 }
 
-/* skills section styles */
-.skills-header {
+.proj-list {
+  padding: 1.5rem;
+}
+
+/* technical skills section styles */
+.tech-header {
   font-family: "BBH Bartle", regular;
   font-weight: 400;
   background: rgb(164, 48, 16);
@@ -86,29 +166,39 @@ header {
   padding: 1rem;
 }
 
-.skills {
+.tech-skills {
   background: rgb(232, 139, 96);
   padding: 2rem;
   display: flex;
   flex-direction: column;
 }
 
-li {
+.tech-item {
+  /* eventually change points to a custom image? */
+  list-style: disc;
+  margin-left: 2rem;
   margin-bottom: 0.5rem;
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-  .education {
+  .hero-headline {
+    font-size: 4rem;
+  }
+
+  .ring-links {
+    font-size: 2rem;
+  }
+
+  .eduproject-wrapper {
     flex-direction: row;
-    justify-content: flex-start;
   }
-  .edu-header {
-    align-content: center;
-    padding: 3rem;
+
+  .education {
+    width: 50%;
   }
-  .education-main {
-    width: 80%;
-    background: lightskyblue;
+
+  .projects {
+    width: 50%;
   }
 }
