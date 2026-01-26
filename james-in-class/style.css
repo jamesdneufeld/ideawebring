@@ -4,12 +4,28 @@
 
 body {
   font-family: "Rubik", sans-serif;
-  padding: 1rem;
 }
 
 header {
-  background: lightblue;
-  padding: 2rem;
+  background-image: linear-gradient(
+    to right top,
+    #d16ba5,
+    #c777b9,
+    #ba83ca,
+    #aa8fd8,
+    #9a9ae1,
+    #8aa7ec,
+    #79b3f4,
+    #69bff8,
+    #52cffe,
+    #41dfff,
+    #46eefa,
+    #5ffbf1
+  );
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .education {
@@ -35,7 +51,7 @@ h1 {
   font-family: "IBM Plex Mono", monospace;
   font-weight: 600;
   color: lemonchiffon;
-  font-size: 2rem;
+  font-size: 5rem;
   margin-bottom: 1rem;
 }
 
@@ -60,28 +76,8 @@ ol {
   margin-bottom: 1rem;
 }
 
-/* Media queries demo */
+/* Session 3 */
 
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-  h1 {
-    font-size: 3rem;
-    color: red;
-  }
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  h1 {
-    font-size: 4rem;
-    color: green;
-  }
-}
-
-/* X-Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-  h1 {
-    font-size: 5rem;
-    color: orange;
-  }
+.hero-text {
+  border: 5px solid white;
 }
