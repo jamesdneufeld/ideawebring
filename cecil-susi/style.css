@@ -14,14 +14,7 @@ html {
 
 body {
   font-family: "Rubik", sans-serif;
-  padding: 1rem;
-}
-
-h1 {
-  font-family: "BBH Bartle", regular;
-  font-weight: 400;
-  color: beige;
-  font-size: 3rem;
+  background: rgb(255, 209, 196);
 }
 
 h3 {
@@ -32,13 +25,58 @@ h3 {
 p {
   padding-top: 0.5rem;
 }
+a {
+  color: rgb(152, 58, 58);
+}
 
+/* INDEX (Web Ring) */
+.hero {
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url(star-bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.hero-headline {
+  font-family: "Sekuya", regular;
+  color: rgb(255, 209, 196);
+  background: rgb(163, 40, 40);
+  padding: 1.5rem;
+  font-size: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+}
+
+.ring-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  font-family: "Sekuya", regular;
+}
+
+/* RESUME */
 /* header styles */
-header {
+.resume-header {
   background: rgb(152, 58, 58);
   padding: 2rem;
   font-weight: bold;
   font-size: 2rem;
+}
+
+.name-header {
+  font-family: "BBH Bartle", regular;
+  font-weight: 400;
+  color: beige;
+  font-size: 3rem;
 }
 
 .position-title {
@@ -75,8 +113,8 @@ header {
   padding-bottom: 1.25rem;
 }
 
-/* skills section styles */
-.skills-header {
+/* technical skills section styles */
+.tech-header {
   font-family: "BBH Bartle", regular;
   font-weight: 400;
   background: rgb(164, 48, 16);
@@ -86,7 +124,7 @@ header {
   padding: 1rem;
 }
 
-.skills {
+.tech-skills {
   background: rgb(232, 139, 96);
   padding: 2rem;
   display: flex;
@@ -94,11 +132,18 @@ header {
 }
 
 li {
+  /* eventually change points to a custom image? */
+  list-style: disc;
+  margin-left: 2rem;
   margin-bottom: 0.5rem;
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+  .hero-headline {
+    font-size: 5rem;
+  }
+
   .education {
     flex-direction: row;
     justify-content: flex-start;
@@ -107,8 +152,12 @@ li {
     align-content: center;
     padding: 3rem;
   }
-  .education-main {
-    width: 80%;
-    background: lightskyblue;
+  .tech-skills {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .tech-header {
+    align-content: center;
+    padding: 3rem;
   }
 }
