@@ -114,7 +114,8 @@ header {
   font-style: normal;
   display: flex;
   justify-content: center;
-  margin-bottom: 1.5rem;
+  margin-top: 8rem;
+  margin-bottom: 3rem;
   text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.8);
 }
 .cherryflip {
@@ -130,9 +131,9 @@ header {
 .webringbody {
   color: rgb(33, 58, 25);
   font-family: "Work Sans", sans-serif;
-  font-size: 1.5rem;
+  font-size: 2rem;
   text-align: center;
-  margin-bottom: 10rem;
+  margin-bottom: 9.5rem;
 }
 .link {
   display: flex;
