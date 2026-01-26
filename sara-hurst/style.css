@@ -115,7 +115,7 @@ header {
   display: flex;
   justify-content: center;
   margin-bottom: 1.5rem;
-  text-shadow: 2px 2px 4px black;
+  text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.8);
 }
 .cherryflip {
   font-size: 5rem;
