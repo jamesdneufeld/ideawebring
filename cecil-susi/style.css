@@ -25,8 +25,17 @@ h3 {
 p {
   padding-top: 0.5rem;
 }
+
 a {
-  color: rgb(152, 58, 58);
+  color: rgb(255, 209, 196);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+  background: rgb(255, 209, 196);
+  color: rgb(163, 40, 40);
+  padding: 0.25rem;
 }
 
 /* INDEX (Web Ring) */
@@ -47,20 +56,45 @@ a {
   color: rgb(255, 209, 196);
   background: rgb(163, 40, 40);
   padding: 1.5rem;
-  font-size: 3rem;
+  font-size: 2rem;
   display: flex;
-  flex-direction: column;
+  flex-flow: row, wrap;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   border-radius: 25px;
 }
 
 .ring-links {
+  margin: 1rem;
+  border-radius: 25px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-content: center;
   font-family: "Sekuya", regular;
+}
+
+.previous {
+  background: rgb(163, 40, 40);
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 25px;
+}
+
+.resume {
+  background: rgb(163, 40, 40);
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 25px;
+}
+
+.next {
+  background: rgb(163, 40, 40);
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 25px;
 }
 
 /* RESUME */
@@ -141,7 +175,11 @@ li {
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   .hero-headline {
-    font-size: 5rem;
+    font-size: 4rem;
+  }
+
+  .ring-links {
+    font-size: 2rem;
   }
 
   .education {
