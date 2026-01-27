@@ -43,7 +43,7 @@ h3 {
 }
 .links {
   width: 50%;
-  border-top: 1px solid red;
+  border-top: 1px solid rgb(47, 42, 42);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -82,13 +82,13 @@ h3 {
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   body {
-    background: lightblue;
+    background: rgb(255, 255, 255);
   }
   h2 {
     font-family: "quicksand", sans-serif;
     font-weight: 700;
     font-size: 2rem;
-    background-color: rgb(250, 174, 198);
+    background-color: rgb(255, 255, 255);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -99,7 +99,12 @@ h3 {
     padding-bottom: 1rem;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
   }
+  .contact-1 {
+    padding-right: 4rem;
+  }
+
   .experience {
     border-bottom: 2px solid black;
     padding-top: 1rem;
@@ -107,11 +112,18 @@ h3 {
     display: flex;
     flex-wrap: wrap;
   }
+
+  .experience-1 {
+    padding-right: 4rem;
+  }
   .education {
     border-bottom: 2px solid black;
     padding-top: 1rem;
     padding-bottom: 1rem;
     display: flex;
     flex-wrap: wrap;
+  }
+  .education1 {
+    padding-right: 4rem;
   }
 }
