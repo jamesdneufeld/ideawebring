@@ -19,6 +19,11 @@ body {
   font-family: "Unbounded", sans-serif;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 header {
   font-size: 5rem;
   font-weight: 700;
@@ -106,6 +111,7 @@ a:hover {
 .index-sub {
   color: rgb(66, 186, 180);
   font-weight: 400;
+  text-align: center;
 }
 
 .index-links {
@@ -138,6 +144,10 @@ a:hover {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.self-portrait {
+  border: 3px solid white;
 }
 
 /*resume.html things*/
@@ -262,13 +272,11 @@ a:hover {
   }
 
   /*index.html things*/
+
   .hero {
-    min-height: 100vh;
-    background-image: url(katbg-.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
     background-position-x: center;
   }
+
   .hero-text {
     text-align: center;
     font-size: 2rem;
@@ -285,6 +293,10 @@ a:hover {
   .aboutwrap {
     display: flex;
     flex-direction: column;
+  }
+  .aboutcol {
+    padding-left: 5rem;
+    padding-right: 5rem;
   }
 
   /*resume.html things*/
