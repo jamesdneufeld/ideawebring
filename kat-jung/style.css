@@ -132,6 +132,7 @@ a:hover {
   background-image: url(katbg-.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  background-position-y: center;
 }
 
 .top-nav {

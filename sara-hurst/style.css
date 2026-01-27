@@ -45,6 +45,13 @@ header {
 }
 
 /* Layout components */
+.resumelink {
+  text-decoration: none;
+  color: black;
+}
+.resumelink:hover {
+  color: rgb(121, 166, 133);
+}
 .sections {
   display: flex;
   flex-direction: column;
@@ -145,16 +152,17 @@ header {
 }
 .link {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   gap: 3.5rem;
   background-color: white;
-  padding: 1rem 2rem;
+  padding: 4rem 4rem;
   border: 5px solid indianred;
   border-radius: 12px;
-  width: fit-content;
-  margin: 3rem auto 0;
   margin-bottom: 8rem;
   text-decoration: none;
+  width: 280px;
+  margin: 3rem auto 8rem;
 }
 .link a {
   font-size: 1rem;
@@ -180,6 +188,14 @@ header {
   font-family: "Work Sans", sans-serif;
   font-size: 1.3rem;
   text-align: center;
+  margin-bottom: 3rem;
+}
+.cherry-final {
+  font-size: 6.25rem;
+  display: flex;
+  justify-content: center;
+  margin: 3rem;
+  text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.8);
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -220,5 +236,19 @@ header {
     padding: 2rem;
     width: 100%;
     min-height: 75vh;
+  }
+  .link {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 3.5rem;
+    background-color: white;
+    padding: 1rem 2rem;
+    border: 5px solid indianred;
+    border-radius: 12px;
+    width: fit-content;
+    margin: 3rem auto 0;
+    margin-bottom: 8rem;
+    text-decoration: none;
   }
 }
