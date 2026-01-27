@@ -15,7 +15,6 @@ html {
 }
 
 /*non-class things, for basic format*/
-
 body {
   font-family: "Unbounded", sans-serif;
 }
@@ -120,6 +119,25 @@ a:hover {
   color: aliceblue;
   font-weight: 400;
   font-style: normal;
+}
+
+/*about.html things*/
+.aboutwrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-image: url(katbg-.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.aboutcol {
+  margin: 7rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 /*resume.html things*/
@@ -261,6 +279,12 @@ a:hover {
   .index-links {
     font-size: 1rem;
     text-align: center;
+  }
+
+  /*about.html things*/
+  .aboutwrap {
+    display: flex;
+    flex-direction: column;
   }
 
   /*resume.html things*/
