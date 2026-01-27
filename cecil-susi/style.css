@@ -38,6 +38,10 @@ a:hover {
   padding: 0.25rem;
 }
 
+ul {
+  padding: 1.5rem;
+}
+
 /* INDEX (Web Ring) */
 .hero {
   padding: 2rem;
@@ -58,17 +62,20 @@ a:hover {
   padding: 1.5rem;
   font-size: 2rem;
   display: flex;
-  flex-flow: row, wrap;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  border-radius: 25px;
+  border-radius: 1.5rem;
+}
+
+.hero-tagline {
+  font-size: 2rem;
 }
 
 .ring-links {
   margin: 1rem;
-  border-radius: 25px;
+  border-radius: 1.5rem;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -80,21 +87,21 @@ a:hover {
   background: rgb(163, 40, 40);
   padding: 1rem;
   margin: 1rem;
-  border-radius: 25px;
+  border-radius: 1.5rem;
 }
 
 .resume {
   background: rgb(163, 40, 40);
   padding: 1rem;
   margin: 1rem;
-  border-radius: 25px;
+  border-radius: 1.5rem;
 }
 
 .next {
   background: rgb(163, 40, 40);
   padding: 1rem;
   margin: 1rem;
-  border-radius: 25px;
+  border-radius: 1.5rem;
 }
 
 /* RESUME */
@@ -112,13 +119,13 @@ a:hover {
 }
 
 .name {
-  font-family: "BBH Bartle", regular;
+  font-family: "Sekuya", regular;
   font-weight: 400;
-  font-size: 3rem;
+  font-size: 3.25rem;
 }
 
 .position-title {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-top: 1.5rem;
 }
 
@@ -132,17 +139,13 @@ a:hover {
 }
 
 .eduproject-header {
-  font-family: "BBH Bartle", regular;
+  font-family: "Sekuya", regular;
   font-weight: 400;
   background: rgb(190, 87, 19);
   color: rgb(238, 181, 131);
-  font-size: 2rem;
+  font-size: 2.8rem;
   margin-bottom: 1.5rem;
   padding: 1rem;
-}
-
-.eduproject-lists {
-  padding: 1.5rem;
 }
 
 .years {
@@ -151,29 +154,56 @@ a:hover {
   padding-bottom: 1.25rem;
 }
 
-.proj-list {
-  padding: 1.5rem;
+/* .eduproject-link {
+  color: rgb(164, 48, 16);
 }
 
+.eduproject-link:hover {
+  color: rgb(238, 181, 131);
+  text-decoration: none;
+  background: rgb(190, 87, 19);
+  padding: 0.25rem;
+} */
+
 /* technical skills section styles */
-.tech-header {
-  font-family: "BBH Bartle", regular;
+.skills-wrapper {
+  background: rgb(232, 139, 96);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.skills-header {
+  font-family: "Sekuya", regular;
   font-weight: 400;
   background: rgb(164, 48, 16);
   color: rgb(232, 139, 96);
-  font-size: 2rem;
+  font-size: 2.8rem;
   margin-bottom: 1.5rem;
   padding: 1rem;
 }
 
-.tech-skills {
-  background: rgb(232, 139, 96);
-  padding: 2rem;
+/* work experience section styles */
+.work-wrapper {
+  background: rgb(238, 181, 131);
+  padding: 1rem;
   display: flex;
   flex-direction: column;
+  margin-bottom: 1rem;
 }
 
-.tech-item {
+.work-header {
+  font-family: "Sekuya", regular;
+  font-weight: 400;
+  background: rgb(190, 87, 19);
+  color: rgb(238, 181, 131);
+  font-size: 2.8rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+}
+
+.bulleted-item {
   /* eventually change points to a custom image? */
   list-style: disc;
   margin-left: 2rem;
@@ -199,6 +229,30 @@ a:hover {
   }
 
   .projects {
+    width: 50%;
+  }
+
+  .work-wrapper {
+    flex-direction: row;
+  }
+
+  .jobs {
+    width: 50%;
+  }
+
+  .freelance {
+    width: 50%;
+  }
+
+  .skills-wrapper {
+    flex-direction: row;
+  }
+
+  .hard-skills {
+    width: 50%;
+  }
+
+  .soft-skills {
     width: 50%;
   }
 }

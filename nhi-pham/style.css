@@ -100,9 +100,7 @@ h3 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-  }
-  .contact-1 {
-    padding-right: 4rem;
+    width: 50%;
   }
 
   .experience {
@@ -111,19 +109,17 @@ h3 {
     padding-bottom: 1rem;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
+    width: 50%;
   }
 
-  .experience-1 {
-    padding-right: 4rem;
-  }
   .education {
     border-bottom: 2px solid black;
     padding-top: 1rem;
     padding-bottom: 1rem;
     display: flex;
     flex-wrap: wrap;
-  }
-  .education1 {
-    padding-right: 4rem;
+    justify-content: space-between;
+    width: 50%;
   }
 }
