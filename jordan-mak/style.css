@@ -135,11 +135,12 @@ a:hover {
     border: 2px solid black;
     padding: 1rem;
     width: 50%;
-    background: lemonchiffon;
+    background: lightskyblue;
   }
   .resume-sidebar {
     border: 2px solid black;
     padding: 1rem;
     width: 50%;
+    background: lightskyblue;
   }
 }
