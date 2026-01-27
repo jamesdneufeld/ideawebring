@@ -1,6 +1,7 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chewy&family=DM+Serif+Text:ital@0;1&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap");
 
 /*
 CSS oklch Gradation
@@ -12,22 +13,32 @@ Text Glitch Effect (on hover)
 Copyright (c) by Tiffany Grevious (https://codepen.io/DevchamploO/pen/QBWdqd?editors=1100)
 */
 
+.index-name {
+  color: rgb(254, 246, 197);
+  font-size: 4rem;
+  font-family: "Sigmar One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 5rem;
+  margin-bottom: 1rem;
+}
 .resume-header {
   padding: 4rem;
   font-size: 3rem;
   color: #000000;
-  font-family: "DM Serif Text", serif;
+  font-family: "DM Serif Text";
   font-style: normal;
-  text-align: center;
-}
-
-h1 {
-  color: white;
-  font-size: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 h2 {
   font-size: 1.8rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 body {
@@ -56,6 +67,12 @@ body {
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+.subhead {
+  color: DodgerBlue;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: left;
+}
 
 .education,
 .objective,
@@ -72,13 +89,23 @@ body {
 .objective-main,
 .experience-main,
 .extracurricular-main,
+.skills-main {
+  padding: 2rem;
+}
 .education-heading,
 .objective-heading,
 .experience-heading,
 .extracurricular-heading,
-.skills-heading,
-.skills-main {
+.skills-heading {
+  color: DarkBlue;
+  font-family: "DM Serif Text";
   padding: 2rem;
+  min-width: 10rem;
+}
+
+.jump {
+  margin-top: 3rem;
+  font-size: 1.5rem;
 }
 
 h1,
@@ -91,6 +118,7 @@ p,
 ul,
 ol {
   margin-bottom: 1rem;
+  margin-right: 1rem;
 }
 @media (min-width: 992px) {
   .education,
@@ -128,12 +156,14 @@ ol {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 2rem;
+  min-height: 20rem;
 }
 
 button {
   font-size: 24pt;
   letter-spacing: 3px;
-  background: #9ec6f3;
+  background: #ffffff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -143,7 +173,7 @@ button {
 }
 
 a {
-  color: #ffffff;
+  color: #9ec6f3;
   text-decoration: none;
   font-weight: bold;
 }
@@ -157,85 +187,18 @@ a:hover {
 }
 
 .index {
-  background-image: url("https://framerusercontent.com/images/VNzaX4q0ao1jod6O3ISvZdE7Ws.png?scale-down-to=4096");
-
+  min-height: 100vh;
   padding: 2rem;
   min-height: 2rem;
 }
-.buttons {
-  padding: 2rem;
-  min-height: 20rem;
+.full {
+  background-image: url("https://www.comedywildlifephoto.com/images/gallery/2/00001912_p.webp");
 }
 
 .name {
-  color: #9ec6f3;
+  color: #f2bd44;
   font-family: "Rubik", sans-serif;
   text-align: center;
   font-size: 3rem;
   padding: 8rem;
-}
-
-.glitch {
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #fff;
-  font-size: 130px;
-  text-decoration: none;
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  &:before,
-  &:after {
-    content: "Σ(;ﾟдﾟ)";
-    opacity: 0.8;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  &:before {
-    color: #0ff;
-    z-index: -1;
-  }
-  &:after {
-    color: #f0f;
-    z-index: -2;
-  }
-  &:hover {
-    &:before {
-      animation: glitch 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
-    }
-    &:after {
-      animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both
-        infinite;
-    }
-  }
-}
-
-@keyframes glitch {
-  0% {
-    -webkit-transform: translate(0);
-    transform: translate(0);
-  }
-  20% {
-    -webkit-transform: translate(-5px, 5px);
-    transform: translate(-5px, 5px);
-    transform: skewX(10deg);
-  }
-  40% {
-    -webkit-transform: translate(-5px, -5px);
-    transform: translate(-5px, -5px);
-  }
-  60% {
-    -webkit-transform: translate(5px, 5px);
-    transform: translate(5px, 5px);
-  }
-  80% {
-    -webkit-transform: translate(5px, -5px);
-    transform: translate(5px, -5px);
-  }
-  to {
-    -webkit-transform: translate(0);
-    transform: translate(0);
-  }
 }

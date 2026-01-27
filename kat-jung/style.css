@@ -15,9 +15,13 @@ html {
 }
 
 /*non-class things, for basic format*/
-
 body {
   font-family: "Unbounded", sans-serif;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 header {
@@ -29,7 +33,6 @@ header {
 h2 {
   font-size: 2rem;
   font-weight: 500;
-  padding-bottom: 1rem;
 }
 
 h3 {
@@ -77,7 +80,7 @@ a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url(saturnbg.jpg);
+  background-image: url(katbg-.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -95,12 +98,20 @@ a:hover {
   color: rgb(159, 140, 216);
   font-size: 2rem;
   font-weight: 200rem;
-  padding: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.sub-text {
+  text-align: center;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  line-height: 1.5rem;
 }
 
 .index-sub {
   color: rgb(66, 186, 180);
   font-weight: 400;
+  text-align: center;
 }
 
 .index-links {
@@ -111,20 +122,45 @@ a:hover {
 }
 
 .index-links:hover {
-  color: rgb(203, 197, 248);
+  color: aliceblue;
   font-weight: 400;
   font-style: normal;
+}
+
+/*about.html things*/
+.aboutwrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-image: url(katbg-.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.aboutcol {
+  margin: 7rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.self-portrait {
+  border: 3px solid white;
 }
 
 /*resume.html things*/
 .h4 {
   color: rgb(66, 186, 180);
+  padding-top: 0.3rem;
 }
 
 .resumeheader {
-  background-image: url(saturnbg.jpg);
+  background-image: url(katbg-.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  background-position-y: center;
 }
 
 .top-nav {
@@ -137,6 +173,26 @@ a:hover {
   color: rgb(159, 140, 216);
 }
 
+.resume-h2 {
+  color: rgb(203, 197, 248);
+}
+
+.list-header {
+  color: rgb(203, 197, 248);
+  padding-bottom: 0.5rem;
+}
+
+.return {
+  color: rgb(66, 186, 180);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.5rem;
+}
+
+.return:hover {
+  font-style: normal;
+}
+
 .contact {
   color: rgb(159, 140, 216);
   padding-bottom: 2rem;
@@ -147,17 +203,13 @@ a:hover {
   color: rgb(66, 186, 180);
   font-weight: 400;
   font-style: italic;
+  font-size: 1rem;
 }
 
 .education {
   background-color: rgb(41 33 72);
   color: #9f8cd8;
   padding: 2rem;
-}
-
-.edutext {
-  padding-bottom: 0rem;
-  color: rgb(203, 197, 248);
 }
 
 .wrapper {
@@ -176,10 +228,6 @@ a:hover {
   width: 100%;
 }
 
-.bpheader {
-  color: rgb(203, 197, 248);
-}
-
 .workex {
   background-color: rgb(41 33 72);
   color: #9f8cd8;
@@ -188,10 +236,12 @@ a:hover {
 
 .work-link {
   color: rgb(66, 186, 180);
+  font-style: italic;
+  font-weight: 400;
 }
 
-.workextext {
-  color: rgb(203, 197, 248);
+.work-link:hover {
+  font-style: normal;
 }
 
 .achievements {
@@ -203,9 +253,10 @@ a:hover {
 
 .footer {
   text-align: center;
-  background-image: url(saturnbg.jpg);
+  background-image: url(katbg-.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   padding: 2rem;
 }
 
@@ -221,6 +272,11 @@ a:hover {
   }
 
   /*index.html things*/
+
+  .hero {
+    background-position-x: center;
+  }
+
   .hero-text {
     text-align: center;
     font-size: 2rem;
@@ -233,6 +289,16 @@ a:hover {
     text-align: center;
   }
 
+  /*about.html things*/
+  .aboutwrap {
+    display: flex;
+    flex-direction: column;
+  }
+  .aboutcol {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+
   /*resume.html things*/
   .wrapper {
     display: flex;
@@ -243,5 +309,9 @@ a:hover {
   }
   .h2-top {
     font-size: 1.5rem;
+  }
+
+  .return {
+    font-size: 1.1rem;
   }
 }
