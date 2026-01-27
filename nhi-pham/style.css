@@ -18,6 +18,7 @@ header {
   font-weight: 600;
   color: black;
   font-size: 4rem;
+  padding: 2rem;
 }
 h2 {
   font-family: "quicksand", sans-serif;
@@ -42,9 +43,10 @@ h3 {
 }
 .links {
   width: 50%;
-  border: 1px solid red;
+  border-top: 1px solid red;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 2rem;
 }
 .contactsection {
@@ -87,7 +89,9 @@ h3 {
     font-weight: 700;
     font-size: 2rem;
     background-color: rgb(250, 174, 198);
-    display: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .contactsection {
     border-bottom: 2px solid black;
@@ -97,6 +101,13 @@ h3 {
     flex-wrap: wrap;
   }
   .experience {
+    border-bottom: 2px solid black;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .education {
     border-bottom: 2px solid black;
     padding-top: 1rem;
     padding-bottom: 1rem;
