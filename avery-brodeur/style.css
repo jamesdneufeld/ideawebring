@@ -12,6 +12,8 @@
 /* apply a natural box layout model to all elements, but allowing components to change */
 html {
   box-sizing: border-box;
+  font-family: Josefin Sans;
+  font-weight: 300;
 }
 *,
 *:before,
@@ -20,6 +22,8 @@ html {
 }
 
 /* Very General Element Styles */
+
+/*Web Ring Homepage*/
 
 header {
   background-color: lavender;
@@ -109,6 +113,22 @@ p {
 #rh2 {
   font-size: 2rem;
   font-family: Josefin Sans;
+}
+
+/*resume*/
+
+/* Very General Element Styles */
+
+/* Specific Class Styles */
+.resume h1 {
+  font-size: 5rem;
+  font-family: Bagel Fat One;
+}
+
+.information {
+  text-align: center;
+  width: 100%;
+  background-color: aqua;
 }
 
 /* Large devices (desktops, 992px and up) */
