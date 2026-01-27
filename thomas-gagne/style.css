@@ -11,33 +11,14 @@ html {
 *:after {
   box-sizing: inherit;
 }
-/* Header Section */
+
+/* General Styles */
 header {
   background: tomato;
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
-.edusummary {
-  font-family: "Momo Trust Display", sans-serif;
-  font-weight: 200;
-  font-size: 2rem;
-  color: #ffebcd;
-  padding: 0.25rem;
-  margin-bottom: 0.25rem;
-  margin-top: 2rem;
-}
-.Paragraph-mdhero {
-  font-size: 0.8rem;
-  color: blanchedalmond;
-  padding: 0.25rem;
-  margin-bottom: 2rem;
-  margin-right: 23rem;
-  margin-left: 23rem;
-}
-/* End of Header */
 h1 {
   font-family: "Momo Trust Display", sans-serif;
   font-weight: 400;
@@ -46,35 +27,28 @@ h1 {
   font-style: normal;
   padding: 0.25rem;
   margin-bottom: 1rem;
-}
-/* Above is Name */
-.education {
-  font-size: 1.5rem;
-  background: orange;
-  padding: 2rem;
-  display: flex;
-}
-.skills {
-  background: blanchedalmond;
-  padding: 2rem;
-  display: flex;
-}
-.experience {
-  background: seagreen;
-  padding: 2rem;
-  display: flex;
-}
-.educertification {
-  background: indianred;
-  padding: 2rem;
-}
-.edufooter {
-  background: darkslategray;
-  padding: 2rem;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
-/* End of Sections* */
+li {
+  margin-bottom: 1rem;
+}
+/* Header Section */
+
+/* Hyperlink Styles */
+
+a {
+  color: blanchedalmond;
+  text-decoration: none;
+}
+a:hover {
+  color: tomato;
+}
+a {
+  font-size: 2rem;
+}
+/* General Paragraph Styles */
 
 /* Paragraph Style */
 .Paragraph-md {
@@ -93,6 +67,56 @@ h1 {
   color: orange;
   padding: 0.25rem;
 }
+
+/* Specific Class Styles */
+.edusummary {
+  font-family: "Momo Trust Display", sans-serif;
+  font-weight: 200;
+  font-size: 2rem;
+  color: #ffebcd;
+  padding: 0.25rem;
+  margin-bottom: 0.25rem;
+  margin-top: 2rem;
+}
+.Paragraph-mdhero {
+  font-size: 0.8rem;
+  color: blanchedalmond;
+  padding: 0.25rem;
+}
+/* End of Header */
+.education {
+  font-size: 1.5rem;
+  background: orange;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+.skills {
+  background: blanchedalmond;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+.experience {
+  background: seagreen;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+.educertification {
+  background: indianred;
+  padding: 2rem;
+}
+.edufooter {
+  background: darkslategray;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 13vh;
+}
+/* End of Sections* */
+
 /* Section Headers */
 
 .edutitle {
@@ -138,33 +162,32 @@ h1 {
   padding: 0.25rem;
   margin-bottom: 1rem;
 }
-li {
-  margin-bottom: 1rem;
-}
+
 /* End of Lists. */
 
-.resume-grid {
+.resume-wrapper {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  width: 100%;
 }
+
 .education,
 .skills,
 .experience,
 .educertification {
-  width: 50%;
+  width: 100%;
 }
 /* CSS For Index */
 
 /* Sections for Index */
-.indheroheader {
-  font-size: 8rem;
-  background: orange;
-  padding: 2rem;
-}
 
 .indhero {
-  min-height: 100vh;
   background-color: orange;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .indherosubheader {
@@ -185,26 +208,33 @@ li {
   padding: 1rem;
 }
 
-a {
-  color: blanchedalmond;
-}
-a:hover {
-  color: tomato;
-}
-a {
-  font-size: 2rem;
-}
-
-html {
-  box-sizing: border-box;
-}
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
+.webringhero {
+  background: orange;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
-h2 {
-  font-size: 3rem;
-  font-weight: 700;
+/* Web ring nav notes
+
+<ul class=Wrapper for webring links">
+<li> Webring link 1 <li>
+<li> Webring link 2 <li>
+<li> Webring link 3 <li>
+</ul> */
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .resume-wrapper {
+    flex-direction: row;
+  }
+
+  .education,
+  .skills,
+  .educertification {
+    width: 50%;
+  }
 }
