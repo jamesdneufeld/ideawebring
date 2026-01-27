@@ -28,7 +28,9 @@ header {
 }
 .skills {
   margin-bottom: 1rem;
+
   text-align: center;
+  border-top: 1px solid white;
 }
 .paragraph-md {
   font-size: 1rem;
@@ -85,14 +87,13 @@ a:hover {
 .resume {
   margin-top: 1rem;
 }
-.experience {
-  margin-bottom: 2rem;
-}
+
 h2.job-title {
   font-size: 2rem;
 }
 footer {
   padding: 2rem;
+  border-top: 1px solid white;
 }
 li {
   margin-bottom: 1rem;
@@ -129,4 +130,10 @@ ul {
     justify-content: center;
     justify-content: space-around;
   }
+}
+.life-experience {
+  margin-bottom: 2rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
