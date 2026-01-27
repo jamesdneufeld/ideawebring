@@ -40,11 +40,9 @@ h2 {
   color: rgb(0, 0, 0);
   font-size: 2rem;
   margin-bottom: 1rem;
-  border: 10px dotted hotpink;
 }
 
 h3 {
-  border: 2px solid purple;
   font-weight: 200;
   font-size: 1.5rem;
 }
@@ -70,7 +68,7 @@ body {
 }
 
 header {
-  background: lightblue;
+  background: #FF1F39;
   padding: 3rem;
 }
 .education {
@@ -83,8 +81,8 @@ header {
   padding: 3rem;
 }
 
-.experience {
-  background: lightskyblue;
+.work-experience {
+  background: whitesmoke;
   padding: 3rem;
 }
 
@@ -92,13 +90,20 @@ header {
   background: lightskyblue;
   padding: 3rem;
 }
-
+title {
+  font-family: .ibm-plex-mono-semibold {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight>: 600;
+  font-style: normal;
+  color:#75000E;
+}
+}
 h1 {
   font-family: "Alumni Sans Pinstripe", sans-serif;
   font-weight: 900;
   font-style: normal;
   font-size: 4rem;
-  color: cornflowerblue;
+  color: #75000E;
 }
 
 h2 {
@@ -117,21 +122,8 @@ h2 {
   justify-content: center;
   min-height: 100vh;
 
-  background-image: radial-gradient(
-    circle,
-    #adecb5,
-    #86e5c7,
-    #66dcda,
-    #5bd0e8,
-    #6ac2ed,
-    #6cb4eb,
-    #76a5e6,
-    #8495dc,
-    #8183d3,
-    #8170c9,
-    #845cbb,
-    #8845ab
-  );
+  background-image: background: #FF1FA9;
+background: linear-gradient(90deg, rgba(255, 31, 169, 1) 0%, rgba(255, 31, 57, 1) 50%, rgba(255, 117, 31, 1) 100%);
 }
 
 .hero-heading {

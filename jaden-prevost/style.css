@@ -83,10 +83,11 @@ h4 {
   font-size: 1.2rem;
   font-family: "Archivo Black", sans-serif;
   color: rgb(249, 73, 73);
+  text-transform: uppercase;
 }
 
 .hero-sub {
-  color: black;
+  color: rgb(241, 135, 58);
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -95,4 +96,8 @@ h4 {
   font-weight: 400;
   font-style: normal;
   font-size: 2rem;
+}
+
+.hero-text {
+  border: 5px solid rgb(204, 17, 4);
 }
