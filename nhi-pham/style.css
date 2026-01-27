@@ -5,6 +5,12 @@
 body {
   font-family: "Quicksand", sans-serif;
   padding: 1rem;
+  background: lightpink;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
 }
 
 header {
@@ -12,6 +18,7 @@ header {
   font-weight: 600;
   color: black;
   font-size: 4rem;
+  padding: 2rem;
 }
 h2 {
   font-family: "quicksand", sans-serif;
@@ -36,9 +43,10 @@ h3 {
 }
 .links {
   width: 50%;
-  border: 1px solid red;
+  border-top: 1px solid rgb(47, 42, 42);
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 2rem;
 }
 .contactsection {
@@ -65,4 +73,57 @@ h3 {
   font-size: 0.75rem;
   color: black;
   font-weight: 100;
+}
+
+.wrapper {
+  border: 10px solid white;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  body {
+    background: rgb(255, 255, 255);
+  }
+  h2 {
+    font-family: "quicksand", sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .contactsection {
+    border-bottom: 2px solid black;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .contact-1 {
+    padding-right: 4rem;
+  }
+
+  .experience {
+    border-bottom: 2px solid black;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .experience-1 {
+    padding-right: 4rem;
+  }
+  .education {
+    border-bottom: 2px solid black;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .education1 {
+    padding-right: 4rem;
+  }
 }
