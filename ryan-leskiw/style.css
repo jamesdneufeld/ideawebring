@@ -18,23 +18,32 @@ body {
   padding: 1rem;
 }
 header {
-  background: lightblue;
   padding: 2rem;
 }
 .education {
-  background: goldenrod;
-  padding: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
 }
 .skills {
-  background: hotpink;
-  padding: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 .paragraph-md {
   font-size: 1rem;
+  text-align: center;
 }
 .paragraph-sm {
   font-size: 0.8rem;
   color: dodgerblue;
+}
+.experience {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+footer {
+  text-align: center;
 }
 h1 {
   font-family: "stalinist one", cursive;
@@ -48,7 +57,11 @@ h1 {
 h2 {
   font-size: 1.5rem;
   font-weight: 500;
-  color: darkblue;
+  color: white;
+  margin-bottom: 1rem;
+}
+h3 {
+  margin-bottom: 1rem;
 }
 p {
   font-size: 1.5rem;
@@ -73,14 +86,12 @@ a:hover {
   margin-top: 1rem;
 }
 .experience {
-  background: lightgreen;
-  padding: 2rem;
+  margin-bottom: 2rem;
 }
 h2.job-title {
   font-size: 2rem;
 }
 footer {
-  background: lightseagreen;
   padding: 2rem;
 }
 li {
@@ -95,4 +106,27 @@ li {
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+ul {
+  color: white;
+}
+.job-title {
+  text-align: center;
+  font-weight: 300;
+}
+.resume-link {
+  border: none;
+  border-radius: none;
+  background: none;
+}
+.education-title {
+  margin-top: 0.75rem;
+}
+@media (min-width: 768px) {
+  .skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    justify-content: space-around;
+  }
 }
