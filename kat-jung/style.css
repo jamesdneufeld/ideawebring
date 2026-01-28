@@ -80,6 +80,7 @@ a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   background-image: url(katbg-.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -87,7 +88,6 @@ a:hover {
 }
 
 .hero-text {
-  background: none;
   color: rgb(203, 197, 248);
   font-size: 2rem;
   align-self: center;
@@ -96,18 +96,14 @@ a:hover {
 }
 
 .hero-sub {
-  background: none;
   color: rgb(159, 140, 216);
   font-size: 1.2rem;
   font-weight: 200rem;
-  padding-bottom: 0.5rem;
 }
 
 .sub-text {
-  text-align: center;
-  padding-left: 3rem;
-  padding-right: 3rem;
   line-height: 1.5rem;
+  margin: 1rem;
 }
 
 .index-sub {
@@ -143,15 +139,27 @@ a:hover {
 }
 
 .aboutcol {
-  margin: 3rem;
+  margin: 1rem;
   display: flex;
   flex-direction: column;
+  text-align: left;
 }
 
 .abouth {
   align-self: left;
-  text-align: left;
   color: rgb(203, 197, 248);
+  font-size: 2rem;
+}
+
+.aboutsub {
+  color: rgb(159, 140, 216);
+  font-size: 1.2rem;
+  font-weight: 200rem;
+}
+
+.abouttext {
+  line-height: 1.5rem;
+  margin: 1rem;
 }
 
 .aboutimg {
@@ -287,6 +295,12 @@ a:hover {
 
   h2 {
     font-size: 2rem;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    width: 40rem;
   }
 
   /*index.html things*/
