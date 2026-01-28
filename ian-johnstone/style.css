@@ -197,3 +197,20 @@ body.index .hero-heading {
   display: flex;
   flex-direction: column;
 }
+.webring-list a.external::after,
+.webring-list a.external::before {
+  display: inline-block;
+  font-size: 1em;
+  line-height: 1;
+  vertical-align: text-top;
+  opacity: 0.9;
+}
+.webring-list a.external.ne::after {
+  content: "↗";
+  margin-left: 0.35em;
+}
+.webring-list a.external.nw::before {
+  content: "↗";
+  margin-right: 0.35em;
+  transform: scaleX(-1);
+}
