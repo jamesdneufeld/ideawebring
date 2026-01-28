@@ -135,9 +135,8 @@ a:hover {
 .aboutwrap {
   min-height: 100vh;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
   background-image: url(katbg-.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -147,10 +146,15 @@ a:hover {
   margin: 3rem;
   display: flex;
   flex-direction: column;
-  width: 100%;
 }
 
-.self-portrait {
+.abouth {
+  align-self: left;
+  text-align: left;
+  color: rgb(203, 197, 248);
+}
+
+.aboutimg {
   border: 3px solid white;
 }
 
@@ -308,17 +312,12 @@ a:hover {
 
   /*about.html things*/
   .aboutwrap {
-    display: flex;
-    flex-direction: column;
-  }
-  .aboutcol {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    flex-direction: row;
+    align-items: center;
   }
 
   /*resume.html things*/
   .wrapper {
-    display: flex;
     flex-direction: row;
   }
   .hard-skills {
