@@ -25,13 +25,13 @@ img {
 }
 
 header {
-  font-size: 5rem;
+  font-size: 3rem;
   font-weight: 700;
   padding-bottom: 0.5rem;
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 500;
 }
 
@@ -80,32 +80,30 @@ a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   background-image: url(katbg-.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  background-position-x: center;
 }
 
 .hero-text {
-  background: none;
   color: rgb(203, 197, 248);
-  font-size: 3.5rem;
+  font-size: 2rem;
   align-self: center;
   justify-items: center;
+  text-align: center;
 }
 
 .hero-sub {
-  background: none;
   color: rgb(159, 140, 216);
-  font-size: 2rem;
+  font-size: 1.2rem;
   font-weight: 200rem;
-  padding-bottom: 0.5rem;
 }
 
 .sub-text {
-  text-align: center;
-  padding-left: 3rem;
-  padding-right: 3rem;
   line-height: 1.5rem;
+  margin: 1rem;
 }
 
 .index-sub {
@@ -119,6 +117,8 @@ a:hover {
   font-weight: 400;
   font-style: italic;
   padding: 1rem;
+  font-size: 1rem;
+  text-align: center;
 }
 
 .index-links:hover {
@@ -131,22 +131,38 @@ a:hover {
 .aboutwrap {
   min-height: 100vh;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
   background-image: url(katbg-.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 }
 
 .aboutcol {
-  margin: 7rem;
+  margin: 1rem;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  text-align: left;
 }
 
-.self-portrait {
+.abouth {
+  align-self: left;
+  color: rgb(203, 197, 248);
+  font-size: 2rem;
+}
+
+.aboutsub {
+  color: rgb(159, 140, 216);
+  font-size: 1.2rem;
+  font-weight: 200rem;
+}
+
+.abouttext {
+  line-height: 1.5rem;
+  margin: 1rem;
+}
+
+.aboutimg {
   border: 3px solid white;
 }
 
@@ -171,6 +187,7 @@ a:hover {
 
 .h2-top {
   color: rgb(159, 140, 216);
+  font-size: 1rem;
 }
 
 .resume-h2 {
@@ -186,7 +203,7 @@ a:hover {
   color: rgb(66, 186, 180);
   font-weight: 400;
   font-style: italic;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
 }
 
 .return:hover {
@@ -214,10 +231,19 @@ a:hover {
 
 .wrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
-.hard-skills,
+.hard-skills {
+  background-color: rgb(19 14 36);
+  padding: 2rem;
+  padding-bottom: 0rem;
+  color: rgb(159, 140, 216);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .soft-skills {
   background-color: rgb(19 14 36);
   padding: 2rem;
@@ -262,13 +288,19 @@ a:hover {
 
 /*small device (mobile) tings*/
 
-@media (max-width: 992px) {
+@media (min-width: 992px) {
   header {
-    font-size: 3rem;
+    font-size: 5rem;
   }
 
   h2 {
-    font-size: 1.6rem;
+    font-size: 2rem;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    width: 40rem;
   }
 
   /*index.html things*/
@@ -278,10 +310,13 @@ a:hover {
   }
 
   .hero-text {
-    text-align: center;
+    font-size: 3.5rem;
+  }
+
+  .hero-sub {
     font-size: 2rem;
   }
-  .hero-sub {
+  .sub-text {
     font-size: 1.2rem;
   }
   .index-links {
@@ -291,27 +326,21 @@ a:hover {
 
   /*about.html things*/
   .aboutwrap {
-    display: flex;
-    flex-direction: column;
-  }
-  .aboutcol {
-    padding-left: 5rem;
-    padding-right: 5rem;
+    flex-direction: row;
+    align-items: center;
   }
 
   /*resume.html things*/
   .wrapper {
-    display: flex;
-    flex-direction: column;
+    flex-direction: row;
   }
   .hard-skills {
-    padding-bottom: 0rem;
+    padding-bottom: 2rem;
   }
   .h2-top {
     font-size: 1.5rem;
   }
-
   .return {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
   }
 }
