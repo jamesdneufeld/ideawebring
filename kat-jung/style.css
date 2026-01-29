@@ -128,33 +128,14 @@ a:hover {
   margin-bottom: 0rem;
   display: flex;
   flex-direction: column;
-  text-align: left;
-}
-
-.abouth {
-  align-self: left;
-}
-
-.aboutsub {
-  color: rgb(159, 140, 216);
-  font-size: 1.2rem;
-  font-weight: 200rem;
 }
 
 .aboutlinks {
-  color: rgb(66, 186, 180);
-  font-weight: 400;
-  font-style: italic;
-  text-align: left;
   padding: 1rem;
 }
 
-.abouttext {
-  line-height: 1.5rem;
-}
-
 .aboutimg {
-  border: 3px solid rgb(66, 186, 180);
+  border: 3px inset rgb(66, 186, 180);
 }
 
 /*resume.html things*/
