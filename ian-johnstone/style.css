@@ -90,7 +90,7 @@ body.index .hero-heading {
   border-radius: 6px;
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("workspace.jpg");
+    url("workspace2.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -200,7 +200,7 @@ body.index .hero-heading {
 .webring-list a.external::after,
 .webring-list a.external::before {
   display: inline-block;
-  font-size: 1em;
+  font-size: 0.5em;
   line-height: 1;
   vertical-align: text-top;
   opacity: 0.9;
