@@ -16,10 +16,25 @@ body {
   background-color: aqua;
   background-image: url(stripebg.png);
 }
+.title {
+  display: flex;
+  justify-content: center;
+  color: rgb(243, 93, 93);
+}
 a {
   text-decoration: none;
   font-weight: 600;
   color: rgb(47, 47, 47);
+}
+.buttonlink {
+  border-radius: 100px;
+  display: inline-block;
+  background-color: rgb(177, 177, 231);
+  padding: 0.5rem;
+  background-size: 20px;
+}
+.buttonlink:hover {
+  background-color: white;
 }
 .decor {
   display: flex;
@@ -50,11 +65,6 @@ h3 {
   font-family: "quicksand", sans-serif;
   font-weight: 700;
   font-size: 1rem;
-}
-.title {
-  display: flex;
-  justify-content: center;
-  color: black;
 }
 
 .contactsection {
