@@ -12,7 +12,9 @@ body {
   align-items: center;
   justify-content: center;
 }
-
+.indexpage {
+  background-color: aqua;
+}
 header {
   font-family: "Anton", sans-serif;
   font-weight: 600;
@@ -24,7 +26,6 @@ h2 {
   font-family: "quicksand", sans-serif;
   font-weight: 700;
   font-size: 2rem;
-  background-color: antiquewhite;
   display: left;
 }
 h3 {
@@ -121,5 +122,14 @@ h3 {
     flex-wrap: wrap;
     justify-content: space-between;
     width: 50%;
+  }
+  .experience-1,
+  .experience-2,
+  .education-1,
+  .education-2,
+  .contact-1,
+  .contact-2 {
+    width: 50%;
+    background: rgb(255, 255, 255);
   }
 }
