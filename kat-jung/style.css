@@ -28,11 +28,15 @@ header {
   font-size: 3rem;
   font-weight: 700;
   padding-bottom: 0.5rem;
+  color: rgb(203, 197, 248);
 }
 
 h2 {
   font-size: 1.6rem;
   font-weight: 500;
+  color: rgb(159, 140, 216);
+  font-size: 1.2rem;
+  font-weight: 200rem;
 }
 
 h3 {
@@ -43,33 +47,35 @@ h3 {
 }
 
 h4 {
-  font-size: 1rem;
   font-weight: 500;
   padding-bottom: 0.7rem;
+  color: rgb(66, 186, 180);
+  padding-top: 0.3rem;
 }
 
 li {
+  color: rgb(159, 140, 216);
   font-weight: 300;
-  padding: 0.2em;
   list-style-type: disc;
+  margin-top: 0.8rem;
   margin-left: 2em;
-  line-height: 1.5rem;
 }
 
 p {
-  font-size: 1rem;
   font-weight: 300;
-  line-height: 1.8rem;
+  line-height: 1.5rem;
   color: rgb(203, 197, 248);
   padding-bottom: 1.8rem;
 }
 
 a {
-  color: rgb(159, 140, 216);
+  color: rgb(66, 186, 180);
+  font-style: italic;
 }
 
 a:hover {
   color: aliceblue;
+  font-style: normal;
 }
 
 /*index.html things*/
@@ -88,17 +94,7 @@ a:hover {
 }
 
 .hero-text {
-  color: rgb(203, 197, 248);
   font-size: 2rem;
-  align-self: center;
-  justify-items: center;
-  text-align: center;
-}
-
-.hero-sub {
-  color: rgb(159, 140, 216);
-  font-size: 1.2rem;
-  font-weight: 200rem;
 }
 
 .sub-text {
@@ -109,22 +105,10 @@ a:hover {
 .index-sub {
   color: rgb(66, 186, 180);
   font-weight: 400;
-  text-align: center;
 }
 
 .index-links {
-  color: rgb(66, 186, 180);
-  font-weight: 400;
-  font-style: italic;
-  padding: 1rem;
-  font-size: 1rem;
-  text-align: center;
-}
-
-.index-links:hover {
-  color: aliceblue;
-  font-weight: 400;
-  font-style: normal;
+  padding: 0.5rem;
 }
 
 /*about.html things*/
@@ -132,44 +116,40 @@ a:hover {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   background-image: url(katbg-.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  background-position-x: center;
+  justify-content: center;
 }
 
 .aboutcol {
-  margin: 1rem;
+  margin: 3rem;
+  margin-bottom: 0rem;
   display: flex;
   flex-direction: column;
-  text-align: left;
 }
 
-.abouth {
-  align-self: left;
-  color: rgb(203, 197, 248);
-  font-size: 2rem;
-}
-
-.aboutsub {
-  color: rgb(159, 140, 216);
-  font-size: 1.2rem;
-  font-weight: 200rem;
-}
-
-.abouttext {
-  line-height: 1.5rem;
-  margin: 1rem;
+.aboutlinks {
+  padding: 1rem;
 }
 
 .aboutimg {
-  border: 3px solid white;
+  border: 3px inset rgb(66, 186, 180);
 }
 
 /*resume.html things*/
-.h4 {
-  color: rgb(66, 186, 180);
-  padding-top: 0.3rem;
+
+.bigheader {
+  padding-top: 1rem;
+}
+
+.h2-top {
+  font-size: 1.5rem;
+}
+.header2 {
+  color: rgb(203, 197, 248);
+  font-size: 1.8rem;
 }
 
 .resumeheader {
@@ -180,38 +160,11 @@ a:hover {
 }
 
 .top-nav {
-  color: rgb(203, 197, 248);
   padding: 2rem;
   padding-bottom: 1rem;
 }
 
-.h2-top {
-  color: rgb(159, 140, 216);
-  font-size: 1rem;
-}
-
-.resume-h2 {
-  color: rgb(203, 197, 248);
-}
-
-.list-header {
-  color: rgb(203, 197, 248);
-  padding-bottom: 0.5rem;
-}
-
-.return {
-  color: rgb(66, 186, 180);
-  font-weight: 400;
-  font-style: italic;
-  font-size: 1.1rem;
-}
-
-.return:hover {
-  font-style: normal;
-}
-
 .contact {
-  color: rgb(159, 140, 216);
   padding-bottom: 2rem;
   padding-left: 2rem;
 }
@@ -220,13 +173,16 @@ a:hover {
   color: rgb(66, 186, 180);
   font-weight: 400;
   font-style: italic;
-  font-size: 1rem;
 }
 
-.education {
+.section1 {
   background-color: rgb(41 33 72);
   color: #9f8cd8;
   padding: 2rem;
+}
+
+.link2 {
+  color: rgb(159, 140, 216);
 }
 
 .wrapper {
@@ -234,47 +190,13 @@ a:hover {
   flex-direction: column;
 }
 
-.hard-skills {
-  background-color: rgb(19 14 36);
-  padding: 2rem;
-  padding-bottom: 0rem;
-  color: rgb(159, 140, 216);
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.soft-skills {
+.section2 {
   background-color: rgb(19 14 36);
   padding: 2rem;
   padding-bottom: 2rem;
-  color: rgb(159, 140, 216);
   display: flex;
   flex-direction: column;
   width: 100%;
-}
-
-.workex {
-  background-color: rgb(41 33 72);
-  color: #9f8cd8;
-  padding: 2rem;
-}
-
-.work-link {
-  color: rgb(66, 186, 180);
-  font-style: italic;
-  font-weight: 400;
-}
-
-.work-link:hover {
-  font-style: normal;
-}
-
-.achievements {
-  background-color: rgb(19 14 36);
-  padding: 2rem;
-  padding-bottom: 2rem;
-  color: rgb(159, 140, 216);
 }
 
 .footer {
@@ -295,12 +217,6 @@ a:hover {
 
   h2 {
     font-size: 2rem;
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-    width: 40rem;
   }
 
   /*index.html things*/
@@ -334,13 +250,8 @@ a:hover {
   .wrapper {
     flex-direction: row;
   }
-  .hard-skills {
-    padding-bottom: 2rem;
-  }
+
   .h2-top {
-    font-size: 1.5rem;
-  }
-  .return {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 }
