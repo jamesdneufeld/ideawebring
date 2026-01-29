@@ -50,6 +50,8 @@ h4 {
   font-size: 1rem;
   font-weight: 500;
   padding-bottom: 0.7rem;
+  color: rgb(66, 186, 180);
+  padding-top: 0.3rem;
 }
 
 li {
@@ -148,11 +150,6 @@ a:hover {
   font-size: 1.8rem;
 }
 
-.h4 {
-  color: rgb(66, 186, 180);
-  padding-top: 0.3rem;
-}
-
 .resumeheader {
   background-image: url(katbg-.jpg);
   background-size: cover;
@@ -163,13 +160,6 @@ a:hover {
 .top-nav {
   padding: 2rem;
   padding-bottom: 1rem;
-}
-
-.return {
-  color: rgb(66, 186, 180);
-  font-weight: 400;
-  font-style: italic;
-  font-size: 1.1rem;
 }
 
 .contact {
@@ -185,7 +175,7 @@ a:hover {
   font-size: 1rem;
 }
 
-.education {
+.section1 {
   background-color: rgb(41 33 72);
   color: #9f8cd8;
   padding: 2rem;
@@ -193,11 +183,6 @@ a:hover {
 
 .link2 {
   color: rgb(159, 140, 216);
-  font-style: italic;
-}
-
-.link2:hover {
-  font-style: none;
 }
 
 .wrapper {
@@ -205,17 +190,7 @@ a:hover {
   flex-direction: column;
 }
 
-.hard-skills {
-  background-color: rgb(19 14 36);
-  padding: 2rem;
-  padding-bottom: 0rem;
-  color: rgb(159, 140, 216);
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.soft-skills {
+.section2 {
   background-color: rgb(19 14 36);
   padding: 2rem;
   padding-bottom: 2rem;
@@ -223,29 +198,6 @@ a:hover {
   display: flex;
   flex-direction: column;
   width: 100%;
-}
-
-.workex {
-  background-color: rgb(41 33 72);
-  color: #9f8cd8;
-  padding: 2rem;
-}
-
-.work-link {
-  color: rgb(66, 186, 180);
-  font-style: italic;
-  font-weight: 400;
-}
-
-.work-link:hover {
-  font-style: normal;
-}
-
-.achievements {
-  background-color: rgb(19 14 36);
-  padding: 2rem;
-  padding-bottom: 2rem;
-  color: rgb(159, 140, 216);
 }
 
 .footer {
@@ -266,11 +218,6 @@ a:hover {
 
   h2 {
     font-size: 2rem;
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
   }
 
   /*index.html things*/
@@ -304,10 +251,7 @@ a:hover {
   .wrapper {
     flex-direction: row;
   }
-  .hard-skills,
-  .softskills {
-    padding-bottom: 2rem;
-  }
+
   .h2-top {
     font-size: 2rem;
   }
