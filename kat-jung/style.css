@@ -140,6 +140,10 @@ a:hover {
 
 /*resume.html things*/
 
+.bigheader {
+  padding-top: 1rem;
+}
+
 .h2-top {
   font-size: 1.5rem;
 }
