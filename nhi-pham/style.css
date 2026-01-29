@@ -14,6 +14,24 @@ body {
 }
 .indexpage {
   background-color: aqua;
+  background-image: url(stripebg.png);
+}
+a {
+  text-decoration: none;
+  font-weight: 600;
+  color: rgb(47, 47, 47);
+}
+.decor {
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+}
+.links {
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
 }
 header {
   font-family: "Anton", sans-serif;
@@ -36,20 +54,9 @@ h3 {
 .title {
   display: flex;
   justify-content: center;
+  color: black;
 }
-.decor {
-  display: flex;
-  justify-content: center;
-  font-size: 2rem;
-}
-.links {
-  width: 50%;
-  border-top: 1px solid rgb(47, 42, 42);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2rem;
-}
+
 .contactsection {
   border-bottom: 2px solid black;
   padding-top: 1rem;
@@ -78,6 +85,9 @@ h3 {
 
 .wrapper {
   border: 10px solid white;
+  border-radius: 3rem;
+  padding: 1rem;
+  background-color: azure;
 }
 
 /* Large devices (desktops, 992px and up) */
