@@ -1,34 +1,180 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+
 body {
   font-family: "Quicksand", sans-serif;
   padding: 1rem;
+  background: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
 }
-
-header {
-  background: lightblue;
-  font-family: Quicksand;
+.indexpage {
+  background-color: aqua;
+  background-image: url(stripebg.png);
+}
+.title {
+  display: flex;
+  justify-content: center;
+  color: rgb(243, 93, 93);
+}
+a {
+  text-decoration: none;
   font-weight: 600;
-  color: lemonchiffon;
-  font-size: 4rem;
+  color: rgb(47, 47, 47);
+}
+.buttonlink {
+  border-radius: 100px;
+  display: inline-block;
+  background-color: rgb(177, 177, 231);
+  padding: 0.5rem;
+  background-size: 20px;
+}
+.buttonlink:hover {
+  background-color: white;
+}
+.decor {
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+}
+.links {
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 2rem;
 }
-.education {
-  background: teal;
-  padding: 2rem;
+header {
+  font-family: "Anton", sans-serif;
+  font-weight: 600;
+  color: black;
+  font-size: 4rem;
+}
+button {
+  display: flex;
+  border-radius: 100px;
+  background-color: rgb(255, 255, 255);
+  justify-content: center;
+  padding: 0.5rem;
+  align-items: center;
+  width: 70%;
+}
+button:hover {
+  background-color: rgb(251, 158, 158);
+}
+h2 {
+  font-family: "quicksand", sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  display: left;
+}
+h3 {
+  font-family: "quicksand", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
 }
 
-.skill {
-  background: lightpink;
-  padding: 2rem;
+.contactsection {
+  border-bottom: 2px solid black;
+  padding: 1rem;
+}
+.experience {
+  border-bottom: 2px solid black;
+  padding: 1rem;
+}
+
+.education {
+  border-bottom: 2px solid black;
+  padding: 1rem;
 }
 
 .paragraph-md {
-  font-size: 1.4rem;
-  color: white;
+  font-size: 1rem;
+  color: black;
+  font-family: "quicksand";
+  padding-bottom: 1rem;
 }
 .paragraph-sm {
+  font-family: "quicksand";
   font-size: 0.75rem;
-  color: peachpuff;
+  color: black;
+  font-weight: 100;
+}
+.wrapper {
+  border: 10px solid white;
+  border-radius: 3rem;
+  padding: 1rem;
+  background-color: azure;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  body {
+    background: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  button {
+    display: flex;
+    border-radius: 100px;
+    background-color: rgb(255, 255, 255);
+    justify-content: center;
+    padding: 0.5rem;
+    align-items: center;
+    width: 100%;
+  }
+  button:hover {
+    background-color: rgb(251, 158, 158);
+  }
+  h2 {
+    font-family: "quicksand", sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .contactsection {
+    border-bottom: 2px solid black;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 50%;
+  }
+
+  .experience {
+    border-bottom: 2px solid black;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 50%;
+  }
+
+  .education {
+    border-bottom: 2px solid black;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 50%;
+  }
+  .experience-1,
+  .experience-2,
+  .education-1,
+  .education-2,
+  .contact-1,
+  .contact-2 {
+    width: 50%;
+    background: rgb(255, 255, 255);
+  }
 }

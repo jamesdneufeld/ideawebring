@@ -14,111 +14,244 @@ html {
   box-sizing: inherit;
 }
 
+/*non-class things, for basic format*/
 body {
   font-family: "Unbounded", sans-serif;
-  padding: 1rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 header {
-  background: rgb(162, 156, 205);
-  padding: 2rem;
-  font-size: 5rem;
+  font-size: 3rem;
   font-weight: 700;
-  color: rgb(100, 75, 142);
-}
-
-.h2-top {
-  background: rgb(162, 156, 205);
-  padding: 2rem;
-  padding-top: 0.1em;
-  font-size: 2.5rem;
-  font-weight: 600;
-  color: rgb(100, 75, 142);
+  padding-bottom: 0.5rem;
+  color: rgb(203, 197, 248);
 }
 
 h2 {
-  padding-bottom: 0.3em;
-  padding-top: 0.5em;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: rgb(159, 140, 216);
+  font-size: 1.2rem;
+  font-weight: 200rem;
 }
 
-.education {
-  background: rgb(182, 188, 237);
+h3 {
+  font-size: 1.3rem;
+  font-weight: 500;
+  padding-top: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+
+h4 {
+  font-weight: 500;
+  padding-bottom: 0.7rem;
+  color: rgb(66, 186, 180);
+  padding-top: 0.3rem;
+}
+
+li {
+  color: rgb(159, 140, 216);
+  font-weight: 300;
+  list-style-type: disc;
+  margin-top: 0.8rem;
+  margin-left: 2em;
+}
+
+p {
+  font-weight: 300;
+  line-height: 1.5rem;
+  color: rgb(203, 197, 248);
+  padding-bottom: 1.8rem;
+}
+
+a {
+  color: rgb(66, 186, 180);
+  font-style: italic;
+}
+
+a:hover {
+  color: aliceblue;
+  font-style: normal;
+}
+
+/*index.html things*/
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-image: url(katbg-.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: center;
+}
+
+.hero-text {
+  font-size: 2rem;
+}
+
+.sub-text {
+  line-height: 1.5rem;
   margin: 1rem;
-  padding: 1em;
-  font-size: 2rem;
-  font-weight: 600;
-  color: rgb(101, 96, 165);
 }
-.wrapper {
-  border: 10px;
+
+.index-sub {
+  color: rgb(66, 186, 180);
+  font-weight: 400;
 }
-.hard-skills,
-.soft-skills {
-  background: rgb(182, 210, 237);
+
+.index-links {
+  padding: 0.5rem;
+}
+
+/*about.html things*/
+.aboutwrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image: url(katbg-.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  justify-content: center;
+}
+
+.aboutcol {
+  margin: 3rem;
+  margin-bottom: 0rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.aboutlinks {
+  padding: 1rem;
+}
+
+.aboutimg {
+  border: 3px inset rgb(66, 186, 180);
+}
+
+/*resume.html things*/
+
+.bigheader {
+  padding-top: 1rem;
+}
+
+.h2-top {
+  font-size: 1.5rem;
+}
+.header2 {
+  color: rgb(203, 197, 248);
+  font-size: 1.8rem;
+}
+
+.resumeheader {
+  background-image: url(katbg-.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-y: center;
+}
+
+.top-nav {
   padding: 2rem;
-  font-size: 2rem;
-  font-weight: 600;
-  color: rgb(88, 126, 155);
+  padding-bottom: 1rem;
+}
+
+.contact {
+  padding-bottom: 2rem;
+  padding-left: 2rem;
+}
+
+.contactinfo {
+  color: rgb(66, 186, 180);
+  font-weight: 400;
+  font-style: italic;
+}
+
+.section1 {
+  background-color: rgb(41 33 72);
+  color: #9f8cd8;
+  padding: 2rem;
+}
+
+.link2 {
+  color: rgb(159, 140, 216);
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.section2 {
+  background-color: rgb(19 14 36);
+  padding: 2rem;
+  padding-bottom: 2rem;
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.workex {
-  background: rgb(182, 237, 232);
-  margin: 1rem;
+.footer {
+  text-align: center;
+  background-image: url(katbg-.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   padding: 2rem;
-  font-size: 2rem;
-  font-weight: 600;
-  color: rgb(88, 155, 145);
 }
 
-.contact {
-  background: rgb(182, 237, 215);
-  margin: 0.5rem;
-  padding: 2rem;
-  font-size: 2rem;
-  font-weight: 600;
-  color: rgb(88, 155, 118);
-}
+/*small device (mobile) tings*/
 
-h3 {
-  font-size: 1.2rem;
-  font-weight: 400;
-  padding-top: 1rem;
-  padding-bottom: 0.4rem;
-}
-
-li {
-  font-size: 1rem;
-  font-weight: 300;
-  padding: 0.2em;
-  list-style-type: disc;
-  margin-left: 2em;
-}
-
-p {
-  font-size: 1rem;
-  font-weight: 300;
-}
-
-.a-1 {
-  color: rgb(81, 67, 160);
-  font-weight: 500;
-}
-
-.a-1:hover {
-  color: rgb(101, 96, 165);
-}
-
-/*Large devices (desktops, 992px and up)*/
 @media (min-width: 992px) {
+  header {
+    font-size: 5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  /*index.html things*/
+
+  .hero {
+    background-position-x: center;
+  }
+
+  .hero-text {
+    font-size: 3.5rem;
+  }
+
+  .hero-sub {
+    font-size: 2rem;
+  }
+  .sub-text {
+    font-size: 1.2rem;
+  }
+  .index-links {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  /*about.html things*/
+  .aboutwrap {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  /*resume.html things*/
   .wrapper {
-    display: flex;
     flex-direction: row;
   }
-  .hard-skills,
-  .soft-skills {
-    width: 150%;
+
+  .h2-top {
+    font-size: 2rem;
   }
 }
