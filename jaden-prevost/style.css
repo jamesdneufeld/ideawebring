@@ -190,3 +190,44 @@ body {
   margin: 0;
   box-sizing: border-box;
 }
+
+/* Return Home */
+header {
+  position: relative;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  background-color: white;
+  color: black;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 4px;
+  border: 2px solid transparent;
+}
+
+.back-button:hover {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+/* This forces the dots to appear and moves them in so they aren't cut off */
+.work-points {
+  list-style-type: disc !important;
+  margin-left: 25px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.work-points li {
+  display: list-item !important; /* This is the "magic" line that brings the dot back */
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 5px;
+  color: #333; /* Adjust color if needed to see it against the background */
+}
