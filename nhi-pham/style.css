@@ -5,11 +5,10 @@
 body {
   font-family: "Quicksand", sans-serif;
   padding: 1rem;
-  background: lightpink;
+  background: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  align-items: center;
   justify-content: center;
 }
 .indexpage {
@@ -53,7 +52,18 @@ header {
   font-weight: 600;
   color: black;
   font-size: 4rem;
-  padding: 2rem;
+}
+button {
+  display: flex;
+  border-radius: 100px;
+  background-color: rgb(255, 255, 255);
+  justify-content: center;
+  padding: 0.5rem;
+  align-items: center;
+  width: 70%;
+}
+button:hover {
+  background-color: rgb(251, 158, 158);
 }
 h2 {
   font-family: "quicksand", sans-serif;
@@ -69,15 +79,16 @@ h3 {
 
 .contactsection {
   border-bottom: 2px solid black;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding: 1rem;
 }
 .experience {
   border-bottom: 2px solid black;
+  padding: 1rem;
 }
 
 .education {
   border-bottom: 2px solid black;
+  padding: 1rem;
 }
 
 .paragraph-md {
@@ -92,7 +103,6 @@ h3 {
   color: black;
   font-weight: 100;
 }
-
 .wrapper {
   border: 10px solid white;
   border-radius: 3rem;
@@ -104,6 +114,21 @@ h3 {
 @media (min-width: 992px) {
   body {
     background: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  button {
+    display: flex;
+    border-radius: 100px;
+    background-color: rgb(255, 255, 255);
+    justify-content: center;
+    padding: 0.5rem;
+    align-items: center;
+    width: 100%;
+  }
+  button:hover {
+    background-color: rgb(251, 158, 158);
   }
   h2 {
     font-family: "quicksand", sans-serif;
