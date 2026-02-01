@@ -15,7 +15,7 @@ html {
 
 /* General Styles */
 header {
-  background: tomato;
+  background-color: #161616;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -40,21 +40,22 @@ li {
 /* Hyperlink Styles */
 
 a {
-  color: blanchedalmond;
+  color: #fef300;
   text-decoration: none;
   font-size: 1.333rem;
   font-family: lexend-regular;
 }
 a:hover {
-  color: tomato;
+  color: #ed1e24;
 }
+
 /* General Paragraph Styles */
 
 /* Paragraph Style */
 
 .Paragraph-md {
   font-size: 0.8rem;
-  color: blanchedalmond;
+  color: #fff9fa;
   padding: 0.25rem;
   margin-bottom: 2rem;
   font-family: lexend-regular;
@@ -62,14 +63,14 @@ a:hover {
 }
 .Paragraph-lg {
   font-size: 1rem;
-  color: blanchedalmond;
+  color: #fff9fa;
   padding: 0.25rem;
   font-family: lexend-regular;
   font-weight: 900;
 }
 .Paragraph-sm {
   font-size: 0.8rem;
-  color: orange;
+  color: #fff9fa;
   padding: 0.25rem;
 }
 .belanosima-regular {
@@ -99,7 +100,7 @@ a:hover {
 .hero-header {
   font-family: "Momo Trust Display", sans-serif;
   font-weight: 400;
-  color: blanchedalmond;
+  color: #fef300;
   font-size: 3.157rem;
   font-style: normal;
   padding: 0.25rem;
@@ -108,25 +109,19 @@ a:hover {
   justify-content: flex-start;
   align-items: center;
 }
-.index-list {
-  font-size: 1.333rem;
-  color: blanchedalmond;
-  padding: 0.25rem;
-  font-family: lexend-regular;
-}
 /* Specific Class Styles */
 .edusummary {
   font-family: "Momo Trust Display", sans-serif;
   font-weight: 200;
   font-size: 1.777rem;
-  color: #ffebcd;
+  color: #ed1e24;
   padding: 0.25rem;
   margin-bottom: 0.25rem;
   margin-top: 0.5rem;
 }
 .Paragraph-mdhero {
   font-size: 0.8rem;
-  color: blanchedalmond;
+  color: #fff9fa;
   padding: 0.25rem;
   font-family: lexend-regular;
   font-size: 1rem;
@@ -134,29 +129,25 @@ a:hover {
 /* End of Header */
 .education {
   font-size: 1.5rem;
-  background: orange;
+  background: #161616;
   padding: 2rem;
   display: flex;
   flex-direction: column;
 }
 .skills {
-  background: blanchedalmond;
+  background: #161616;
   padding: 2rem;
   display: flex;
   flex-direction: column;
 }
 .experience {
-  background: seagreen;
+  background: #161616;
   padding: 2rem;
   display: flex;
   flex-direction: column;
 }
-.educertification {
-  background: indianred;
-  padding: 2rem;
-}
 .edufooter {
-  background: darkslategray;
+  background: #161616;
   padding: 2rem;
   display: flex;
   justify-content: center;
@@ -172,7 +163,7 @@ a:hover {
   font-family: "Momo Trust Display", sans-serif;
   font-weight: 200;
   font-size: 1.777rem;
-  color: #ffebcd;
+  color: #ed1e24;
   padding: 0.25rem;
   margin-bottom: 2rem;
   margin-top: 2rem;
@@ -181,7 +172,7 @@ a:hover {
   font-family: "Momo Trust Display", sans-serif;
   font-weight: 200;
   font-size: 1.777rem;
-  color: orange;
+  color: #ed1e24;
   padding: 0.25rem;
   margin-top: 2rem;
   margin-bottom: 1rem;
@@ -190,7 +181,7 @@ a:hover {
   font-family: "Momo Trust Display", sans-serif;
   font-weight: 200;
   font-size: 1.777rem;
-  color: blanchedalmond;
+  color: #ed1e24;
   margin-bottom: 2rem;
   margin-top: 2rem;
 }
@@ -200,14 +191,14 @@ a:hover {
   font-family: "Lexend-regular", sans-serif;
   font-weight: 600;
   font-size: 1.777rem;
-  color: blanchedalmond;
+  color: #ed1e24;
   padding: 0.25rem;
 }
 /* End of Section Sub-Headers */
 /* Lists */
 .eduskillist {
   font-size: 1rem;
-  color: orange;
+  color: #fff9fa;
   padding: 0.25rem;
   margin-bottom: 1rem;
   font-family: lexend-regular;
@@ -232,7 +223,6 @@ a:hover {
 /* Sections for Index */
 
 .indhero {
-  background-color: #354024;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -249,19 +239,18 @@ a:hover {
   font-family: "Momo Trust Display", sans-serif;
   font-weight: 200;
   font-size: 1.333rem;
-  color: #2e4356;
+  color: #ed1e24;
   padding: 0.25rem;
 }
 
 .indherobody {
-  color: #e5d7c4;
+  color: #fff9fa;
   padding: 1rem;
   font-size: 1rem;
   font-family: lexend-regular;
 }
 
 .webringhero {
-  background: #889063;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -272,7 +261,7 @@ a:hover {
 .indheroheader {
   font-family: "Momo Trust Display", sans-serif;
   font-weight: 400;
-  color: #e5d7c4;
+  color: #fef300;
   font-size: 3.157rem;
   font-style: normal;
   padding: 0.25rem;
@@ -280,6 +269,19 @@ a:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.index-list {
+  font-size: 1.333rem;
+  color: #fff9fa;
+  padding: 0.25rem;
+  font-family: lexend-regular;
+}
+.plswork {
+  font-size: 5rem;
+  color: #fff9fa;
+  padding: 0.25rem;
+  margin-top: 2rem;
+  font-family: lexend-regular;
 }
 /* Web ring nav notes
 
