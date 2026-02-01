@@ -2,7 +2,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Rubik+80s+Fade&display=swap");
 
 html {
   box-sizing: border-box;
@@ -47,6 +46,31 @@ a {
 }
 a:hover {
   color: #ed1e24;
+  font-size: 1.5rem;
+}
+a.webring-links {
+  color: #ed1e24;
+  text-decoration: none;
+  font-size: 1.333rem;
+  font-family: lexend-regular;
+  font-size: 2rem;
+}
+a:hover.webring-links {
+  color: #fef300;
+  font-family: "Momo Trust Display", sans-serif;
+  font-size: 2.333rem;
+}
+a.webring-links-middle {
+  color: #fef300;
+  text-decoration: none;
+  font-size: 1.333rem;
+  font-family: lexend-regular;
+  font-size: 2rem;
+}
+a:hover.webring-links-middle {
+  color: #ed1e24;
+  font-family: "Momo Trust Display", sans-serif;
+  font-size: 2.333rem;
 }
 
 /* General Paragraph Styles */
@@ -152,7 +176,7 @@ a:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 13vh;
+  min-height: 5vh;
   font-family: lexend-regular;
 }
 /* End of Sections* */
@@ -285,6 +309,7 @@ a:hover {
   min-height: 1vh;
   font-family: lexend-regular;
 }
+
 /* Web ring nav notes
 
 <ul class=Wrapper for webring links">
