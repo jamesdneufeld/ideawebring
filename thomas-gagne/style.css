@@ -1,6 +1,5 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600;700&display=swap");
 
 html {
@@ -30,8 +29,9 @@ li {
 a {
   color: #fef300;
   text-decoration: none;
-  font-size: 1.333rem;
-  font-family: Lexend;
+  font-size: 1.5rem;
+  font-family: "Belanosima", sans-serif;
+  font-weight: 400;
 }
 a:hover {
   color: #ed1e24;
@@ -41,51 +41,34 @@ a.webring-links {
   color: #ed1e24;
   text-decoration: none;
   font-size: 1.333rem;
-  font-family: Lexend;
+  font-family: "Belanosima", sans-serif;
+  font-weight: 400;
   font-size: 2rem;
 }
 a:hover.webring-links {
   color: #fef300;
-  font-family: "Momo Trust Display", sans-serif;
+  font-family: "Belanosima", sans-serif;
+  font-weight: 600;
   font-size: 2.333rem;
 }
 a.webring-links-middle {
   color: #fef300;
   text-decoration: none;
   font-size: 1.333rem;
-  font-family: Lexend;
+  font-family: "Belanosima", sans-serif;
+  font-weight: 400;
   font-size: 2rem;
 }
 a:hover.webring-links-middle {
   color: #ed1e24;
-  font-family: "Momo Trust Display", sans-serif;
+  font-family: "Belanosima", sans-serif;
+  font-weight: 600;
   font-size: 2.333rem;
 }
 
 /* General Paragraph Styles */
 
 /* Paragraph Style */
-
-.Paragraph-md {
-  font-size: 0.8rem;
-  color: #fff9fa;
-  padding: 0.25rem;
-  margin-bottom: 2rem;
-  font-family: Lexend;
-  font-size: 1rem;
-}
-.Paragraph-lg {
-  font-size: 1rem;
-  color: #fff9fa;
-  padding: 0.25rem;
-  font-family: Lexend;
-  font-weight: 900;
-}
-.Paragraph-sm {
-  font-size: 0.8rem;
-  color: #fff9fa;
-  padding: 0.25rem;
-}
 .belanosima-regular {
   font-family: "Belanosima", sans-serif;
   font-weight: 400;
@@ -103,13 +86,33 @@ a:hover.webring-links-middle {
   font-weight: 700;
   font-style: normal;
 }
-
-.lexend-regular {
-  font-family: "Lexend", sans-serif;
-  font-optical-sizing: auto;
+.momo-trust-display-regular {
+  font-family: "Momo Trust Display", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
+.Paragraph-md {
+  font-size: 0.8rem;
+  color: #fff9fa;
+  padding: 0.25rem;
+  margin-bottom: 2rem;
+  font-family: "Belanosima", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+}
+.Paragraph-lg {
+  font-size: 1rem;
+  color: #fff9fa;
+  padding: 0.25rem;
+  font-family: "Belanosima", sans-serif;
+  font-weight: 400;
+}
+.Paragraph-sm {
+  font-size: 0.8rem;
+  color: #fff9fa;
+  padding: 0.25rem;
+}
+
 .hero-header {
   font-family: "Momo Trust Display", sans-serif;
   font-weight: 400;
@@ -136,7 +139,8 @@ a:hover.webring-links-middle {
   font-size: 0.8rem;
   color: #fff9fa;
   padding: 0.25rem;
-  font-family: lexend-regular;
+  font-family: "Belanosima", sans-serif;
+  font-weight: 400;
   font-size: 1rem;
 }
 /* End of Header */
@@ -166,7 +170,8 @@ a:hover.webring-links-middle {
   justify-content: center;
   align-items: center;
   min-height: 5vh;
-  font-family: lexend-regular;
+  font-family: "Belanosima", sans-serif;
+  font-weight: 400;
 }
 /* End of Sections* */
 
@@ -201,7 +206,7 @@ a:hover.webring-links-middle {
 /* End of Section Headers */
 /* Section Sub-Headers */
 .eduheader {
-  font-family: "Lexend-regular", sans-serif;
+  font-family: "Belanosima", sans-serif;
   font-weight: 600;
   font-size: 1.777rem;
   color: #ed1e24;
@@ -214,7 +219,8 @@ a:hover.webring-links-middle {
   color: #fff9fa;
   padding: 0.25rem;
   margin-bottom: 1rem;
-  font-family: lexend-regular;
+  font-family: "Belanosima", sans-serif;
+  font-weight: 400;
 }
 
 /* End of Lists. */
@@ -249,8 +255,8 @@ a:hover.webring-links-middle {
 }
 
 .indsubheader {
-  font-family: "Momo Trust Display", sans-serif;
-  font-weight: 200;
+  font-family: "Belanosima", sans-serif;
+  font-weight: 600;
   font-size: 1.333rem;
   color: #ed1e24;
   padding: 0.25rem;
@@ -260,7 +266,8 @@ a:hover.webring-links-middle {
   color: #fff9fa;
   padding: 1rem;
   font-size: 1rem;
-  font-family: lexend-regular;
+  font-family: Belanosima;
+  font-weight: 400;
 }
 
 .webringhero {
@@ -273,7 +280,7 @@ a:hover.webring-links-middle {
 }
 .indheroheader {
   font-family: "Momo Trust Display", sans-serif;
-  font-weight: 400;
+  font-weight: 700;
   color: #fef300;
   font-size: 3.157rem;
   font-style: normal;
@@ -287,16 +294,18 @@ a:hover.webring-links-middle {
   font-size: 1.333rem;
   color: #fff9fa;
   padding: 0.25rem;
-  font-family: lexend-regular;
+  font-family: Belanosima;
+  font-weight: 400;
 }
 .index-footer {
   background: #161616;
-  padding: 0.1rem;
+  padding: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 1vh;
-  font-family: lexend-regular;
+  font-family: Belanosima;
+  font-weight: 400;
 }
 
 /* Web ring nav notes
