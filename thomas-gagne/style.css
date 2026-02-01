@@ -1,7 +1,8 @@
 /* Typography imported from Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik+80s+Fade&display=swap");
 
 html {
   box-sizing: border-box;
@@ -20,7 +21,7 @@ header {
   flex-direction: column;
 }
 h1 {
-  font-family: "Momo Trust Display", sans-serif;
+  font-family: "Boldonse", sans-serif;
   font-weight: 400;
   color: blanchedalmond;
   font-size: 5rem;
@@ -41,47 +42,94 @@ li {
 a {
   color: blanchedalmond;
   text-decoration: none;
+  font-size: 1.333rem;
+  font-family: lexend-regular;
 }
 a:hover {
   color: tomato;
 }
-a {
-  font-size: 2rem;
-}
 /* General Paragraph Styles */
 
 /* Paragraph Style */
+
 .Paragraph-md {
   font-size: 0.8rem;
   color: blanchedalmond;
   padding: 0.25rem;
   margin-bottom: 2rem;
+  font-family: lexend-regular;
+  font-size: 1rem;
 }
 .Paragraph-lg {
   font-size: 1rem;
   color: blanchedalmond;
   padding: 0.25rem;
+  font-family: lexend-regular;
+  font-weight: 900;
 }
 .Paragraph-sm {
   font-size: 0.8rem;
   color: orange;
   padding: 0.25rem;
 }
+.belanosima-regular {
+  font-family: "Belanosima", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
+.belanosima-semibold {
+  font-family: "Belanosima", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.belanosima-bold {
+  font-family: "Belanosima", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.lexend-regular {
+  font-family: "Lexend", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+.hero-header {
+  font-family: "Momo Trust Display", sans-serif;
+  font-weight: 400;
+  color: blanchedalmond;
+  font-size: 3.157rem;
+  font-style: normal;
+  padding: 0.25rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.index-list {
+  font-size: 1.333rem;
+  color: blanchedalmond;
+  padding: 0.25rem;
+  font-family: lexend-regular;
+}
 /* Specific Class Styles */
 .edusummary {
   font-family: "Momo Trust Display", sans-serif;
   font-weight: 200;
-  font-size: 2rem;
+  font-size: 1.777rem;
   color: #ffebcd;
   padding: 0.25rem;
   margin-bottom: 0.25rem;
-  margin-top: 2rem;
+  margin-top: 0.5rem;
 }
 .Paragraph-mdhero {
   font-size: 0.8rem;
   color: blanchedalmond;
   padding: 0.25rem;
+  font-family: lexend-regular;
+  font-size: 1rem;
 }
 /* End of Header */
 .education {
@@ -114,6 +162,7 @@ a {
   justify-content: center;
   align-items: center;
   min-height: 13vh;
+  font-family: lexend-regular;
 }
 /* End of Sections* */
 
@@ -122,7 +171,7 @@ a {
 .edutitle {
   font-family: "Momo Trust Display", sans-serif;
   font-weight: 200;
-  font-size: 2rem;
+  font-size: 1.777rem;
   color: #ffebcd;
   padding: 0.25rem;
   margin-bottom: 2rem;
@@ -131,7 +180,7 @@ a {
 .eduskills {
   font-family: "Momo Trust Display", sans-serif;
   font-weight: 200;
-  font-size: 2rem;
+  font-size: 1.777rem;
   color: orange;
   padding: 0.25rem;
   margin-top: 2rem;
@@ -140,7 +189,7 @@ a {
 .eduexp {
   font-family: "Momo Trust Display", sans-serif;
   font-weight: 200;
-  font-size: 2rem;
+  font-size: 1.777rem;
   color: blanchedalmond;
   margin-bottom: 2rem;
   margin-top: 2rem;
@@ -148,9 +197,9 @@ a {
 /* End of Section Headers */
 /* Section Sub-Headers */
 .eduheader {
-  font-family: "Momo Trust Display", sans-serif;
-  font-weight: 200;
-  font-size: 3;
+  font-family: "Lexend-regular", sans-serif;
+  font-weight: 600;
+  font-size: 1.777rem;
   color: blanchedalmond;
   padding: 0.25rem;
 }
@@ -161,6 +210,7 @@ a {
   color: orange;
   padding: 0.25rem;
   margin-bottom: 1rem;
+  font-family: lexend-regular;
 }
 
 /* End of Lists. */
@@ -182,7 +232,7 @@ a {
 /* Sections for Index */
 
 .indhero {
-  background-color: orange;
+  background-color: #354024;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -198,18 +248,20 @@ a {
 .indsubheader {
   font-family: "Momo Trust Display", sans-serif;
   font-weight: 200;
-  font-size: 3rem;
-  color: blanchedalmond;
+  font-size: 1.333rem;
+  color: #2e4356;
   padding: 0.25rem;
 }
 
 .indherobody {
-  color: blanchedalmond;
+  color: #e5d7c4;
   padding: 1rem;
+  font-size: 1rem;
+  font-family: lexend-regular;
 }
 
 .webringhero {
-  background: orange;
+  background: #889063;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -217,7 +269,18 @@ a {
   align-items: center;
   min-height: 100vh;
 }
-
+.indheroheader {
+  font-family: "Momo Trust Display", sans-serif;
+  font-weight: 400;
+  color: #e5d7c4;
+  font-size: 3.157rem;
+  font-style: normal;
+  padding: 0.25rem;
+  margin-bottom: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 /* Web ring nav notes
 
 <ul class=Wrapper for webring links">
@@ -236,5 +299,52 @@ a {
   .skills,
   .educertification {
     width: 50%;
+  }
+
+  /* Index Type */
+  .indheroheader {
+    font-size: 5.61rem;
+  }
+  .indsubheader {
+    font-size: 2.333rem;
+  }
+  .indherobody {
+    font-size: 1.333rem;
+  }
+  /* Resume Type Size */
+  .hero-header {
+    font-size: 5.61rem;
+  }
+
+  .edusummary {
+    font-size: 3.157rem;
+  }
+
+  .Paragraph-mdhero {
+    font-size: 1.333rem;
+  }
+
+  .edutitle {
+    font-size: 3.157rem;
+  }
+
+  .eduheader {
+    font-size: 2rem;
+  }
+
+  .Paragraph-md {
+    font-size: 1.333rem;
+  }
+
+  .eduskillist {
+    font-size: 1.333rem;
+  }
+
+  .eduskills {
+    font-size: 3.157rem;
+  }
+
+  .eduexp {
+    font-size: 3.157rem;
   }
 }
