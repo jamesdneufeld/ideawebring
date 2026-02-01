@@ -5,35 +5,35 @@
 body {
   font-family: "Quicksand", sans-serif;
   padding: 1rem;
-  background: lightpink;
+  background: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  align-items: center;
   justify-content: center;
 }
-
-header {
-  font-family: "Anton", sans-serif;
-  font-weight: 600;
-  color: black;
-  font-size: 4rem;
-}
-h2 {
-  font-family: "quicksand", sans-serif;
-  font-weight: 700;
-  font-size: 2rem;
-  background-color: antiquewhite;
-  display: left;
-}
-h3 {
-  font-family: "quicksand", sans-serif;
-  font-weight: 700;
-  font-size: 1rem;
+.indexpage {
+  background-color: aqua;
+  background-image: url(stripebg.png);
 }
 .title {
   display: flex;
   justify-content: center;
+  color: rgb(243, 93, 93);
+}
+a {
+  text-decoration: none;
+  font-weight: 600;
+  color: rgb(47, 47, 47);
+}
+.buttonlink {
+  border-radius: 100px;
+  display: inline-block;
+  background-color: rgb(177, 177, 231);
+  padding: 0.5rem;
+  background-size: 20px;
+}
+.buttonlink:hover {
+  background-color: white;
 }
 .decor {
   display: flex;
@@ -41,23 +41,54 @@ h3 {
   font-size: 2rem;
 }
 .links {
-  width: 50%;
-  border: 1px solid red;
+  width: 75%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 2rem;
 }
+header {
+  font-family: "Anton", sans-serif;
+  font-weight: 600;
+  color: black;
+  font-size: 4rem;
+}
+button {
+  display: flex;
+  border-radius: 100px;
+  background-color: rgb(255, 255, 255);
+  justify-content: center;
+  padding: 0.5rem;
+  align-items: center;
+  width: 70%;
+}
+button:hover {
+  background-color: rgb(251, 158, 158);
+}
+h2 {
+  font-family: "quicksand", sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  display: left;
+}
+h3 {
+  font-family: "quicksand", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
 .contactsection {
   border-bottom: 2px solid black;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding: 1rem;
 }
 .experience {
   border-bottom: 2px solid black;
+  padding: 1rem;
 }
 
 .education {
   border-bottom: 2px solid black;
+  padding: 1rem;
 }
 
 .paragraph-md {
@@ -72,22 +103,41 @@ h3 {
   color: black;
   font-weight: 100;
 }
-
 .wrapper {
   border: 10px solid white;
+  border-radius: 3rem;
+  padding: 1rem;
+  background-color: azure;
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   body {
-    background: lightblue;
+    background: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  button {
+    display: flex;
+    border-radius: 100px;
+    background-color: rgb(255, 255, 255);
+    justify-content: center;
+    padding: 0.5rem;
+    align-items: center;
+    width: 100%;
+  }
+  button:hover {
+    background-color: rgb(251, 158, 158);
   }
   h2 {
     font-family: "quicksand", sans-serif;
     font-weight: 700;
     font-size: 2rem;
-    background-color: rgb(250, 174, 198);
-    display: left;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .contactsection {
     border-bottom: 2px solid black;
@@ -95,12 +145,36 @@ h3 {
     padding-bottom: 1rem;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
+    width: 50%;
   }
+
   .experience {
     border-bottom: 2px solid black;
     padding-top: 1rem;
     padding-bottom: 1rem;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
+    width: 50%;
+  }
+
+  .education {
+    border-bottom: 2px solid black;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 50%;
+  }
+  .experience-1,
+  .experience-2,
+  .education-1,
+  .education-2,
+  .contact-1,
+  .contact-2 {
+    width: 50%;
+    background: rgb(255, 255, 255);
   }
 }

@@ -12,6 +12,8 @@
 /* apply a natural box layout model to all elements, but allowing components to change */
 html {
   box-sizing: border-box;
+  font-family: Josefin Sans;
+  font-weight: 300;
 }
 *,
 *:before,
@@ -21,8 +23,10 @@ html {
 
 /* Very General Element Styles */
 
+/*Web Ring Homepage*/
+
 header {
-  background-color: lavender;
+  color: lightcyan;
   padding-top: 8rem;
   padding-bottom: 5rem;
   width: 100%;
@@ -41,7 +45,7 @@ header {
   justify-content: center;
 }
 .webringinfo {
-  background-color: lavender;
+  background-color: lightcyan;
   padding: 1rem;
   width: 100%;
 }
@@ -62,6 +66,7 @@ p {
   width: 100%;
   text-align: center;
   min-height: 100vh;
+  background-image: url(nightsky.jpg);
 }
 
 .linkbutton {
@@ -71,14 +76,15 @@ p {
   display: inline-block;
   padding: 1rem 2rem;
   margin: 2rem;
-  border: 0.25rem solid lavender;
+  border: 0.25rem solid lightcyan;
   border-radius: 1.5rem;
-  color: black;
+  color: lightcyan;
   text-decoration: none;
 }
 
 .webringlink {
   text-decoration: none;
+  color: teal;
 }
 .webringlink:hover {
   text-decoration: underline;
@@ -91,7 +97,7 @@ p {
   display: inline-block;
   padding: 1rem 2rem;
   margin: 2rem;
-  background-color: lavender;
+  background-color: lightcyan;
   border-radius: 1.5rem;
   color: black;
 }
@@ -111,6 +117,22 @@ p {
   font-family: Josefin Sans;
 }
 
+/*resume*/
+
+/* Very General Element Styles */
+
+/* Specific Class Styles */
+.resume h1 {
+  font-size: 5rem;
+  font-family: Bagel Fat One;
+}
+
+.information {
+  text-align: center;
+  width: 100%;
+  background-color: aqua;
+}
+
 /* Large devices (desktops, 992px and up) */
 
 @media (min-width: 992px) {
@@ -118,3 +140,5 @@ p {
     flex-direction: row;
   }
 }
+
+/* make homepage look like space, have moon and starts */

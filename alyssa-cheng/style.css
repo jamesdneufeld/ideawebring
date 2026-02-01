@@ -2,50 +2,52 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 body {
   font-family: "Lato", sans-serif;
-  padding: 1rem;
 }
 header {
-  background: lightblue;
+  background: #235c7e;
   padding: 2rem;
 }
 section {
-  background: goldenrod;
+  background: antiquewhite;
   padding: 2rem;
-}
-.education {
-  background: cadetblue;
-  padding: 2 rem;
-}
-.skills {
-  background: hotpink;
-  padding: 2 rem;
 }
 h1 {
   font-weight: 900;
   font-style: italic;
   font-size: 4rem;
   margin-bottom: 1rem;
+  color: antiquewhite;
 }
 h2 {
   font-weight: 700;
   font-style: normal;
   font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #235c7e;
 }
 h3 {
   font-weight: 700;
   font-style: normal;
   font-size: 1.5rem;
   margin-bottom: 0.4rem;
+  color: #235c7e;
 }
 h4 {
   font-weight: 500;
   font-style: italic;
   font-size: 1.5rem;
+  color: #235c7e;
+  margin-bottom: 0.4rem;
+}
+p {
+  margin-bottom: 1.5rem;
+  color: #94bebb;
 }
 ul {
   list-style-type: disc;
   list-style-position: inside;
   margin-bottom: 1.4rem;
+  color: #235c7e;
 }
 li {
   margin-bottom: 0.5rem;
@@ -53,8 +55,40 @@ li {
 .site-header,
 .main-nav {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 55%;
 }
 
+.para-md {
+  font-size: 1.3rem;
+  color: #6777b6;
+}
+.para-sm {
+  color: #6777b6;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+button {
+  font-family: "Lato", sans-serif;
+  font-size: 1.2rem;
+}
+a {
+  text-decoration: none;
+  color: #235c7e;
+}
+.resume-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.index {
+  background-image: url(https://www.artic.edu/iiif/2/6a7d96dd-68bf-e997-b3c8-b8f7aa371818/full/843,/0/default.jpg);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
   .edu-heading,
@@ -94,19 +128,13 @@ li {
   .edu-heading,
   .exp-heading,
   .skills-heading {
+    padding-right: 3rem;
     width: 20%;
   }
   .edu-main,
   .exp-main,
   .skills-main {
     width: 80%;
-  }
-  .para-md {
-    font-size: 1.3rem;
-  }
-  .para-sm {
-    font-size: 1rem;
-    margin-bottom: 1rem;
   }
 }
 

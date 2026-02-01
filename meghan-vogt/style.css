@@ -53,7 +53,7 @@ h2 {
 /* Home page styles */
 
 .hero {
-  min-height: 50vh;
+  min-height: 65vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -76,22 +76,22 @@ h2 {
 }
 .hero-title {
   font-size: 5rem;
+  padding: 1rem;
   margin-bottom: 1rem;
-  color: rgba(79, 6, 237, 0.942);
+  color: rgba(77, 36, 94, 0.942);
+  font-family: "Lora", serif;
+  font-weight: 600;
+  text-align: center;
 }
 
 @media only screen and (min-width: 992px) {
   body {
-    background: lightpink;
-    padding: 1rem;
+    background: rgb(241, 166, 241);
+    padding: 2rem;
+    margin-top: 5rem;
   }
 }
 
-.middle {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
 .sections {
   display: flex;
   flex-direction: row;
@@ -102,6 +102,12 @@ h2 {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  font-family: "Lora", serif;
+  font-weight: 600;
+  color: lemonchiffon;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
 }
 .education {
   background: pink;
@@ -135,4 +141,36 @@ h3 {
   font-size: 1.3rem;
   padding: 1rem;
   text-align: center;
+}
+.webringnavigation {
+  border: 5px solid rgb(216, 163, 251);
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  margin: 1rem;
+  font-weight: 800;
+  font-size: 1.3rem;
+  padding: 1rem;
+  background: lemonchiffon;
+}
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 2rem;
+  padding: 1rem;
+}
+body {
+  background-image: url("Cheetah.jpg");
+}
+.index {
+  background-image: url("https://i.pinimg.com/736x/68/6a/79/686a79e45003748a0c8a54c5a4652a9b.jpg");
+  width: 100%;
+  padding: 1rem;
+}
+.sparkle {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 1rem;
 }

@@ -1,31 +1,8 @@
 /* Typography imported from Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=TASA+Explorer:wght@400..800&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 
-body {
-  font-family: "Rubik", sans-serif;
-}
-
-header {
-  background: whitesmoke;
-  padding: 2rem;
-}
-.education {
-  background: whitesmoke;
-  padding: 2rem;
-}
-.skills {
-  background: whitesmoke;
-  padding: 2rem;
-}
-.paragraph-md {
-  font-size: 2rem;
-  color: navy;
-}
-
-.paragraph-sm {
-  font-size: 0.8rem;
-}
+/*general*/
 
 h1 {
   font-family: "IBM Plex Mono", monospace;
@@ -50,6 +27,40 @@ h3 {
 h4 {
   margin-bottom: 1rem;
 }
+
+/*typography*/
+
+body {
+  font-family: "TASA Explorer", sans-serif;
+}
+header {
+  background: whitesmoke;
+  padding: 2rem;
+}
+.education {
+  background: whitesmoke;
+  padding: 2rem;
+}
+.skills {
+  background: whitesmoke;
+  padding: 2rem;
+}
+.paragraph-md {
+  font-size: 2rem;
+  color: navy;
+}
+
+.paragraph-sm {
+  font-size: 0.8rem;
+}
+
+/*sizes*/
+
+@media (min-width: 576px) {
+  h1 {
+    font-size: 1.777rem;
+  }
+}
 .work-experience {
   background: whitesmoke;
   padding: 2rem;
@@ -61,10 +72,6 @@ ul {
 
 li {
   margin-bottom: 1rem;
-}
-
-body {
-  font-family: "Alumni Sans Pinstripe", sans-serif;
 }
 
 header {
@@ -90,13 +97,11 @@ header {
   background: lightskyblue;
   padding: 3rem;
 }
-title {
-  font-family: .ibm-plex-mono-semibold {
+{
+  font-family: .ibm-plex-mono-semibold 
   font-family: "IBM Plex Mono", monospace;
-  font-weight>: 600;
+  font-weight: 600;
   font-style: normal;
-  color:#75000E;
-}
 }
 h1 {
   font-family: "Alumni Sans Pinstripe", sans-serif;
@@ -122,7 +127,7 @@ h2 {
   justify-content: center;
   min-height: 100vh;
 
-  background-image: background: #FF1FA9;
+  background-image: background; <element id="FF1FA9">;
 background: linear-gradient(90deg, rgba(255, 31, 169, 1) 0%, rgba(255, 31, 57, 1) 50%, rgba(255, 117, 31, 1) 100%);
 }
 
@@ -133,4 +138,27 @@ background: linear-gradient(90deg, rgba(255, 31, 169, 1) 0%, rgba(255, 31, 57, 1
 .hero-text {
   color: white;
   font-size: 2rem;
+}
+.linkbutton {
+  font-size: 2rem;
+  text-align:center;
+  display: inline-block;
+  padding: 1rem 2rem;
+  margin: 2rem;
+  border: 0.25rem solid whitesmoke;
+  border-radius: 1.5rem;
+  color: black;
+  text-decoration: wavy;
+}
+
+.linkbutton:hover {
+  font-size: 2rem;
+  text-align:center;
+  display: inline-block;
+  padding: 1rem 2rem;
+  margin: 2rem;
+  background-color:whitesmoke;
+  border-radius: 1.5rem;
+  color: black;
+  text-decoration: wavy;
 }
