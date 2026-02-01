@@ -26,7 +26,7 @@ html {
 /*Web Ring Homepage*/
 
 header {
-  background-color: lavender;
+  color: lightcyan;
   padding-top: 8rem;
   padding-bottom: 5rem;
   width: 100%;
@@ -45,7 +45,7 @@ header {
   justify-content: center;
 }
 .webringinfo {
-  background-color: lavender;
+  background-color: lightcyan;
   padding: 1rem;
   width: 100%;
 }
@@ -66,6 +66,7 @@ p {
   width: 100%;
   text-align: center;
   min-height: 100vh;
+  background-image: url(nightsky.jpg);
 }
 
 .linkbutton {
@@ -75,14 +76,15 @@ p {
   display: inline-block;
   padding: 1rem 2rem;
   margin: 2rem;
-  border: 0.25rem solid lavender;
+  border: 0.25rem solid lightcyan;
   border-radius: 1.5rem;
-  color: black;
+  color: lightcyan;
   text-decoration: none;
 }
 
 .webringlink {
   text-decoration: none;
+  color: teal;
 }
 .webringlink:hover {
   text-decoration: underline;
@@ -95,7 +97,7 @@ p {
   display: inline-block;
   padding: 1rem 2rem;
   margin: 2rem;
-  background-color: lavender;
+  background-color: lightcyan;
   border-radius: 1.5rem;
   color: black;
 }
@@ -138,3 +140,5 @@ p {
     flex-direction: row;
   }
 }
+
+/* make homepage look like space, have moon and starts */

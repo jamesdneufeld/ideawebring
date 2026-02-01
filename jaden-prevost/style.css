@@ -18,11 +18,6 @@ section {
   padding: 2rem;
 }
 
-.skills {
-  background: rgb(143, 96, 96);
-  padding: 2rem;
-}
-
 .paragraph-md {
   font-size: 1rem;
   color: rgb(0, 0, 0);
@@ -68,7 +63,7 @@ h4 {
 .hero-text {
   font-family: "Archivo Black", sans-serif;
   color: rgb(255, 255, 255);
-  background: rgb(249, 73, 73);
+  background: rgb(219, 84, 84);
   padding: 1.5rem;
   font-size: 3rem;
   display: flex;
@@ -80,14 +75,14 @@ h4 {
   flex-direction: row;
   justify-content: space-around;
   align-content: center;
-  font-size: 1.2rem;
+  font-size: 2rem;
   font-family: "Archivo Black", sans-serif;
-  color: rgb(249, 73, 73);
+  color: rgb(168, 0, 0);
   text-transform: uppercase;
 }
 
 .hero-sub {
-  color: rgb(241, 135, 58);
+  color: rgb(251, 251, 251);
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -100,4 +95,175 @@ h4 {
 
 .hero-text {
   border: 5px solid rgb(204, 17, 4);
+}
+
+.paragraph-sm {
+  color: black;
+}
+
+.paragraph-sm {
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.workexperince ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.workexperince li {
+  margin-bottom: 30px;
+}
+
+.Education h5.paragraph-sm {
+  margin-top: 20px;
+  line-height: 1.5;
+}
+
+.skills ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.skills li {
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+.Education ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.Education li {
+  margin-bottom: 40px;
+}
+
+.Education h3,
+.Education h4 {
+  margin-bottom: 5px;
+}
+
+.Education h5.paragraph-sm {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.workexperince li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  list-style-type: none;
+}
+
+.hero-sub {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.index-sub {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* INDEX (Web Ring) */
+body {
+  background-image: url("8-light-red-watercolor-background-3.jpg"); /* Ensure this matches your filename exactly */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+body {
+  border: 8px solid white;
+  min-height: 100vh;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Return Home */
+header {
+  position: relative;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  background-color: white;
+  color: black;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 4px;
+  border: 2px solid transparent;
+}
+
+.back-button:hover {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.skills-flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  width: 100%;
+}
+
+.skills-list {
+  flex: 1;
+  min-width: 150px;
+  list-style-type: disc !important;
+  padding-left: 20px;
+}
+
+.skills {
+  background-color: (143, 96, 96);
+  padding: 30px;
+  overflow: hidden;
+  display: block;
+  height: auto;
+}
+
+.skills-column h2 {
+  font-family: "Archivo Black", sans-serif;
+}
+
+.skills-flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 80px;
+  align-items: flex-start;
+}
+
+.skills {
+  background-color: #be4b47;
+  padding: 40px;
+  height: auto;
+  display: block;
+  overflow: hidden;
+}
+
+.skills-column h2 {
+  font-size: 32px;
+  color: white;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.skills-list {
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+.contact-info {
+  color: rgb(220, 225, 230);
 }
