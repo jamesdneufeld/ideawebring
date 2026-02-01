@@ -276,11 +276,13 @@ a:hover {
   padding: 0.25rem;
   font-family: lexend-regular;
 }
-.plswork {
-  font-size: 5rem;
-  color: #fff9fa;
-  padding: 0.25rem;
-  margin-top: 2rem;
+.index-footer {
+  background: #161616;
+  padding: 0.1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 1vh;
   font-family: lexend-regular;
 }
 /* Web ring nav notes
