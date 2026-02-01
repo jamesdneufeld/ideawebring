@@ -31,7 +31,7 @@ a {
   color: #fef300;
   text-decoration: none;
   font-size: 1.333rem;
-  font-family: lexend-regular;
+  font-family: Lexend;
 }
 a:hover {
   color: #ed1e24;
@@ -41,7 +41,7 @@ a.webring-links {
   color: #ed1e24;
   text-decoration: none;
   font-size: 1.333rem;
-  font-family: lexend-regular;
+  font-family: Lexend;
   font-size: 2rem;
 }
 a:hover.webring-links {
@@ -53,7 +53,7 @@ a.webring-links-middle {
   color: #fef300;
   text-decoration: none;
   font-size: 1.333rem;
-  font-family: lexend-regular;
+  font-family: Lexend;
   font-size: 2rem;
 }
 a:hover.webring-links-middle {
@@ -71,14 +71,14 @@ a:hover.webring-links-middle {
   color: #fff9fa;
   padding: 0.25rem;
   margin-bottom: 2rem;
-  font-family: lexend-regular;
+  font-family: Lexend;
   font-size: 1rem;
 }
 .Paragraph-lg {
   font-size: 1rem;
   color: #fff9fa;
   padding: 0.25rem;
-  font-family: lexend-regular;
+  font-family: Lexend;
   font-weight: 900;
 }
 .Paragraph-sm {
