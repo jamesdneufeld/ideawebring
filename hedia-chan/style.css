@@ -297,7 +297,7 @@ james ref, edited
 
 /*index pg class*/
 .index-name {
-  color: rgb(254, 246, 197);
+  color: #ff4c00;
   font-size: 4rem;
   font-family: "Sigmar One", sans-serif;
   font-weight: 400;
@@ -311,7 +311,7 @@ james ref, edited
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  min-height: 20rem;
+  min-height: 25vh;
   box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
   padding: 1rem;
   margin: 0.5rem;
@@ -321,12 +321,16 @@ james ref, edited
   min-height: 100vh;
   padding: 2rem;
   min-height: 2rem;
+  /*background: url("https://i.pinimg.com/1200x/b3/00/26/b30026dc8bf54edcd47acb8ae584be94.jpg")
+    no-repeat scroll center center;*/
+  border: 10px solid transparent;
+  padding: 15px;
+  border-image: url("https://www.w3schools.com/cssref/border.png") 30 stretch;
 }
 .full {
-  background-image: url("https://www.comedywildlifephoto.com/images/gallery/2/00001912_p.webp");
 }
 .name {
-  color: Wheat;
+  color: #ffbe5c;
   font-family: "Rubik", sans-serif;
   text-align: center;
   font-size: 3rem;
