@@ -70,6 +70,7 @@ a {
   text-decoration: none;
   background-color: white;
   font-size: 0.75rem;
+  flex-direction: column;
 }
 a:hover {
   color: white;
