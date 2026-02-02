@@ -5,17 +5,17 @@
 /*general*/
 
 h1 {
-  font-family: "Alumni Sans Pinstripe", sans-serif;
+  font-family: "TASA Explorer", sans-serif;
   font-weight: 900;
   font-style: normal;
   font-size: 4rem;
   color: #fdf0d5;
 }
 h2 {
-  font-family: "Alumni Sans Pinstripe", sans-serif;
+  font-family: "TASA Explorer", sans-serif;
   font-weight: 800;
   font-size: 3rem;
-  color: black;
+  color: #fdf0d5;
   margin-bottom: 1rem;
 }
 
@@ -27,27 +27,30 @@ h3 {
 h4 {
   margin-bottom: 1rem;
 }
-
+.wrapper {
+  display: flex;
+  padding: 2rem;
+}
 /*typography*/
 
 body {
   font-family: "TASA Explorer", sans-serif;
 }
 header {
-  background: whitesmoke;
+  background: #fdf0d5;
   padding: 2rem;
 }
 .education {
-  background: whitesmoke;
+  background: #fdf0d5;
   padding: 2rem;
 }
 .skills {
-  background: whitesmoke;
+  background: #fdf0d5;
   padding: 2rem;
 }
 .paragraph-md {
   font-size: 2rem;
-  color: navy;
+  color: #fdf0d5;
 }
 
 .paragraph-sm {
@@ -63,9 +66,22 @@ html {
 *:after {
   box-sizing: inherit;
 }
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  h1 {
+    font-size: 1.777rem;
+  }
+  h2 {
+    font-size: 1.777rem;
+  }
+}
+
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   h1 {
+    font-size: 2.369rem;
+  }
+  h2 {
     font-size: 2.369rem;
   }
 }
@@ -74,9 +90,12 @@ html {
   h1 {
     font-size: 3.157rem;
   }
+  h2 {
+    font-size: 3.157rem;
+  }
 }
 .work-experience {
-  background: whitesmoke;
+  background: #669bbc;
   padding: 2rem;
 }
 ul {
@@ -93,22 +112,17 @@ header {
   padding: 3rem;
 }
 .education {
-  background: whitesmoke;
+  background: #669bbc;
   padding: 3rem;
 }
 
 .skills {
-  background: whitesmoke;
+  background: #669bbc;
   padding: 3rem;
 }
 
 .work-experience {
-  background: whitesmoke;
-  padding: 3rem;
-}
-
-.interests {
-  background: lightskyblue;
+  background: #669bbc;
   padding: 3rem;
 }
 
@@ -124,33 +138,10 @@ header {
 }
 
 .hero-heading {
-  color: white;
+  color: red;
   font-size: 8rem;
 }
 .hero-text {
-  color: white;
+  color: #fdf0d5;
   font-size: 2rem;
-}
-.linkbutton {
-  font-size: 2rem;
-  text-align: center;
-  display: inline-block;
-  padding: 1rem 2rem;
-  margin: 2rem;
-  border: 0.25rem solid whitesmoke;
-  border-radius: 1.5rem;
-  color: black;
-  text-decoration: wavy;
-}
-
-.linkbutton:hover {
-  font-size: 2rem;
-  text-align: center;
-  display: inline-block;
-  padding: 1rem 2rem;
-  margin: 2rem;
-  background-color: whitesmoke;
-  border-radius: 1.5rem;
-  color: black;
-  text-decoration: wavy;
 }
