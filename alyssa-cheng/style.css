@@ -14,7 +14,7 @@ section {
 h1 {
   font-weight: 900;
   font-style: italic;
-  font-size: 4rem;
+  font-size: 2.5rem;
   margin-bottom: 1rem;
   color: antiquewhite;
 }
@@ -42,6 +42,7 @@ h4 {
 p {
   margin-bottom: 1.5rem;
   color: #94bebb;
+  font-size: 1.2;
 }
 ul {
   list-style-type: disc;
@@ -57,7 +58,6 @@ li {
   text-align: center;
   display: flex;
   flex-direction: column;
-  width: 55%;
 }
 
 .para-md {
@@ -84,10 +84,11 @@ a {
   justify-content: flex-end;
 }
 .index {
-  background-image: url(https://www.artic.edu/iiif/2/6a7d96dd-68bf-e997-b3c8-b8f7aa371818/full/843,/0/default.jpg);
+  background-image: url(https://api.nga.gov/iiif/a167f440-ad1c-481e-ada0-2f6962d54e64/full/!800,800/0/default.jpg);
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
@@ -110,6 +111,13 @@ a {
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+  h1 {
+    font-size: 4rem;
+  }
+  .site-header,
+  .main-nav {
+    width: 55%;
+  }
   .contact {
     display: flex;
     flex-direction: row;
