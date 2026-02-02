@@ -8,37 +8,25 @@ CSS oklch Gradation
 Copyright (c) 2025 by Wakana Y.K. (https://codepen.io/wakana-k/pen/qEBoPoO)
 */
 
+/*borders ex https://getcssscan.com/css-box-shadow-examples*/
+
 /*
-Text Glitch Effect (on hover)
-Copyright (c) by Tiffany Grevious (https://codepen.io/DevchamploO/pen/QBWdqd?editors=1100)
+basic element
 */
 
-.index-name {
-  color: rgb(254, 246, 197);
-  font-size: 4rem;
-  font-family: "Sigmar One", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 5rem;
-  margin-bottom: 1rem;
+html {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
 }
-.resume-header {
-  padding: 4rem;
-  font-size: 3rem;
-  color: #000000;
-  font-family: "DM Serif Text";
-  font-style: normal;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
-
-h2 {
-  font-size: 1.8rem;
-  padding: 0.5rem;
-  border-radius: 1rem;
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
+/*?huhh, keep first*/
+:root {
+  --accent-color: #555;
+  --body-typeface: "Slabo 27px", serif;
 }
 
 body {
@@ -67,46 +55,6 @@ body {
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-.subhead {
-  color: DodgerBlue;
-  font-size: 1.2rem;
-  display: flex;
-  justify-content: left;
-}
-
-.education,
-.objective,
-.experience,
-.extracurricular,
-.skills {
-  padding: 2rem;
-  min-height: 10vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.education-main,
-.objective-main,
-.experience-main,
-.extracurricular-main,
-.skills-main {
-  padding: 2rem;
-}
-.education-heading,
-.objective-heading,
-.experience-heading,
-.extracurricular-heading,
-.skills-heading {
-  color: DarkBlue;
-  font-family: "DM Serif Text";
-  padding: 2rem;
-  min-width: 10rem;
-}
-
-.jump {
-  margin-top: 3rem;
-  font-size: 1.5rem;
-}
 
 h1,
 h2,
@@ -118,46 +66,27 @@ p,
 ul,
 ol {
   margin-bottom: 1rem;
-  margin-right: 1rem;
-}
-@media (min-width: 992px) {
-  .education,
-  .objective,
-  .experience,
-  .extracurricular,
-  .skills {
-    flex-direction: row;
-    padding: 2rem;
-  }
-}
-@keyframes anim_bg {
-  0% {
-    --hue1: 0deg;
-    --hue2: 300deg;
-  }
-
-  100% {
-    --hue1: 360deg;
-    --hue2: 660deg;
-  }
-}
-@property --hue1 {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-@property --hue2 {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
 }
 
-.buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  min-height: 20rem;
+h2 {
+  font-size: 1.8rem;
+  border-radius: 1rem;
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+li {
+  margin: 0;
+  padding: 0 0 0 3rem;
+  list-style: none;
+  background-image: url("https://img.sanishtech.com/u/4b5cc2c47068b2c970f59f8eed7200f6.png");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 2.5rem;
+}
+
+hr {
+  border: none;
 }
 
 button {
@@ -186,17 +115,222 @@ a:hover {
   color: #f5efe6;
 }
 
+/*
+resume pg class
+*/
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+header,
+.experience,
+.education,
+.skills {
+  /*border: 2px dashed black;*/
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+  padding: 1rem;
+  margin: 0.5rem;
+  flex-direction: column;
+}
+
+.wrapper {
+  /*border: 2px dashed blueviolet;*/
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+  padding: 1rem;
+  margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.summary {
+  /*border: 4px dashed yellowgreen;*/
+  box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+  padding: 1rem;
+  margin: 0.5rem;
+}
+
+.main-details {
+  /*border: 4px dashed orangered;*/
+  box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+  padding: 1rem;
+  margin: 0.5rem;
+}
+
+.resume-name {
+  font-size: 3rem;
+  color: #353935;
+  font-family: "DM Serif Text";
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.subhead {
+  color: DodgerBlue;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: left;
+}
+
+.education,
+.experience,
+.skills {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.education-main,
+.experience-main,
+.skills-main {
+  width: 80%;
+}
+.education-heading,
+.experience-heading,
+.skills-heading {
+  color: DarkBlue;
+  font-family: "DM Serif Text";
+}
+.jump {
+  margin-top: 3rem;
+  font-size: 1.5rem;
+}
+
+/* 
+james ref, edited
+*/
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .resume-name {
+    font-size: 6rem;
+    color: #1f3b4d;
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .summary {
+    width: 25%;
+  }
+  .main-details {
+    width: 75%;
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  h1 {
+    font-size: 1.777rem;
+  }
+  h2 {
+    font-size: 1.184rem;
+  }
+}
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2.369rem;
+  }
+  h2 {
+    font-size: 1.5793rem;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  h1 {
+    font-size: 3.157rem;
+  }
+  h2 {
+    font-size: 2.1046rem;
+  }
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  h1 {
+    font-size: 4.209rem;
+  }
+  h2 {
+    font-size: 2.806rem;
+  }
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+  h1 {
+    font-size: 5.61rem;
+  }
+  h2 {
+    font-size: 3.74rem;
+  }
+}
+
+/*CSS oklch Gradation...*/
+@keyframes anim_bg {
+  0% {
+    --hue1: 0deg;
+    --hue2: 300deg;
+  }
+
+  100% {
+    --hue1: 360deg;
+    --hue2: 660deg;
+  }
+}
+@property --hue1 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --hue2 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/*index pg class*/
+.index-name {
+  color: #ff4c00;
+  font-size: 4rem;
+  font-family: "Sigmar One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 5rem;
+  margin-bottom: 1rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  min-height: 25vh;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+  padding: 1rem;
+  margin: 0.5rem;
+}
+
 .index {
   min-height: 100vh;
   padding: 2rem;
   min-height: 2rem;
+  /*background: url("https://i.pinimg.com/1200x/b3/00/26/b30026dc8bf54edcd47acb8ae584be94.jpg")
+    no-repeat scroll center center;*/
+  border: 10px solid transparent;
+  padding: 15px;
+  border-image: url("https://www.w3schools.com/cssref/border.png") 30 stretch;
 }
 .full {
-  background-image: url("https://www.comedywildlifephoto.com/images/gallery/2/00001912_p.webp");
 }
-
 .name {
-  color: #f2bd44;
+  color: #ffbe5c;
   font-family: "Rubik", sans-serif;
   text-align: center;
   font-size: 3rem;

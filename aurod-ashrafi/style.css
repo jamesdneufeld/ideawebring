@@ -2,48 +2,126 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap");
 
-body {
-  font-family: "Rubik", sans-serif;
-  padding: 1rem;
-}
-header {
-  background: lightblue;
-  padding: 2rem;
-}
-.Education {
-  background: yellowgreen;
-  padding: 2rem;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.Skills {
-  li {
-    margin-bottom: 1rem;
-  }
-  background: lightseagreen;
-  padding: 2rem;
+body {
+  font-family: "Inter", sans-serif;
+  background: #ffffff;
+  color: #111;
+  line-height: 1.6;
 }
-h1 {
-  font-family: "Roboto Slab", serif;
-  font-weight: 600;
-  font-size: 6rem;
+
+/* Header */
+.header {
+  background: #e0e0e0;
+  padding: 40px 0;
 }
+
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.header h1 {
+  font-size: 3.4rem;
+  font-weight: 800;
+}
+
+.subtitle {
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.contact p {
+  text-align: right;
+  font-size: 0.95rem;
+}
+
+.content {
+  background: #affff4;
+}
+
+.content-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 40px;
+  display: grid;
+  grid-template-columns: 3fr 1.2fr;
+  gap: 60px;
+}
+
+section {
+  margin-bottom: 48px;
+}
+
 h2 {
-  font-family: "Roboto Slab", serif;
-  font-weight: 300;
-  font-size: 4rem;
-  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  background: white;
 }
-.Experience {
-  li {
-    margin-bottom: 1rem;
-  }
-  background: mediumaquamarine;
-  padding: 2rem;
+
+h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  background: rgb(255, 255, 255);
 }
-.Languages {
-  li {
-    margin-bottom: 1rem;
+
+.date {
+  font-size: 0.85rem;
+  color: hsl(0, 0%, 0%);
+}
+
+.note {
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+ul {
+  padding-left: 18px;
+  margin-top: 8px;
+}
+
+ul li {
+  margin-bottom: 6px;
+}
+
+.list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.list li {
+  margin-bottom: 14px;
+  font-weight: 500;
+  background: rgb(197, 215, 255);
+  padding: 1rem;
+}
+
+@media (max-width: 900px) {
+  .header-inner {
+    flex-direction: column;
+    gap: 20px;
   }
-  background: darkseagreen;
-  padding: 2rem;
+
+  .contact p {
+    text-align: left;
+  }
+
+  .content-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .right {
+    border-left: none;
+  }
 }

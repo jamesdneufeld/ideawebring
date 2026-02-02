@@ -33,6 +33,9 @@
   li {
     font-size: 1.5rem;
     font-weight: 700;
+    margin-bottom: 12px;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 6px;
   }
 }
 header {
@@ -67,14 +70,14 @@ header {
 .resume-heading {
   width: 50%;
   background: lemonchiffon;
-  margin-bottom: 0.5rem;
-  border-radius: 10px;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
 }
 .resume-content {
   width: 50%;
   background: lightskyblue;
-  margin-bottom: 0.5rem;
-  border-radius: 10px;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
 }
 
 h1 {
