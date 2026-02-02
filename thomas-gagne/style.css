@@ -43,10 +43,8 @@ header {
   order: 3;
 }
 .web-navlist > li {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-}
-.web-navlist li {
   margin-bottom: 0;
 }
 a {
