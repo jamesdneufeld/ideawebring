@@ -54,18 +54,53 @@ li {
 }
 
 .resume-heading {
-  color: red;
+  color: lightseagreen;
 }
 
 .summary {
   background: lightblue;
 }
 .education {
-  background: goldenrod;
+  background: lightblue;
 }
 .experience {
-  background: lightcoral;
+  background: lightblue;
 }
 .skills {
-  background: lightseagreen;
+  background: lightblue;
+
+  /* Small devices (landscape phones, 576px and up) */
+  @media (min-width: 576px) {
+    h1 {
+      font-size: 1.777rem;
+    }
+  }
+
+  /* Medium devices (tablets, 768px and up) */
+  @media (min-width: 768px) {
+    h1 {
+      font-size: 2.369rem;
+    }
+  }
+
+  /* Large devices (desktops, 992px and up) */
+  @media (min-width: 992px) {
+    h1 {
+      font-size: 3.157rem;
+    }
+  }
+
+  /* X-Large devices (large desktops, 1200px and up) */
+  @media (min-width: 1200px) {
+    h1 {
+      font-size: 4.209rem;
+    }
+  }
+
+  /* XX-Large devices (larger desktops, 1400px and up) */
+  @media (min-width: 1400px) {
+    h1 {
+      font-size: 5.61rem;
+    }
+  }
 }
