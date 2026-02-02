@@ -30,7 +30,6 @@ html {
 }
 
 body {
-  font-family: "Rubik", sans-serif;
   padding: 1rem;
   background-image:
     linear-gradient(
@@ -102,13 +101,13 @@ button {
 }
 
 a {
-  color: #9ec6f3;
+  color: silver;
   text-decoration: none;
   font-weight: bold;
 }
 
 button:hover {
-  background: #9fb3df;
+  background: #ffbe5c;
 }
 
 a:hover {
@@ -218,14 +217,11 @@ header,
   min-height: 100vh;
   padding: 2rem;
   min-height: 2rem;
-  /*background: url("https://i.pinimg.com/1200x/b3/00/26/b30026dc8bf54edcd47acb8ae584be94.jpg")
-    no-repeat scroll center center;*/
   border: 10px solid transparent;
-  padding: 15px;
+  padding: 1px;
   border-image: url("https://www.w3schools.com/cssref/border.png") 30 stretch;
 }
-.full {
-}
+
 .name {
   color: #ffbe5c;
   font-family: "Rubik", sans-serif;
@@ -294,6 +290,9 @@ james ref, edited
   .jump {
     font-size: 1rem;
   }
+  .index {
+    border-image: none;
+  }
 }
 
 @media (min-width: 576px) {
@@ -327,7 +326,7 @@ james ref, edited
     font-size: 1.5rem;
   }
   .index-name {
-    font-size: 3rem;
+    font-size: 4rem;
   }
 
   .buttons {
@@ -337,6 +336,9 @@ james ref, edited
     flex-direction: row;
     padding: 1rem;
     margin: 0.5rem;
+  }
+  .index {
+    border-image: url("https://www.w3schools.com/cssref/border.png") 30 stretch;
   }
 }
 
@@ -368,6 +370,9 @@ james ref, edited
     box-shadow: none;
     padding: 1rem;
     min-height: 65vh;
+  }
+  .index-name {
+    font-size: 5rem;
   }
 }
 

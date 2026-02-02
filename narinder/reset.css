@@ -1,41 +1,129 @@
-body {
-  font-family: Inter, Arial, sans-serif;
-  color: #2b2b2b;
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
   margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
-.hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 16px;
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
 }
-.hero-card {
-  width: 100%;
-  max-width: 760px;
-  text-align: center;
-
-  background: rgba(255, 255, 255, 0.95);
-  border: 2px solid rgba(255, 127, 182, 0.75);
-  border-radius: 22px;
-
-  padding: 30px 22px;
-  box-shadow: 0 16px 34px rgba(255, 127, 182, 0.25);
+body {
+  line-height: 1;
 }
-.badge {
-  display: inline-block;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: #ffd0e4;
-  border: 1px solid #ff7fb6;
-  color: #7a1450;
-  font-weight: 600;
-  margin-bottom: 14px;
+ol,
+ul {
+  list-style: none;
 }
-.hero-name {
-  font-family: Poppins, Arial, sans-serif;
-  font-weight: 800;
-  font-size: 44px;
-  color: #c2185b;
-  margin: 0 0 8px 0;
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
