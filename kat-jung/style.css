@@ -91,6 +91,7 @@ a:hover {
   background-size: cover;
   background-repeat: no-repeat;
   background-position-x: center;
+  padding: 2rem;
 }
 
 .hero-text {
@@ -99,8 +100,8 @@ a:hover {
 }
 
 .hero-sub {
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .sub-text {
