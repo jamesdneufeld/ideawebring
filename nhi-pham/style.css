@@ -37,6 +37,7 @@ a {
   background-color: rgb(211, 155, 70);
   padding: 0.5rem;
   background-size: 20px;
+  justify-content: center;
 }
 .buttonlink:hover {
   background-color: white;
@@ -67,11 +68,12 @@ header {
 }
 .button {
   border-radius: 50px;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
   background-color: rgb(255, 255, 255);
   padding: 0.5rem;
   border: 0.1rem solid black;
-  width: 25%;
+  width: 55%;
 }
 .button:hover {
   background-color: rgb(211, 155, 70);
