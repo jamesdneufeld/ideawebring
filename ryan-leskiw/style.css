@@ -167,7 +167,9 @@ li {
   align-items: center;
 }
 .project-coordinator {
-  font-weight: 600;
+  font-weight: 500;
+  text-align: start;
+  margin-left: 10rem;
 }
 
 @media (min-width: 768px) {
@@ -210,7 +212,7 @@ li {
   p {
     font-size: 1.5rem;
     font-family: "IBM Plex Mono", monospace;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
     color: white;
   }
   .webring {
@@ -225,32 +227,4 @@ li {
     padding: 0.5rem;
     width: 40vw;
   }
-
-  /* h1 {
-  font-family: "stalinist one", cursive;
-  text-align: center;
-  font-weight: 700;
-  font-size: 4rem;
-  padding-top: 2rem;
-
-  color: white;
-}
-h2 {
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: white;
-  margin-bottom: 1rem;
-}
-h3 {
-  margin-bottom: 1rem;
-}
-p {
-  font-size: 1.5rem;
-  font-family: "IBM Plex Mono", monospace;
-  margin-bottom: 1.5rem;
-  color: white;
-}
-
-ul {
-  color: white; */
 }
