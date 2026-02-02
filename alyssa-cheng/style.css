@@ -1,16 +1,27 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* Broad general styles */
+
 body {
   font-family: "Lato", sans-serif;
   background-color: antiquewhite;
 }
 header {
   background: #235c7e;
-  padding: 2rem;
+  padding: 1rem;
 }
 section {
   background: antiquewhite;
-  padding: 2rem;
 }
 h1 {
   font-weight: 900;
@@ -45,15 +56,25 @@ p {
   color: #94bebb;
   font-size: 1.2;
 }
-ul {
+.job-duties {
   list-style-type: disc;
-  list-style-position: inside;
+  margin-left: 1.5rem;
   margin-bottom: 1.4rem;
+
   color: #235c7e;
 }
-li {
+.job-duty-item {
   margin-bottom: 0.5rem;
 }
+
+.edu,
+.exp,
+.skills {
+  padding: 1rem;
+}
+
+/* More specific class styles */
+
 .site-header,
 .main-nav {
   text-align: center;
@@ -92,11 +113,13 @@ a {
   align-items: center;
   min-height: 100vh;
 }
+
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
   .edu,
   .exp,
-  .skills {
+  .skills,
+  .index {
     width: 100%;
     flex-direction: column;
   }
@@ -108,6 +131,17 @@ a {
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+  header {
+    padding: 1rem;
+  }
+  .edu,
+  .exp,
+  .skills,
+  .index {
+    width: 100%;
+    flex-direction: column;
+    padding: 1rem;
+  }
   .site-header,
   .main-nav {
     width: 100%;
@@ -122,7 +156,6 @@ a {
   h1 {
     font-size: 4rem;
   }
-
   .contact {
     display: flex;
     flex-direction: row;
@@ -137,6 +170,7 @@ a {
   .skills {
     display: flex;
     flex-direction: row;
+    padding: 2rem;
   }
   .edu-heading,
   .exp-heading,
@@ -153,13 +187,4 @@ a {
   .main-nav {
     width: 55%;
   }
-}
-
-html {
-  box-sizing: border-box;
-}
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
 }
