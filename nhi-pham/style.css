@@ -38,7 +38,12 @@ a {
 .decor {
   display: flex;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 1rem;
+  padding-top: 0.5rem;
+}
+br {
+  display: flex;
+  justify-content: center;
 }
 .links {
   width: 75%;
