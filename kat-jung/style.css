@@ -210,7 +210,7 @@ a:hover {
   padding: 2rem;
 }
 
-/*small device (mobile) tings*/
+/*large device (desktop) tings*/
 
 @media (min-width: 992px) {
   header {
