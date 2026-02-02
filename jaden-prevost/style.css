@@ -31,7 +31,7 @@ h1 {
   font-family: "Archivo Black", sans-serif;
   font-weight: 600;
   color: rgb(255, 255, 255);
-  font-size: 5rem;
+  font-size: 3.7rem;
 }
 
 h2 {
@@ -65,7 +65,7 @@ h4 {
   color: rgb(255, 255, 255);
   background: rgb(219, 84, 84);
   padding: 1.5rem;
-  font-size: 3rem;
+  font-size: 2rem;
   display: flex;
   justify-content: center;
 }

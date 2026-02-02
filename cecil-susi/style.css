@@ -77,7 +77,7 @@ ul {
   margin: 1rem;
   border-radius: 1.5rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   align-content: center;
   font-family: "Sekuya", sans-serif;
@@ -140,17 +140,6 @@ ul {
   padding-bottom: 1.25rem;
 }
 
-/* .eduproject-link {
-  color: rgb(164, 48, 16);
-}
-
-.eduproject-link:hover {
-  color: rgb(238, 181, 131);
-  text-decoration: none;
-  background: rgb(190, 87, 19);
-  padding: 0.25rem;
-} */
-
 /* technical skills section styles */
 .skills-wrapper {
   background: rgb(232, 139, 96);
@@ -198,6 +187,7 @@ ul {
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+  /* Index Styles */
   .hero-headline {
     font-size: 4rem;
   }
@@ -210,6 +200,7 @@ ul {
     font-size: 2rem;
   }
 
+  /* Resume Styles */
   .eduproject-wrapper {
     flex-direction: row;
   }
