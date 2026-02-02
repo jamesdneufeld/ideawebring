@@ -90,7 +90,7 @@ body.index .hero-heading {
   border-radius: 6px;
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("workspace.jpg");
+    url("workspace2.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -196,4 +196,21 @@ body.index .hero-heading {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+.webring-list a.external::after,
+.webring-list a.external::before {
+  display: inline-block;
+  font-size: 0.5em;
+  line-height: 1;
+  vertical-align: text-top;
+  opacity: 0.9;
+}
+.webring-list a.external.ne::after {
+  content: "↗";
+  margin-left: 0.35em;
+}
+.webring-list a.external.nw::before {
+  content: "↗";
+  margin-right: 0.35em;
+  transform: scaleX(-1);
 }

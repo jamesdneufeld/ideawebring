@@ -22,11 +22,43 @@ html {
 }
 
 /* Very General Element Styles */
+h1 {
+  font-family: Bagel Fat One;
+  font-size: 8rem;
+  margin: 3rem;
+}
 
+h2 {
+  font-family: Josefin Sans;
+  font-size: 1.5rem;
+  margin: 0.5rem;
+}
+
+h3 {
+  font-size: 3rem;
+  margin: 1rem;
+  font-weight: 400;
+}
+
+h4 {
+  font-size: 1.5rem;
+  margin: 0.5rem;
+  font-weight: 300;
+}
+
+h5 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+li {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
 /*Web Ring Homepage*/
 
 header {
-  background-color: lavender;
+  color: lightcyan;
   padding-top: 8rem;
   padding-bottom: 5rem;
   width: 100%;
@@ -45,12 +77,11 @@ header {
   justify-content: center;
 }
 .webringinfo {
-  background-color: lavender;
+  background-color: lightcyan;
   padding: 1rem;
   width: 100%;
 }
 
-h2,
 h3,
 h4,
 p {
@@ -66,6 +97,7 @@ p {
   width: 100%;
   text-align: center;
   min-height: 100vh;
+  background-image: url(nightsky.jpg);
 }
 
 .linkbutton {
@@ -75,14 +107,15 @@ p {
   display: inline-block;
   padding: 1rem 2rem;
   margin: 2rem;
-  border: 0.25rem solid lavender;
+  border: 0.25rem solid lightcyan;
   border-radius: 1.5rem;
-  color: black;
+  color: lightcyan;
   text-decoration: none;
 }
 
 .webringlink {
   text-decoration: none;
+  color: teal;
 }
 .webringlink:hover {
   text-decoration: underline;
@@ -95,7 +128,7 @@ p {
   display: inline-block;
   padding: 1rem 2rem;
   margin: 2rem;
-  background-color: lavender;
+  background-color: lightcyan;
   border-radius: 1.5rem;
   color: black;
 }
@@ -104,32 +137,15 @@ p {
   font-size: 2rem;
 }
 
-#rtitle {
-  font-family: Bagel Fat One;
-  font-size: 8rem;
-  margin: 3rem;
-}
-
-#rh2 {
-  font-size: 2rem;
-  font-family: Josefin Sans;
-}
-
 /*resume*/
 
 /* Very General Element Styles */
 
-/* Specific Class Styles */
 .resume h1 {
-  font-size: 5rem;
-  font-family: Bagel Fat One;
+  color: black;
 }
 
-.information {
-  text-align: center;
-  width: 100%;
-  background-color: aqua;
-}
+/* Specific Class Styles */
 
 /* Large devices (desktops, 992px and up) */
 
@@ -138,3 +154,5 @@ p {
     flex-direction: row;
   }
 }
+
+/* make homepage look like space, have moon and starts */
