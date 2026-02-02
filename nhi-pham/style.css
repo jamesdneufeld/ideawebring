@@ -13,12 +13,13 @@ body {
 }
 .indexpage {
   background-color: aqua;
-  background-image: url(stripebg.png);
+  background-image: url(daisies.jpg);
 }
 .title {
+  padding-top: 0.5rem;
   display: flex;
   justify-content: center;
-  color: rgb(243, 93, 93);
+  color: rgb(128, 174, 162);
 }
 a {
   text-decoration: none;
@@ -28,7 +29,7 @@ a {
 .buttonlink {
   border-radius: 100px;
   display: inline-block;
-  background-color: rgb(177, 177, 231);
+  background-color: rgb(211, 155, 70);
   padding: 0.5rem;
   background-size: 20px;
 }
@@ -111,8 +112,8 @@ h3 {
 .wrapper {
   border: 10px solid white;
   border-radius: 3rem;
-  padding: 1rem;
-  background-color: azure;
+  padding: 3rem;
+  background-color: rgb(202, 227, 165);
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -139,7 +140,6 @@ h3 {
     font-family: "quicksand", sans-serif;
     font-weight: 700;
     font-size: 2rem;
-    background-color: rgb(255, 255, 255);
     display: flex;
     justify-content: center;
     align-items: center;
