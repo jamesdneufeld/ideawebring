@@ -29,13 +29,13 @@ p {
 a {
   color: rgb(255, 209, 196);
   text-decoration: none;
+  padding: 0.25rem;
 }
 
 a:hover {
   text-decoration: none;
   background: rgb(255, 209, 196);
   color: rgb(163, 40, 40);
-  padding: 0.25rem;
 }
 
 ul {
@@ -56,7 +56,7 @@ ul {
 }
 
 .hero-headline {
-  font-family: "Sekuya", regular;
+  font-family: "Sekuya", sans-serif;
   color: rgb(255, 209, 196);
   background: rgb(163, 40, 40);
   padding: 1.5rem;
@@ -70,34 +70,20 @@ ul {
 }
 
 .hero-tagline {
-  font-size: 2rem;
+  font-size: 1rem;
 }
 
 .ring-links {
   margin: 1rem;
   border-radius: 1.5rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   align-content: center;
-  font-family: "Sekuya", regular;
+  font-family: "Sekuya", sans-serif;
 }
 
-.previous {
-  background: rgb(163, 40, 40);
-  padding: 1rem;
-  margin: 1rem;
-  border-radius: 1.5rem;
-}
-
-.resume {
-  background: rgb(163, 40, 40);
-  padding: 1rem;
-  margin: 1rem;
-  border-radius: 1.5rem;
-}
-
-.next {
+.link-buttons {
   background: rgb(163, 40, 40);
   padding: 1rem;
   margin: 1rem;
@@ -119,7 +105,7 @@ ul {
 }
 
 .name {
-  font-family: "Sekuya", regular;
+  font-family: "Sekuya", sans-serif;
   font-weight: 400;
   font-size: 3.25rem;
 }
@@ -139,7 +125,7 @@ ul {
 }
 
 .eduproject-header {
-  font-family: "Sekuya", regular;
+  font-family: "Sekuya", sans-serif;
   font-weight: 400;
   background: rgb(190, 87, 19);
   color: rgb(238, 181, 131);
@@ -153,17 +139,6 @@ ul {
   padding-top: 0.5rem;
   padding-bottom: 1.25rem;
 }
-
-/* .eduproject-link {
-  color: rgb(164, 48, 16);
-}
-
-.eduproject-link:hover {
-  color: rgb(238, 181, 131);
-  text-decoration: none;
-  background: rgb(190, 87, 19);
-  padding: 0.25rem;
-} */
 
 /* technical skills section styles */
 .skills-wrapper {
@@ -212,14 +187,20 @@ ul {
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+  /* Index Styles */
   .hero-headline {
     font-size: 4rem;
+  }
+
+  .hero-tagline {
+    font-size: 2rem;
   }
 
   .ring-links {
     font-size: 2rem;
   }
 
+  /* Resume Styles */
   .eduproject-wrapper {
     flex-direction: row;
   }
