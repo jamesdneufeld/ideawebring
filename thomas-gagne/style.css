@@ -19,13 +19,36 @@ header {
   flex-direction: column;
 }
 
-li {
-  margin-bottom: 1rem;
-}
 /* Header Section */
 
 /* Hyperlink Styles */
+.web-middle:hover .webring-links-middle {
+  color: #ed1e24;
+  font-family: "Belanosima", sans-serif;
+  font-weight: 600;
+  font-size: 3rem;
+}
+.web-middle:hover ~ li a.webring-links {
+  color: #fef300;
+}
+.web-left {
+  order: 1;
+}
 
+.web-middle {
+  order: 2;
+}
+
+.web-right {
+  order: 3;
+}
+.web-navlist > li {
+  display: inline-flex;
+  align-items: center;
+}
+.web-navlist li {
+  margin-bottom: 0;
+}
 a {
   color: #fef300;
   text-decoration: none;
@@ -59,13 +82,15 @@ a.webring-links-middle {
   font-weight: 400;
   font-size: 2rem;
 }
-a:hover.webring-links-middle {
-  color: #ed1e24;
-  font-family: "Belanosima", sans-serif;
-  font-weight: 600;
-  font-size: 2.333rem;
+.web-navlist {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
-
 /* General Paragraph Styles */
 
 /* Paragraph Style */
@@ -299,13 +324,14 @@ a:hover.webring-links-middle {
 }
 .index-footer {
   background: #161616;
-  padding: 0.5rem;
+  padding: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 1vh;
-  font-family: Belanosima;
+  font-family: "Belanosima", sans-serif;
   font-weight: 400;
+  opacity: 0.8;
 }
 
 /* Web ring nav notes
