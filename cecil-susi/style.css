@@ -29,13 +29,13 @@ p {
 a {
   color: rgb(255, 209, 196);
   text-decoration: none;
+  padding: 0.25rem;
 }
 
 a:hover {
   text-decoration: none;
   background: rgb(255, 209, 196);
   color: rgb(163, 40, 40);
-  padding: 0.25rem;
 }
 
 ul {
@@ -56,7 +56,7 @@ ul {
 }
 
 .hero-headline {
-  font-family: "Sekuya", regular;
+  font-family: "Sekuya", sans-serif;
   color: rgb(255, 209, 196);
   background: rgb(163, 40, 40);
   padding: 1.5rem;
@@ -70,7 +70,7 @@ ul {
 }
 
 .hero-tagline {
-  font-size: 2rem;
+  font-size: 1rem;
 }
 
 .ring-links {
@@ -80,24 +80,10 @@ ul {
   flex-direction: row;
   justify-content: space-around;
   align-content: center;
-  font-family: "Sekuya", regular;
+  font-family: "Sekuya", sans-serif;
 }
 
-.previous {
-  background: rgb(163, 40, 40);
-  padding: 1rem;
-  margin: 1rem;
-  border-radius: 1.5rem;
-}
-
-.resume {
-  background: rgb(163, 40, 40);
-  padding: 1rem;
-  margin: 1rem;
-  border-radius: 1.5rem;
-}
-
-.next {
+.link-buttons {
   background: rgb(163, 40, 40);
   padding: 1rem;
   margin: 1rem;
@@ -119,7 +105,7 @@ ul {
 }
 
 .name {
-  font-family: "Sekuya", regular;
+  font-family: "Sekuya", sans-serif;
   font-weight: 400;
   font-size: 3.25rem;
 }
@@ -139,7 +125,7 @@ ul {
 }
 
 .eduproject-header {
-  font-family: "Sekuya", regular;
+  font-family: "Sekuya", sans-serif;
   font-weight: 400;
   background: rgb(190, 87, 19);
   color: rgb(238, 181, 131);
@@ -214,6 +200,10 @@ ul {
 @media (min-width: 992px) {
   .hero-headline {
     font-size: 4rem;
+  }
+
+  .hero-tagline {
+    font-size: 2rem;
   }
 
   .ring-links {
