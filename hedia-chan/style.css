@@ -130,31 +130,23 @@ header,
 .experience,
 .education,
 .skills {
-  /*border: 2px dashed black;*/
-  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
   padding: 1rem;
   margin: 0.5rem;
   flex-direction: column;
 }
 
 .wrapper {
-  /*border: 2px dashed blueviolet;*/
-  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
   padding: 1rem;
   margin: 0.5rem;
   display: flex;
   flex-direction: column;
 }
 .summary {
-  /*border: 4px dashed yellowgreen;*/
-  box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
   padding: 1rem;
   margin: 0.5rem;
 }
 
 .main-details {
-  /*border: 4px dashed orangered;*/
-  box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
   padding: 1rem;
   margin: 0.5rem;
 }
@@ -204,12 +196,8 @@ header,
 /* 
 james ref, edited
 */
-/* Large devices (desktops, 992px and up) */
+
 @media (min-width: 992px) {
-  .resume-name {
-    font-size: 6rem;
-    color: #1f3b4d;
-  }
   .wrapper {
     display: flex;
     flex-direction: row;
@@ -222,53 +210,100 @@ james ref, edited
     width: 75%;
   }
 }
+@media (min-width: 300px) {
+  .resume-name {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1rem;
+  }
 
-/* Small devices (landscape phones, 576px and up) */
+  h3,
+  .summary {
+    font-size: 0.7rem;
+  }
+  .education-main,
+  .experience-main,
+  .skills-main {
+    font-size: 0.5rem;
+  }
+  header,
+  .experience,
+  .education,
+  .skills,
+  .wrapper,
+  .summary,
+  .main-details {
+    box-shadow: none;
+    padding: 0.1rem;
+    min-height: 33vh;
+  }
+  .jump {
+    font-size: 1rem;
+  }
+}
+
 @media (min-width: 576px) {
-  h1 {
-    font-size: 1.777rem;
+  .resume-name {
+    font-size: 2.5rem;
   }
   h2 {
-    font-size: 1.184rem;
+    font-size: 1.5rem;
   }
-}
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-  h1 {
-    font-size: 2.369rem;
+
+  h3,
+  .summary {
+    font-size: 1.2rem;
   }
-  h2 {
-    font-size: 1.5793rem;
+  .education-main,
+  .experience-main,
+  .skills-main {
+    font-size: 1rem;
+  }
+  header,
+  .experience,
+  .education,
+  .skills,
+  .wrapper,
+  .summary,
+  .main-details {
+    box-shadow: none;
+    padding: 0.6rem;
+    min-height: 45vh;
+  }
+  .jump {
+    font-size: 1.5rem;
   }
 }
 
-/* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-  h1 {
-    font-size: 3.157rem;
+  .education-main,
+  .experience-main,
+  .skills-main {
+    font-size: 1.2rem;
   }
   h2 {
-    font-size: 2.1046rem;
+    font-size: 1.7rem;
   }
-}
 
-/* X-Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-  h1 {
-    font-size: 4.209rem;
+  h3,
+  .summary {
+    font-size: 1.4rem;
   }
-  h2 {
-    font-size: 2.806rem;
+  .resume-name {
+    font-size: 6rem;
+    color: #1f3b4d;
   }
-}
-
-/* XX-Large devices (larger desktops, 1400px and up) */
-@media (min-width: 1400px) {
-  h1 {
-    font-size: 5.61rem;
-  }
-  h2 {
-    font-size: 3.74rem;
+  header,
+  .experience,
+  .education,
+  .skills,
+  .wrapper,
+  .summary,
+  .main-details {
+    box-shadow: none;
+    padding: 1rem;
+    min-height: 65vh;
   }
 }
 
@@ -312,7 +347,6 @@ james ref, edited
   align-items: center;
   flex-direction: row;
   min-height: 25vh;
-  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
   padding: 1rem;
   margin: 0.5rem;
 }
