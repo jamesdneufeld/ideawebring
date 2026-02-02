@@ -193,6 +193,47 @@ header,
   font-size: 1.5rem;
 }
 
+/*index pg class*/
+.index-name {
+  color: #ff4c00;
+  font-size: 4rem;
+  font-family: "Sigmar One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 5rem;
+  margin-bottom: 1rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  min-height: 25vh;
+  padding: 1rem;
+  margin: 0.5rem;
+}
+
+.index {
+  min-height: 100vh;
+  padding: 2rem;
+  min-height: 2rem;
+  /*background: url("https://i.pinimg.com/1200x/b3/00/26/b30026dc8bf54edcd47acb8ae584be94.jpg")
+    no-repeat scroll center center;*/
+  border: 10px solid transparent;
+  padding: 15px;
+  border-image: url("https://www.w3schools.com/cssref/border.png") 30 stretch;
+}
+.full {
+}
+.name {
+  color: #ffbe5c;
+  font-family: "Rubik", sans-serif;
+  text-align: center;
+  font-size: 3rem;
+  padding: 8rem;
+}
+
 /* 
 james ref, edited
 */
@@ -213,6 +254,18 @@ james ref, edited
 @media (min-width: 300px) {
   .resume-name {
     font-size: 2rem;
+  }
+  .index-name {
+    font-size: 3rem;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+    margin: 0.5rem;
   }
   h2 {
     font-size: 1rem;
@@ -250,7 +303,6 @@ james ref, edited
   h2 {
     font-size: 1.5rem;
   }
-
   h3,
   .summary {
     font-size: 1.2rem;
@@ -273,6 +325,18 @@ james ref, edited
   }
   .jump {
     font-size: 1.5rem;
+  }
+  .index-name {
+    font-size: 3rem;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 1rem;
+    margin: 0.5rem;
   }
 }
 
@@ -318,55 +382,4 @@ james ref, edited
     --hue1: 360deg;
     --hue2: 660deg;
   }
-}
-@property --hue1 {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-@property --hue2 {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-
-/*index pg class*/
-.index-name {
-  color: #ff4c00;
-  font-size: 4rem;
-  font-family: "Sigmar One", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 5rem;
-  margin-bottom: 1rem;
-}
-
-.buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  min-height: 25vh;
-  padding: 1rem;
-  margin: 0.5rem;
-}
-
-.index {
-  min-height: 100vh;
-  padding: 2rem;
-  min-height: 2rem;
-  /*background: url("https://i.pinimg.com/1200x/b3/00/26/b30026dc8bf54edcd47acb8ae584be94.jpg")
-    no-repeat scroll center center;*/
-  border: 10px solid transparent;
-  padding: 15px;
-  border-image: url("https://www.w3schools.com/cssref/border.png") 30 stretch;
-}
-.full {
-}
-.name {
-  color: #ffbe5c;
-  font-family: "Rubik", sans-serif;
-  text-align: center;
-  font-size: 3rem;
-  padding: 8rem;
 }

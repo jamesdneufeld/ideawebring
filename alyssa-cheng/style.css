@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 body {
   font-family: "Lato", sans-serif;
+  background-color: antiquewhite;
 }
 header {
   background: #235c7e;
@@ -85,6 +86,7 @@ a {
 }
 .index {
   background-image: url(https://api.nga.gov/iiif/a167f440-ad1c-481e-ada0-2f6962d54e64/full/!800,800/0/default.jpg);
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -92,32 +94,35 @@ a {
 }
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
-  .edu-heading,
-  .exp-heading,
-  .skills-heading {
+  .edu,
+  .exp,
+  .skills {
     width: 100%;
     flex-direction: column;
   }
-  .edu-main,
-  .exp-main,
-  .skills-main {
+  .site-header,
+  .main-nav {
     width: 100%;
   }
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+  .site-header,
+  .main-nav {
+    width: 100%;
+  }
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+  header {
+    padding: 2rem;
+  }
   h1 {
     font-size: 4rem;
   }
-  .site-header,
-  .main-nav {
-    width: 55%;
-  }
+
   .contact {
     display: flex;
     flex-direction: row;
@@ -143,6 +148,10 @@ a {
   .exp-main,
   .skills-main {
     width: 80%;
+  }
+  .site-header,
+  .main-nav {
+    width: 55%;
   }
 }
 
