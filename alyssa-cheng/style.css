@@ -10,7 +10,7 @@ html {
   box-sizing: inherit;
 }
 
-/* Broad general styles */
+/* General Styles */
 
 body {
   font-family: "Lato", sans-serif;
@@ -18,7 +18,7 @@ body {
 }
 header {
   background: #235c7e;
-  padding: 1rem;
+  padding: 2rem;
 }
 section {
   background: antiquewhite;
@@ -112,47 +112,40 @@ a {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  h3 {
+    color: antiquewhite;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
 }
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
   .edu,
   .exp,
-  .skills,
-  .index {
+  .skills {
     width: 100%;
     flex-direction: column;
-  }
-  .site-header,
-  .main-nav {
-    width: 100%;
   }
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-  header {
-    padding: 1rem;
-  }
   .edu,
   .exp,
   .skills,
   .index {
     width: 100%;
     flex-direction: column;
-    padding: 1rem;
   }
   .site-header,
   .main-nav {
-    width: 100%;
+    width: 60%;
   }
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-  header {
-    padding: 2rem;
-  }
   h1 {
     font-size: 4rem;
   }
