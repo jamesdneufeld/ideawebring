@@ -40,6 +40,7 @@ a {
 }
 .buttonlink:hover {
   background-color: white;
+  color: rgb(211, 155, 70);
 }
 .decor {
   display: flex;
@@ -75,6 +76,7 @@ button {
 }
 button:hover {
   background-color: rgb(251, 158, 158);
+  color: white;
 }
 h2 {
   font-family: "quicksand", sans-serif;
