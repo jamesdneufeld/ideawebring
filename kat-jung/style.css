@@ -99,6 +99,11 @@ a:hover {
   text-align: center;
 }
 
+.hero-sub {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 .sub-text {
   line-height: 1.5rem;
   margin: 1rem;
@@ -107,10 +112,14 @@ a:hover {
 .index-sub {
   color: rgb(66, 186, 180);
   font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.8rem;
 }
 
 .index-links {
-  padding: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 /*about.html things*/
@@ -130,10 +139,6 @@ a:hover {
   margin-bottom: 0rem;
   display: flex;
   flex-direction: column;
-}
-
-.aboutlinks {
-  padding: 1rem;
 }
 
 .aboutimg {
@@ -240,6 +245,10 @@ a:hover {
   .index-links {
     font-size: 1rem;
     text-align: center;
+  }
+
+  .index-sub {
+    flex-direction: row;
   }
 
   /*about.html things*/
