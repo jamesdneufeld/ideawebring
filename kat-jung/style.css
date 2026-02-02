@@ -91,6 +91,7 @@ a:hover {
   background-size: cover;
   background-repeat: no-repeat;
   background-position-x: center;
+  padding: 1.8rem;
 }
 
 .hero-text {
