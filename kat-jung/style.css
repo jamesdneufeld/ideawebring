@@ -95,6 +95,12 @@ a:hover {
 
 .hero-text {
   font-size: 2rem;
+  text-align: center;
+}
+
+.hero-sub {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .sub-text {
@@ -105,10 +111,14 @@ a:hover {
 .index-sub {
   color: rgb(66, 186, 180);
   font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.8rem;
 }
 
 .index-links {
-  padding: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 /*about.html things*/
@@ -128,10 +138,6 @@ a:hover {
   margin-bottom: 0rem;
   display: flex;
   flex-direction: column;
-}
-
-.aboutlinks {
-  padding: 1rem;
 }
 
 .aboutimg {
@@ -208,7 +214,7 @@ a:hover {
   padding: 2rem;
 }
 
-/*small device (mobile) tings*/
+/*large device (desktop) tings*/
 
 @media (min-width: 992px) {
   header {
@@ -238,6 +244,10 @@ a:hover {
   .index-links {
     font-size: 1rem;
     text-align: center;
+  }
+
+  .index-sub {
+    flex-direction: row;
   }
 
   /*about.html things*/
