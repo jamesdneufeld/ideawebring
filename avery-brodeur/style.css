@@ -22,7 +22,39 @@ html {
 }
 
 /* Very General Element Styles */
+h1 {
+  font-family: Bagel Fat One;
+  font-size: 8rem;
+  margin: 3rem;
+}
 
+h2 {
+  font-family: Josefin Sans;
+  font-size: 1.5rem;
+  margin: 0.5rem;
+}
+
+h3 {
+  font-size: 3rem;
+  margin: 1rem;
+  font-weight: 400;
+}
+
+h4 {
+  font-size: 1.5rem;
+  margin: 0.5rem;
+  font-weight: 300;
+}
+
+h5 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+li {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
 /*Web Ring Homepage*/
 
 header {
@@ -50,7 +82,6 @@ header {
   width: 100%;
 }
 
-h2,
 h3,
 h4,
 p {
@@ -106,32 +137,15 @@ p {
   font-size: 2rem;
 }
 
-#rtitle {
-  font-family: Bagel Fat One;
-  font-size: 8rem;
-  margin: 3rem;
-}
-
-#rh2 {
-  font-size: 2rem;
-  font-family: Josefin Sans;
-}
-
 /*resume*/
 
 /* Very General Element Styles */
 
-/* Specific Class Styles */
 .resume h1 {
-  font-size: 5rem;
-  font-family: Bagel Fat One;
+  color: black;
 }
 
-.information {
-  text-align: center;
-  width: 100%;
-  background-color: aqua;
-}
+/* Specific Class Styles */
 
 /* Large devices (desktops, 992px and up) */
 

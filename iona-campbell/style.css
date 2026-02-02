@@ -1,21 +1,20 @@
 /* Typography imported from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=TASA+Explorer:wght@400..800&display=swap');
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=TASA+Explorer:wght@400..800&display=swap");
 
 /*general*/
 
 h1 {
-  font-family: "IBM Plex Mono", monospace;
-  font-weight: 600;
-  color: rgb(19, 37, 82);
+  font-family: "TASA Explorer", sans-serif;
+  font-weight: 900;
+  font-style: normal;
   font-size: 4rem;
-  margin-bottom: 1rem;
+  color: #fdf0d5;
 }
-
 h2 {
-  font-weight: 500;
-  color: rgb(0, 0, 0);
-  font-size: 2rem;
+  font-family: "TASA Explorer", sans-serif;
+  font-weight: 800;
+  font-size: 3rem;
+  color: #fdf0d5;
   margin-bottom: 1rem;
 }
 
@@ -27,44 +26,85 @@ h3 {
 h4 {
   margin-bottom: 1rem;
 }
-
+.wrapper {
+  display: flex;
+  background: #669bbc;
+}
 /*typography*/
 
 body {
   font-family: "TASA Explorer", sans-serif;
 }
-header {
-  background: whitesmoke;
+.header {
+  background: #fdf0d5;
   padding: 2rem;
 }
 .education {
-  background: whitesmoke;
+  background: #fdf0d5;
   padding: 2rem;
 }
 .skills {
-  background: whitesmoke;
+  background: #fdf0d5;
   padding: 2rem;
 }
 .paragraph-md {
   font-size: 2rem;
-  color: navy;
+  color: #fdf0d5;
 }
 
 .paragraph-sm {
   font-size: 0.8rem;
 }
-
+a {
+  color: black;
+}
 /*sizes*/
-
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+/* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
   h1 {
     font-size: 1.777rem;
   }
+  h2 {
+    font-size: 1.777rem;
+  }
+  h3 {
+    font-size: 1.44rem;
+  }
 }
-.work-experience {
-  background: whitesmoke;
-  padding: 2rem;
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2.369rem;
+  }
+  h2 {
+    font-size: 2.369rem;
+  }
+  h3 {
+    font-size: 1.777rem;
+  }
 }
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  h1 {
+    font-size: 3.157rem;
+  }
+  h2 {
+    font-size: 3.157rem;
+  }
+  h3 {
+    font-size: 2.074rem;
+  }
+}
+
 ul {
   list-style-type: circle;
   list-style-position: inside;
@@ -75,47 +115,22 @@ li {
 }
 
 header {
-  background: #FF1F39;
+  background: #669bbc;
   padding: 3rem;
 }
 .education {
-  background: whitesmoke;
+  background: #669bbc;
   padding: 3rem;
 }
 
 .skills {
-  background: whitesmoke;
+  background: #669bbc;
   padding: 3rem;
 }
 
 .work-experience {
-  background: whitesmoke;
+  background: #669bbc;
   padding: 3rem;
-}
-
-.intrests {
-  background: lightskyblue;
-  padding: 3rem;
-}
-{
-  font-family: .ibm-plex-mono-semibold 
-  font-family: "IBM Plex Mono", monospace;
-  font-weight: 600;
-  font-style: normal;
-}
-h1 {
-  font-family: "Alumni Sans Pinstripe", sans-serif;
-  font-weight: 900;
-  font-style: normal;
-  font-size: 4rem;
-  color: #75000E;
-}
-
-h2 {
-  font-family: "Alumni Sans Pinstripe", sans-serif;
-  font-weight: 800;
-  font-style: normal;
-  font-size: 3rem;
 }
 
 .hero {
@@ -126,39 +141,13 @@ h2 {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-
-  background-image: background; <element id="FF1FA9">;
-background: linear-gradient(90deg, rgba(255, 31, 169, 1) 0%, rgba(255, 31, 57, 1) 50%, rgba(255, 117, 31, 1) 100%);
+  background: #669bbc;
 }
 
 .hero-heading {
-  color: white;
   font-size: 8rem;
 }
 .hero-text {
-  color: white;
+  color: #fdf0d5;
   font-size: 2rem;
-}
-.linkbutton {
-  font-size: 2rem;
-  text-align:center;
-  display: inline-block;
-  padding: 1rem 2rem;
-  margin: 2rem;
-  border: 0.25rem solid whitesmoke;
-  border-radius: 1.5rem;
-  color: black;
-  text-decoration: wavy;
-}
-
-.linkbutton:hover {
-  font-size: 2rem;
-  text-align:center;
-  display: inline-block;
-  padding: 1rem 2rem;
-  margin: 2rem;
-  background-color:whitesmoke;
-  border-radius: 1.5rem;
-  color: black;
-  text-decoration: wavy;
 }
