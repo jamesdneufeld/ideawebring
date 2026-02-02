@@ -91,11 +91,12 @@ a:hover {
   background-size: cover;
   background-repeat: no-repeat;
   background-position-x: center;
-  padding: 1.8rem;
+  padding: 2rem;
 }
 
 .hero-text {
   font-size: 2rem;
+  text-align: center;
 }
 
 .sub-text {
@@ -209,7 +210,7 @@ a:hover {
   padding: 2rem;
 }
 
-/*small device (mobile) tings*/
+/*large device (desktop) tings*/
 
 @media (min-width: 992px) {
   header {
