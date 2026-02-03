@@ -1,7 +1,27 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=TASA+Explorer:wght@400..800&display=swap");
 
-/*general*/
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* very general */
+
+body {
+  font-family: "TASA Explorer", sans-serif;
+  background: #669bbc;
+}
+
+header {
+  padding: 2rem;
+}
+
+/* general headings */
 
 h1 {
   font-family: "TASA Explorer", sans-serif;
@@ -26,26 +46,43 @@ h3 {
 h4 {
   margin-bottom: 1rem;
 }
-.wrapper {
-  display: flex;
-  background: #669bbc;
+
+ul {
+  list-style-type: circle;
+  list-style-position: inside;
 }
+
+li {
+  margin-bottom: 1rem;
+}
+
+/* general hyperlinks */
+a {
+  color: #0d1321;
+}
+
+/* Major structural and layout containers */
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 /*typography*/
 
-body {
-  font-family: "TASA Explorer", sans-serif;
-}
 .header {
-  background: #fdf0d5;
   padding: 2rem;
 }
 .education {
-  background: #fdf0d5;
   padding: 2rem;
+
+  width: 100%;
 }
 .skills {
-  background: #fdf0d5;
   padding: 2rem;
+
+  width: 100%;
 }
 .paragraph-md {
   font-size: 2rem;
@@ -55,33 +92,34 @@ body {
 .paragraph-sm {
   font-size: 0.8rem;
 }
-a {
-  color: black;
+
+.work-experience {
+  padding: 2rem;
 }
+
+.hero {
+  font-size: 2rem;
+  font-weight: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.hero-heading {
+  font-size: 8rem;
+}
+.hero-text {
+  color: #fdf0d5;
+  font-size: 2rem;
+}
+
 /*sizes*/
-html {
-  box-sizing: border-box;
-}
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
-  h1 {
-    font-size: 1.777rem;
-  }
-  h2 {
-    font-size: 1.777rem;
-  }
-  h3 {
-    font-size: 1.44rem;
-  }
-}
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+  padding: 2rem;
   h1 {
     font-size: 2.369rem;
   }
@@ -90,6 +128,16 @@ html {
   }
   h3 {
     font-size: 1.777rem;
+  }
+  .wrapper {
+    flex-direction: row;
+  }
+  .education {
+    width: 50%;
+  }
+
+  .skills {
+    width: 50%;
   }
 }
 /* Large devices (desktops, 992px and up) */
@@ -103,51 +151,4 @@ html {
   h3 {
     font-size: 2.074rem;
   }
-}
-
-ul {
-  list-style-type: circle;
-  list-style-position: inside;
-}
-
-li {
-  margin-bottom: 1rem;
-}
-
-header {
-  background: #669bbc;
-  padding: 3rem;
-}
-.education {
-  background: #669bbc;
-  padding: 3rem;
-}
-
-.skills {
-  background: #669bbc;
-  padding: 3rem;
-}
-
-.work-experience {
-  background: #669bbc;
-  padding: 3rem;
-}
-
-.hero {
-  font-size: 2rem;
-  font-weight: 900;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background: #669bbc;
-}
-
-.hero-heading {
-  font-size: 8rem;
-}
-.hero-text {
-  color: #fdf0d5;
-  font-size: 2rem;
 }
