@@ -8,11 +8,29 @@ body {
   background-color: whitesmoke;
   color: #222;
 }
-h1 {
+.page-title {
   font-family: "Jost", sans-serif;
   font-size: 5rem;
   text-align: center;
+  margin: 0.5rem 0;
 }
+.page-subtitle {
+  font-family: "Jost", sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 0.25rem 0 0;
+}
+.section-title {
+  font-family: "Jost", sans-serif;
+  font-size: 2rem;
+  margin: 0.35rem 0;
+}
+.section-heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0.35rem 0;
+}
+
 header {
   background: rgb(95, 168, 192);
   padding: 2rem;
@@ -40,12 +58,7 @@ header {
   background: white;
   padding: 1.75rem;
 }
-h2 {
-  font-family: "Jost", sans-serif;
-  font-size: 2rem;
-  margin-bottom: 0.35rem;
-  margin-top: 0.35rem;
-}
+
 .subheader {
   font-weight: 400;
   color: black;
@@ -53,33 +66,15 @@ h2 {
   margin-bottom: 0.25rem;
   font-size: 0.95rem;
 }
-.skills h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.35rem;
-  margin-top: 0.35rem;
-}
-.education h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.35rem;
-  margin-top: 0.35rem;
-}
-.work h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.35rem;
-  margin-top: 0.35rem;
-}
 .hero-heading {
   text-align: center;
   margin-bottom: 2rem;
 }
-.hero-heading h1 {
+.hero-heading .page-title {
   font-size: 3rem;
   margin-bottom: 0.5rem;
 }
-.hero-heading h2 {
+.hero-heading .page-subtitle {
   font-size: 1.5rem;
   color: #ffffff;
 }
@@ -124,15 +119,6 @@ body.index .hero-heading {
   padding-left: 1.25rem;
   margin: 0;
 }
-@media (min-width: 900px) {
-  .skills-columns {
-    flex-direction: row;
-    gap: 2rem;
-  }
-  .skills-col {
-    flex: 1;
-  }
-}
 .webring-list {
   list-style-type: none;
   padding: 0;
@@ -161,13 +147,13 @@ body.index .hero-heading {
   background-color: rgb(203, 232, 241);
   color: rgb(0, 0, 0);
 }
-.webring h2 {
+.webring .section-title {
   font-size: 3rem;
   margin-bottom: 2rem;
   text-align: center;
   padding: 0.5rem;
 }
-@media (min-width: 900px) {
+@media (min-width: 992px) {
   .webring-list {
     flex-direction: row;
     gap: 3rem;
@@ -180,12 +166,6 @@ body.index .hero-heading {
 .achievements {
   background: rgb(203, 232, 241);
   padding: 1.75rem;
-}
-.achievements h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.35rem;
-  margin-top: 0.35rem;
 }
 .footer {
   background: rgb(95, 168, 192);
@@ -213,4 +193,13 @@ body.index .hero-heading {
   content: "↗";
   margin-right: 0.35em;
   transform: scaleX(-1);
+}
+@media (min-width: 992px) {
+  .skills-columns {
+    flex-direction: row;
+    gap: 2rem;
+  }
+  .skills-col {
+    flex: 1;
+  }
 }

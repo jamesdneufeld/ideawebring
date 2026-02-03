@@ -44,9 +44,19 @@ header {
   justify-content: center;
   padding-top: 0.5rem;
 }
-
 .intro-paragraph {
   text-align: center;
+}
+.daisy1 {
+  display: inline-block;
+  vertical-align: middle;
+  height: 30px;
+  width: 30px;
+  background-image: url(daisy.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 .title {
   padding-top: 0.5rem;
