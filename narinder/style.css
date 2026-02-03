@@ -1,5 +1,17 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* General Element Styles */
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: Inter, Arial, sans-serif;
   line-height: 1.6;
   margin: 0;
   padding: 40px 18px;
@@ -15,6 +27,8 @@ header {
   box-shadow: 0 10px 25px rgba(255, 127, 182, 0.25);
   margin-bottom: 22px;
 }
+
+/* General Typography Styles */
 
 h1 {
   margin: 0 0 8px 0;
@@ -65,6 +79,8 @@ li {
   margin: 6px 0;
 }
 
+/* General Hyperlink Styles */
+
 a {
   color: #c2185b;
   text-decoration: none;
@@ -74,6 +90,8 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+/* Specific Class Styles */
 
 .Paragraph-md {
   font-size: 15px;
@@ -88,4 +106,58 @@ a:hover {
 .Paragraph-sm {
   font-size: 13px;
   color: #6b3b5d;
+}
+
+/* Resume Styles */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+}
+.hero-card {
+  width: 100%;
+  max-width: 760px;
+  text-align: center;
+
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(255, 127, 182, 0.75);
+  border-radius: 22px;
+
+  padding: 30px 22px;
+  box-shadow: 0 16px 34px rgba(255, 127, 182, 0.25);
+}
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #ffd0e4;
+  border: 1px solid #ff7fb6;
+  color: #7a1450;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.hero-name {
+  font-family: Poppins, Arial, sans-serif;
+  font-weight: 800;
+  font-size: 44px;
+  color: #c2185b;
+  margin: 0 0 8px 0;
+}
+
+.home {
+  background: url(flowers.jpg);
+}
+
+/* Large devices (desktops, 992px and up) */
+
+@media (min-width: 992px) {
+  h1 {
+    color: rgb(64, 0, 21);
+  }
+  h2 {
+    color: rgb(170, 0, 255);
+  }
 }

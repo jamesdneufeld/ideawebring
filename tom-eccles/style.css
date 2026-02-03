@@ -54,20 +54,20 @@ li {
 }
 
 .resume-heading {
-  color: red;
+  color: #fff;
 }
 
 .summary {
-  background: lightblue;
+  background: lightseagreen;
 }
 .education {
-  background: goldenrod;
+  background: lightblue;
 }
 .experience {
-  background: lightcoral;
+  background: lightblue;
 }
 .skills {
-  background: lightseagreen;
+  background: lightblue;
 
   /* Small devices (landscape phones, 576px and up) */
   @media (min-width: 576px) {
