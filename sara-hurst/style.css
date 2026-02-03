@@ -19,6 +19,7 @@ body {
 
 .resume-wrapper {
   max-width: 1100px;
+  border: #6a8f7c;
   margin: 20px 10px;
   background: white;
   padding: 10px;
@@ -32,7 +33,7 @@ body {
 
 h1 {
   font-family: "Major Mono Display", monospace;
-  font-size: 5rem;
+  font-size: 4rem;
   font-weight: 400;
   font-style: normal;
   text-align: center;
@@ -163,19 +164,19 @@ header {
   text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.8);
 }
 .cherryflip {
-  font-size: 5rem;
+  font-size: 3rem;
   margin-left: 0.3rem;
   display: inline-block;
   transform: scaleX(-1); /* horizontal flip */
 }
 .cherry {
-  font-size: 5rem;
-  margin-left: 0.3rem;
+  font-size: 3rem;
+  margin-left: 0.5rem;
 }
 .webringbody {
   color: rgb(33, 58, 25);
   font-family: "Work Sans", sans-serif;
-  font-size: 2rem;
+  font-size: 1.25rem;
   text-align: center;
   margin-bottom: 9.5rem;
 }
@@ -215,7 +216,7 @@ header {
 .aboutmep {
   color: rgb(33, 58, 25);
   font-family: "Work Sans", sans-serif;
-  font-size: 1.3rem;
+  font-size: 1rem;
   text-align: center;
   margin-bottom: 3rem;
 }
@@ -295,5 +296,30 @@ header {
     margin: 3rem auto 0;
     margin-bottom: 8rem;
     text-decoration: none;
+  }
+
+  .cherryflip {
+    font-size: 5rem;
+    margin-left: 0.3rem;
+    display: inline-block;
+    transform: scaleX(-1); /* horizontal flip */
+  }
+  .cherry {
+    font-size: 5rem;
+    margin-left: 0.3rem;
+  }
+  .aboutmep {
+    color: rgb(33, 58, 25);
+    font-family: "Work Sans", sans-serif;
+    font-size: 1.3rem;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .webringbody {
+    color: rgb(33, 58, 25);
+    font-family: "Work Sans", sans-serif;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 9.5rem;
   }
 }

@@ -10,7 +10,7 @@
 
 body {
   font-family: "Inter", sans-serif;
-  background: #f6f6f6;
+  background: #ffffff;
   color: #111;
   line-height: 1.6;
 }
@@ -31,8 +31,8 @@ body {
 }
 
 .header h1 {
-  font-size: 3.4rem;
-  font-weight: 800;
+  font-size: 9rem;
+  font-weight: 900;
 }
 
 .subtitle {
@@ -45,7 +45,6 @@ body {
   font-size: 0.95rem;
 }
 
-/* Main content */
 .content {
   background: #affff4;
 }
@@ -59,7 +58,6 @@ body {
   gap: 60px;
 }
 
-/* Sections */
 section {
   margin-bottom: 48px;
 }
@@ -88,7 +86,6 @@ h3 {
   font-style: italic;
 }
 
-/* Lists */
 ul {
   padding-left: 18px;
   margin-top: 8px;
@@ -110,7 +107,6 @@ ul li {
   padding: 1rem;
 }
 
-/* Responsive */
 @media (max-width: 900px) {
   .header-inner {
     flex-direction: column;
@@ -127,6 +123,12 @@ ul li {
 
   .right {
     border-left: none;
-    padding-left: 0;
   }
+}
+.hero {
+  text-align: center;
+  font-size: 1.5rem;
+}
+h1 {
+  font-size: 5rem;
 }
