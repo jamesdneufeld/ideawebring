@@ -153,6 +153,14 @@ a:hover {
   border: 3px inset rgb(66, 186, 180);
 }
 
+.aboutsub {
+  padding-bottom: 1rem;
+}
+
+.aboutlinks {
+  padding-bottom: 1rem;
+}
+
 /*resume.html things*/
 
 .bigheader {
