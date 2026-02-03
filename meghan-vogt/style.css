@@ -13,25 +13,25 @@ html {
   box-sizing: inherit;
 }
 
+/* General and Global Style */
+body {
+  background: rgb(225, 162, 225);
+  padding: 2rem;
+  margin-top: 4rem;
+  background-image: url("Cheetah.jpg");
+}
 header {
   background: lightblue;
   padding: 2rem;
 }
-.paragraph-md {
-  font-size: 1.3rem;
-  color: lightpink;
-}
-.paragraph-sm {
-  font-size: 1rem;
-  color: black;
-}
 h1 {
   font-family: "Lora", serif;
   font-weight: 600;
-  color: lightpink;
-  font-size: 5rem;
+  color: rgb(209, 144, 202);
+  font-size: 3rem; /* Heading 1 size for mobile */
   text-align: center;
 }
+
 h2 {
   font-family: "Lora", serif;
   font-weight: 600;
@@ -41,13 +41,37 @@ h2 {
   text-align: center;
 }
 
-.certifications {
-  background: lightpink;
-  padding: 2rem;
+h3 {
+  font-weight: 600;
+  font-size: 1.3rem;
+  padding: 1rem;
+  text-align: center;
 }
-.experience {
-  background: pink;
-  padding: 2rem;
+
+h4 {
+  font-weight: 400;
+  font-size: 1.3rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Specific Styles */
+.paragraph-md {
+  font-size: 1.3rem;
+  color: lightpink;
+}
+
+.paragraph-sm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Lora", serif;
+  font-weight: 400;
+  color: lemonchiffon;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 /* Home page styles */
@@ -84,66 +108,39 @@ h2 {
   text-align: center;
 }
 
-@media only screen and (min-width: 992px) {
-  body {
-    background: rgb(241, 166, 241);
-    padding: 2rem;
-    margin-top: 5rem;
-  }
+.sections {
+  border: 5px solid yellow;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.sections {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-.paragraph-sm {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  font-family: "Lora", serif;
-  font-weight: 600;
-  color: lemonchiffon;
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  text-align: center;
-}
 .education {
   background: pink;
-  padding: 2 rem;
-  width: 100%;
-}
-.skills {
-  background: lightpink;
-  padding: 4rem;
-  width: 200%;
-}
-.experience {
-  background: lightpink;
-  padding: 4rem;
-  width: 300%;
-}
-.certifications {
-  background: lightpink;
   padding: 2rem;
-  width: 200%;
-}
-.list {
-  display: flex;
-  padding: 2rem;
-  height: 300px;
   width: 100%;
 }
 
-h3 {
-  font-weight: 600;
-  font-size: 1.3rem;
-  padding: 1rem;
-  text-align: center;
+.skills {
+  background: rgba(235, 144, 236, 0.712);
+  padding: 2rem;
+  width: 100%;
 }
+
+.experience {
+  background: rgb(180, 96, 225);
+  padding: 2rem;
+  width: 100%;
+}
+
+.certifications {
+  background: rgb(177, 50, 202);
+  padding: 2rem;
+  width: 100%;
+}
+
 .webringnavigation {
-  border: 5px solid rgb(216, 163, 251);
+  border: 4px solid rgb(123, 31, 184);
   display: flex;
   flex-direction: row-reverse;
   justify-content: center;
@@ -160,9 +157,7 @@ h3 {
   margin: 2rem;
   padding: 1rem;
 }
-body {
-  background-image: url("Cheetah.jpg");
-}
+
 .index {
   background-image: url("https://i.pinimg.com/736x/68/6a/79/686a79e45003748a0c8a54c5a4652a9b.jpg");
   width: 100%;
@@ -173,4 +168,32 @@ body {
   flex-direction: row;
   justify-content: center;
   margin-bottom: 1rem;
+}
+
+/* DESKTOP ONLY BELOW - MOBILE AND GLOBAL ABOVE */
+
+@media only screen and (min-width: 992px) {
+  h1 {
+    font-size: 5rem; /* Heading 1 size for desktop */
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+  }
+
+  h4 {
+    font-size: 1.3rem;
+  }
+  .sections {
+    flex-direction: row;
+  }
+  .paragraph-sm {
+    font-size: 2rem;
+    font-weight: 600;
+    flex-direction: row;
+  }
 }
