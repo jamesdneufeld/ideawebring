@@ -1,7 +1,6 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Sekuya&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=BBH+Bartle&display=swap");
 
 html {
   box-sizing: border-box;
@@ -16,7 +15,8 @@ html {
   --headerfont: "Sekuya", sans-serif;
   /* colours */
   --bgred: rgb(163, 40, 40);
-  --resheadersize: 2rem; /* resume header size for mobile */
+  --resheader-mobile: 2rem; /* resume header size for mobile */
+  --resheader-tablet: 3.5rem;
 }
 
 body {
@@ -49,7 +49,7 @@ ul {
   padding: 1.5rem;
 }
 
-/* INDEX (Web Ring) */
+/* INDEX STYLES (Web Ring) */
 .hero {
   padding: 2rem;
   min-height: 100vh;
@@ -67,18 +67,25 @@ ul {
   color: rgb(255, 209, 196);
   background: var(--bgred);
   padding: 1.5rem;
-  font-size: 1.5rem;
+  font-size: 2rem;
   text-align: center;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  border-radius: 1.5rem;
+  border-radius: 2rem;
 }
 
 .hero-tagline {
-  font-size: 01rem;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.hero-desc {
+  font-family: "Rubik", sans-serif;
+  font-size: 1rem;
 }
 
 .ring-links {
@@ -88,7 +95,7 @@ ul {
   flex-direction: column;
   justify-content: space-around;
   align-content: center;
-  font-family: "Sekuya", sans-serif;
+  font-family: var(--headerfont);
 }
 
 .link-buttons {
@@ -100,7 +107,9 @@ ul {
   border-radius: 1.5rem;
 }
 
-/* RESUME */
+/* ABOUT STYLES */
+
+/* RESUME STYLES */
 /* header styles */
 .resume-header {
   background: var(--bgred);
@@ -115,7 +124,7 @@ ul {
 }
 
 .name {
-  font-family: "Sekuya", sans-serif;
+  font-family: var(--headerfont);
   font-weight: 400;
   font-size: 3.25rem;
 }
@@ -135,11 +144,11 @@ ul {
 }
 
 .eduproject-header {
-  font-family: "Sekuya", sans-serif;
+  font-family: var(--headerfont);
   font-weight: 400;
   background: rgb(190, 87, 19);
   color: rgb(238, 181, 131);
-  font-size: var(--resheadersize);
+  font-size: var(--resheader-mobile);
   margin-bottom: 1.5rem;
   padding: 1rem;
 }
@@ -160,11 +169,11 @@ ul {
 }
 
 .skills-header {
-  font-family: "Sekuya", regular;
+  font-family: var(--headerfont);
   font-weight: 400;
   background: rgb(164, 48, 16);
   color: rgb(232, 139, 96);
-  font-size: var(--resheadersize);
+  font-size: var(--resheader-mobile);
   margin-bottom: 1.5rem;
   padding: 1rem;
 }
@@ -179,11 +188,11 @@ ul {
 }
 
 .work-header {
-  font-family: "Sekuya", regular;
+  font-family: var(--headerfont);
   font-weight: 400;
   background: rgb(190, 87, 19);
   color: rgb(238, 181, 131);
-  font-size: var(--resheadersize);
+  font-size: var(--resheader-mobile);
   margin-bottom: 1.5rem;
   padding: 1rem;
 }
@@ -197,6 +206,7 @@ ul {
 
 /* Tablet view (768px to 991 px) */
 @media (min-width: 768px) {
+  /* INDEX STYLES */
   .ring-links {
     flex-direction: row;
   }
@@ -204,7 +214,7 @@ ul {
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-  /* Index Styles */
+  /* INDEX STYLES */
   .hero-headline {
     font-size: 4rem;
   }
@@ -213,12 +223,15 @@ ul {
     font-size: 2rem;
   }
 
+  .hero-desc {
+    font-size: 1.5rem;
+  }
   .ring-links {
     font-size: 2rem;
     flex-direction: row;
   }
 
-  /* Resume Styles */
+  /* RESUME STYLES */
   .eduproject-wrapper {
     flex-direction: row;
   }
