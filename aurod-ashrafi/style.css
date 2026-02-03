@@ -31,8 +31,8 @@ body {
 }
 
 .header h1 {
-  font-size: 3.4rem;
-  font-weight: 800;
+  font-size: 9rem;
+  font-weight: 900;
 }
 
 .subtitle {
@@ -124,4 +124,11 @@ ul li {
   .right {
     border-left: none;
   }
+}
+.hero {
+  text-align: center;
+  font-size: 1.5rem;
+}
+h1 {
+  font-size: 5rem;
 }
