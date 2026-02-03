@@ -23,6 +23,15 @@ body {
 header {
   background: lightblue;
   padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+a {
+  text-decoration: none;
+  font-weight: 600;
+  color: rgb(88, 12, 83);
 }
 h1 {
   font-family: "Lora", serif;
@@ -150,6 +159,9 @@ h4 {
   padding: 1rem;
   background: lemonchiffon;
 }
+.webringnavigation:hover {
+  background-color: rgb(237, 160, 237);
+}
 .main {
   display: flex;
   flex-direction: row;
@@ -168,6 +180,12 @@ h4 {
   flex-direction: row;
   justify-content: center;
   margin-bottom: 1rem;
+}
+.image2 {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* DESKTOP ONLY BELOW - MOBILE AND GLOBAL ABOVE */
@@ -196,4 +214,11 @@ h4 {
     font-weight: 600;
     flex-direction: row;
   }
+}
+.back {
+  flex-direction: row;
+  justify-content: center;
+}
+.image2 {
+  width: 100%;
 }
