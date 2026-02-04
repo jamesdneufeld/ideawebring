@@ -17,7 +17,6 @@ html {
   --darkred: rgb(163, 40, 40);
   --textonred: rgb(255, 209, 196);
   --resheader-mobile: 2rem; /* resume header size for mobile */
-  --resheader-tablet: 3.5rem;
 }
 
 img {
@@ -96,10 +95,10 @@ ul {
   color: var(--textonred);
   padding: 0.75rem;
   border-radius: 1rem;
+  margin-bottom: 1rem;
 }
 
 .ring-links {
-  margin: 1rem;
   border-radius: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -108,7 +107,8 @@ ul {
   font-family: var(--headerfont);
 }
 
-.link-buttons {
+.link-buttons,
+.about-links {
   background: var(--darkred);
   justify-content: center;
   text-align: center;
@@ -130,6 +130,18 @@ ul {
   justify-content: center;
   align-items: center;
   border-radius: 2rem;
+}
+
+.about-desc {
+  font-family: "Rubik", sans-serif;
+  font-size: 1rem;
+  color: var(--textonred);
+  padding: 0.75rem;
+}
+
+.about-links {
+  font-size: 1rem;
+  margin: 0.5rem;
 }
 
 /* RESUME STYLES */
@@ -237,6 +249,9 @@ ul {
   .about-wrap {
     flex-direction: row;
   }
+  .aboutcontent {
+    max-width: 80%;
+  }
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -262,6 +277,13 @@ ul {
   .about-wrap {
     font-size: 4rem;
     flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  .aboutcontent {
+    max-width: 50%;
+  }
+  .about-desc {
+    font-size: 1.5rem;
   }
 
   /* RESUME STYLES */
