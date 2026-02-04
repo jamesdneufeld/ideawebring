@@ -125,7 +125,8 @@ a {
 @media (min-width: 576px) {
   .edu,
   .exp,
-  .skills {
+  .skills,
+  .webring-nav {
     width: 100%;
     flex-direction: column;
   }
