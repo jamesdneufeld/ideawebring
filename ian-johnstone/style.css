@@ -190,12 +190,7 @@ body.index .hero-heading {
   text-align: center;
   padding: 0.5rem;
 }
-@media (min-width: 992px) {
-  .webring-list {
-    flex-direction: row;
-    gap: 3rem;
-  }
-}
+
 .webring {
   margin-top: 2rem;
   padding: 2rem;
