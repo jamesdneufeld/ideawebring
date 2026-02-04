@@ -85,6 +85,36 @@ header {
   font-size: 1.5rem;
   color: #ffffff;
 }
+.hero-blurb {
+  max-width: 60ch;
+  margin: 1rem auto 0;
+  font-size: 1.05rem;
+}
+
+.subnav {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.subnav a {
+  text-decoration: none;
+  color: #ffffff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  border: 2px solid rgb(255, 255, 255, 0.5);
+}
+.subnav a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.about-content {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
 body.index .hero-heading {
   background-color: lightgreen;
   color: #ffffff;
