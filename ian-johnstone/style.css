@@ -172,27 +172,23 @@ body.index .hero-heading {
   padding: 2rem;
   text-align: center;
 }
-.about body {
+body.about {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
-.webring-list a.external::after,
-.webring-list a.external::before {
-  display: inline-block;
-  font-size: 0.5em;
-  line-height: 1;
-  vertical-align: text-top;
+.icon-prev::before {
+  content: "← ";
+}
+
+.icon-next::after {
+  content: " →";
+}
+
+.icon-external::after {
+  content: " ↗";
+  font-size: 0.9em;
   opacity: 0.9;
-}
-.webring-list a.external.ne::after {
-  content: "↗";
-  margin-left: 0.35em;
-}
-.webring-list a.external.nw::before {
-  content: "↗";
-  margin-right: 0.35em;
-  transform: scaleX(-1);
 }
 @media (min-width: 992px) {
   .skills-columns {
