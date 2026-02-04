@@ -207,6 +207,12 @@ ul {
 /* Tablet view (768px to 991 px) */
 @media (min-width: 768px) {
   /* INDEX STYLES */
+  .hero-tagline {
+    flex-direction: row;
+  }
+  .hero-desc {
+    flex-direction: row;
+  }
   .ring-links {
     flex-direction: row;
   }
@@ -218,52 +224,41 @@ ul {
   .hero-headline {
     font-size: 4rem;
   }
-
   .hero-tagline {
     font-size: 2rem;
   }
-
   .hero-desc {
     font-size: 1.5rem;
   }
   .ring-links {
     font-size: 2rem;
-    flex-direction: row;
   }
 
   /* RESUME STYLES */
   .eduproject-wrapper {
     flex-direction: row;
   }
-
   .education {
     width: 50%;
   }
-
   .projects {
     width: 50%;
   }
-
   .work-wrapper {
     flex-direction: row;
   }
-
   .jobs {
     width: 50%;
   }
-
   .freelance {
     width: 50%;
   }
-
   .skills-wrapper {
     flex-direction: row;
   }
-
   .hard-skills {
     width: 50%;
   }
-
   .soft-skills {
     width: 50%;
   }
