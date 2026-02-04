@@ -114,6 +114,31 @@ header {
   flex-direction: column;
   gap: 1.25rem;
 }
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.gallery-item {
+  flex: 1 1 260px;
+}
+
+.gallery-item--wide {
+  flex: 2 1 520px;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.caption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
 
 body.index .hero-heading {
   background-color: lightgreen;
