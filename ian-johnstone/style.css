@@ -141,15 +141,25 @@ header {
   margin-top: 0.5rem;
   font-size: 0.9rem;
 }
-
 body.index .hero-heading {
-  background-color: lightgreen;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* move content toward the top */
+  align-items: center;
+
+  text-align: center;
   color: #ffffff;
-  padding: 2rem;
+
+  /* more top padding so the group sits in the top half */
+  padding: 4rem 2rem 2rem;
+
   border-radius: 6px;
+
+  /* keep the full-screen background like before */
+  min-height: 100vh;
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("workspace2.jpg");
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("workspace2.jpg"); /* adjust path if needed */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
