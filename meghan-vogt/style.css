@@ -15,14 +15,23 @@ html {
 
 /* General and Global Style */
 body {
-  background: rgb(225, 162, 225);
-  padding: 2rem;
-  margin-top: 4rem;
+  background: rgb(248, 182, 248);
+  padding: 1rem;
+  margin-top: 2rem;
   background-image: url("Cheetah.jpg");
 }
 header {
   background: lightblue;
-  padding: 2rem;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+a {
+  text-decoration: none;
+  font-weight: 600;
+  color: rgb(88, 12, 83);
 }
 h1 {
   font-family: "Lora", serif;
@@ -109,7 +118,7 @@ h4 {
 }
 
 .sections {
-  border: 5px solid yellow;
+  border: 5px solid rgb(236, 236, 209);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -150,6 +159,9 @@ h4 {
   padding: 1rem;
   background: lemonchiffon;
 }
+.webringnavigation:hover {
+  background-color: rgb(237, 160, 237);
+}
 .main {
   display: flex;
   flex-direction: row;
@@ -169,12 +181,27 @@ h4 {
   justify-content: center;
   margin-bottom: 1rem;
 }
+.image2 {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.aboutme {
+  background: rgb(239, 184, 239);
+  border-color: #9456d4;
+  border-width: 1rem;
+  display: flex;
+  flex-direction: column;
+  font-weight: 200;
+}
 
 /* DESKTOP ONLY BELOW - MOBILE AND GLOBAL ABOVE */
 
 @media only screen and (min-width: 992px) {
   h1 {
     font-size: 5rem; /* Heading 1 size for desktop */
+    margin-bottom: 2rem;
   }
 
   h2 {
@@ -194,6 +221,19 @@ h4 {
   .paragraph-sm {
     font-size: 2rem;
     font-weight: 600;
-    flex-direction: row;
+    margin-bottom: 2rem;
+    justify-content: space-evenly;
   }
+}
+.back {
+  flex-direction: row;
+  justify-content: center;
+}
+.image2 {
+  width: 100%;
+}
+.aboutme {
+  flex-direction: row;
+  justify-content: center;
+  font-weight: 600;
 }
