@@ -1,7 +1,14 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
-
+html {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
 body {
   font-family: "Rubik", sans-serif;
   padding: 1rem;
@@ -16,9 +23,9 @@ body {
 }
 .page-subtitle {
   font-family: "Jost", sans-serif;
-  font-size: 1.5rem;
+  font-size: 2rem;
   text-align: center;
-  margin: 0.25rem 0 0;
+  margin: 0.25rem 0 1rem;
 }
 .section-title {
   font-family: "Jost", sans-serif;
@@ -68,28 +75,93 @@ header {
 }
 .hero-heading {
   text-align: center;
-  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 1rem;
+  min-height: 100vh;
+
+  margin-bottom: 0;
 }
-.hero-heading .page-title {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
+
+.hero-blurb {
+  max-width: 60ch;
+  margin: 1rem auto 0;
+  font-size: 1.05rem;
 }
-.hero-heading .page-subtitle {
-  font-size: 1.5rem;
+
+.subnav {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.subnav a {
+  text-decoration: none;
   color: #ffffff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+.subnav a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.about-content {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.gallery-item {
+  flex: 1 1 260px;
+}
+
+.gallery-item--wide {
+  flex: 2 1 520px;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.caption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
 }
 body.index .hero-heading {
-  background-color: lightgreen;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* move content toward the top */
+  align-items: center;
+
+  text-align: center;
   color: #ffffff;
-  padding: 2rem;
+
+  /* more top padding so the group sits in the top half */
+  padding: 4rem 2rem 2rem;
+
   border-radius: 6px;
+
+  /* keep the full-screen background like before */
+  min-height: 100vh;
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("workspace2.jpg");
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("workspace2.jpg"); /* adjust path if needed */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 100vh;
 }
 .information {
   display: flex;
@@ -153,12 +225,7 @@ body.index .hero-heading {
   text-align: center;
   padding: 0.5rem;
 }
-@media (min-width: 992px) {
-  .webring-list {
-    flex-direction: row;
-    gap: 3rem;
-  }
-}
+
 .webring {
   margin-top: 2rem;
   padding: 2rem;
@@ -172,29 +239,49 @@ body.index .hero-heading {
   padding: 2rem;
   text-align: center;
 }
-.about body {
+body.about {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
-.webring-list a.external::after,
-.webring-list a.external::before {
-  display: inline-block;
-  font-size: 0.5em;
-  line-height: 1;
-  vertical-align: text-top;
+.icon-prev::before {
+  content: "← ";
+}
+
+.icon-next::after {
+  content: " →";
+}
+
+.icon-external::after {
+  content: " ↗";
+  font-size: 0.9em;
   opacity: 0.9;
 }
-.webring-list a.external.ne::after {
-  content: "↗";
-  margin-left: 0.35em;
+:root {
+  --group-gap: 0.6rem;
+  --hero-blurb-gap: 1.5rem;
 }
-.webring-list a.external.nw::before {
-  content: "↗";
-  margin-right: 0.35em;
-  transform: scaleX(-1);
+.page-title {
+  margin-top: 0;
+  margin-bottom: 0;
 }
+
+.webring .section-title {
+  margin-top: var(--group-gap);
+}
+.webring-list {
+  margin-top: 0;
+}
+
+.hero-blurb {
+  margin: 1rem auto var(--hero-blurb-gap);
+}
+
 @media (min-width: 992px) {
+  .webring-list {
+    flex-direction: row;
+    gap: 3rem;
+  }
   .skills-columns {
     flex-direction: row;
     gap: 2rem;
