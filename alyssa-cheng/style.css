@@ -120,30 +120,31 @@ a {
     margin-bottom: 1.5rem;
   }
 }
+.webring-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.pg-link {
+  margin-bottom: 0.5rem;
+}
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
-  .edu,
-  .exp,
-  .skills,
-  .webring-nav {
-    width: 100%;
-    flex-direction: column;
-  }
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-  .edu,
-  .exp,
-  .skills,
-  .index {
-    width: 100%;
-    flex-direction: column;
+  .webring-nav {
+    flex-direction: row;
   }
   .site-header,
   .main-nav {
     width: 60%;
+  }
+  .pg-link {
+    margin: 0.5rem;
   }
 }
 
