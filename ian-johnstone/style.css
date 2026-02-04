@@ -23,7 +23,7 @@ body {
 }
 .page-subtitle {
   font-family: "Jost", sans-serif;
-  font-size: 2rem;
+  font-size: 1.6rem;
   text-align: center;
   margin: 0.25rem 0 1rem;
 }
@@ -75,6 +75,7 @@ header {
 }
 .hero-heading {
   text-align: center;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -88,7 +89,6 @@ header {
 
 .hero-blurb {
   max-width: 60ch;
-  margin: 1rem auto 0;
   font-size: 1.05rem;
 }
 
@@ -141,24 +141,12 @@ header {
   font-size: 0.9rem;
 }
 body.index .hero-heading {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* move content toward the top */
-  align-items: center;
-
-  text-align: center;
   color: #ffffff;
-
-  /* more top padding so the group sits in the top half */
-  padding: 4rem 2rem 2rem;
-
+  padding: 2rem;
   border-radius: 6px;
-
-  /* keep the full-screen background like before */
-  min-height: 100vh;
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url("workspace2.jpg"); /* adjust path if needed */
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("workspace2.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -168,9 +156,9 @@ body.index .hero-heading {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 0.5rem;
   padding: 0.25rem;
   flex-wrap: wrap;
+  margin: 1rem 0;
 }
 
 .information h3 {
@@ -200,9 +188,10 @@ body.index .hero-heading {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  margin: 0.25rem 1rem 1rem;
 }
 .webring-list li a {
-  margin: 1.5rem;
+  margin: 0;
   font-size: 1.5rem;
 }
 .webring-list a {
@@ -276,6 +265,11 @@ body.about {
 .hero-blurb {
   margin: 1rem auto var(--hero-blurb-gap);
 }
+.about-blurb {
+  max-width: 65ch;
+  font-size: 1.05rem;
+  margin: 0 auto;
+}
 
 @media (min-width: 992px) {
   .webring-list {
@@ -288,5 +282,24 @@ body.about {
   }
   .skills-col {
     flex: 1;
+  }
+}
+@media (max-width: 480px) {
+  .webring-list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .webring-list li a {
+    margin: 0;
+    font-size: 1.15rem;
+  }
+
+  .webring-list a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.85rem 1rem;
   }
 }
