@@ -1,7 +1,14 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
-
+html {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
 body {
   font-family: "Rubik", sans-serif;
   padding: 1rem;
@@ -191,6 +198,10 @@ body.about {
   opacity: 0.9;
 }
 @media (min-width: 992px) {
+  .webring-list {
+    flex-direction: row;
+    gap: 3rem;
+  }
   .skills-columns {
     flex-direction: row;
     gap: 2rem;
