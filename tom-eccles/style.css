@@ -1,5 +1,13 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
 /* Typography imported from Google Fonts */
-
 @import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Quicksand:wght@300..700&display=swap");
 
 body {
@@ -10,7 +18,9 @@ body {
   padding: 1.25rem;
   color: #333;
 }
-
+h1 {
+  font-size: 3rem;
+}
 h1,
 h2,
 h3 {
@@ -27,7 +37,13 @@ header {
 section {
   margin-bottom: 1.25rem;
 }
-
+/* Class specific styles*/
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background: salmon;
+}
 .job h3,
 .degree h3 {
   margin-bottom: 0;
@@ -68,39 +84,22 @@ li {
 }
 .skills {
   background: lightblue;
+}
 
-  /* Small devices (landscape phones, 576px and up) */
-  @media (min-width: 576px) {
-    h1 {
-      font-size: 1.777rem;
-    }
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2.369rem;
   }
+}
 
-  /* Medium devices (tablets, 768px and up) */
-  @media (min-width: 768px) {
-    h1 {
-      font-size: 2.369rem;
-    }
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  h1 {
+    font-size: 5rem;
   }
-
-  /* Large devices (desktops, 992px and up) */
-  @media (min-width: 992px) {
-    h1 {
-      font-size: 3.157rem;
-    }
-  }
-
-  /* X-Large devices (large desktops, 1200px and up) */
-  @media (min-width: 1200px) {
-    h1 {
-      font-size: 4.209rem;
-    }
-  }
-
-  /* XX-Large devices (larger desktops, 1400px and up) */
-  @media (min-width: 1400px) {
-    h1 {
-      font-size: 5.61rem;
-    }
+  .wrapper {
+    display: flex;
+    flex-direction: row;
   }
 }
