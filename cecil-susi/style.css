@@ -14,9 +14,15 @@ html {
 :root {
   --headerfont: "Sekuya", sans-serif;
   /* colours */
-  --bgred: rgb(163, 40, 40);
+  --darkred: rgb(163, 40, 40);
+  --textonred: rgb(255, 209, 196);
   --resheader-mobile: 2rem; /* resume header size for mobile */
   --resheader-tablet: 3.5rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 body {
@@ -42,7 +48,7 @@ a {
 a:hover {
   text-decoration: none;
   background: rgb(255, 209, 196);
-  color: var(--bgred);
+  color: var(--darkred);
 }
 
 ul {
@@ -57,20 +63,21 @@ ul {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   background-image: url(star-bg.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 }
 
-.hero-headline {
+.hero-wrap {
   font-family: var(--headerfont);
-  color: rgb(255, 209, 196);
-  background: var(--bgred);
+  color: var(--textonred);
+  background: var(--darkred);
   padding: 1.5rem;
+  margin-bottom: 1.5rem;
   font-size: 2rem;
   text-align: center;
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
@@ -79,13 +86,16 @@ ul {
 
 .hero-tagline {
   font-size: 1.5rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 2rem;
 }
 
 .hero-desc {
   font-family: "Rubik", sans-serif;
+  background: rgb(66, 36, 36);
   font-size: 1rem;
+  color: var(--textonred);
+  padding: 0.75rem;
+  border-radius: 1rem;
 }
 
 .ring-links {
@@ -99,7 +109,7 @@ ul {
 }
 
 .link-buttons {
-  background: var(--bgred);
+  background: var(--darkred);
   justify-content: center;
   text-align: center;
   padding: 1rem;
@@ -108,14 +118,27 @@ ul {
 }
 
 /* ABOUT STYLES */
+.about-wrap {
+  font-family: var(--headerfont);
+  color: var(--textonred);
+  background: var(--darkred);
+  padding: 1.5rem;
+  font-size: 2rem;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2rem;
+}
 
 /* RESUME STYLES */
 /* header styles */
 .resume-header {
-  background: var(--bgred);
+  background: var(--darkred);
   padding: 2rem;
   font-weight: bold;
-  color: beige;
+  color: var(--textonred);
   margin-bottom: 1rem;
 }
 
@@ -198,7 +221,6 @@ ul {
 }
 
 .bulleted-item {
-  /* eventually change points to a custom image? */
   list-style: disc;
   margin-left: 2rem;
   margin-bottom: 0.5rem;
@@ -207,13 +229,12 @@ ul {
 /* Tablet view (768px to 991 px) */
 @media (min-width: 768px) {
   /* INDEX STYLES */
-  .hero-tagline {
-    flex-direction: row;
-  }
-  .hero-desc {
-    flex-direction: row;
-  }
   .ring-links {
+    flex-direction: row;
+  }
+
+  /* ABOUT STYLES */
+  .about-wrap {
     flex-direction: row;
   }
 }
@@ -221,17 +242,26 @@ ul {
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   /* INDEX STYLES */
-  .hero-headline {
+  .hero-wrap {
     font-size: 4rem;
+    flex-direction: row;
   }
   .hero-tagline {
     font-size: 2rem;
+    flex-direction: row;
   }
   .hero-desc {
     font-size: 1.5rem;
+    flex-direction: row;
   }
   .ring-links {
     font-size: 2rem;
+  }
+
+  /* ABOUT STYLES */
+  .about-wrap {
+    font-size: 4rem;
+    flex-direction: row;
   }
 
   /* RESUME STYLES */
