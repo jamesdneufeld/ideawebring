@@ -1,112 +1,144 @@
 /* Typography imported from Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&display=swap");
-@import url(<linkhref="https://fonts.googleapis.com/css2?family=Asset&display=swap"rel="stylesheet">);
-@import url(<linkhref="https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&display=swap"rel="stylesheet">);
+@import url("https://fonts.googleapis.com/css2?family=Pirata+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
 
-/* Mobile-first default */
-.card {
-  width: 100%;
-}
+/* Mobile First*/
+@media (max-width: 600px) {
+  .education {
+    flex-direction: column;
+    font-size: 0.5rem;
+  }
 
-/* Tablet */
-@media (min-width: 768px) {
-  .card {
-    width: 50%;
+  .skills {
+    flex-direction: column;
+    font-size: 0.5rem;
+  }
+
+  .experience {
+    flex-direction: column;
+    font-size: 0.5rem;
+  }
+
+  .intrests {
+    flex-direction: column;
+    font-size: 0.5rem;
+  }
+
+  .hero-heading {
+    font-size: 2rem;
+  }
+  .hero-text {
+    font-size: 0.5rem;
   }
 }
-
-/* Desktop */
-@media (min-width: 1024px) {
-  .card {
-    width: 30%;
-  }
-  body {
-    font-family: "Alumni Sans Pinstripe", sans-serif;
-    padding: 1rem;
-  }
-  h2 {
-    font-size: 3rem;
-    font-weight: 700;
-  }
-  p,
-  li {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 12px;
-    border-bottom: 2px solid #e5e7eb;
-    padding-bottom: 6px;
-  }
+/* Resume Below */
+body {
+  font-family: "Oswald";
 }
-header {
-  background: lightblue;
-  padding: 4rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 0.5rem;
-  border-radius: 30px;
-}
-.education {
-  display: flex;
-  flex-direction: row;
-}
-
-.skills {
-  display: flex;
-  flex-direction: row;
-}
-
-.experience {
-  display: flex;
-  flex-direction: row;
-}
-
-.intrests {
-  display: flex;
-  flex-direction: row;
-}
-
-.resume-heading {
-  width: 50%;
-  background: lemonchiffon;
-  margin-bottom: 12px;
-  padding-bottom: 6px;
-}
-.resume-content {
-  width: 50%;
-  background: lightskyblue;
-  margin-bottom: 12px;
-  padding-bottom: 6px;
-}
-
-h1 {
-  font-family: "Alumni Sans Pinstripe", sans-serif;
-  font-weight: 900;
-  font-style: normal;
-  font-size: 4rem;
-  color: cornflowerblue;
-  align-items: center;
-}
-
 h2 {
-  font-family: "Alumni Sans Pinstripe", sans-serif;
-  font-weight: 800;
+  font-family: "Oswald";
+  font-weight: 200;
   font-style: normal;
   font-size: 3rem;
   display: flex;
   align-items: start;
 }
 
-.hero {
+h3 {
+  font-family: "Oswald";
+  font-size: 2rem;
+  font-weight: 200;
+  color: rgb(71, 71, 200);
+}
+h4 {
+  font-family: "Oswald";
+  font-size: 2rem;
+  font-weight: 200;
+}
+
+/* RESUME HEADING */
+.resume-header {
+  background: lightblue;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.resume-name {
+  font-family: "Pirata One";
+  font-size: 6rem;
+  color: white;
+}
+.resume-capu {
+  font-size: 2.5rem;
+  color: cornflowerblue;
+}
+.resume-email {
+  font-size: 2rem;
+  font-weight: 200;
+  color: cornflowerblue;
+  margin-top: 1rem;
+}
+.resume-header h1,
+.resume-header h3,
+.resume-header h4 {
+  margin: 1rem;
+}
+/* RESUME CONTENT */
+
+.resume-section {
+  background: white;
+  padding: 2rem;
+  margin: 2rem auto;
+  width: 80%;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+.section-title {
+  width: 100%;
+  color: cornflowerblue;
+  margin-bottom: 1rem;
+}
+
+.section-list {
+  width: 100%;
+  max-width: none;
+  text-align: left;
+  font-size: 2rem;
+  padding: 0;
+  margin: 0;
+}
+
+.section-list li {
+  margin-bottom: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+/* RESUME DATES */
+.date {
+  font-style: italic;
   font-size: 1.5rem;
-  font-weight: 600;
+  color: #555;
+  margin-left: 2rem;
+  white-space: nowrap;
+}
+/* OTHER RESUME FORMATTING STUFF */
+
+body {
+  background-color: lightblue;
+}
+
+/* Start of Webring */
+.hero {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-
+  padding: 1rem;
   background-image: radial-gradient(
     circle,
     #efee82,
@@ -126,29 +158,51 @@ h2 {
 
 .hero-heading {
   color: white;
-  font-size: 8rem;
-  font-family: "Asset", serif;
+  font-size: 1rem;
+  font-family: "Pirata One";
 }
 .hero-text {
   color: black;
   font-size: 2rem;
   font-weight: 200;
-  font-family: "Monsieur La Doulaise", cursive;
+  font-family: "Pirata One";
   margin-bottom: 1rem;
 }
-.asset-regular {
-  font-family: "Asset", serif;
-  font-weight: 400;
-  font-style: normal;
+
+a {
+  font-size: 2rem;
+  font-family: "Pirata One";
 }
-.monsieur-la-doulaise-regular {
-  font-family: "Monsieur La Doulaise", cursive;
-  font-weight: 200;
-  font-style: normal;
-}
+/* Hyperlink Styles */
+
 a {
   color: black;
 }
 a:hover {
-  color: lightsalmon;
+  color: skyblue;
+}
+
+/* End of Webring */
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .education {
+    flex-direction: row;
+  }
+
+  .skills {
+    flex-direction: row;
+  }
+
+  .experience {
+    flex-direction: row;
+  }
+
+  .intrests {
+    flex-direction: row;
+  }
+
+  .hero-heading {
+    font-size: 8rem; /* Desktop size */
+  }
 }

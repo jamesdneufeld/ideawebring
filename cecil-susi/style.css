@@ -1,7 +1,6 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Sekuya&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=BBH+Bartle&display=swap");
 
 html {
   box-sizing: border-box;
@@ -13,15 +12,37 @@ html {
 }
 
 :root {
-  --headerfont: "Sekuya", sans-serif;
   /* colours */
-  --bgred: rgb(163, 40, 40);
-  --resheadersize: 2rem; /* resume header size for mobile */
+  --darkred: rgb(163, 40, 40);
+  --cream: rgb(255, 209, 196);
+  --orange: rgb(190, 87, 19);
+  --goldyellow: rgb(238, 181, 131);
+  --darkbrown: rgb(66, 36, 36);
+  /* fonts */
+  --headerfont: "Sekuya", sans-serif;
+  --bodyfont: "Rubik", sans-serif;
+  /* font sizes */
+  --largetitle: 4rem;
+  --resheader-mobile: 2rem; /* resume header size for mobile */
+}
+
+a {
+  color: var(--cream);
+  text-decoration: none;
+  font-style: oblique;
+  padding: 0.25rem;
+}
+
+a:hover {
+  text-decoration: none;
+  font-style: normal;
+  background: var(--cream);
+  color: var(--darkred);
 }
 
 body {
-  font-family: "Rubik", sans-serif;
-  background: rgb(29, 25, 24);
+  font-family: var(--bodyfont);
+  background: var(--darkbrown);
 }
 
 h3 {
@@ -29,27 +50,20 @@ h3 {
   font-size: 1.5rem;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 p {
   padding-top: 0.5rem;
-}
-
-a {
-  color: rgb(255, 209, 196);
-  text-decoration: none;
-  padding: 0.25rem;
-}
-
-a:hover {
-  text-decoration: none;
-  background: rgb(255, 209, 196);
-  color: var(--bgred);
 }
 
 ul {
   padding: 1.5rem;
 }
 
-/* INDEX (Web Ring) */
+/* INDEX STYLES (Web Ring) */
 .hero {
   padding: 2rem;
   min-height: 100vh;
@@ -57,42 +71,54 @@ ul {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url(star-bg.jpg);
+  text-align: center;
+  background-image: url(sm-star-bg.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 }
 
-.hero-headline {
+.hero-wrap {
   font-family: var(--headerfont);
-  color: rgb(255, 209, 196);
-  background: var(--bgred);
+  color: var(--cream);
+  background: var(--darkred);
   padding: 1.5rem;
-  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
   text-align: center;
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  border-radius: 1.5rem;
+  border-radius: 2rem;
 }
 
 .hero-tagline {
-  font-size: 01rem;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+}
+
+.hero-desc {
+  font-family: var(--bodyfont);
+  background: var(--darkbrown);
+  font-size: 1rem;
+  color: var(--cream);
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
 }
 
 .ring-links {
-  margin: 1rem;
   border-radius: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-content: center;
-  font-family: "Sekuya", sans-serif;
+  font-family: var(--headerfont);
 }
 
-.link-buttons {
-  background: var(--bgred);
+.link-buttons,
+.about-links {
+  background: var(--darkred);
   justify-content: center;
   text-align: center;
   padding: 1rem;
@@ -100,13 +126,40 @@ ul {
   border-radius: 1.5rem;
 }
 
-/* RESUME */
+/* ABOUT STYLES */
+.about-wrap {
+  font-family: var(--headerfont);
+  color: var(--cream);
+  background: var(--darkred);
+  padding: 1.5rem;
+  font-size: 2rem;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2rem;
+}
+
+.about-desc {
+  font-family: var(--bodyfont);
+  font-size: 1rem;
+  color: var(--cream);
+  padding: 0.75rem;
+}
+
+.about-links {
+  font-size: 1rem;
+  margin: 0.5rem;
+}
+
+/* RESUME STYLES */
 /* header styles */
 .resume-header {
-  background: var(--bgred);
+  background: var(--darkred);
   padding: 2rem;
   font-weight: bold;
-  color: beige;
+  color: var(--cream);
   margin-bottom: 1rem;
 }
 
@@ -115,7 +168,7 @@ ul {
 }
 
 .name {
-  font-family: "Sekuya", sans-serif;
+  font-family: var(--headerfont);
   font-weight: 400;
   font-size: 3.25rem;
 }
@@ -135,11 +188,11 @@ ul {
 }
 
 .eduproject-header {
-  font-family: "Sekuya", sans-serif;
+  font-family: var(--headerfont);
   font-weight: 400;
   background: rgb(190, 87, 19);
   color: rgb(238, 181, 131);
-  font-size: var(--resheadersize);
+  font-size: var(--resheader-mobile);
   margin-bottom: 1.5rem;
   padding: 1rem;
 }
@@ -160,11 +213,11 @@ ul {
 }
 
 .skills-header {
-  font-family: "Sekuya", regular;
+  font-family: var(--headerfont);
   font-weight: 400;
-  background: rgb(164, 48, 16);
+  background: var(--darkred);
   color: rgb(232, 139, 96);
-  font-size: var(--resheadersize);
+  font-size: var(--resheader-mobile);
   margin-bottom: 1.5rem;
   padding: 1rem;
 }
@@ -179,17 +232,16 @@ ul {
 }
 
 .work-header {
-  font-family: "Sekuya", regular;
+  font-family: var(--headerfont);
   font-weight: 400;
-  background: rgb(190, 87, 19);
-  color: rgb(238, 181, 131);
-  font-size: var(--resheadersize);
+  background: var(--orange);
+  color: var(--goldyellow);
+  font-size: var(--resheader-mobile);
   margin-bottom: 1.5rem;
   padding: 1rem;
 }
 
 .bulleted-item {
-  /* eventually change points to a custom image? */
   list-style: disc;
   margin-left: 2rem;
   margin-bottom: 0.5rem;
@@ -197,60 +249,62 @@ ul {
 
 /* Tablet view (768px to 991 px) */
 @media (min-width: 768px) {
+  /* INDEX STYLES */
   .ring-links {
     flex-direction: row;
+  }
+  /* ABOUT STYLES */
+  .about-wrap {
+    flex-direction: row;
+  }
+  .aboutcontent {
+    max-width: 80%;
   }
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-  /* Index Styles */
-  .hero-headline {
-    font-size: 4rem;
+  /* INDEX STYLES */
+  .hero-wrap {
+    font-size: var(--largetitle);
+    flex-direction: row;
   }
-
   .hero-tagline {
     font-size: 2rem;
+    flex-direction: row;
   }
-
+  .hero-desc {
+    font-size: 1.5rem;
+    flex-direction: row;
+  }
   .ring-links {
     font-size: 2rem;
+  }
+
+  /* ABOUT STYLES */
+  .about-wrap {
+    font-size: var(--largetitle);
     flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  .aboutcontent {
+    max-width: 50%;
+  }
+  .about-desc {
+    font-size: 1.5rem;
   }
 
-  /* Resume Styles */
-  .eduproject-wrapper {
-    flex-direction: row;
-  }
-
-  .education {
-    width: 50%;
-  }
-
-  .projects {
-    width: 50%;
-  }
-
-  .work-wrapper {
-    flex-direction: row;
-  }
-
-  .jobs {
-    width: 50%;
-  }
-
-  .freelance {
-    width: 50%;
-  }
-
+  /* RESUME STYLES */
+  .eduproject-wrapper,
+  .work-wrapper,
   .skills-wrapper {
     flex-direction: row;
   }
-
-  .hard-skills {
-    width: 50%;
-  }
-
+  .education,
+  .projects,
+  .jobs,
+  .freelance,
+  .hard-skills,
   .soft-skills {
     width: 50%;
   }

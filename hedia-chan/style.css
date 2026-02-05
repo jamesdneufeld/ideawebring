@@ -23,12 +23,8 @@ html {
 *:after {
   box-sizing: inherit;
 }
-/*?huhh, keep first*/
-:root {
-  --accent-color: #555;
-  --body-typeface: "Slabo 27px", serif;
-}
 
+/*background gradient flow*/
 body {
   padding: 1rem;
   background-image:
@@ -88,7 +84,7 @@ hr {
   border: none;
 }
 
-button {
+.links {
   font-size: 24pt;
   letter-spacing: 3px;
   background: #ffffff;
@@ -106,7 +102,7 @@ a {
   font-weight: bold;
 }
 
-button:hover {
+.links:hover {
   background: #ffbe5c;
 }
 
@@ -128,7 +124,8 @@ header {
 header,
 .experience,
 .education,
-.skills {
+.skills,
+.info {
   padding: 1rem;
   margin: 0.5rem;
   flex-direction: column;
@@ -150,7 +147,8 @@ header,
   margin: 0.5rem;
 }
 
-.resume-name {
+.resume-name,
+.about-name {
   font-size: 3rem;
   color: #353935;
   font-family: "DM Serif Text";
@@ -170,7 +168,8 @@ header,
 
 .education,
 .experience,
-.skills {
+.skills,
+.info {
   min-height: 60vh;
   display: flex;
   flex-direction: column;
@@ -178,12 +177,14 @@ header,
 
 .education-main,
 .experience-main,
-.skills-main {
+.skills-main,
+.info-main {
   width: 80%;
 }
 .education-heading,
 .experience-heading,
-.skills-heading {
+.skills-heading,
+.info-heading {
   color: DarkBlue;
   font-family: "DM Serif Text";
 }
@@ -222,7 +223,7 @@ header,
   border-image: url("https://www.w3schools.com/cssref/border.png") 30 stretch;
 }
 
-.name {
+.hugename {
   color: #ffbe5c;
   font-family: "Rubik", sans-serif;
   text-align: center;
@@ -231,24 +232,12 @@ header,
 }
 
 /* 
-james ref, edited
+james refrences
 */
 
-@media (min-width: 992px) {
-  .wrapper {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .summary {
-    width: 25%;
-  }
-  .main-details {
-    width: 75%;
-  }
-}
 @media (min-width: 300px) {
-  .resume-name {
+  .resume-name,
+  .about-name {
     font-size: 2rem;
   }
   .index-name {
@@ -273,7 +262,8 @@ james ref, edited
   }
   .education-main,
   .experience-main,
-  .skills-main {
+  .skills-main,
+  .info-main {
     font-size: 0.5rem;
   }
   header,
@@ -282,7 +272,8 @@ james ref, edited
   .skills,
   .wrapper,
   .summary,
-  .main-details {
+  .main-details,
+  .info {
     box-shadow: none;
     padding: 0.1rem;
     min-height: 33vh;
@@ -296,7 +287,8 @@ james ref, edited
 }
 
 @media (min-width: 576px) {
-  .resume-name {
+  .resume-name,
+  .about-name {
     font-size: 2.5rem;
   }
   h2 {
@@ -308,7 +300,8 @@ james ref, edited
   }
   .education-main,
   .experience-main,
-  .skills-main {
+  .skills-main,
+  .info-main {
     font-size: 1rem;
   }
   header,
@@ -317,7 +310,8 @@ james ref, edited
   .skills,
   .wrapper,
   .summary,
-  .main-details {
+  .main-details,
+  .info {
     box-shadow: none;
     padding: 0.6rem;
     min-height: 45vh;
@@ -345,7 +339,8 @@ james ref, edited
 @media (min-width: 992px) {
   .education-main,
   .experience-main,
-  .skills-main {
+  .skills-main,
+  .info-main {
     font-size: 1.2rem;
   }
   h2 {
@@ -356,7 +351,8 @@ james ref, edited
   .summary {
     font-size: 1.4rem;
   }
-  .resume-name {
+  .resume-name,
+  .about-name {
     font-size: 6rem;
     color: #1f3b4d;
   }
@@ -366,7 +362,8 @@ james ref, edited
   .skills,
   .wrapper,
   .summary,
-  .main-details {
+  .main-details,
+  .info {
     box-shadow: none;
     padding: 1rem;
     min-height: 65vh;
@@ -374,9 +371,20 @@ james ref, edited
   .index-name {
     font-size: 5rem;
   }
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .summary {
+    width: 25%;
+  }
+  .main-details {
+    width: 75%;
+  }
 }
 
-/*CSS oklch Gradation...*/
+/*background g too...*/
 @keyframes anim_bg {
   0% {
     --hue1: 0deg;
