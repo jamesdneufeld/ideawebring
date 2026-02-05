@@ -41,6 +41,9 @@ h2 {
 h3 {
   font-weight: 200;
   font-size: 1.5rem;
+  padding-bottom: 0.25rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #fdf0d5;
 }
 
 h4 {
@@ -91,6 +94,7 @@ a {
 
 .paragraph-sm {
   font-size: 0.8rem;
+  margin-bottom: 1rem;
 }
 
 .work-experience {
