@@ -31,12 +31,17 @@ header {
   color: rgb(203, 197, 248);
 }
 
+h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  padding-bottom: 0.5rem;
+  color: rgb(203, 197, 248);
+}
+
 h2 {
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   font-weight: 500;
   color: rgb(159, 140, 216);
-  font-size: 1.2rem;
-  font-weight: 200rem;
 }
 
 h3 {
@@ -95,7 +100,8 @@ a:hover {
 }
 
 .hero-text {
-  font-size: 2rem;
+  font-size: 3rem;
+  padding: 1rem;
   text-align: center;
 }
 
@@ -106,7 +112,7 @@ a:hover {
 
 .sub-text {
   line-height: 1.5rem;
-  margin: 1rem;
+  margin-top: 1rem;
 }
 
 .index-sub {
@@ -143,6 +149,14 @@ a:hover {
 
 .aboutimg {
   border: 3px inset rgb(66, 186, 180);
+}
+
+.aboutsub {
+  padding-bottom: 1rem;
+}
+
+.aboutlinks {
+  padding-bottom: 1rem;
 }
 
 /*resume.html things*/
@@ -219,6 +233,10 @@ a:hover {
 
 @media (min-width: 992px) {
   header {
+    font-size: 5rem;
+  }
+
+  h1 {
     font-size: 5rem;
   }
 

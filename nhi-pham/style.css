@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
 
+/* General Styles */
 body {
   font-family: "Quicksand", sans-serif;
   padding: 1rem;
@@ -11,41 +12,20 @@ body {
   min-height: 100vh;
   justify-content: center;
 }
-.indexpage {
-  background-color: aqua;
-  background-image: url(stripebg.png);
-}
-.title {
-  display: flex;
-  justify-content: center;
-  color: rgb(243, 93, 93);
-}
 a {
   text-decoration: none;
   font-weight: 600;
   color: rgb(47, 47, 47);
 }
-.buttonlink {
-  border-radius: 100px;
-  display: inline-block;
-  background-color: rgb(177, 177, 231);
-  padding: 0.5rem;
-  background-size: 20px;
-}
-.buttonlink:hover {
-  background-color: white;
-}
-.decor {
-  display: flex;
-  justify-content: center;
+h2 {
+  font-family: "quicksand", sans-serif;
+  font-weight: 700;
   font-size: 2rem;
 }
-.links {
-  width: 75%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2rem;
+h3 {
+  font-family: "quicksand", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
 }
 header {
   font-family: "Anton", sans-serif;
@@ -53,42 +33,91 @@ header {
   color: black;
   font-size: 4rem;
 }
-button {
+/* Specific Class Styles */
+
+.indexpage {
+  background-color: aqua;
+  background-image: url(daisies.jpg);
+}
+.intro {
   display: flex;
-  border-radius: 100px;
-  background-color: rgb(255, 255, 255);
   justify-content: center;
+  padding-top: 0.5rem;
+}
+.intro-paragraph {
+  text-align: center;
+}
+.daisy1 {
+  display: inline-block;
+  vertical-align: middle;
+  height: 30px;
+  width: 30px;
+  background-image: url(daisy.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.title {
+  padding-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  color: rgb(128, 174, 162);
+}
+
+.buttonlink {
+  border-radius: 100px;
+  display: inline-block;
+  background-color: rgb(211, 155, 70);
   padding: 0.5rem;
+  background-size: 20px;
+  justify-content: center;
+}
+.buttonlink:hover {
+  background-color: white;
+  color: rgb(211, 155, 70);
+}
+.decor {
+  display: flex;
+  justify-content: center;
+}
+
+.links {
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  width: 70%;
+  padding: 2rem;
 }
-button:hover {
-  background-color: rgb(251, 158, 158);
+.button {
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(255, 255, 255);
+  padding: 0.5rem;
+  border: 0.1rem solid black;
+  width: 55%;
 }
-h2 {
-  font-family: "quicksand", sans-serif;
-  font-weight: 700;
-  font-size: 2rem;
-  display: left;
-}
-h3 {
-  font-family: "quicksand", sans-serif;
-  font-weight: 700;
-  font-size: 1rem;
+.button:hover {
+  background-color: rgb(211, 155, 70);
+  color: white;
 }
 
 .contactsection {
   border-bottom: 2px solid black;
   padding: 1rem;
+  width: 100%;
 }
 .experience {
   border-bottom: 2px solid black;
   padding: 1rem;
+  width: 100%;
 }
 
 .education {
   border-bottom: 2px solid black;
   padding: 1rem;
+  width: 100%;
 }
 
 .paragraph-md {
@@ -106,8 +135,8 @@ h3 {
 .wrapper {
   border: 10px solid white;
   border-radius: 3rem;
-  padding: 1rem;
-  background-color: azure;
+  padding: 3rem;
+  background-color: rgb(202, 227, 165);
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -118,23 +147,24 @@ h3 {
     justify-content: center;
     align-items: center;
   }
-  button {
+
+  .button {
     display: flex;
     border-radius: 100px;
     background-color: rgb(255, 255, 255);
     justify-content: center;
     padding: 0.5rem;
     align-items: center;
-    width: 100%;
+    width: 25%;
   }
-  button:hover {
-    background-color: rgb(251, 158, 158);
+  .button:hover {
+    background-color: rgb(211, 155, 70);
+    color: white;
   }
   h2 {
     font-family: "quicksand", sans-serif;
     font-weight: 700;
     font-size: 2rem;
-    background-color: rgb(255, 255, 255);
     display: flex;
     justify-content: center;
     align-items: center;
