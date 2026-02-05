@@ -1,9 +1,5 @@
 /* Typography imported from Google Fonts */
 
-@import url("https://fonts.googleapis.com/css2?family=Limelight&display=swap");
-
-@import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap");
-
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100..700&display=swap");
 
 @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap");
@@ -23,25 +19,26 @@ html {
 /* Very General Element Styles */
 h1 {
   font-family: "Bagel Fat One", system-ui;
-  font-size: 8rem;
+  font-size: 5rem;
   margin: 3rem;
 }
 
 h2 {
   font-family: "Josefin Sans", sans-serif;
-  font-size: 1.5rem;
-  margin: 0.5rem;
+  font-size: 2rem;
+  margin: 1rem auto;
 }
 
 h3 {
   font-size: 3rem;
-  margin: 1rem;
+  margin: 1rem auto;
   font-weight: 400;
+  color: midnightblue;
 }
 
 h4 {
   font-size: 1.5rem;
-  margin: 0.5rem;
+  margin: 0.5rem auto;
   font-weight: 300;
 }
 
@@ -55,13 +52,33 @@ h4,
 p {
   font-family: "Josefin Sans", sans-serif;
 }
+
+a {
+  text-decoration: none;
+  color: teal;
+  font-size: 1rem;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+p {
+  font-size: 1.5rem;
+  margin: 1rem;
+}
+
 li {
   font-size: 1rem;
   margin-bottom: 0.5rem;
 }
+
+ul {
+  margin-bottom: 2rem;
+}
 /*Web Ring Homepage*/
 
-header {
+.homepageheader {
   color: lightcyan;
   padding-top: 8rem;
   padding-bottom: 5rem;
@@ -70,6 +87,7 @@ header {
   margin-bottom: 1rem;
   flex: 1; /* Take up all available room */
 }
+
 .about-me {
   width: 100%;
   padding: 1rem auto;
@@ -82,8 +100,8 @@ header {
 }
 .webringinfo {
   background-color: lightcyan;
-  padding: 1rem;
   width: 100%;
+  font-size: 1rem;
 }
 
 /* Specific Class Styles */
@@ -96,6 +114,7 @@ header {
   text-align: center;
   min-height: 100vh;
   background-image: url(nightsky.jpg);
+  background-size: cover;
 }
 
 .linkbutton {
@@ -111,15 +130,6 @@ header {
   text-decoration: none;
 }
 
-.webringlink {
-  text-decoration: none;
-  color: teal;
-  font-size: 2rem;
-}
-.webringlink:hover {
-  text-decoration: underline;
-}
-
 .linkbutton:hover {
   font-size: 2rem;
   font-family: "Josefin Sans", sans-serif;
@@ -132,26 +142,94 @@ header {
   color: black;
 }
 
+.information {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.education {
+  padding-left: 1rem;
+  margin-bottom: 3rem;
+}
+
+.skills {
+  padding-left: 1rem;
+  margin-bottom: 3rem;
+}
+
+.experience {
+  padding-left: 1rem;
+  padding-bottom: 2rem;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .about-me h3 {
   font-size: 2rem;
 }
 
-/*resume*/
-
-/* Very General Element Styles */
-
-.resume h1 {
-  color: black;
+.resume {
+  color: midnightblue;
+  justify-items: center;
+  padding: 1rem auto;
+  margin: 1rem auto;
 }
 
-/* Specific Class Styles */
+.photolink {
+  font-size: 1.5rem;
+  color: lightcyan;
+}
+
+.lunaphoto {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+#rh2 {
+  color: lightcyan;
+  font-size: 2rem;
+  margin-top: 1rem;
+}
 
 /* Large devices (desktops, 992px and up) */
 
 @media (min-width: 992px) {
+  h1 {
+    font-size: 8rem;
+  }
+
   .buttongroup {
     flex-direction: row;
   }
-}
 
-/* make homepage look like space, have moon and starts */
+  .information {
+    flex-direction: row;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .knowledge {
+    margin-left: 2rem;
+  }
+
+  .experience {
+    width: 75%;
+    border-left: 0.25rem solid black;
+    margin-left: 2rem;
+    padding-left: 2rem;
+  }
+
+  .education {
+    border-bottom: 0.25rem solid black;
+  }
+}

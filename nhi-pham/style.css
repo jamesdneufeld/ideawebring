@@ -106,15 +106,18 @@ header {
 .contactsection {
   border-bottom: 2px solid black;
   padding: 1rem;
+  width: 100%;
 }
 .experience {
   border-bottom: 2px solid black;
   padding: 1rem;
+  width: 100%;
 }
 
 .education {
   border-bottom: 2px solid black;
   padding: 1rem;
+  width: 100%;
 }
 
 .paragraph-md {
