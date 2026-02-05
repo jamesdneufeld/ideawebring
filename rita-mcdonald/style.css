@@ -57,49 +57,79 @@ a {
 a:hover {
   color: lightsalmon;
 }
-
-header {
+/* RESUME HEADING */
+.resume-header {
   background: lightblue;
   padding: 4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
-
-/* RESUME ROW AND COLUMN STRUCTURE */
-
-.education {
-  display: flex;
-  flex-direction: column;
+.resume-name {
+  font-family: "Asset", serif;
 }
-
-.skills {
-  display: flex;
-  flex-direction: column;
-}
-
-.experience {
-  display: flex;
-  flex-direction: column;
-}
-
-.intrests {
-  display: flex;
-  flex-direction: column;
-}
-
-/* OTHER RESUME STUFF */
-
-.resume-heading {
-  width: 50%;
+.resume-capu {
+  font-size: 2.5rem;
   color: cornflowerblue;
 }
-
-.resume-content {
-  width: 50%;
+.resume-email {
   font-size: 2rem;
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
+  font-weight: 900;
+  color: cornflowerblue;
+  margin-top: 1rem;
+}
+.resume-header h1,
+.resume-header h3,
+.resume-header h4 {
+  margin: 0.5rem 0;
+}
+/* RESUME CONTENT */
+
+.resume-section {
+  background: white;
+  padding: 2rem;
+  margin: 2rem auto;
+  width: 80%;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+.section-title {
+  width: 100%;
+  color: cornflowerblue;
+  font-style: bold;
+  margin-bottom: 0.75 rem;
+}
+
+.section-list {
+  width: 100%;
+  max-width: none;
+  text-align: left;
+  font-size: 2rem;
+  padding: 0;
+  margin: 0;
+}
+
+.section-list li {
+  margin-bottom: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+/* RESUME DATES */
+.date {
+  font-style: italic;
+  font-weight: 900
+  font-size: 1.5rem;
+  color: #555;
+  margin-left: 2rem;
+  white-space: nowrap;
+}
+/* OTHER RESUME FORMATTING STUFF */
+
+body {
+  background-color: lightblue;
 }
 
 /* Start of Webring */
