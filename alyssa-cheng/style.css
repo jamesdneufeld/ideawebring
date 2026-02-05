@@ -1,16 +1,23 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* General Styles */
+
 body {
   font-family: "Lato", sans-serif;
   background-color: antiquewhite;
 }
-header {
-  background: #235c7e;
-  padding: 2rem;
-}
 section {
   background: antiquewhite;
-  padding: 2rem;
 }
 h1 {
   font-weight: 900;
@@ -43,22 +50,34 @@ h4 {
 p {
   margin-bottom: 1.5rem;
   color: #94bebb;
-  font-size: 1.2;
+  font-size: 1.2rem;
 }
-ul {
+.job-duties {
   list-style-type: disc;
-  list-style-position: inside;
+  margin-left: 1.5rem;
   margin-bottom: 1.4rem;
+
   color: #235c7e;
 }
-li {
+.job-duty-item {
   margin-bottom: 0.5rem;
 }
-.site-header,
+
+.edu,
+.exp,
+.skills {
+  padding: 1rem;
+}
+
+/* More specific class styles */
+
+.index-contents,
 .main-nav {
   text-align: center;
   display: flex;
   flex-direction: column;
+  border-radius: 2rem;
+  width: 90%;
 }
 
 .para-md {
@@ -84,6 +103,10 @@ a {
   flex-direction: row;
   justify-content: flex-end;
 }
+.resume-header {
+  background: #235c7e;
+  padding: 2rem;
+}
 .index {
   background-image: url(https://api.nga.gov/iiif/a167f440-ad1c-481e-ada0-2f6962d54e64/full/!800,800/0/default.jpg);
   background-size: cover;
@@ -91,38 +114,50 @@ a {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  h3 {
+    color: antiquewhite;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
 }
+.index-contents {
+  background: #235c7e;
+  border-radius: 2rem;
+  padding: 2rem;
+}
+.webring-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.pg-link {
+  margin-bottom: 0.5rem;
+}
+
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
-  .edu,
-  .exp,
-  .skills {
-    width: 100%;
-    flex-direction: column;
-  }
-  .site-header,
-  .main-nav {
-    width: 100%;
-  }
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-  .site-header,
+  .webring-nav {
+    flex-direction: row;
+  }
+  .index-contents,
   .main-nav {
-    width: 100%;
+    width: 60%;
+  }
+  .pg-link {
+    margin: 0.5rem;
   }
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-  header {
-    padding: 2rem;
-  }
   h1 {
     font-size: 4rem;
   }
-
   .contact {
     display: flex;
     flex-direction: row;
@@ -137,6 +172,7 @@ a {
   .skills {
     display: flex;
     flex-direction: row;
+    padding: 2rem;
   }
   .edu-heading,
   .exp-heading,
@@ -149,17 +185,8 @@ a {
   .skills-main {
     width: 80%;
   }
-  .site-header,
+  .index-contents,
   .main-nav {
     width: 55%;
   }
-}
-
-html {
-  box-sizing: border-box;
-}
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
 }

@@ -1,163 +1,388 @@
-/* apply a natural box layout model to all elements, but allowing components to change */
+/*
+   Global / Base
+*/
+
 html {
   box-sizing: border-box;
-}
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
+  font-size: 100%;
 }
 
-/* General Element Styles */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
 
 body {
   font-family: Inter, Arial, sans-serif;
   line-height: 1.6;
   margin: 0;
-  padding: 40px 18px;
+  padding: 2.5rem 1.125rem;
   background: #ffe6f1;
   color: #2b2b2b;
 }
 
-header {
-  background: #ffffff;
-  border: 2px solid #ff7fb6;
-  border-radius: 18px;
-  padding: 22px 20px;
-  box-shadow: 0 10px 25px rgba(255, 127, 182, 0.25);
-  margin-bottom: 22px;
-}
-
-/* General Typography Styles */
-
-h1 {
-  margin: 0 0 8px 0;
-  font-size: 34px;
-  letter-spacing: 0.5px;
-  color: #c2185b;
-}
-
-h2 {
-  margin: 18px 0 8px 0;
-  font-size: 16px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #7a1450;
-}
-
-h3 {
-  margin: 14px 0 4px 0;
-  font-size: 18px;
-  color: #4b1240;
-}
-
-h4 {
-  margin: 4px 0 10px 0;
-  font-size: 14px;
-  color: #6b3b5d;
-}
-
-p {
-  margin: 6px 0 10px 0;
-}
-
-section {
-  background: #ffffff;
-  border-radius: 18px;
-  padding: 18px 20px;
-  margin: 16px 0;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(194, 24, 91, 0.15);
-}
-
-ul {
-  margin: 8px 0 0 18px;
-  padding: 0;
-}
-
-li {
-  margin: 6px 0;
-}
-
-/* General Hyperlink Styles */
-
 a {
   color: #c2185b;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 a:hover {
   text-decoration: underline;
 }
 
-/* Specific Class Styles */
+/*
+   Resume (DO NOT BREAK)
+ */
 
-.Paragraph-md {
-  font-size: 15px;
-  color: #2b2b2b;
+.header {
+  background: #ffffff;
+  border: 0.125rem solid #ff7fb6;
+  border-radius: 1.125rem;
+  padding: 1.375rem 1.25rem;
+  box-shadow: 0 0.625rem 1.5625rem rgba(255, 127, 182, 0.25);
+  margin-bottom: 1.25rem;
 }
 
-.Paragraph-lg {
-  font-size: 14px;
+.name {
+  font-family: Poppins, Arial, sans-serif;
+  font-weight: 800;
+  font-size: 2.75rem;
+  color: #c2185b;
+  margin: 0 0 0.5rem 0;
+}
+
+.contact {
+  color: #6b3b5d;
+  margin: 0 0 1rem 0;
+}
+
+.section-title {
+  margin: 1.125rem 0 0.5rem;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #7a1450;
+}
+
+.body-md {
+  font-size: 1rem;
+  margin: 0.375rem 0 0.625rem;
+}
+
+.subhead {
+  margin: 1rem 0 0.25rem;
+  font-size: 1rem;
+  color: #4b1240;
+  font-weight: 700;
+}
+
+.item-title {
+  margin: 0.75rem 0 0.25rem;
+  font-size: 1.125rem;
+  color: #4b1240;
+}
+
+.item-meta {
+  margin: 0 0 0.5rem;
+  color: #6b3b5d;
+  font-size: 0.9375rem;
+}
+
+.section {
+  background: #ffffff;
+  border-radius: 1.125rem;
+  padding: 1.125rem 1.25rem;
+  box-shadow: 0 0.625rem 1.5625rem rgba(0, 0, 0, 0.06);
+  border: 0.0625rem solid rgba(194, 24, 91, 0.15);
+}
+
+.list {
+  margin: 0.5rem 0 1.125rem;
+  padding-left: 1.125rem;
+}
+.list li {
+  margin: 0.375rem 0;
+}
+
+.btn-link {
+  display: inline-block;
+  padding: 0.5rem 0.875rem;
+  border-radius: 999rem;
+  background: #ffd0e4;
+  border: 0.0625rem solid #ff7fb6;
+  color: #7a1450;
+  font-weight: 700;
+}
+
+.btn-link:hover {
+  text-decoration: none;
+  filter: brightness(0.98);
+}
+
+.top-nav {
+  margin-top: 1rem;
+}
+
+/* Resume grid: mobile 1 col */
+.resume-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+/* Desktop 2 col */
+@media (min-width: 48rem) {
+  .resume-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.footer {
+  margin-top: 2rem;
+  text-align: center;
   color: #6b3b5d;
 }
-
-.Paragraph-sm {
-  font-size: 13px;
-  color: #6b3b5d;
+.footer-text {
+  font-size: 0.875rem;
 }
 
-/* Resume Styles */
+/* 
+   HOME PAGE (Cute + Soft + Prettiest)
+ */
 
+.home {
+  /* keep your flowers background */
+  background: url(flowers.jpg);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* soft overlay so text pops */
+.home::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 208, 228, 0.55),
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(255, 230, 241, 0.7),
+      transparent 55%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.35),
+      rgba(255, 255, 255, 0.15)
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* center content */
 .hero {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 16px;
+  padding: 2.75rem 1.125rem;
+  position: relative;
+  z-index: 1;
 }
+
+/* the pretty box */
 .hero-card {
   width: 100%;
-  max-width: 760px;
-  text-align: center;
+  max-width: 52rem;
+  text-align: left;
 
-  background: rgba(255, 255, 255, 0.95);
-  border: 2px solid rgba(255, 127, 182, 0.75);
-  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.86);
+  border: 0.125rem solid rgba(255, 127, 182, 0.95);
+  border-radius: 1.75rem;
+  padding: 2.25rem 2rem;
 
-  padding: 30px 22px;
-  box-shadow: 0 16px 34px rgba(255, 127, 182, 0.25);
+  /* cute glow + depth */
+  box-shadow:
+    0 1.5rem 3.25rem rgba(255, 127, 182, 0.22),
+    0 0 0 0.45rem rgba(255, 127, 182, 0.09);
+
+  /* soft blur for glassy look */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  /* subtle animation */
+  transform: translateY(0);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
 }
+
+.hero-card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 2rem 3.75rem rgba(255, 127, 182, 0.26),
+    0 0 0 0.55rem rgba(255, 127, 182, 0.12);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* cute badge */
 .badge {
   display: inline-block;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: #ffd0e4;
-  border: 1px solid #ff7fb6;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999rem;
+  background: rgba(255, 208, 228, 0.9);
+  border: 0.0625rem solid rgba(255, 127, 182, 0.95);
   color: #7a1450;
-  font-weight: 600;
-  margin-bottom: 14px;
-}
-.hero-name {
-  font-family: Poppins, Arial, sans-serif;
   font-weight: 800;
-  font-size: 44px;
+  letter-spacing: 0.02em;
+  margin: 0 0 1.15rem 0;
+}
+
+.hero-name {
+  font-family: Poppins, Inter, Arial, sans-serif;
+  font-weight: 900;
+  font-size: 2.75rem;
   color: #c2185b;
-  margin: 0 0 8px 0;
+  margin: 0 0 0.25rem 0;
 }
 
-.home {
-  background: url(flowers.jpg);
+.hero-subtitle {
+  margin: 0 0 1rem 0;
+  color: #4b1240;
+  font-weight: 700;
 }
 
-/* Large devices (desktops, 992px and up) */
+.hero-text {
+  margin: 0 0 1.25rem 0;
+  color: #2b2b2b;
+  font-size: 1.0625rem;
+  max-width: 44rem;
+}
 
-@media (min-width: 992px) {
-  h1 {
-    color: rgb(64, 0, 21);
+/* CTA button */
+.cta-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin: 0 0 1.25rem 0;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 0.85rem 1.15rem;
+  border-radius: 999rem;
+  background: linear-gradient(180deg, #d81b60, #c2185b);
+  color: #fff;
+  border: 0.125rem solid rgba(194, 24, 91, 0.65);
+  font-weight: 900;
+  letter-spacing: 0.01em;
+
+  box-shadow: 0 1rem 1.8rem rgba(194, 24, 91, 0.22);
+  transition:
+    transform 160ms ease,
+    filter 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.btn-primary:hover {
+  text-decoration: none;
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+  box-shadow: 0 1.25rem 2.2rem rgba(194, 24, 91, 0.26);
+}
+
+.btn-primary:focus-visible {
+  outline: 0.22rem solid rgba(122, 20, 80, 0.35);
+  outline-offset: 0.25rem;
+}
+
+/* label above nav */
+.nav-label {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: rgba(75, 18, 64, 0.85);
+  margin: 0 0 0.6rem 0;
+  letter-spacing: 0.04em;
+}
+
+/* webring pills */
+.webring-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.webring-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+
+  padding: 0.7rem 1rem;
+  border-radius: 999rem;
+
+  background: rgba(255, 208, 228, 0.72);
+  border: 0.0625rem solid rgba(255, 127, 182, 0.95);
+  color: #7a1450;
+  font-weight: 900;
+
+  box-shadow: 0 0.7rem 1.4rem rgba(255, 127, 182, 0.14);
+  transition:
+    transform 150ms ease,
+    filter 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.webring-link:hover {
+  text-decoration: none;
+  transform: translateY(-1px);
+  filter: brightness(0.985);
+  box-shadow: 0 0.9rem 1.7rem rgba(255, 127, 182, 0.18);
+}
+
+.webring-link:focus-visible {
+  outline: 0.22rem solid rgba(122, 20, 80, 0.35);
+  outline-offset: 0.25rem;
+}
+
+/* make Resume pill slightly special */
+.webring-link--main {
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(194, 24, 91, 0.55);
+}
+
+/* little arrows */
+.nav-arrow {
+  font-weight: 900;
+}
+
+/* tiny footer note */
+.tiny-note {
+  margin: 1.15rem 0 0 0;
+  color: rgba(107, 59, 93, 0.9);
+  font-size: 0.9rem;
+}
+
+/* Responsive tweaks */
+@media (min-width: 48rem) {
+  body {
+    padding: 3rem 2rem;
   }
-  h2 {
-    color: rgb(170, 0, 255);
+
+  .hero-card {
+    padding: 2.5rem 2.25rem;
+  }
+
+  .hero-name {
+    font-size: 3rem;
   }
 }

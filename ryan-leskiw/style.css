@@ -41,7 +41,7 @@ h1 {
   color: white;
 }
 h2 {
-  font-size: 1.5rem;
+  font-size: 2.25rem;
   font-weight: 500;
   color: white;
   margin-bottom: 1rem;
@@ -51,13 +51,24 @@ h3 {
 }
 p {
   font-size: 1rem;
-  font-family: "IBM Plex Mono", monospace;
   margin-bottom: 1rem;
   color: white;
+  font-family: "IBM Plex Mono", monospace;
+  line-height: 1.2;
 }
 
 ul {
   color: white;
+}
+footer {
+  padding: 2rem;
+  border-top: 1px solid white;
+}
+li {
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+  line-height: 1.3;
 }
 /* Hyperlink styles */
 
@@ -91,6 +102,11 @@ a:hover {
 
 /* Specific class styles */
 
+.subtitle {
+  font-size: 4rem;
+  text-align: center;
+}
+
 .education {
   margin-bottom: 2rem;
   text-align: center;
@@ -114,11 +130,18 @@ a:hover {
   font-size: 0.8rem;
   color: dodgerblue;
 }
+.bullet-list {
+  list-style-type: disc;
+}
 
-.experience,
-.life-experience {
+.experience {
   text-align: center;
   margin-bottom: 3rem;
+  padding: 1rem;
+}
+.life-experience {
+  margin-bottom: 3rem;
+  padding: 1rem;
 }
 footer {
   text-align: center;
@@ -132,15 +155,6 @@ footer {
   font-size: 2rem;
   text-align: center;
   font-weight: 300;
-}
-
-footer {
-  padding: 2rem;
-  border-top: 1px solid white;
-}
-li {
-  margin-bottom: 1rem;
-  margin-top: 0.5rem;
 }
 
 .hero {
@@ -161,18 +175,31 @@ li {
   margin-top: 0.75rem;
 }
 .life-experience {
-  text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
-.project-coordinator {
+.job-title {
   font-weight: 500;
-  text-align: start;
-  margin-left: 10rem;
+  text-align: center;
+  color: white;
+  font-size: 1.2rem;
+}
+.company {
+  font-family: "Rubik", sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: white;
+}
+.job-description {
+  line-height: 1.3;
+  font-size: 1rem;
+  margin-bottom: 2rem;
 }
 
-@media (min-width: 768px) {
+/* Desktop */
+
+@media (min-width: 992px) {
   .skill-list {
     display: flex;
     flex-wrap: wrap;
@@ -191,27 +218,14 @@ li {
     width: 50%;
   }
   a {
-    color: black;
-    margin-bottom: 1rem;
-    border: 0.15rem solid white;
-    border-radius: 0.15rem;
-    padding: 0.25rem 0.5rem;
-    text-decoration: none;
-    background-color: white;
     font-size: 1rem;
   }
   h1 {
-    font-family: "stalinist one", cursive;
-    text-align: center;
-    font-weight: 700;
     font-size: 4rem;
-    margin-bottom: 1rem;
-
-    color: white;
   }
   p {
     font-size: 1.5rem;
-    font-family: "IBM Plex Mono", monospace;
+
     margin-bottom: 0.5rem;
     color: white;
   }
@@ -226,5 +240,17 @@ li {
     margin: 0.5rem;
     padding: 0.5rem;
     width: 40vw;
+  }
+  .company {
+    text-align: left;
+  }
+  .job-title {
+  }
+  .company {
+    text-align: center;
+    font-size: 1.25rem;
+  }
+  .job-description {
+    font-size: 0.9rem;
   }
 }
