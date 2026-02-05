@@ -1,7 +1,6 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Sekuya&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=BBH+Bartle&display=swap");
 
 html {
   box-sizing: border-box;
@@ -12,9 +11,39 @@ html {
   box-sizing: inherit;
 }
 
+:root {
+  /* colours */
+  --darkred: rgb(163, 40, 40);
+  --cream: rgb(255, 209, 196);
+  --lightorange: rgb(232, 139, 96);
+  --orange: rgb(190, 87, 19);
+  --goldyellow: rgb(238, 181, 131);
+  --darkbrown: rgb(66, 36, 36);
+  /* fonts */
+  --headerfont: "Sekuya", sans-serif;
+  --bodyfont: "Rubik", sans-serif;
+  /* font sizes */
+  --largetitle: 4rem;
+  --resheader-mobile: 2rem; /* resume header size for mobile */
+}
+
+a {
+  color: var(--cream);
+  text-decoration: none;
+  font-style: oblique;
+  padding: 0.25rem;
+}
+
+a:hover {
+  text-decoration: none;
+  font-style: normal;
+  background: var(--cream);
+  color: var(--darkred);
+}
+
 body {
-  font-family: "Rubik", sans-serif;
-  background: rgb(29, 25, 24);
+  font-family: var(--bodyfont);
+  background: var(--darkbrown);
 }
 
 h3 {
@@ -22,27 +51,25 @@ h3 {
   font-size: 1.5rem;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 p {
   padding-top: 0.5rem;
-}
-
-a {
-  color: rgb(255, 209, 196);
-  text-decoration: none;
-  padding: 0.25rem;
-}
-
-a:hover {
-  text-decoration: none;
-  background: rgb(255, 209, 196);
-  color: rgb(163, 40, 40);
 }
 
 ul {
   padding: 1.5rem;
 }
 
-/* INDEX (Web Ring) */
+.subheading {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* INDEX STYLES (Web Ring) */
 .hero {
   padding: 2rem;
   min-height: 100vh;
@@ -50,53 +77,84 @@ ul {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url(star-bg.jpg);
+  text-align: center;
+  background-image: url(sm-star-bg.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 }
 
-.hero-headline {
-  font-family: "Sekuya", sans-serif;
-  color: rgb(255, 209, 196);
-  background: rgb(163, 40, 40);
+.hero-wrap {
+  font-family: var(--headerfont);
+  color: var(--cream);
+  background: var(--darkred);
   padding: 1.5rem;
+  margin-bottom: 1.5rem;
   font-size: 2rem;
+  text-align: center;
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  border-radius: 1.5rem;
+  border-radius: 2rem;
 }
 
-.hero-tagline {
+.bodytext {
+  font-family: var(--bodyfont);
   font-size: 1rem;
+  color: var(--cream);
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+}
+
+.darkbg {
+  background: var(--darkbrown);
 }
 
 .ring-links {
-  margin: 1rem;
   border-radius: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-content: center;
-  font-family: "Sekuya", sans-serif;
+  font-family: var(--headerfont);
 }
 
 .link-buttons {
-  background: rgb(163, 40, 40);
+  background: var(--darkred);
+  justify-content: center;
+  text-align: center;
   padding: 1rem;
   margin: 1rem;
   border-radius: 1.5rem;
 }
 
-/* RESUME */
-/* header styles */
+.sm-link {
+  font-size: 1rem;
+  margin: 0.5rem;
+}
+
+/* ABOUT STYLES */
+.about-wrap {
+  font-family: var(--headerfont);
+  color: var(--cream);
+  background: var(--darkred);
+  padding: 1.5rem;
+  font-size: 2rem;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2rem;
+}
+
+/* RESUME STYLES */
 .resume-header {
-  background: rgb(152, 58, 58);
+  background: var(--darkred);
   padding: 2rem;
   font-weight: bold;
-  color: beige;
+  color: var(--cream);
   margin-bottom: 1rem;
 }
 
@@ -105,7 +163,7 @@ ul {
 }
 
 .name {
-  font-family: "Sekuya", sans-serif;
+  font-family: var(--headerfont);
   font-weight: 400;
   font-size: 3.25rem;
 }
@@ -115,125 +173,96 @@ ul {
   margin-top: 1.5rem;
 }
 
-/* education & project section styles */
-.eduproject-wrapper {
-  background: rgb(238, 181, 131);
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
+/* resume section header styles */
 
-.eduproject-header {
-  font-family: "Sekuya", sans-serif;
-  font-weight: 400;
-  background: rgb(190, 87, 19);
-  color: rgb(238, 181, 131);
-  font-size: 2.8rem;
+.res-section-header {
+  font-family: var(--headerfont);
+  font-size: var(--resheader-mobile);
   margin-bottom: 1.5rem;
   padding: 1rem;
 }
-
+.orange {
+  background: var(--orange);
+  color: var(--goldyellow);
+}
+.red {
+  background: var(--darkred);
+  color: var(--lightorange);
+}
 .years {
   font-style: italic;
   padding-top: 0.5rem;
   padding-bottom: 1.25rem;
 }
 
-/* technical skills section styles */
-.skills-wrapper {
-  background: rgb(232, 139, 96);
+/* resume wrapper styles */
+.res-wrapper {
   padding: 1rem;
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
 }
-
-.skills-header {
-  font-family: "Sekuya", regular;
-  font-weight: 400;
-  background: rgb(164, 48, 16);
-  color: rgb(232, 139, 96);
-  font-size: 2.8rem;
-  margin-bottom: 1.5rem;
-  padding: 1rem;
+.yellow-wrap {
+  background: var(--goldyellow);
 }
-
-/* work experience section styles */
-.work-wrapper {
-  background: rgb(238, 181, 131);
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
-
-.work-header {
-  font-family: "Sekuya", regular;
-  font-weight: 400;
-  background: rgb(190, 87, 19);
-  color: rgb(238, 181, 131);
-  font-size: 2.8rem;
-  margin-bottom: 1.5rem;
-  padding: 1rem;
+.lightorange-wrap {
+  background: var(--lightorange);
 }
 
 .bulleted-item {
-  /* eventually change points to a custom image? */
   list-style: disc;
   margin-left: 2rem;
   margin-bottom: 0.5rem;
 }
 
+/* Tablet view (768px to 991 px) */
+@media (min-width: 768px) {
+  /* INDEX STYLES */
+  .ring-links {
+    flex-direction: row;
+  }
+  /* ABOUT STYLES */
+  .about-wrap {
+    flex-direction: row;
+  }
+  .aboutcontent {
+    max-width: 80%;
+  }
+}
+
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-  /* Index Styles */
-  .hero-headline {
-    font-size: 4rem;
+  /* INDEX STYLES */
+  .hero-wrap {
+    font-size: var(--largetitle);
+    flex-direction: row;
   }
-
-  .hero-tagline {
+  .subheading {
     font-size: 2rem;
+    flex-direction: row;
   }
-
+  .bodytext {
+    font-size: 1.5rem;
+  }
   .ring-links {
     font-size: 2rem;
   }
 
-  /* Resume Styles */
-  .eduproject-wrapper {
+  /* ABOUT STYLES */
+  .about-wrap {
+    font-size: var(--largetitle);
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  .aboutcontent {
+    max-width: 50%;
+  }
+
+  /* RESUME STYLES */
+  .res-wrapper {
     flex-direction: row;
   }
-
-  .education {
-    width: 50%;
-  }
-
-  .projects {
-    width: 50%;
-  }
-
-  .work-wrapper {
-    flex-direction: row;
-  }
-
-  .jobs {
-    width: 50%;
-  }
-
-  .freelance {
-    width: 50%;
-  }
-
-  .skills-wrapper {
-    flex-direction: row;
-  }
-
-  .hard-skills {
-    width: 50%;
-  }
-
-  .soft-skills {
+  .res-section {
     width: 50%;
   }
 }

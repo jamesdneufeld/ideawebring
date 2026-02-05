@@ -22,44 +22,44 @@ header {
 
 .education {
   background: lightblue;
-  padding: 4rem;
+  padding: 2rem;
 }
 
 .skills {
   background: lightcyan;
-  padding: 4rem;
+  padding: 2rem;
 }
 
 .contact {
   background: lightcyan;
-  padding: 4rem;
+  padding: 2rem;
 }
 
 .volunteer {
   background: lightblue;
-  padding: 4rem;
+  padding: 2rem;
 }
 
 .work {
   background: lightcyan;
-  padding: 4rem;
+  padding: 2rem;
 }
 
 .certifications {
   background: lightblue;
-  padding: 4rem;
+  padding: 2rem;
 }
 
 .achievements {
   background: lightcyan;
-  padding: 4rem;
+  padding: 2rem;
 }
 
 h1 {
   font-family: "Quicksand", sans-serif;
   font-weight: 700;
   color: white;
-  font-size: 7rem;
+  font-size: 2.5rem;
 }
 
 h2 {
@@ -77,6 +77,8 @@ h3 {
 
 h4 {
   margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: darkcyan;
 }
 
 li {

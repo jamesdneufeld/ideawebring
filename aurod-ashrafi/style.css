@@ -31,8 +31,8 @@ body {
 }
 
 .header h1 {
-  font-size: 3.4rem;
-  font-weight: 800;
+  font-size: 5rem;
+  font-weight: 900;
 }
 
 .subtitle {
@@ -124,4 +124,60 @@ ul li {
   .right {
     border-left: none;
   }
+}
+.hero {
+  text-align: center;
+  font-size: 1.5rem;
+}
+h1 {
+  font-size: 5rem;
+}
+.link1:hover {
+  color: pink;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+  height: 34rem;
+  text-align: center;
+}
+.link1 {
+  padding: 0.75rem 1.25rem;
+  background-color: #8800ff;
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+}
+@media (max-width: 50rem) {
+  .center {
+    flex-direction: column;
+  }
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  border-radius: 2rem;
+  max-width: 30rem;
+  margin: 3.2rem auto;
+  height: 22rem;
+}
+@media (max-width: 600px) {
+  .center {
+    width: 90%;
+    flex-direction: column;
+    align-items: center;
+  }
+  .link1 {
+    width: 80%;
+  }
+}
+.link1 {
+  font-family: "Rubik Glitch", system-ui;
 }

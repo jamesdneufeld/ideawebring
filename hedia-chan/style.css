@@ -23,14 +23,9 @@ html {
 *:after {
   box-sizing: inherit;
 }
-/*?huhh, keep first*/
-:root {
-  --accent-color: #555;
-  --body-typeface: "Slabo 27px", serif;
-}
 
+/*background gradient flow*/
 body {
-  font-family: "Rubik", sans-serif;
   padding: 1rem;
   background-image:
     linear-gradient(
@@ -89,7 +84,7 @@ hr {
   border: none;
 }
 
-button {
+.links {
   font-size: 24pt;
   letter-spacing: 3px;
   background: #ffffff;
@@ -102,13 +97,13 @@ button {
 }
 
 a {
-  color: #9ec6f3;
+  color: silver;
   text-decoration: none;
   font-weight: bold;
 }
 
-button:hover {
-  background: #9fb3df;
+.links:hover {
+  background: #ffbe5c;
 }
 
 a:hover {
@@ -127,39 +122,30 @@ header {
 }
 
 header,
-.experience,
-.education,
-.skills {
-  /*border: 2px dashed black;*/
-  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+.section {
   padding: 1rem;
   margin: 0.5rem;
   flex-direction: column;
 }
 
 .wrapper {
-  /*border: 2px dashed blueviolet;*/
-  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
   padding: 1rem;
   margin: 0.5rem;
   display: flex;
   flex-direction: column;
 }
 .summary {
-  /*border: 4px dashed yellowgreen;*/
-  box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
   padding: 1rem;
   margin: 0.5rem;
 }
 
 .main-details {
-  /*border: 4px dashed orangered;*/
-  box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
   padding: 1rem;
   margin: 0.5rem;
 }
 
-.resume-name {
+.resume-name,
+.about-name {
   font-size: 3rem;
   color: #353935;
   font-family: "DM Serif Text";
@@ -177,122 +163,23 @@ header,
   justify-content: left;
 }
 
-.education,
-.experience,
-.skills {
+.section {
   min-height: 60vh;
   display: flex;
   flex-direction: column;
 }
 
-.education-main,
-.experience-main,
-.skills-main {
+.section-main {
   width: 80%;
 }
-.education-heading,
-.experience-heading,
-.skills-heading {
+
+.section-heading {
   color: DarkBlue;
   font-family: "DM Serif Text";
 }
 .jump {
   margin-top: 3rem;
   font-size: 1.5rem;
-}
-
-/* 
-james ref, edited
-*/
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  .resume-name {
-    font-size: 6rem;
-    color: #1f3b4d;
-  }
-  .wrapper {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .summary {
-    width: 25%;
-  }
-  .main-details {
-    width: 75%;
-  }
-}
-
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
-  h1 {
-    font-size: 1.777rem;
-  }
-  h2 {
-    font-size: 1.184rem;
-  }
-}
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-  h1 {
-    font-size: 2.369rem;
-  }
-  h2 {
-    font-size: 1.5793rem;
-  }
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  h1 {
-    font-size: 3.157rem;
-  }
-  h2 {
-    font-size: 2.1046rem;
-  }
-}
-
-/* X-Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-  h1 {
-    font-size: 4.209rem;
-  }
-  h2 {
-    font-size: 2.806rem;
-  }
-}
-
-/* XX-Large devices (larger desktops, 1400px and up) */
-@media (min-width: 1400px) {
-  h1 {
-    font-size: 5.61rem;
-  }
-  h2 {
-    font-size: 3.74rem;
-  }
-}
-
-/*CSS oklch Gradation...*/
-@keyframes anim_bg {
-  0% {
-    --hue1: 0deg;
-    --hue2: 300deg;
-  }
-
-  100% {
-    --hue1: 360deg;
-    --hue2: 660deg;
-  }
-}
-@property --hue1 {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-@property --hue2 {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
 }
 
 /*index pg class*/
@@ -312,7 +199,6 @@ james ref, edited
   align-items: center;
   flex-direction: row;
   min-height: 25vh;
-  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
   padding: 1rem;
   margin: 0.5rem;
 }
@@ -321,18 +207,165 @@ james ref, edited
   min-height: 100vh;
   padding: 2rem;
   min-height: 2rem;
-  /*background: url("https://i.pinimg.com/1200x/b3/00/26/b30026dc8bf54edcd47acb8ae584be94.jpg")
-    no-repeat scroll center center;*/
   border: 10px solid transparent;
-  padding: 15px;
+  padding: 1px;
   border-image: url("https://www.w3schools.com/cssref/border.png") 30 stretch;
 }
-.full {
-}
-.name {
+
+.hugename {
   color: #ffbe5c;
   font-family: "Rubik", sans-serif;
   text-align: center;
   font-size: 3rem;
   padding: 8rem;
+}
+
+/* 
+james refrences
+*/
+
+@media (min-width: 300px) {
+  .resume-name,
+  .about-name {
+    font-size: 2rem;
+  }
+  .index-name {
+    font-size: 3rem;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+    margin: 0.5rem;
+  }
+  h2 {
+    font-size: 1rem;
+  }
+
+  h3,
+  .summary {
+    font-size: 0.7rem;
+  }
+
+  .section-main {
+    font-size: 0.5rem;
+  }
+  header,
+  .section,
+  .wrapper,
+  .summary,
+  .main-details {
+    box-shadow: none;
+    padding: 0.1rem;
+    min-height: 33vh;
+  }
+  .jump {
+    font-size: 1rem;
+  }
+  .index {
+    border-image: none;
+  }
+}
+
+@media (min-width: 576px) {
+  .resume-name,
+  .about-name {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  h3,
+  .summary {
+    font-size: 1.2rem;
+  }
+
+  .section-main {
+    font-size: 1rem;
+  }
+  header,
+  .section,
+  .wrapper,
+  .summary,
+  .main-details {
+    box-shadow: none;
+    padding: 0.6rem;
+    min-height: 45vh;
+  }
+  .jump {
+    font-size: 1.5rem;
+  }
+  .index-name {
+    font-size: 4rem;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 1rem;
+    margin: 0.5rem;
+  }
+  .index {
+    border-image: url("https://www.w3schools.com/cssref/border.png") 30 stretch;
+  }
+}
+
+@media (min-width: 992px) {
+  .section-main {
+    font-size: 1.2rem;
+  }
+  h2 {
+    font-size: 1.7rem;
+  }
+
+  h3,
+  .summary {
+    font-size: 1.4rem;
+  }
+  .resume-name,
+  .about-name {
+    font-size: 6rem;
+    color: #1f3b4d;
+  }
+  header,
+  .section,
+  .wrapper,
+  .summary,
+  .main-details {
+    box-shadow: none;
+    padding: 1rem;
+    min-height: 65vh;
+  }
+  .index-name {
+    font-size: 5rem;
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .summary {
+    width: 25%;
+  }
+  .main-details {
+    width: 75%;
+  }
+}
+
+/*background g too...*/
+@keyframes anim_bg {
+  0% {
+    --hue1: 0deg;
+    --hue2: 300deg;
+  }
+
+  100% {
+    --hue1: 360deg;
+    --hue2: 660deg;
+  }
 }

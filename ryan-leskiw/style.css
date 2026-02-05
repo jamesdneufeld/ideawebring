@@ -36,29 +36,42 @@ h1 {
   font-family: "stalinist one", cursive;
   text-align: center;
   font-weight: 700;
-  font-size: 4rem;
-  padding-top: 2rem;
-
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
   color: white;
 }
 h2 {
-  font-size: 1.5rem;
+  font-size: 2.25rem;
   font-weight: 500;
   color: white;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 h3 {
   margin-bottom: 1rem;
 }
 p {
-  font-size: 1.5rem;
-  font-family: "IBM Plex Mono", monospace;
-  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
   color: white;
+  font-family: "IBM Plex Mono", monospace;
+  line-height: 1.2;
 }
 
 ul {
   color: white;
+}
+footer {
+  padding: 2rem;
+  border-top: 1px solid white;
+  margin-left: 4rem;
+  margin-right: 4rem;
+}
+li {
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+  line-height: 1.3;
+  font-family: "IBM Plex Mono", monospace;
 }
 /* Hyperlink styles */
 
@@ -70,16 +83,39 @@ a {
   padding: 0.25rem 0.5rem;
   text-decoration: none;
   background-color: white;
+  font-size: 0.75rem;
+  flex-direction: column;
 }
 a:hover {
   color: white;
   background: none;
 }
+.webring {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90vw;
+}
+.webring a {
+  width: 90vw;
+  text-align: center;
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
 
 /* Specific class styles */
 
+.subtitle {
+  font-size: 2.5rem;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 0rem;
+}
+
 .education {
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
   text-align: center;
   border-top: 1px solid white;
   border-bottom: 1px solid white;
@@ -87,47 +123,51 @@ a:hover {
 .skills {
   margin-bottom: 1rem;
   margin-top: 2rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
   text-align: center;
   border-top: 1px solid white;
 }
 .skills-title {
   margin-top: 2rem;
+  margin-bottom: 1rem;
 }
+
 .paragraph-md {
   font-size: 1rem;
   text-align: center;
+  margin-bottom: 1rem;
 }
 .paragraph-sm {
   font-size: 0.8rem;
   color: dodgerblue;
 }
+.bullet-list {
+  list-style-type: disc;
+}
 
-.experience,
-.life-experience {
+.experience {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+.life-experience {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.section-title {
+  text-align: center;
 }
 footer {
   text-align: center;
-}
-
-.resume {
-  margin-top: 1rem;
 }
 
 .job-title {
   font-size: 2rem;
   text-align: center;
   font-weight: 300;
-}
-
-footer {
-  padding: 2rem;
-  border-top: 1px solid white;
-}
-li {
-  margin-bottom: 1rem;
-  margin-top: 0.5rem;
 }
 
 .hero {
@@ -146,15 +186,39 @@ li {
 }
 .education-title {
   margin-top: 0.75rem;
+  margin-bottom: 1.5rem;
 }
-.life-experience {
+.job-title {
+  font-weight: 500;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  color: white;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+.company {
+  font-family: "Rubik", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: white;
+}
+.job-description {
+  line-height: 1.3;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+.contact {
+  margin-bottom: 2rem;
+}
+.resume-wrapper {
+  margin-left: 4rem;
+  margin-right: 4rem;
 }
 
-@media (min-width: 768px) {
+/* Desktop */
+
+@media (min-width: 992px) {
   .skill-list {
     display: flex;
     flex-wrap: wrap;
@@ -171,5 +235,34 @@ li {
   }
   .life-experience {
     width: 50%;
+  }
+  a {
+    font-size: 1rem;
+  }
+  h1 {
+    font-size: 4rem;
+  }
+  p {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .webring {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 40vw;
+  }
+  .webring a {
+    text-align: center;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    width: 40vw;
+  }
+  .company {
+    text-align: center;
+    font-size: 1.25rem;
+  }
+  .job-description {
+    font-size: 0.9rem;
   }
 }

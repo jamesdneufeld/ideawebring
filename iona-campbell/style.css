@@ -1,7 +1,27 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=TASA+Explorer:wght@400..800&display=swap");
 
-/*general*/
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* very general */
+
+body {
+  font-family: "TASA Explorer", sans-serif;
+  background: #669bbc;
+}
+
+header {
+  padding: 2rem;
+}
+
+/* general headings */
 
 h1 {
   font-family: "TASA Explorer", sans-serif;
@@ -21,88 +41,12 @@ h2 {
 h3 {
   font-weight: 200;
   font-size: 1.5rem;
+  padding-bottom: 0.25rem;
+  margin-bottom: 1rem;
 }
 
 h4 {
   margin-bottom: 1rem;
-}
-.wrapper {
-  display: flex;
-  background: #669bbc;
-}
-/*typography*/
-
-body {
-  font-family: "TASA Explorer", sans-serif;
-}
-.header {
-  background: #fdf0d5;
-  padding: 2rem;
-}
-.education {
-  background: #fdf0d5;
-  padding: 2rem;
-}
-.skills {
-  background: #fdf0d5;
-  padding: 2rem;
-}
-.paragraph-md {
-  font-size: 2rem;
-  color: #fdf0d5;
-}
-
-.paragraph-sm {
-  font-size: 0.8rem;
-}
-a {
-  color: black;
-}
-/*sizes*/
-html {
-  box-sizing: border-box;
-}
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
-  h1 {
-    font-size: 1.777rem;
-  }
-  h2 {
-    font-size: 1.777rem;
-  }
-  h3 {
-    font-size: 1.44rem;
-  }
-}
-
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-  h1 {
-    font-size: 2.369rem;
-  }
-  h2 {
-    font-size: 2.369rem;
-  }
-  h3 {
-    font-size: 1.777rem;
-  }
-}
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  h1 {
-    font-size: 3.157rem;
-  }
-  h2 {
-    font-size: 3.157rem;
-  }
-  h3 {
-    font-size: 2.074rem;
-  }
 }
 
 ul {
@@ -114,23 +58,52 @@ li {
   margin-bottom: 1rem;
 }
 
-header {
-  background: #669bbc;
-  padding: 3rem;
-}
-.education {
-  background: #669bbc;
-  padding: 3rem;
+/* general hyperlinks */
+a {
+  color: #0d1321;
 }
 
+/* Major structural and layout containers */
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.resume-item-wrapper {
+  padding: 1rem;
+  border-bottom: 2px solid #fdf0d5;
+  background: rgb(255, 255, 255, 0.2);
+}
+
+/*typography*/
+
+.header {
+  padding: 2rem;
+}
+.education {
+  padding: 2rem;
+
+  width: 100%;
+}
 .skills {
-  background: #669bbc;
-  padding: 3rem;
+  padding: 2rem;
+
+  width: 100%;
+}
+.paragraph-md {
+  font-size: 2rem;
+  color: #fdf0d5;
+}
+
+.paragraph-sm {
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
 }
 
 .work-experience {
-  background: #669bbc;
-  padding: 3rem;
+  padding: 2rem;
 }
 
 .hero {
@@ -141,7 +114,7 @@ header {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: #669bbc;
+  padding: 2rem;
 }
 
 .hero-heading {
@@ -150,4 +123,41 @@ header {
 .hero-text {
   color: #fdf0d5;
   font-size: 2rem;
+}
+
+/*sizes*/
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2.986rem;
+  }
+  h2 {
+    font-size: 2.074rem;
+  }
+  h3 {
+    font-size: 1.777rem;
+  }
+  .wrapper {
+    flex-direction: row;
+  }
+  .education {
+    width: 50%;
+  }
+
+  .skills {
+    width: 50%;
+  }
+}
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  h1 {
+    font-size: 3.157rem;
+  }
+  h2 {
+    font-size: 2.074rem;
+  }
+  h3 {
+    font-size: 1.44rem;
+  }
 }
