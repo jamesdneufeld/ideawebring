@@ -108,7 +108,7 @@ a {
   padding: 2rem;
 }
 .index {
-  background-image: url(https://api.nga.gov/iiif/a167f440-ad1c-481e-ada0-2f6962d54e64/full/!800,800/0/default.jpg);
+  background-image: url(../alyssa-cheng/the-banks-of-the-oise.png);
   background-size: cover;
   display: flex;
   justify-content: center;
