@@ -105,6 +105,7 @@ a {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  padding: 2rem;
 }
 
 .hero-heading {
@@ -119,12 +120,11 @@ a {
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-  padding: 2rem;
   h1 {
-    font-size: 2.369rem;
+    font-size: 2.986rem;
   }
   h2 {
-    font-size: 2.369rem;
+    font-size: 2.074rem;
   }
   h3 {
     font-size: 1.777rem;
@@ -146,9 +146,9 @@ a {
     font-size: 3.157rem;
   }
   h2 {
-    font-size: 3.157rem;
+    font-size: 2.074rem;
   }
   h3 {
-    font-size: 2.074rem;
+    font-size: 1.44rem;
   }
 }

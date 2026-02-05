@@ -12,10 +12,17 @@ html {
 }
 
 :root {
-  --headerfont: "Sekuya", sans-serif;
   /* colours */
   --darkred: rgb(163, 40, 40);
-  --textonred: rgb(255, 209, 196);
+  --cream: rgb(255, 209, 196);
+  --orange: rgb(190, 87, 19);
+  --goldyellow: rgb(238, 181, 131);
+  --darkbrown: rgb(66, 36, 36);
+  /* fonts */
+  --headerfont: "Sekuya", sans-serif;
+  --bodyfont: "Rubik", sans-serif;
+  /* font sizes */
+  --largetitle: 4rem;
   --resheader-mobile: 2rem; /* resume header size for mobile */
 }
 
@@ -25,8 +32,8 @@ img {
 }
 
 body {
-  font-family: "Rubik", sans-serif;
-  background: rgb(29, 25, 24);
+  font-family: var(--bodyfont);
+  background: var(--darkbrown);
 }
 
 h3 {
@@ -39,14 +46,16 @@ p {
 }
 
 a {
-  color: rgb(255, 209, 196);
+  color: var(--cream);
   text-decoration: none;
+  font-style: oblique;
   padding: 0.25rem;
 }
 
 a:hover {
   text-decoration: none;
-  background: rgb(255, 209, 196);
+  font-style: normal;
+  background: var(--cream);
   color: var(--darkred);
 }
 
@@ -63,14 +72,14 @@ ul {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-image: url(star-bg.jpg);
+  background-image: url(sm-star-bg.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 }
 
 .hero-wrap {
   font-family: var(--headerfont);
-  color: var(--textonred);
+  color: var(--cream);
   background: var(--darkred);
   padding: 1.5rem;
   margin-bottom: 1.5rem;
@@ -89,10 +98,10 @@ ul {
 }
 
 .hero-desc {
-  font-family: "Rubik", sans-serif;
-  background: rgb(66, 36, 36);
+  font-family: var(--bodyfont);
+  background: var(--darkbrown);
   font-size: 1rem;
-  color: var(--textonred);
+  color: var(--cream);
   padding: 0.75rem;
   border-radius: 1rem;
   margin-bottom: 1rem;
@@ -120,7 +129,7 @@ ul {
 /* ABOUT STYLES */
 .about-wrap {
   font-family: var(--headerfont);
-  color: var(--textonred);
+  color: var(--cream);
   background: var(--darkred);
   padding: 1.5rem;
   font-size: 2rem;
@@ -133,9 +142,9 @@ ul {
 }
 
 .about-desc {
-  font-family: "Rubik", sans-serif;
+  font-family: var(--bodyfont);
   font-size: 1rem;
-  color: var(--textonred);
+  color: var(--cream);
   padding: 0.75rem;
 }
 
@@ -150,7 +159,7 @@ ul {
   background: var(--darkred);
   padding: 2rem;
   font-weight: bold;
-  color: var(--textonred);
+  color: var(--cream);
   margin-bottom: 1rem;
 }
 
@@ -206,7 +215,7 @@ ul {
 .skills-header {
   font-family: var(--headerfont);
   font-weight: 400;
-  background: rgb(164, 48, 16);
+  background: var(--darkred);
   color: rgb(232, 139, 96);
   font-size: var(--resheader-mobile);
   margin-bottom: 1.5rem;
@@ -225,8 +234,8 @@ ul {
 .work-header {
   font-family: var(--headerfont);
   font-weight: 400;
-  background: rgb(190, 87, 19);
-  color: rgb(238, 181, 131);
+  background: var(--orange);
+  color: var(--goldyellow);
   font-size: var(--resheader-mobile);
   margin-bottom: 1.5rem;
   padding: 1rem;
@@ -258,7 +267,7 @@ ul {
 @media (min-width: 992px) {
   /* INDEX STYLES */
   .hero-wrap {
-    font-size: 4rem;
+    font-size: var(--largetitle);
     flex-direction: row;
   }
   .hero-tagline {
@@ -275,7 +284,7 @@ ul {
 
   /* ABOUT STYLES */
   .about-wrap {
-    font-size: 4rem;
+    font-size: var(--largetitle);
     flex-direction: row;
     flex-wrap: nowrap;
   }
