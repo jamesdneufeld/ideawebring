@@ -7,83 +7,192 @@ html {
 *:after {
   box-sizing: inherit;
 }
-/* Typography imported from Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Quicksand:wght@300..700&display=swap");
 
 body {
-  font-family: "Quicksand", sans-serif;
-  line-height: 1.6;
-  margin: auto;
-  max-width: 43.75rem; /* Keeps content readable on large screens */
-  padding: 1.25rem;
-  color: #333;
-}
-h1 {
-  font-size: 3rem;
-}
-h1,
-h2,
-h3 {
-  font-family: "Lexend", sans-serif;
-  color: #000;
+  min-height: 100vh;
+  margin: 0;
+
+  /* background image */
+  background-image: url("https://i.pinimg.com/1200x/42/89/3a/42893a28b94e35f8a28df39eaae5da11.jpg"); /* update path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: #f2e9ff;
 }
 
-header {
-  border-bottom: 0.125rem solid #333;
-  padding-bottom: 0.625rem;
-  margin-bottom: 1.25rem;
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+
+  padding: 3rem 4rem;
+  max-width: 600px;
+  text-align: center;
+
+  background: rgba(80, 40, 140, 0.35);
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(220, 190, 255, 0.6);
+  box-shadow: 0 0 25px rgba(160, 120, 255, 0.6);
+}
+
+h1 {
+  position: center;
+  top: 2rem;
+  font-size: 1.25rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.hero-text {
+  font-size: 2.2rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-sub {
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+/* ---- paragraph ---- */
+p {
+  margin: 0;
+}
+
+/* ---- link section ---- */
+.index-sub {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.resume-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.resume-header h1 {
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+}
+
+.resume-header p {
+  opacity: 0.85;
+  font-size: 0.95rem;
 }
 
 section {
-  margin-bottom: 1.25rem;
+  background: rgba(80, 40, 140, 0.35);
+  border: 1px solid rgba(220, 190, 255, 0.6);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 20px rgba(160, 120, 255, 0.4);
+
+  padding: 1.75rem;
+  margin-bottom: 2rem;
 }
-/* Class specific styles*/
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  background: salmon;
-}
-.job h3,
-.degree h3 {
-  margin-bottom: 0;
+
+section h2 {
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.12em;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
 }
 
 .company-school-role {
-  color: blue;
-  font-size: 1.5rem;
-  text-transform: uppercase;
-}
-.dates {
-  font-style: italic;
-  color: #777;
-  margin-top: 0;
-  margin-bottom: 0.625rem;
+  font-weight: 600;
 }
 
+.dates {
+  font-size: 0.85rem;
+  opacity: 0.75;
+  margin-bottom: 0.5rem;
+}
+
+.wrapper {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+.experience,
+.education {
+  flex: 2;
+}
+
+.skills {
+  flex: 1;
+}
 ul {
-  padding-left: 1.25rem;
+  padding-left: 1.2rem;
 }
 
 li {
-  margin-bottom: 0.313rem;
+  margin-bottom: 0.6rem;
+  line-height: 1.5;
 }
 
-.resume-heading {
-  color: #fff;
+.job {
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+.home-button {
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.6rem 1.2rem;
+
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  color: #ffffff;
+
+  background: rgba(120, 80, 200, 0.35);
+  border: 1px solid rgba(220, 190, 255, 0.7);
+  backdrop-filter: blur(6px);
+
+  box-shadow: 0 0 18px rgba(160, 120, 255, 0.5);
+  transition: all 0.25s ease;
+  z-index: 1000;
 }
 
-.summary {
-  background: lightseagreen;
+.index-links {
+  padding: 0.6rem 1.2rem;
+  text-decoration: none;
+  color: #ffffff;
+
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(120, 80, 200, 0.3);
+
+  transition: all 0.25s ease;
 }
-.education {
-  background: lightblue;
+
+.index-links:hover {
+  background: rgba(170, 120, 255, 0.6);
+  box-shadow: 0 0 12px rgba(200, 160, 255, 0.9);
+  transform: translateY(-2px);
 }
-.experience {
-  background: lightblue;
-}
-.skills {
-  background: lightblue;
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  h1 {
+    font-size: 1.777rem;
+  }
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -96,10 +205,20 @@ li {
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   h1 {
-    font-size: 5rem;
+    font-size: 3.157rem;
   }
-  .wrapper {
-    display: flex;
-    flex-direction: row;
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  h1 {
+    font-size: 4.209rem;
+  }
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+  h1 {
+    font-size: 5.61rem;
   }
 }

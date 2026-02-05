@@ -115,16 +115,16 @@ a {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  h3 {
-    color: antiquewhite;
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
-  }
 }
 .index-contents {
   background: #235c7e;
   border-radius: 2rem;
   padding: 2rem;
+}
+.welcome-msg {
+  color: antiquewhite;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
 }
 .webring-nav {
   display: flex;
@@ -162,6 +162,9 @@ a {
 @media (min-width: 992px) {
   h1 {
     font-size: 4rem;
+  }
+  .welcome-msg {
+    font-size: 1.8rem;
   }
   .contact {
     display: flex;
