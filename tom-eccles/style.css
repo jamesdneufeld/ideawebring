@@ -11,17 +11,13 @@ html {
 body {
   min-height: 100vh;
   margin: 0;
+  padding: 4rem 2rem;
 
-  /* background image */
-  background-image: url("https://i.pinimg.com/1200x/42/89/3a/42893a28b94e35f8a28df39eaae5da11.jpg"); /* update path */
+  background-image: url("https://i.pinimg.com/1200x/ab/18/4a/ab184ac73b413c9864126ce440e8b085.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
   font-family: "Helvetica Neue", Arial, sans-serif;
   color: #f2e9ff;
@@ -42,19 +38,48 @@ body {
   border: 2px solid rgba(220, 190, 255, 0.6);
   box-shadow: 0 0 25px rgba(160, 120, 255, 0.6);
 }
+.webring-page {
+  min-height: 100vh;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-image: url("https://i.pinimg.com/1200x/42/89/3a/42893a28b94e35f8a28df39eaae5da11.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.dance-gif-container1 {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+}
+.dance-gif-container2 {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+}
+
+.resume-container {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
 h1 {
   position: center;
   top: 2rem;
   font-size: 1.25rem;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.15rem;
   text-transform: uppercase;
   opacity: 0.85;
 }
 
 .hero-text {
   font-size: 2.2rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.08rem;
   text-transform: uppercase;
 }
 
@@ -63,12 +88,10 @@ h1 {
   opacity: 0.85;
 }
 
-/* ---- paragraph ---- */
 p {
   margin: 0;
 }
 
-/* ---- link section ---- */
 .index-sub {
   display: flex;
   gap: 1.5rem;
@@ -82,7 +105,7 @@ p {
 
 .resume-header h1 {
   font-family: var(--font-display, "Orbitron", sans-serif);
-  letter-spacing: 0.15em;
+  letter-spacing: 0.15rem;
   margin-bottom: 0.5rem;
 }
 
@@ -103,7 +126,7 @@ section {
 
 section h2 {
   font-family: var(--font-display, "Orbitron", sans-serif);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.12rem;
   margin-bottom: 1rem;
   font-size: 1.1rem;
 }
@@ -120,16 +143,19 @@ section h2 {
 
 .wrapper {
   display: flex;
-  gap: 2rem;
-  align-items: flex-start;
+  gap: 2.5rem;
+  align-items: stretch;
 }
-.experience,
-.education {
+.experience {
   flex: 2;
 }
 
+.education,
 .skills {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 ul {
   padding-left: 1.2rem;
@@ -157,7 +183,7 @@ li {
 
   font-family: var(--font-display, "Orbitron", sans-serif);
   font-size: 0.85rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.12rem;
   text-decoration: none;
   text-transform: uppercase;
 
