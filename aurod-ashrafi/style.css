@@ -31,7 +31,7 @@ body {
 }
 
 .header h1 {
-  font-size: 9rem;
+  font-size: 5rem;
   font-weight: 900;
 }
 
@@ -180,12 +180,4 @@ h1 {
 }
 .link1 {
   font-family: "Rubik Glitch", system-ui;
-}
-.header-text {
-  width: 100%;
-  text-align: center; /* centers text horizontally */
-  margin-bottom: 2rem; /* space between the header and inner boxes */
-  font-family: "Rubik Glitch", system-ui;
-  font-size: 1rem; /* adjust size as needed */
-  color: black; /* or any color you prefer */
 }
