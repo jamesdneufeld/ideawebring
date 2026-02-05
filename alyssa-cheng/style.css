@@ -23,7 +23,7 @@ h1 {
   font-weight: 900;
   font-style: italic;
   font-size: 2.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.4rem;
   color: antiquewhite;
 }
 h2 {
@@ -37,7 +37,7 @@ h3 {
   font-weight: 700;
   font-style: normal;
   font-size: 1.5rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
   color: #235c7e;
 }
 h4 {
@@ -51,6 +51,7 @@ p {
   margin-bottom: 1.5rem;
   color: #94bebb;
   font-size: 1.2rem;
+  line-height: 1.4rem;
 }
 .job-duties {
   list-style-type: disc;
@@ -73,9 +74,9 @@ p {
 
 .index-contents,
 .main-nav {
-  text-align: center;
   display: flex;
   flex-direction: column;
+  text-align: center;
   border-radius: 2rem;
   width: 90%;
 }
@@ -108,22 +109,22 @@ a {
   padding: 2rem;
 }
 .index {
-  background-image: url(https://api.nga.gov/iiif/a167f440-ad1c-481e-ada0-2f6962d54e64/full/!800,800/0/default.jpg);
+  background-image: url(../alyssa-cheng/the-banks-of-the-oise.png);
   background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  h3 {
-    color: antiquewhite;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-  }
 }
 .index-contents {
   background: #235c7e;
   border-radius: 2rem;
   padding: 2rem;
+}
+.welcome-msg {
+  color: antiquewhite;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
 }
 .webring-nav {
   display: flex;
@@ -132,7 +133,14 @@ a {
   flex-direction: column;
 }
 .pg-link {
-  margin-bottom: 0.5rem;
+  margin: 0.25rem;
+  background-color: #f9f8f7;
+  padding: 0.3rem;
+  border: none;
+  border-radius: 0.25rem;
+}
+.pg-link:hover {
+  background-color: #94bebb;
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -148,15 +156,15 @@ a {
   .main-nav {
     width: 60%;
   }
-  .pg-link {
-    margin: 0.5rem;
-  }
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   h1 {
     font-size: 4rem;
+  }
+  .welcome-msg {
+    font-size: 1.8rem;
   }
   .contact {
     display: flex;
