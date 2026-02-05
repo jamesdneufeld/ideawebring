@@ -44,7 +44,7 @@ h2 {
   font-size: 2.25rem;
   font-weight: 500;
   color: white;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 h3 {
   margin-bottom: 1rem;
@@ -63,6 +63,8 @@ ul {
 footer {
   padding: 2rem;
   border-top: 1px solid white;
+  margin-left: 4rem;
+  margin-right: 4rem;
 }
 li {
   margin-bottom: 1rem;
@@ -107,10 +109,13 @@ a:hover {
   font-size: 2.5rem;
   font-weight: 300;
   text-align: center;
+  margin-bottom: 0rem;
 }
 
 .education {
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
   text-align: center;
   border-top: 1px solid white;
   border-bottom: 1px solid white;
@@ -118,15 +123,20 @@ a:hover {
 .skills {
   margin-bottom: 1rem;
   margin-top: 2rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
   text-align: center;
   border-top: 1px solid white;
 }
 .skills-title {
   margin-top: 2rem;
+  margin-bottom: 1rem;
 }
+
 .paragraph-md {
   font-size: 1rem;
   text-align: center;
+  margin-bottom: 1rem;
 }
 .paragraph-sm {
   font-size: 0.8rem;
@@ -138,19 +148,20 @@ a:hover {
 
 .experience {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   padding: 1rem;
 }
 .life-experience {
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.section-title {
+  text-align: center;
 }
 footer {
   text-align: center;
-}
-
-.resume {
-  margin-top: 1rem;
 }
 
 .job-title {
@@ -175,20 +186,19 @@ footer {
 }
 .education-title {
   margin-top: 0.75rem;
-}
-.life-experience {
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 1.5rem;
 }
 .job-title {
   font-weight: 500;
   text-align: center;
   color: white;
   font-size: 1.2rem;
+  margin-bottom: 0.5rem;
 }
 .company {
   font-family: "Rubik", sans-serif;
   font-size: 1.2rem;
+  font-weight: 300;
   margin-bottom: 1rem;
   text-align: center;
   color: white;
@@ -197,6 +207,13 @@ footer {
   line-height: 1.3;
   font-size: 1rem;
   margin-bottom: 2rem;
+}
+.contact {
+  margin-bottom: 2rem;
+}
+.resume-wrapper {
+  margin-left: 4rem;
+  margin-right: 4rem;
 }
 
 /* Desktop */
@@ -240,11 +257,6 @@ footer {
     margin: 0.5rem;
     padding: 0.5rem;
     width: 40vw;
-  }
-  .company {
-    text-align: left;
-  }
-  .job-title {
   }
   .company {
     text-align: center;
