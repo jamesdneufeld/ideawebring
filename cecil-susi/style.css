@@ -98,14 +98,17 @@ ul {
   border-radius: 2rem;
 }
 
-.hero-desc {
+.bodytext {
   font-family: var(--bodyfont);
-  background: var(--darkbrown);
   font-size: 1rem;
   color: var(--cream);
   padding: 0.75rem;
   margin-bottom: 1rem;
   border-radius: 1rem;
+}
+
+.darkbg {
+  background: var(--darkbrown);
 }
 
 .ring-links {
@@ -144,13 +147,6 @@ ul {
   justify-content: center;
   align-items: center;
   border-radius: 2rem;
-}
-
-.about-desc {
-  font-family: var(--bodyfont);
-  font-size: 1rem;
-  color: var(--cream);
-  padding: 0.75rem;
 }
 
 /* RESUME STYLES */
@@ -241,13 +237,12 @@ ul {
     font-size: var(--largetitle);
     flex-direction: row;
   }
-  .hero-tagline {
+  .subheading {
     font-size: 2rem;
     flex-direction: row;
   }
-  .hero-desc {
+  .bodytext {
     font-size: 1.5rem;
-    flex-direction: row;
   }
   .ring-links {
     font-size: 2rem;
@@ -261,9 +256,6 @@ ul {
   }
   .aboutcontent {
     max-width: 50%;
-  }
-  .about-desc {
-    font-size: 1.5rem;
   }
 
   /* RESUME STYLES */
