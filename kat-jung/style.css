@@ -39,11 +39,9 @@ h1 {
 }
 
 h2 {
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   font-weight: 500;
   color: rgb(159, 140, 216);
-  font-size: 1.2rem;
-  font-weight: 200rem;
 }
 
 h3 {
@@ -58,6 +56,7 @@ h4 {
   padding-bottom: 0.7rem;
   color: rgb(66, 186, 180);
   padding-top: 0.3rem;
+  line-height: 1.3rem;
 }
 
 li {
@@ -155,6 +154,7 @@ a:hover {
 
 .aboutsub {
   padding-bottom: 1rem;
+  line-height: 1.4rem;
 }
 
 .aboutlinks {
@@ -275,6 +275,10 @@ a:hover {
   .aboutwrap {
     flex-direction: row;
     align-items: center;
+  }
+
+  .aboutsub {
+    line-height: 2.2rem;
   }
 
   /*resume.html things*/
