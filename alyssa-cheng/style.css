@@ -23,7 +23,7 @@ h1 {
   font-weight: 900;
   font-style: italic;
   font-size: 2.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.4rem;
   color: antiquewhite;
 }
 h2 {
@@ -37,7 +37,7 @@ h3 {
   font-weight: 700;
   font-style: normal;
   font-size: 1.5rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
   color: #235c7e;
 }
 h4 {
@@ -117,7 +117,7 @@ a {
   h3 {
     color: antiquewhite;
     font-size: 2rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 }
 .index-contents {
@@ -133,6 +133,13 @@ a {
 }
 .pg-link {
   margin: 0.25rem;
+  background-color: #f9f8f7;
+  padding: 0.3rem;
+  border: none;
+  border-radius: 0.25rem;
+}
+.pg-link:hover {
+  background-color: #94bebb;
 }
 
 /* Small devices (landscape phones, 576px and up) */
