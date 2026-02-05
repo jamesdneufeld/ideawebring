@@ -69,6 +69,7 @@ li {
   margin-top: 0.5rem;
   margin-left: 1rem;
   line-height: 1.3;
+  font-family: "IBM Plex Mono", monospace;
 }
 /* Hyperlink styles */
 
@@ -103,7 +104,8 @@ a:hover {
 /* Specific class styles */
 
 .subtitle {
-  font-size: 4rem;
+  font-size: 2.5rem;
+  font-weight: 300;
   text-align: center;
 }
 
@@ -225,9 +227,7 @@ footer {
   }
   p {
     font-size: 1.5rem;
-
     margin-bottom: 0.5rem;
-    color: white;
   }
   .webring {
     display: flex;
