@@ -276,33 +276,36 @@ a:hover {
   margin: 0 0 1.25rem 0;
 }
 
-.btn-primary {
-  display: inline-block;
-  padding: 0.85rem 1.15rem;
+.webring-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+
+  padding: 0.7rem 1rem;
   border-radius: 999rem;
-  background: linear-gradient(180deg, #d81b60, #c2185b);
-  color: #fff;
-  border: 0.125rem solid rgba(194, 24, 91, 0.65);
+
+  background: rgba(255, 208, 228, 0.72);
+  border: 0.0625rem solid rgba(255, 127, 182, 0.95);
+  color: #7a1450;
   font-weight: 900;
-  letter-spacing: 0.01em;
 
-  box-shadow: 0 1rem 1.8rem rgba(194, 24, 91, 0.22);
+  box-shadow: 0 0.7rem 1.4rem rgba(255, 127, 182, 0.14);
   transition:
-    transform 160ms ease,
-    filter 160ms ease,
-    box-shadow 160ms ease;
+    transform 150ms ease,
+    filter 150ms ease,
+    box-shadow 150ms ease;
 }
 
-.btn-primary:hover {
+.webring-link:hover {
   text-decoration: none;
-  transform: translateY(-1px);
-  filter: brightness(1.02);
-  box-shadow: 0 1.25rem 2.2rem rgba(194, 24, 91, 0.26);
+  transform: translateY(-2px) scale(1.04);
+  filter: brightness(0.92); /* darker */
+  box-shadow: 0 1rem 1.9rem rgba(255, 127, 182, 0.22);
 }
 
-.btn-primary:focus-visible {
-  outline: 0.22rem solid rgba(122, 20, 80, 0.35);
-  outline-offset: 0.25rem;
+.webring-link:active {
+  transform: translateY(0) scale(0.99);
 }
 
 /* label above nav */
