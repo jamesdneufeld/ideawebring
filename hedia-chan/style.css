@@ -122,9 +122,7 @@ header {
 }
 
 header,
-.experience,
-.education,
-.skills {
+.section {
   padding: 1rem;
   margin: 0.5rem;
   flex-direction: column;
@@ -146,7 +144,8 @@ header,
   margin: 0.5rem;
 }
 
-.resume-name {
+.resume-name,
+.about-name {
   font-size: 3rem;
   color: #353935;
   font-family: "DM Serif Text";
@@ -164,22 +163,17 @@ header,
   justify-content: left;
 }
 
-.education,
-.experience,
-.skills {
+.section {
   min-height: 60vh;
   display: flex;
   flex-direction: column;
 }
 
-.education-main,
-.experience-main,
-.skills-main {
+.section-main {
   width: 80%;
 }
-.education-heading,
-.experience-heading,
-.skills-heading {
+
+.section-heading {
   color: DarkBlue;
   font-family: "DM Serif Text";
 }
@@ -218,7 +212,7 @@ header,
   border-image: url("https://www.w3schools.com/cssref/border.png") 30 stretch;
 }
 
-.name {
+.hugename {
   color: #ffbe5c;
   font-family: "Rubik", sans-serif;
   text-align: center;
@@ -231,7 +225,8 @@ james refrences
 */
 
 @media (min-width: 300px) {
-  .resume-name {
+  .resume-name,
+  .about-name {
     font-size: 2rem;
   }
   .index-name {
@@ -254,15 +249,12 @@ james refrences
   .summary {
     font-size: 0.7rem;
   }
-  .education-main,
-  .experience-main,
-  .skills-main {
+
+  .section-main {
     font-size: 0.5rem;
   }
   header,
-  .experience,
-  .education,
-  .skills,
+  .section,
   .wrapper,
   .summary,
   .main-details {
@@ -279,7 +271,8 @@ james refrences
 }
 
 @media (min-width: 576px) {
-  .resume-name {
+  .resume-name,
+  .about-name {
     font-size: 2.5rem;
   }
   h2 {
@@ -289,15 +282,12 @@ james refrences
   .summary {
     font-size: 1.2rem;
   }
-  .education-main,
-  .experience-main,
-  .skills-main {
+
+  .section-main {
     font-size: 1rem;
   }
   header,
-  .experience,
-  .education,
-  .skills,
+  .section,
   .wrapper,
   .summary,
   .main-details {
@@ -326,9 +316,7 @@ james refrences
 }
 
 @media (min-width: 992px) {
-  .education-main,
-  .experience-main,
-  .skills-main {
+  .section-main {
     font-size: 1.2rem;
   }
   h2 {
@@ -339,14 +327,13 @@ james refrences
   .summary {
     font-size: 1.4rem;
   }
-  .resume-name {
+  .resume-name,
+  .about-name {
     font-size: 6rem;
     color: #1f3b4d;
   }
   header,
-  .experience,
-  .education,
-  .skills,
+  .section,
   .wrapper,
   .summary,
   .main-details {
