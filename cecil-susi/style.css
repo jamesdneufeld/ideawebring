@@ -26,25 +26,6 @@ html {
   --resheader-mobile: 2rem; /* resume header size for mobile */
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-body {
-  font-family: var(--bodyfont);
-  background: var(--darkbrown);
-}
-
-h3 {
-  font-weight: bold;
-  font-size: 1.5rem;
-}
-
-p {
-  padding-top: 0.5rem;
-}
-
 a {
   color: var(--cream);
   text-decoration: none;
@@ -57,6 +38,25 @@ a:hover {
   font-style: normal;
   background: var(--cream);
   color: var(--darkred);
+}
+
+body {
+  font-family: var(--bodyfont);
+  background: var(--darkbrown);
+}
+
+h3 {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+p {
+  padding-top: 0.5rem;
 }
 
 ul {
@@ -103,8 +103,8 @@ ul {
   font-size: 1rem;
   color: var(--cream);
   padding: 0.75rem;
-  border-radius: 1rem;
   margin-bottom: 1rem;
+  border-radius: 1rem;
 }
 
 .ring-links {
@@ -253,7 +253,6 @@ ul {
   .ring-links {
     flex-direction: row;
   }
-
   /* ABOUT STYLES */
   .about-wrap {
     flex-direction: row;
@@ -296,30 +295,16 @@ ul {
   }
 
   /* RESUME STYLES */
-  .eduproject-wrapper {
-    flex-direction: row;
-  }
-  .education {
-    width: 50%;
-  }
-  .projects {
-    width: 50%;
-  }
-  .work-wrapper {
-    flex-direction: row;
-  }
-  .jobs {
-    width: 50%;
-  }
-  .freelance {
-    width: 50%;
-  }
+  .eduproject-wrapper,
+  .work-wrapper,
   .skills-wrapper {
     flex-direction: row;
   }
-  .hard-skills {
-    width: 50%;
-  }
+  .education,
+  .projects,
+  .jobs,
+  .freelance,
+  .hard-skills,
   .soft-skills {
     width: 50%;
   }
