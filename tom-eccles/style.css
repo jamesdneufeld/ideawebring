@@ -27,7 +27,6 @@ body {
   color: #f2e9ff;
 }
 
-/* ---- main content container ---- */
 .hero {
   display: flex;
   flex-direction: column;
@@ -38,16 +37,14 @@ body {
   max-width: 600px;
   text-align: center;
 
-  /* glassy vaporwave panel */
   background: rgba(80, 40, 140, 0.35);
   backdrop-filter: blur(8px);
   border: 2px solid rgba(220, 190, 255, 0.6);
   box-shadow: 0 0 25px rgba(160, 120, 255, 0.6);
 }
 
-/* ---- headings ---- */
 h1 {
-  position: absolute;
+  position: center;
   top: 2rem;
   font-size: 1.25rem;
   letter-spacing: 0.15em;
@@ -175,7 +172,6 @@ li {
   z-index: 1000;
 }
 
-/* ---- links ---- */
 .index-links {
   padding: 0.6rem 1.2rem;
   text-decoration: none;
