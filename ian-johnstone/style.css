@@ -78,7 +78,7 @@ header {
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 
   gap: 1rem;
@@ -90,6 +90,7 @@ header {
 .hero-blurb {
   max-width: 60ch;
   font-size: 1.05rem;
+  margin-top: 1.25rem;
 }
 
 .subnav {
@@ -146,7 +147,7 @@ header {
 }
 body.index .hero-heading {
   color: #ffffff;
-  padding: 2rem;
+  padding: 3rem 2rem 2rem;
   border-radius: 0.5rem;
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
@@ -154,6 +155,16 @@ body.index .hero-heading {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  gap: 1.25rem;
+}
+body.index .page-title,
+body.index .page-subtitle,
+body.index .hero-blurb,
+body.index .webring .section-title {
+  margin: 0;
+}
+
+body.index .hero-heading {
   gap: 1.25rem;
 }
 
@@ -221,14 +232,18 @@ body.index .hero-heading {
 }
 .webring .section-title {
   font-size: 3rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0;
   text-align: center;
-  padding: 0.5rem;
+  padding: 0;
 }
 
 .webring {
-  margin-top: 2rem;
-  padding: 2rem;
+  margin-top: 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 .achievements {
   background: rgb(203, 232, 241);
