@@ -23,12 +23,8 @@ html {
 *:after {
   box-sizing: inherit;
 }
-/*?huhh, keep first*/
-:root {
-  --accent-color: #555;
-  --body-typeface: "Slabo 27px", serif;
-}
 
+/*background gradient flow*/
 body {
   padding: 1rem;
   background-image:
@@ -88,7 +84,7 @@ hr {
   border: none;
 }
 
-button {
+.links {
   font-size: 24pt;
   letter-spacing: 3px;
   background: #ffffff;
@@ -106,7 +102,7 @@ a {
   font-weight: bold;
 }
 
-button:hover {
+.links:hover {
   background: #ffbe5c;
 }
 
@@ -231,22 +227,9 @@ header,
 }
 
 /* 
-james ref, edited
+james refrences
 */
 
-@media (min-width: 992px) {
-  .wrapper {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .summary {
-    width: 25%;
-  }
-  .main-details {
-    width: 75%;
-  }
-}
 @media (min-width: 300px) {
   .resume-name {
     font-size: 2rem;
@@ -374,9 +357,20 @@ james ref, edited
   .index-name {
     font-size: 5rem;
   }
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .summary {
+    width: 25%;
+  }
+  .main-details {
+    width: 75%;
+  }
 }
 
-/*CSS oklch Gradation...*/
+/*background g too...*/
 @keyframes anim_bg {
   0% {
     --hue1: 0deg;
