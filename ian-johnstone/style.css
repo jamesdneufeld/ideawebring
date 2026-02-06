@@ -266,23 +266,27 @@ body.index .hero-heading {
   background: rgb(203, 232, 241);
   padding: 1.75rem;
 }
-
 .skills-columns {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 1.25rem;
   flex-wrap: wrap;
 }
 
-.skills-col h3 {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
+.skills-col {
+  width: 31%;
 }
 
-.skills-col ul {
-  padding-left: 1.25rem;
-  margin: 0;
+@media (max-width: 576px) {
+  .skills-columns {
+    flex-direction: column;
+  }
+
+  .skills-col {
+    width: 100%;
+  }
 }
+
 main h2 {
   font-family: "Jost", sans-serif;
   font-size: 2.25rem;
@@ -343,7 +347,7 @@ body.about {
   font-size: 0.9rem;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576) {
   .information {
     flex-direction: column;
     gap: 0.5rem;
@@ -363,15 +367,6 @@ body.about {
   .webring-list {
     flex-direction: row;
     gap: 3rem;
-  }
-
-  .skills-columns {
-    flex-direction: row;
-    gap: 2rem;
-  }
-
-  .skills-col {
-    flex: 1;
   }
 
   .gallery-item {
