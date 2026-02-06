@@ -103,11 +103,6 @@ header {
   margin: 0.25rem 1rem 1rem;
 }
 
-.webring-list li a {
-  margin: 0;
-  font-size: 1.5rem;
-}
-
 .webring-link {
   text-decoration: none;
   color: #ffffff;
@@ -245,7 +240,7 @@ body.index .hero-heading {
   }
 
   .page-subtitle {
-    font-size: 1.8rem;
+    font-size: 2.25rem;
   }
 
   main h2 {
@@ -274,9 +269,7 @@ body.index .hero-heading {
   flex-direction: column;
   gap: 1.25rem;
 }
-.resume-layout section {
-  margin-bottom: 0rem;
-}
+
 .education {
   background: white;
   padding: 1.75rem;
@@ -380,7 +373,7 @@ body.about {
   }
 
   .page-subtitle {
-    font-size: 2rem;
+    font-size: 3rem;
   }
 
   main h2 {
