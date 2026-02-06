@@ -7,21 +7,23 @@ html {
 *:after {
   box-sizing: inherit;
 }
+:root {
+  --font-display: "Orbitron", sans-serif;
+  --font-body: "Inter", sans-serif;
 
+  --text-main: rgba(255, 255, 255, 0.92);
+  --text-muted: rgba(255, 255, 255, 0.7);
+}
 body {
-  min-height: 100vh;
-  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text-main);
+  line-height: 1.6;
 
-  /* background image */
-  background-image: url("https://i.pinimg.com/1200x/42/89/3a/42893a28b94e35f8a28df39eaae5da11.jpg"); /* update path */
+  background-image: url("https://i.pinimg.com/1200x/ab/18/4a/ab184ac73b413c9864126ce440e8b085.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
   font-family: "Helvetica Neue", Arial, sans-serif;
   color: #f2e9ff;
@@ -42,19 +44,70 @@ body {
   border: 2px solid rgba(220, 190, 255, 0.6);
   box-shadow: 0 0 25px rgba(160, 120, 255, 0.6);
 }
+.webring-page {
+  min-height: 100vh;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-image: url("https://i.pinimg.com/1200x/42/89/3a/42893a28b94e35f8a28df39eaae5da11.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.webring-page h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6rem, 4rem);
+  font-weight: 600;
+  letter-spacing: 0.15rem;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.webring-page h2 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.webring-page a,
+.webring-page button {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.15rem;
+  text-transform: uppercase;
+}
+.dance-gif-container1 {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+}
+.dance-gif-container2 {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+}
+
+.resume-container {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
 h1 {
   position: center;
   top: 2rem;
   font-size: 1.25rem;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.15rem;
   text-transform: uppercase;
   opacity: 0.85;
 }
 
 .hero-text {
   font-size: 2.2rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.08rem;
   text-transform: uppercase;
 }
 
@@ -63,32 +116,57 @@ h1 {
   opacity: 0.85;
 }
 
-/* ---- paragraph ---- */
 p {
   margin: 0;
 }
 
-/* ---- link section ---- */
 .index-sub {
   display: flex;
   gap: 1.5rem;
   margin-top: 1rem;
+}
+.resume-page {
+  font-family: var(--font-body);
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .resume-header {
   text-align: center;
   margin-bottom: 3rem;
 }
-
+.resume-page h1 {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  letter-spacing: 0.1rem;
+  margin-bottom: 0.25rem;
+}
+.resume-page h2 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.12rem;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.company-school-role {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
 .resume-header h1 {
   font-family: var(--font-display, "Orbitron", sans-serif);
-  letter-spacing: 0.15em;
+  letter-spacing: 0.15rem;
   margin-bottom: 0.5rem;
 }
-
-.resume-header p {
-  opacity: 0.85;
+.dates {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+.resume-page p,
+.resume-page li {
   font-size: 0.95rem;
+  line-height: 1.65;
 }
 
 section {
@@ -103,7 +181,7 @@ section {
 
 section h2 {
   font-family: var(--font-display, "Orbitron", sans-serif);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.12rem;
   margin-bottom: 1rem;
   font-size: 1.1rem;
 }
@@ -120,16 +198,19 @@ section h2 {
 
 .wrapper {
   display: flex;
-  gap: 2rem;
-  align-items: flex-start;
+  gap: 2.5rem;
+  align-items: stretch;
 }
-.experience,
-.education {
+.experience {
   flex: 2;
 }
 
+.education,
 .skills {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 ul {
   padding-left: 1.2rem;
@@ -157,7 +238,7 @@ li {
 
   font-family: var(--font-display, "Orbitron", sans-serif);
   font-size: 0.85rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.12rem;
   text-decoration: none;
   text-transform: uppercase;
 
