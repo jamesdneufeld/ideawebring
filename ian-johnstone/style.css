@@ -247,6 +247,14 @@ body.index .hero-heading {
   gap: 1.25rem;
   margin: 2rem;
 }
+.resume-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.resume-layout section {
+  margin-bottom: 0rem;
+}
 .education {
   background: white;
   padding: 1.75rem;
@@ -266,6 +274,7 @@ body.index .hero-heading {
   background: rgb(203, 232, 241);
   padding: 1.75rem;
 }
+
 .skills-columns {
   display: flex;
   flex-direction: row;
