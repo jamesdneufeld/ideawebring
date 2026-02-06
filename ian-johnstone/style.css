@@ -239,6 +239,28 @@ body.index .hero-heading {
     font-size: 1.15rem;
   }
 }
+@media (min-width: 768px) {
+  .page-title {
+    font-size: 5.5rem;
+  }
+
+  .page-subtitle {
+    font-size: 1.8rem;
+  }
+
+  main h2 {
+    font-size: 2.4rem;
+  }
+
+  .webring-link {
+    font-size: 1.6rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .paragraph-sm {
+    font-size: 1.05rem;
+  }
+}
 
 /* RESUME.HTML */
 .resume-layout {
@@ -334,16 +356,6 @@ body.about {
   width: 100%;
 }
 
-@media (min-width: 992px) {
-  .gallery-item {
-    width: 50%;
-  }
-
-  .gallery-item--wide {
-    width: 100%;
-  }
-}
-
 .gallery-item img {
   width: 100%;
   height: auto;
@@ -356,13 +368,32 @@ body.about {
   font-size: 0.9rem;
 }
 
-@media (max-width: 576) {
+@media (max-width: 576px) {
   .information {
     flex-direction: column;
     gap: 0.5rem;
   }
 }
 @media (min-width: 992px) {
+  .page-title {
+    font-size: 6rem;
+  }
+
+  .page-subtitle {
+    font-size: 2rem;
+  }
+
+  main h2 {
+    font-size: 2.6rem;
+  }
+
+  .webring-link {
+    font-size: 1.7rem;
+  }
+
+  .paragraph-sm {
+    font-size: 1.1rem;
+  }
   .resume-layout {
     flex-direction: row;
     align-items: flex-start;
