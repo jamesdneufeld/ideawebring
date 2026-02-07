@@ -62,6 +62,12 @@ body {
   font-size: 1rem;
   color: black;
 }
+main h2 {
+  font-family: "Jost", sans-serif;
+  font-weight: 700;
+  margin: 0 0 1rem;
+  font-size: 2.25rem;
+}
 
 header {
   background: rgb(95, 168, 192);
@@ -219,7 +225,7 @@ body.index .hero-heading {
   gap: 2rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .webring-list {
     flex-direction: column;
     align-items: stretch;
@@ -311,13 +317,6 @@ body.index .hero-heading {
   }
 }
 
-main h2 {
-  font-family: "Jost", sans-serif;
-  font-size: 2.25rem;
-  font-weight: 700;
-  margin: 0 0 1rem;
-}
-
 /* ABOUT.HTML */
 
 body.about {
@@ -353,12 +352,15 @@ body.about {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 0.5rem;
 }
 
 .caption {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  margin: 0.5rem;
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  background: rgb(203, 232, 241, 0.8);
 }
 
 @media (max-width: 576px) {
