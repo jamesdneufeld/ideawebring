@@ -342,22 +342,28 @@ body.about {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  max-width: 60rem;
+  margin: 0 auto;
 }
 
 .gallery-item {
-  width: 100%;
+  width: calc(50% - 0.5rem);
+  text-align: center;
 }
 
 .gallery-item img {
   width: 100%;
-  height: auto;
+  height: 18rem;
+  object-fit: contain;
   display: block;
+  border-radius: 0.5rem;
 }
 
 .caption {
   font-size: 1rem;
   margin: 0.5rem;
   display: inline-block;
+  text-align: center;
   padding: 0.25rem 0.5rem;
   border-radius: 0.5rem;
   background: rgb(203, 232, 241, 0.8);
@@ -367,6 +373,9 @@ body.about {
   .information {
     flex-direction: column;
     gap: 0.5rem;
+  }
+  .gallery-item {
+    width: 100%;
   }
 }
 @media (min-width: 992px) {
@@ -402,13 +411,5 @@ body.about {
   .webring-list {
     flex-direction: row;
     gap: 3rem;
-  }
-
-  .gallery-item {
-    width: 50%;
-  }
-
-  .gallery-item--wide {
-    width: 100%;
   }
 }
