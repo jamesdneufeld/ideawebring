@@ -1,7 +1,11 @@
 /* FONT IMPORT */
-@import url('https://jamesdneufeld.github.io/ideawebring/apsara/fonts/rainyhearts.ttf');
+@import url("https://jamesdneufeld.github.io/ideawebring/apsara/fonts/rainyhearts.ttf");
 
-  
+@font-face {
+  font-family: rainyhearts; /* set name */
+  src: url(https://jamesdneufeld.github.io/ideawebring/apsara/fonts/rainyhearts.ttf); /* url of the font */
+}
+
 /* -------------------------------------------------------- */
 /* VARIABLES */
 /* -------------------------------------------------------- */
@@ -20,7 +24,7 @@
   --link-color-hover: #e88cff;
 
   /* Text: */
-  --font: 'rainyhearts', sans-serif;
+  --font: "rainyhearts", sans-serif;
   --heading-font: Monaco, monospace;
   --font-size: 20px;
 
@@ -53,7 +57,6 @@ body {
   line-height: 1.2;
   background: var(--background-color);
   background-image: url("");
-  
 }
 
 ::selection {
@@ -92,7 +95,11 @@ a:focus {
   width: 1000px;
   display: grid;
   grid-gap: var(--margin);
-  grid-template: "header header" auto "leftSidebar main" auto "footer footer" auto / var(--sidebar-width) auto;
+  grid-template:
+    "header header" auto "leftSidebar main" auto "footer footer" auto / var(
+      --sidebar-width
+    )
+    auto;
   /* Confused by the grid? Check out my tutorial: https://petrapixel.neocities.org/coding/positioning-tutorial#grid */
 }
 
@@ -276,8 +283,6 @@ nav ul summary {
 nav ul ul li > a {
   padding-left: 30px;
 }
-
-
 
 /* -------------------------------------------------------- */
 /* CONTENT */
@@ -482,12 +487,11 @@ main h6 {
 
   .layout {
     width: 100%;
-    grid-template: "header" auto  "leftSidebar" auto "main" auto "footer" auto / 1fr;
+    grid-template: "header" auto "leftSidebar" auto "main" auto "footer" auto / 1fr;
     /* Confused by the grid? Check out my tutorial: https://petrapixel.neocities.org/coding/positioning-tutorial#grid */
   }
 
-  
-  .right-sidebar { 
+  .right-sidebar {
     display: none;
   }
 
@@ -497,7 +501,6 @@ main h6 {
     font-size: 0.9em;
   }
 
-  
   nav {
     padding: 0;
   }
