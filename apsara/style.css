@@ -6,6 +6,18 @@
   src: url(https://jamesdneufeld.github.io/ideawebring/apsara/fonts/rainyhearts.ttf); /* url of the font */
 }
 
+@font-face {
+  font-family: "rainyhearts";
+  src:
+    url("https://jamesdneufeld.github.io/ideawebring/apsara/fonts/rainyhearts.woff2")
+      format("woff2"),
+    url("https://jamesdneufeld.github.io/ideawebring/apsara/fonts/rainyhearts.woff")
+      format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* -------------------------------------------------------- */
 /* VARIABLES */
 /* -------------------------------------------------------- */
