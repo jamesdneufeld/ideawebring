@@ -1,10 +1,4 @@
 /* FONT IMPORT */
-@import url("https://jamesdneufeld.github.io/ideawebring/apsara/fonts/rainyhearts.ttf");
-
-@font-face {
-  font-family: rainyhearts; /* set name */
-  src: url(https://jamesdneufeld.github.io/ideawebring/apsara/fonts/rainyhearts.ttf); /* url of the font */
-}
 
 @font-face {
   font-family: "rainyhearts";
@@ -12,6 +6,18 @@
     url("https://jamesdneufeld.github.io/ideawebring/apsara/fonts/rainyhearts.woff2")
       format("woff2"),
     url("https://jamesdneufeld.github.io/ideawebring/apsara/fonts/rainyhearts.woff")
+      format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "LycheeSoda";
+  src:
+    url("https://jamesdneufeld.github.io/ideawebring/apsara/fonts/LycheeSoda.woff2")
+      format("woff2"),
+    url("https://jamesdneufeld.github.io/ideawebring/apsara/fonts/LycheeSoda.woff")
       format("woff");
   font-weight: 500;
   font-style: normal;
@@ -37,7 +43,7 @@
 
   /* Text: */
   --font: "rainyhearts", sans-serif;
-  --heading-font: Monaco, monospace;
+  --heading-font: "LycheeSoda", monospace;
   --font-size: 20px;
 
   /* Other Settings: */
