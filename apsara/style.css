@@ -32,19 +32,24 @@
 :root {
   /* Background Colors: */
   --background-color: #ffdaea;
-  --content-background-color: #ffffff;
-  --sidebar-background-color: #f9adcbff;
+  --header-background-color: none;
+  --content-background-color: #ffffffb4;
+  --sidebar-background-color: rgb(249, 173, 203);
+  --footer-background-color: none;
 
   /* Text Colors: */
   --text-color: #ec7c96;
-  --sidebar-text-color: #ffffff;
+  --sidebar-text-color: #ffffffb4;
   --link-color: #b56dc7;
   --link-color-hover: #e88cff;
+  --link-sidebar-color: #ffffff;
+  --link-sidebar-color-hover: #ffffff;
 
   /* Text: */
   --font: "rainyhearts", sans-serif;
   --heading-font: "LycheeSoda", monospace;
-  --font-size: 20px;
+  --webring-font: "rainyhearts", monospace;
+  --font-size: 1.5em;
 
   /* Other Settings: */
   --margin: 10px;
@@ -75,11 +80,12 @@ body {
   line-height: 1.2;
   background: var(--background-color);
   background-image: url("");
+  cursor: url('cleffa.cur'), pointer;
 }
 
 ::selection {
   /* (Text highlighted by the user) */
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(255, 137, 137, 0.2);
 }
 
 mark {
@@ -91,7 +97,8 @@ mark {
 
 /* Links: */
 a {
-  text-decoration: underline;
+  text-decoration: none;
+  
 }
 
 a,
@@ -103,7 +110,34 @@ a:hover,
 a:focus {
   color: var(--link-color-hover);
   text-decoration: none;
+  
 }
+
+
+/* Sidebar Links: */
+.left-sidebar a {
+  text-decoration: underline;
+}
+
+.left-sidebar a,
+.left-sidebar a:visited {
+  color: var(--sidebar-link-color);
+}
+
+.left-sidebarr a:hover  /* remove underline not working???? */
+.left-sidebar a:focus {
+  color: var(--sidebar-link-color-hover);
+  text-decoration: none;
+}
+
+.ascii-sidebar {
+  font-size: 0.6em;
+}
+
+.ascii-header {
+  font-size: 0.7em;
+}
+
 
 /* -------------------------------------------------------- */
 /* LAYOUT */
@@ -139,11 +173,12 @@ header {
   font-size: 1.2em;
   border: var(--border);
   border-radius: var(--round-borders);
-  background: var(--content-background-color);
+  background: var(--header-background-color-color);
 }
 
 .header-content {
   padding: var(--padding);
+  text-align: center;
 }
 
 .header-title {
@@ -156,6 +191,8 @@ header {
   width: 100%;
   height: auto;
 }
+
+
 
 /* -------------------------------------------------------- */
 /* SIDEBARS */
@@ -183,6 +220,9 @@ aside {
   font-weight: bold;
   font-size: 1.2em;
   font-family: var(--heading-font);
+  text-align: center;
+  
+ 
 }
 
 .sidebar-section:not(:last-child) {
@@ -240,9 +280,10 @@ footer {
   overflow: hidden;
   font-size: 0.75em;
   padding: 15px;
-  background: var(--content-background-color);
+  background: var(--footer-background-color);
   display: flex;
   justify-content: center;
+  text-align: center;
 }
 
 footer a,
@@ -260,18 +301,20 @@ footer a:focus {
 /* -------------------------------------------------------- */
 
 nav {
-  margin-bottom: 3em;
+  align-content: center;
 }
 
 nav .sidebar-title {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.2em;
+ 
 }
 
 nav ul {
-  margin: 0 -5px;
+  margin: 0 -0px;
   padding: 0;
   list-style: none;
   user-select: none;
+  margin-bottom: 0.5em;
 }
 
 nav ul li {
@@ -300,6 +343,21 @@ nav ul summary {
 
 nav ul ul li > a {
   padding-left: 30px;
+}
+
+.webring-top {
+  font-size: 0.5em;
+  font-family: var(--webring-font);
+  font-weight: normal;
+
+}
+
+
+.webring-bottom {
+  font-size: 1.2em;
+  font-family: var(--webring-font);
+  font-weight: normal;
+  
 }
 
 /* -------------------------------------------------------- */
@@ -332,6 +390,7 @@ main ol,
 main ul {
   margin: 0.5em 0;
   padding-left: 1.5em;
+  list-style-image: url('img/pink-star.gif')
 }
 
 main ol li,
@@ -383,6 +442,8 @@ main h6 {
   line-height: 1.5;
 }
 
+
+
 main h1:first-child,
 main h2:first-child,
 main h3:first-child,
@@ -394,26 +455,32 @@ main h6:first-child {
 
 main h1 {
   font-size: 1.5em;
+  text-align: center;
 }
 
 main h2 {
   font-size: 1.4em;
+  text-align: center;
 }
 
 main h3 {
   font-size: 1.3em;
+  text-align: center;
 }
 
 main h4 {
   font-size: 1.2em;
+  text-align: center;
 }
 
 main h5 {
   font-size: 1.1em;
+  text-align: center;
 }
 
 main h6 {
   font-size: 1em;
+  text-align: center;
 }
 
 /* COLUMNS: */
@@ -467,6 +534,16 @@ main h6 {
   overflow: hidden;
 }
 
+.update-icon {
+  float: left;
+  margin-right: 1em;
+  border-radius: 0.5em;
+  border: 4px solid;
+  border-style: outset;
+
+}
+
+
 /* -------------------------------------------------------- */
 /* ACCESSIBILITY */
 /* -------------------------------------------------------- */
@@ -500,7 +577,7 @@ main h6 {
 /* CSS Code for devices < 800px */
 @media (max-width: 800px) {
   body {
-    font-size: 14px;
+    font-size: 1.5em;
   }
 
   .layout {
@@ -515,16 +592,18 @@ main h6 {
 
   aside {
     border-bottom: 1px solid;
-    padding: 9px;
+    padding: 2em;
     font-size: 0.9em;
   }
 
   nav {
     padding: 0;
+    font-size: 1.5em;
+  
   }
 
   nav > ul {
-    padding-top: 0.5em;
+    padding-top: 0em;
   }
 
   nav > ul li > a,
