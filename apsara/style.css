@@ -345,19 +345,11 @@ nav ul ul li > a {
   padding-left: 30px;
 }
 
-.webring-top {
+.webring {
   font-size: 0.5em;
   font-family: var(--webring-font);
   font-weight: normal;
 
-}
-
-
-.webring-bottom {
-  font-size: 1.2em;
-  font-family: var(--webring-font);
-  font-weight: normal;
-  
 }
 
 /* -------------------------------------------------------- */
@@ -579,6 +571,12 @@ main h6 {
   body {
     font-size: 1.5em;
   }
+
+  .webring {
+  font-size: 1.2em;
+  font-family: var(--webring-font);
+  font-weight: normal;  
+}
 
   .layout {
     width: 100%;
