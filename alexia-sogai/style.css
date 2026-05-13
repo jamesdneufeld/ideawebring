@@ -2,6 +2,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
 
 body {
+  background: pink
   font-family: "Rubik", sans-serif;
   padding: 1rem;
+  align-items: center;
 }
