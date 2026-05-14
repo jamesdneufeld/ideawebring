@@ -279,15 +279,18 @@ a:hover {
 .hero-subhead {
   color: var(--text-inverse);
 }
+.hero-text {
+  font-size: 1.6rem;
+}
 
 /* ===========================================================
    CONTENT SECTION GROUPS
    =========================================================== */
 
-.explore-ring,
 .concept-section,
 .process-section,
 .about-project,
+.tools-skills,
 .project-log-teaser {
   min-height: 100vh;
   display: flex;
@@ -299,6 +302,7 @@ a:hover {
   padding: 3rem;
 }
 
+.explore-ring,
 .methodology-section,
 .how-it-works {
   min-height: 100vh;
