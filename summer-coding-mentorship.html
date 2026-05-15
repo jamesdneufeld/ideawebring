@@ -210,13 +210,19 @@
       // LOAD STUDENTS.JSON
       // ----------------------------
       async function loadStudents() {
-        const res = await fetch("./students.json");
-        const data = await res.json();
-        studentsData = data.students;
+        try {
+          const res = await fetch("./students.json");
+          const data = await res.json();
+          studentsData = data.students;
+        } catch (e) {
+          console.warn("No students.json found, using defaults");
+          // Fallback: use folder names from the page
+          studentsData = [];
+        }
       }
 
       // ----------------------------
-      // RENDER
+      // CREATE BADGE ELEMENT
       // ----------------------------
       function createBadge(text, className, title = "") {
         const el = document.createElement("span");
@@ -226,52 +232,74 @@
         return el;
       }
 
-      async function render() {
+      // ----------------------------
+      // ADD BADGES TO EXISTING STUDENT LIST
+      // ----------------------------
+      async function addBadgesToExistingList() {
         await loadStudents();
 
-        const container = document.querySelector("#students");
-        container.innerHTML = "";
+        // Get all existing student list items
+        const studentItems = document.querySelectorAll(".student-group .student");
 
-        for (const student of studentsData) {
-          const folder = student.id;
+        if (studentItems.length === 0) {
+          console.warn("No student items found");
+          return;
+        }
 
-          const row = document.createElement("div");
-          row.className = "student";
+        // Create a map from folder name to student override data
+        const overrideMap = new Map();
+        if (studentsData.length) {
+          studentsData.forEach((s) => {
+            overrideMap.set(s.id, s);
+          });
+        }
 
-          const name = document.createElement("a");
-          name.href = `./${folder}/`;
-          name.textContent = student.displayName;
+        // Process each student item
+        for (const item of studentItems) {
+          const link = item.querySelector("a");
+          if (!link) continue;
 
-          const badges = document.createElement("div");
-          badges.className = "badges";
+          // Extract folder name from href (e.g., "alexia-sogai/")
+          const href = link.getAttribute("href");
+          const folder = href.replace(/\/$/, "").toLowerCase();
 
-          // 1. Activity
-          const activity = await getActivity(folder);
-          badges.appendChild(createBadge(activity.status, `status-${activity.status}`, activity.date || "No commits"));
+          // Get override data if exists
+          const override = overrideMap.get(folder);
 
-          // 2. Pages
-          const files = await getFiles(folder);
-
-          if (files.about) badges.appendChild(createBadge("👤", "page"));
-          if (files.playground) badges.appendChild(createBadge("🎮", "page"));
-          if (files.links) badges.appendChild(createBadge("🔗", "page"));
-          if (files.event) badges.appendChild(createBadge("📅", "page"));
-
-          // 3. Resume (override-aware)
-          if (student.resumeRequirementMet) {
-            badges.appendChild(createBadge("✓ resume", "resume-ok", "Requirement met"));
-          } else if (files.resume) {
-            badges.appendChild(createBadge("📄 resume", "page"));
+          // Create badges container if it doesn't exist
+          let badgesContainer = item.querySelector(".badges");
+          if (!badgesContainer) {
+            badgesContainer = document.createElement("div");
+            badgesContainer.className = "badges";
+            item.appendChild(badgesContainer);
+          } else {
+            // Clear existing badges
+            badgesContainer.innerHTML = "";
           }
 
-          row.appendChild(name);
-          row.appendChild(badges);
+          // 1. Activity badge (from GitHub commits)
+          const activity = await getActivity(folder);
+          badgesContainer.appendChild(createBadge(activity.status, `status-${activity.status}`, activity.date || "No commits"));
 
-          container.appendChild(row);
+          // 2. Page badges (from GitHub contents)
+          const files = await getFiles(folder);
+
+          if (files.about) badgesContainer.appendChild(createBadge("👤", "page", "about.html exists"));
+          if (files.playground) badgesContainer.appendChild(createBadge("🎮", "page", "playground.html exists"));
+          if (files.links) badgesContainer.appendChild(createBadge("🔗", "page", "links.html exists"));
+          if (files.event) badgesContainer.appendChild(createBadge("📅", "page", "event.html exists"));
+
+          // 3. Resume badge (override-aware)
+          if (override?.resumeRequirementMet) {
+            badgesContainer.appendChild(createBadge("✓ resume", "resume-ok", "Requirement met from prior course"));
+          } else if (files.resume) {
+            badgesContainer.appendChild(createBadge("📄 resume", "page", "resume.html exists"));
+          }
         }
       }
 
-      document.addEventListener("DOMContentLoaded", render);
+      // Run when page loads
+      document.addEventListener("DOMContentLoaded", addBadgesToExistingList);
     </script>
   </body>
 </html>
