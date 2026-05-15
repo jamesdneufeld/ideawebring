@@ -96,7 +96,7 @@ h3 {
 
 p,
 li {
-  font-size: 1.325rem;
+  font-size: 1.2rem;
   font-family: var(--body-typeface);
   line-height: 1.3;
   margin-bottom: 1rem;
@@ -280,13 +280,14 @@ a:hover {
   color: var(--text-inverse);
 }
 .hero-text {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
 }
 
 /* ===========================================================
    CONTENT SECTION GROUPS
    =========================================================== */
 
+.curriculum-anchor,
 .concept-section,
 .process-section,
 .about-project,
