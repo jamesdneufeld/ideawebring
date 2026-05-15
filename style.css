@@ -262,12 +262,12 @@ a:hover {
    =========================================================== */
 
 .intro-section {
-  min-height: 95vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-size: 600%;
+  background-size: 400%;
   background-image: var(--gradient);
   animation: bg-animation 120s infinite alternate;
   padding: 3rem;
