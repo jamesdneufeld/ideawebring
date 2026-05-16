@@ -2,7 +2,8 @@
   "version": 1,
   "repo": {
     "owner": "jamesdneufeld",
-    "name": "ideawebring"
+    "name": "ideawebring",
+    "branch": "main"
   },
   "excludeFolders": [".git", ".vscode", "admin", "assets", "blank-bdes", "blank-ixd", "ixd", "james", "james-in-class", "learning", "log"],
   "defaults": {
@@ -19,7 +20,6 @@
   "matchRules": [
     { "name": "exact", "weight": 100 },
     { "name": "normalized", "weight": 80 },
-    { "name": "formerId", "weight": 70 },
     { "name": "github", "weight": 60 }
   ],
   "ui": {
