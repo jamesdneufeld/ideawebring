@@ -2,11 +2,8 @@
 
 import { loadConfig } from "./config.js";
 import { fetchStudentsFromGitHub, fetchFoldersFromGitHub } from "./github.js";
-
 import { reconcile } from "./reconcile.js";
-
 import { renderTableHeader, renderTable, updateUIFromConfig, showWarning, hideWarning, showEditor, renderPreview } from "./render.js";
-
 import { cleanForExport } from "./student.js";
 
 let existingStudents = [];
@@ -21,7 +18,6 @@ async function init() {
 }
 
 function setupEventListeners() {
-  // Load students.json from GitHub
   document.getElementById("fetchStudentsBtn").addEventListener("click", async () => {
     try {
       const { students } = await fetchStudentsFromGitHub();
@@ -34,7 +30,6 @@ function setupEventListeners() {
     }
   });
 
-  // Upload local students.json
   document.getElementById("uploadBtn").addEventListener("click", () => {
     document.getElementById("upload").click();
   });
@@ -55,7 +50,6 @@ function setupEventListeners() {
     }
   });
 
-  // Fetch folders from GitHub repo
   document.getElementById("fetchFoldersBtn").addEventListener("click", async () => {
     try {
       const { folders = [] } = await fetchFoldersFromGitHub();
@@ -68,7 +62,6 @@ function setupEventListeners() {
     }
   });
 
-  // Load local TXT file
   document.getElementById("loadTxtBtn").addEventListener("click", () => {
     document.getElementById("folderFile").click();
   });
@@ -81,7 +74,6 @@ function setupEventListeners() {
     document.getElementById("folderInput").value = await file.text();
   });
 
-  // Reconcile students
   document.getElementById("reconcileBtn").addEventListener("click", () => {
     const folders = document
       .getElementById("folderInput")
@@ -113,20 +105,16 @@ function setupEventListeners() {
     function handleUpdate(idx, field, value) {
       currentStudents[idx][field] = value;
 
-      // Re-render so cohort preview updates live
       renderTable(currentStudents, handleUpdate);
-
       renderPreview(currentStudents.map(cleanForExport));
     }
 
     renderTable(currentStudents, handleUpdate);
-
     renderPreview(currentStudents.map(cleanForExport));
 
     showEditor();
   });
 
-  // Download students.json
   document.getElementById("downloadBtn").addEventListener("click", () => {
     const output = {
       lastUpdated: new Date().toISOString().split("T")[0],
@@ -134,18 +122,16 @@ function setupEventListeners() {
       students: currentStudents.map(cleanForExport),
     };
 
-    const blob = new Blob([JSON.stringify(output, null, 2)], {
-      type: "application/json",
-    });
+    const blob = new Blob([JSON.stringify(output, null, 2)], { type: "application/json" });
+
+    const url = URL.createObjectURL(blob);
 
     const a = document.createElement("a");
-
-    a.href = URL.createObjectURL(blob);
+    a.href = url;
     a.download = "students.json";
-
     a.click();
 
-    URL.revokeObjectURL(a.href);
+    URL.revokeObjectURL(url);
   });
 }
 
