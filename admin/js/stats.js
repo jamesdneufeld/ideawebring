@@ -3,7 +3,6 @@
 export function computeStats(students) {
   const total = students.length;
 
-  // 🔥 Use unified state model from dashboard.js
   const active = students.filter((s) => s.state?.isActiveParticipant).length;
 
   const engaged = students.filter((s) => s.state?.isEngaged).length;

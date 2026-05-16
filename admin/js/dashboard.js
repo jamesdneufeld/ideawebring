@@ -13,7 +13,7 @@ import { exportToCSV } from "./export.js";
 import { renderStats, renderStudentGrid } from "./render.js";
 
 // -------------------------
-// Application state
+// STATE
 // -------------------------
 let state = {
   search: "",
@@ -22,13 +22,15 @@ let state = {
   selectedTags: new Set(),
   sortBy: "name",
   sortDirection: "asc",
+
+  lastCommitRange: "all", // NEW
 };
 
 let allStudents = [];
 let filteredStudents = [];
 
 // -------------------------
-// Load config
+// CONFIG
 // -------------------------
 async function loadDashboardConfig() {
   try {
@@ -37,13 +39,13 @@ async function loadDashboardConfig() {
       const config = await res.json();
       setRepoConfig(config.repo.owner, config.repo.name);
     }
-  } catch (err) {
+  } catch {
     console.log("Using default repo config");
   }
 }
 
 // -------------------------
-// Render pipeline
+// RENDER
 // -------------------------
 function render() {
   const filtered = filterStudents(allStudents, state);
@@ -62,26 +64,24 @@ function render() {
 }
 
 // -------------------------
-// Init
+// INIT
 // -------------------------
 async function init() {
   await loadDashboardConfig();
 
   const rawStudents = await loadStudentsJson();
 
-  // Normalize → enrich pipeline
   let processed = rawStudents.map(normalizeStudent);
   processed = processed.map(enrichWithUrls);
 
-  // GitHub activity
   const activities = await fetchActivityForAllStudents(processed);
 
   processed = processed.map((student, idx) => enrichWithActivity(student, activities[idx]));
 
-  // 🔥 SINGLE SOURCE OF TRUTH LAYER (IMPORTANT FIX)
-  processed = processed.map((student) => ({
-    ...student,
-    state: buildStudentState(student),
+  // IMPORTANT: ensure lastCommitDate is always available
+  processed = processed.map((s, idx) => ({
+    ...s,
+    lastCommitDate: activities[idx]?.date || s.lastCommitDate || null,
   }));
 
   allStudents = processed;
@@ -91,35 +91,14 @@ async function init() {
 }
 
 // -------------------------
-// 🔥 CENTRAL STATE BUILDER (fixes your "all active" bug)
-// -------------------------
-function buildStudentState(student) {
-  const lifecycle = student.withdrawn ? "withdrawn" : student.isAlumni ? "alumni" : "student";
-
-  const activity = student.activity?.status || "dormant";
-
-  return {
-    lifecycle,
-    activity,
-
-    // UI-safe derived flags
-    isVisible: !student.withdrawn,
-    isActiveParticipant: activity === "active",
-    isEngaged: activity === "active" || activity === "recent",
-  };
-}
-
-// -------------------------
-// Event listeners
+// EVENTS
 // -------------------------
 function setupEventListeners() {
-  // Search
   document.getElementById("searchInput")?.addEventListener("input", (e) => {
     state.search = e.target.value;
     render();
   });
 
-  // Status filters
   document.querySelectorAll("#statusFilterGroup .filter-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       state.statusFilter = btn.dataset.filter;
@@ -131,7 +110,6 @@ function setupEventListeners() {
     });
   });
 
-  // Sort
   document.querySelectorAll(".sort-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const sort = btn.dataset.sort;
@@ -147,12 +125,16 @@ function setupEventListeners() {
     });
   });
 
-  // Export CSV
+  // 🔥 NEW: commit range filter
+  document.getElementById("commitFilter")?.addEventListener("change", (e) => {
+    state.lastCommitRange = e.target.value;
+    render();
+  });
+
   document.getElementById("exportCSVBtn")?.addEventListener("click", () => {
     exportToCSV(filteredStudents);
   });
 
-  // Refresh activity
   document.getElementById("refreshBtn")?.addEventListener("click", async () => {
     const btn = document.getElementById("refreshBtn");
     btn.textContent = "⟳ Loading...";
@@ -166,7 +148,4 @@ function setupEventListeners() {
   });
 }
 
-// -------------------------
-// Start
-// -------------------------
 init();

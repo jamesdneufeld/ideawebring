@@ -2,40 +2,82 @@
 // Pure filtering and sorting functions
 
 export function filterStudents(students, state) {
-  const { search, statusFilter, selectedCohorts, selectedTags } = state;
+  const { search, statusFilter, selectedCohorts, selectedTags, lastCommitRange } = state;
 
   let filtered = [...students];
 
-  // Status filter
+  // -------------------------
+  // STATUS FILTER
+  // -------------------------
   if (statusFilter !== "all") {
-    filtered = filtered.filter((s) => s.status === statusFilter);
+    filtered = filtered.filter((s) => {
+      switch (statusFilter) {
+        case "active":
+          return s.state?.isActiveParticipant;
+        case "engaged":
+          return s.state?.isEngaged;
+        case "alumni":
+          return s.state?.lifecycle === "alumni";
+        case "student":
+          return s.state?.lifecycle === "student";
+        case "withdrawn":
+          return s.state?.lifecycle === "withdrawn";
+        case "dormant":
+          return s.state?.activity === "dormant";
+        default:
+          return true;
+      }
+    });
   }
 
-  // Cohort filter
+  // -------------------------
+  // COHORT FILTER
+  // -------------------------
   if (selectedCohorts.size > 0) {
     filtered = filtered.filter((s) => selectedCohorts.has(s.cohort));
   }
 
-  // Tags filter
+  // -------------------------
+  // TAG FILTER
+  // -------------------------
   if (selectedTags.size > 0) {
     filtered = filtered.filter((s) => {
-      const studentTags = new Set(s.tags || []);
-      for (const tag of selectedTags) {
-        if (!studentTags.has(tag)) return false;
+      const tags = new Set(s.tags || []);
+      for (const t of selectedTags) {
+        if (!tags.has(t)) return false;
       }
       return true;
     });
   }
 
-  // Search
+  // -------------------------
+  // SEARCH FILTER
+  // -------------------------
   if (search) {
     const q = search.toLowerCase();
-    filtered = filtered.filter((s) => s.displayName.toLowerCase().includes(q) || s.id.toLowerCase().includes(q) || (s.githubUsername && s.githubUsername.toLowerCase().includes(q)));
+
+    filtered = filtered.filter((s) => s.displayName.toLowerCase().includes(q) || s.id.toLowerCase().includes(q) || (s.githubUsername || "").toLowerCase().includes(q));
+  }
+
+  // -------------------------
+  // 🔥 LAST COMMIT FILTER
+  // -------------------------
+  if (lastCommitRange && lastCommitRange !== "all") {
+    const days = parseInt(lastCommitRange, 10);
+    const cutoff = Date.now() - days * 24 * 60 * 60 * 1000;
+
+    filtered = filtered.filter((s) => {
+      if (!s.lastCommitDate) return false;
+      return new Date(s.lastCommitDate).getTime() >= cutoff;
+    });
   }
 
   return filtered;
 }
 
+// -------------------------
+// SORT
+// -------------------------
 export function sortStudents(students, sortBy, sortDirection) {
   const sorted = [...students];
 
@@ -44,12 +86,24 @@ export function sortStudents(students, sortBy, sortDirection) {
 
     if (sortBy === "name") {
       comparison = a.displayName.localeCompare(b.displayName);
-    } else if (sortBy === "status") {
-      const order = { active: 0, recent: 1, dormant: 2 };
-      comparison = (order[a.activityStatus] || 2) - (order[b.activityStatus] || 2);
-    } else if (sortBy === "activity") {
+    }
+
+    if (sortBy === "status") {
+      const order = {
+        active: 0,
+        engaged: 1,
+        dormant: 2,
+        alumni: 3,
+        withdrawn: 4,
+      };
+
+      comparison = (order[a.state?.activity] ?? 2) - (order[b.state?.activity] ?? 2);
+    }
+
+    if (sortBy === "activity") {
       const aDate = a.lastCommitDate ? new Date(a.lastCommitDate) : 0;
       const bDate = b.lastCommitDate ? new Date(b.lastCommitDate) : 0;
+
       comparison = bDate - aDate;
     }
 
@@ -57,20 +111,4 @@ export function sortStudents(students, sortBy, sortDirection) {
   });
 
   return sorted;
-}
-
-export function computeAvailableCohorts(students) {
-  const cohorts = new Set();
-  students.forEach((s) => {
-    if (s.cohort && s.cohort !== "Unassigned") cohorts.add(s.cohort);
-  });
-  return Array.from(cohorts).sort();
-}
-
-export function computeAvailableTags(students) {
-  const tags = new Set();
-  students.forEach((s) => {
-    if (s.tags) s.tags.forEach((t) => tags.add(t));
-  });
-  return Array.from(tags).sort();
 }
