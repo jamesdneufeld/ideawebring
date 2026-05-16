@@ -198,14 +198,13 @@
       .cohort-preview {
         font-size: 0.65rem;
         color: #58a6ff;
-        margin-left: 0.5rem;
       }
     </style>
   </head>
   <body>
     <div class="container">
       <h1>🕸️ Web Ring · Merge Engine</h1>
-      <div class="subhead">Identity reconciliation — stores program, grad year, alumni status, tags, GitHub username, and resume flags</div>
+      <div class="subhead">Stores static metadata only — program, grad year, alumni status, tags, GitHub username, resume flag (activity status is live from GitHub)</div>
 
       <!-- Step 1: Load existing JSON -->
       <div class="card">
@@ -238,7 +237,7 @@
       <!-- Step 3: Editor -->
       <div id="editorSection" class="hidden">
         <div class="card">
-          <h3>✏️ Step 3: Edit student data (program, grad year, alumni status, tags, GitHub, resume flag)</h3>
+          <h3>✏️ Step 3: Edit student data (static metadata only)</h3>
           <div id="warningBox" class="warning hidden"></div>
           <div class="student-table">
             <table id="studentTable">
@@ -252,8 +251,7 @@
                   <th>Alumni</th>
                   <th>Cohort</th>
                   <th>Tags</th>
-                  <th>Status</th>
-                  <th>Resume</th>
+                  <th>Resume Met</th>
                   <th>Notes</th>
                 </tr>
               </thead>
@@ -460,7 +458,6 @@
             year: year,
             isAlumni: isAlumni,
             tags: tags,
-            status: existing?.status || "active",
             resumeRequirementMet: existing?.resumeRequirementMet || false,
             notes: existing?.notes || "",
             matchConfidence: match.confidence,
@@ -624,24 +621,8 @@
           });
           tagsCell.appendChild(tagsInput);
 
-          // Status dropdown
-          const statusCell = row.insertCell(8);
-          const statusSelect = document.createElement("select");
-          ["active", "inactive", "alumni"].forEach((opt) => {
-            const option = document.createElement("option");
-            option.value = opt;
-            option.textContent = opt;
-            if (student.status === opt) option.selected = true;
-            statusSelect.appendChild(option);
-          });
-          statusSelect.addEventListener("change", (e) => {
-            reconciledStudents[idx].status = e.target.value;
-            generateJSON();
-          });
-          statusCell.appendChild(statusSelect);
-
           // Resume Requirement Met
-          const resumeCell = row.insertCell(9);
+          const resumeCell = row.insertCell(8);
           resumeCell.className = "checkbox-cell";
           const resumeCheckbox = document.createElement("input");
           resumeCheckbox.type = "checkbox";
@@ -653,7 +634,7 @@
           resumeCell.appendChild(resumeCheckbox);
 
           // Notes
-          const notesCell = row.insertCell(10);
+          const notesCell = row.insertCell(9);
           const notesInput = document.createElement("input");
           notesInput.placeholder = "optional notes";
           notesInput.value = student.notes || "";
