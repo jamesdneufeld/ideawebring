@@ -234,7 +234,7 @@
         <div class="tagline">Student websites — built with HTML, CSS, and curiosity</div>
       </div>
 
-      <div id="statsBar" class="stats-bar"></div>
+      <div id="statsBar" class="stats-bar">Loading stats...</div>
 
       <div class="search-section">
         <div class="search-box">
@@ -272,6 +272,9 @@
           const data = await response.json();
           allStudents = data.students || [];
 
+          // Filter out withdrawn students from display
+          allStudents = allStudents.filter((s) => !s.withdrawn);
+
           document.getElementById("studentGrid").innerHTML = '<div class="no-results">📡 Loading activity data...</div>';
 
           await loadActivityData();
@@ -294,48 +297,57 @@
         const REPO_OWNER = "jamesdneufeld";
         const REPO_NAME = "ideawebring";
 
-        const promises = allStudents.map(async (student) => {
-          // If no GitHub username, they can't have pushed
-          if (!student.githubUsername || student.githubUsername.trim() === "") {
-            student.activityStatus = "inactive";
-            student.activityDays = null;
-            student.commitCount = 0;
-            return student;
-          }
-
-          try {
-            // Fetch commits by this student in their folder
-            const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${student.id}&author=${student.githubUsername}&per_page=1`;
-            const res = await fetch(url);
-
-            if (res.ok) {
-              const data = await res.json();
-              const date = data?.[0]?.commit?.author?.date;
-              if (date) {
-                const days = (new Date() - new Date(date)) / (1000 * 60 * 60 * 24);
-                student.activityDays = Math.floor(days);
-                student.activityStatus = getActivityStatus(student.activityDays);
-                student.commitCount = data.length;
-              } else {
+        // Process in smaller batches to avoid rate limiting
+        const batchSize = 5;
+        for (let i = 0; i < allStudents.length; i += batchSize) {
+          const batch = allStudents.slice(i, i + batchSize);
+          await Promise.all(
+            batch.map(async (student) => {
+              // If no GitHub username, they can't have pushed
+              if (!student.githubUsername || student.githubUsername.trim() === "") {
                 student.activityStatus = "inactive";
                 student.activityDays = null;
-                student.commitCount = 0;
+                return student;
               }
-            } else {
-              student.activityStatus = "inactive";
-              student.activityDays = null;
-              student.commitCount = 0;
-            }
-          } catch (err) {
-            console.warn(`Failed to fetch activity for ${student.id}:`, err);
-            student.activityStatus = "inactive";
-            student.activityDays = null;
-            student.commitCount = 0;
-          }
-          return student;
-        });
 
-        await Promise.all(promises);
+              try {
+                // Fetch commits by this student in their folder
+                const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${student.id}&author=${encodeURIComponent(student.githubUsername)}&per_page=1`;
+                const res = await fetch(url);
+
+                if (res.ok) {
+                  const data = await res.json();
+                  const date = data?.[0]?.commit?.author?.date;
+                  if (date) {
+                    const days = (new Date() - new Date(date)) / (1000 * 60 * 60 * 24);
+                    student.activityDays = Math.floor(days);
+                    student.activityStatus = getActivityStatus(student.activityDays);
+                  } else {
+                    student.activityStatus = "inactive";
+                    student.activityDays = null;
+                  }
+                } else if (res.status === 409) {
+                  // Empty folder, no commits
+                  student.activityStatus = "inactive";
+                  student.activityDays = null;
+                } else {
+                  student.activityStatus = "inactive";
+                  student.activityDays = null;
+                }
+              } catch (err) {
+                console.warn(`Failed to fetch activity for ${student.id}:`, err);
+                student.activityStatus = "inactive";
+                student.activityDays = null;
+              }
+              return student;
+            }),
+          );
+
+          // Small delay between batches to avoid rate limiting
+          if (i + batchSize < allStudents.length) {
+            await new Promise((r) => setTimeout(r, 500));
+          }
+        }
       }
 
       function getFilteredStudents() {
@@ -408,7 +420,7 @@
               statusText = `Occasional (${student.activityDays}d ago)`;
             } else if (student.activityStatus === "inactive" && student.activityDays !== null) {
               statusText = `Inactive (${student.activityDays}d ago)`;
-            } else if (!student.githubUsername) {
+            } else if (!student.githubUsername || student.githubUsername.trim() === "") {
               statusText = "No GitHub linked";
             }
 
