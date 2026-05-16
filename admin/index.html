@@ -2,40 +2,35 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Web Ring Admin · students.json Generator</title>
+    <title>Web Ring Admin · Merge Engine</title>
     <style>
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
-
       body {
         background: #0d0f12;
-        font-family: "Courier New", "SF Mono", monospace;
+        font-family: "Courier New", monospace;
         padding: 2rem;
         color: #e6edf3;
       }
-
       .container {
-        max-width: 1200px;
+        max-width: 1400px;
         margin: 0 auto;
       }
-
       h1 {
         font-size: 1.4rem;
         border-left: 3px solid #3fb950;
         padding-left: 1rem;
         margin-bottom: 0.5rem;
       }
-
       .subhead {
         color: #8b949e;
         margin-bottom: 2rem;
         padding-left: 1rem;
         font-size: 0.8rem;
       }
-
       .card {
         background: #161b22;
         border: 1px solid #30363d;
@@ -43,45 +38,29 @@
         padding: 1.25rem;
         margin-bottom: 1.5rem;
       }
-
       .card h3 {
         margin-bottom: 1rem;
         font-size: 0.9rem;
         color: #f0f6fc;
       }
-
-      label {
-        display: block;
-        margin-bottom: 0.5rem;
-        font-size: 0.8rem;
-        color: #8b949e;
-      }
-
-      textarea {
-        width: 100%;
-        height: 200px;
+      textarea,
+      input {
         background: #0d0f12;
         color: #e6edf3;
         border: 1px solid #30363d;
         padding: 0.75rem;
         border-radius: 6px;
         font-family: monospace;
-        font-size: 0.8rem;
-      }
-
-      input[type="file"] {
-        background: #0d0f12;
-        color: #e6edf3;
-        border: 1px solid #30363d;
-        padding: 0.5rem;
-        border-radius: 6px;
-        font-family: monospace;
         width: 100%;
+        margin-bottom: 0.5rem;
       }
-
+      textarea {
+        height: 150px;
+      }
+      input[type="file"] {
+        padding: 0.5rem;
+      }
       button {
-        margin-top: 1rem;
-        margin-right: 0.5rem;
         padding: 0.5rem 1rem;
         background: #21262d;
         border: 1px solid #30363d;
@@ -89,55 +68,48 @@
         border-radius: 6px;
         cursor: pointer;
         font-family: monospace;
-        font-size: 0.8rem;
       }
-
       button:hover {
         background: #30363d;
-        border-color: #8b949e;
       }
-
       .btn-primary {
         background: #1f6feb;
         border-color: #388bfd;
         color: white;
       }
-
       .btn-primary:hover {
         background: #388bfd;
       }
-
+      .divider {
+        text-align: center;
+        color: #6e7681;
+        margin: 0.5rem 0;
+        font-size: 0.7rem;
+      }
       .student-table {
         margin-top: 1rem;
-        background: #0d0f12;
-        border: 1px solid #30363d;
-        border-radius: 6px;
         overflow-x: auto;
-        max-height: 400px;
+        max-height: 500px;
         overflow-y: auto;
       }
-
       table {
         width: 100%;
         border-collapse: collapse;
         font-size: 0.75rem;
       }
-
       th,
       td {
         padding: 0.5rem;
         text-align: left;
         border-bottom: 1px solid #21262d;
       }
-
       th {
-        background: #161b22;
+        background: #0d0f12;
         color: #8b949e;
         font-weight: normal;
         position: sticky;
         top: 0;
       }
-
       input,
       select {
         background: #0d0f12;
@@ -147,64 +119,17 @@
         border-radius: 4px;
         font-family: monospace;
         width: 100%;
-        font-size: 0.7rem;
+        margin-bottom: 0;
       }
-
-      input:focus,
-      select:focus {
-        outline: none;
-        border-color: #3fb950;
-      }
-
       .checkbox-cell {
         text-align: center;
         width: 30px;
       }
-
       .checkbox-cell input {
         width: auto;
         transform: scale(1.2);
         cursor: pointer;
       }
-
-      .status-badge {
-        display: inline-block;
-        font-size: 0.6rem;
-        padding: 0.1rem 0.4rem;
-        border-radius: 999px;
-      }
-
-      .status-active {
-        background: #3fb95020;
-        color: #3fb950;
-      }
-      .status-inactive {
-        background: #6e768120;
-        color: #6e7681;
-      }
-      .status-alumni {
-        background: #d2992220;
-        color: #d29922;
-      }
-
-      .diff-summary {
-        margin: 1rem 0;
-        padding: 0.75rem;
-        background: #161b22;
-        border-radius: 6px;
-        font-size: 0.7rem;
-      }
-
-      .diff-added {
-        color: #3fb950;
-      }
-      .diff-removed {
-        color: #f85149;
-      }
-      .diff-changed {
-        color: #d29922;
-      }
-
       pre {
         background: #0d0f12;
         border: 1px solid #30363d;
@@ -214,58 +139,68 @@
         overflow: auto;
         font-size: 0.7rem;
       }
-
       .hidden {
         display: none;
+      }
+      .warning {
+        background: #d2992220;
+        border-left: 3px solid #d29922;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+        font-size: 0.75rem;
+      }
+      .exclude-list {
+        font-size: 0.65rem;
+        color: #6e7681;
+        margin-top: 0.5rem;
+        padding: 0.5rem;
+        background: #0d0f12;
+        border-radius: 4px;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>🕸️ Web Ring Admin</h1>
-      <div class="subhead">students.json · Merge Editor (preserves GitHub usernames, notes, and flags)</div>
+      <h1>🕸️ Web Ring · Merge Engine</h1>
+      <div class="subhead">Reconciles folders with existing students.json — preserves GitHub usernames, status, notes</div>
 
-      <!-- Upload Section -->
+      <!-- Step 1: Upload existing JSON -->
       <div class="card">
-        <h3>📥 Step 1: Load Existing students.json</h3>
+        <h3>📥 Step 1: Load existing students.json (your source of truth)</h3>
         <input type="file" id="upload" accept="application/json" />
         <div id="uploadStatus" style="margin-top: 0.5rem; font-size: 0.7rem; color: #6e7681"></div>
       </div>
 
-      <!-- Folder Input Section -->
+      <!-- Step 2: Get folder list -->
       <div class="card">
-        <h3>📁 Step 2: Student Folders (one per line)</h3>
-        <textarea
-          id="folderInput"
-          placeholder="alexia-sogai
-alyssa-cheng
-andy-poystila
-anna-burtseva
-apsara
-cecil-susi
-giao-nguyen
-hedia-chan
-maren-brophy
-mena-mcgill
-scarlett-side
-siobhan-barry
-taylore-lawrence
-tobin-eckstein"></textarea>
-        <button onclick="parseFolders()" class="btn-primary">📋 Parse Folders</button>
+        <h3>📁 Step 2: Get current student folders</h3>
+
+        <!-- Option A: Fetch from GitHub (auto-excludes admin folders) -->
+        <button onclick="fetchFoldersFromGitHub()" class="btn-primary" style="width: 100%; margin-bottom: 0.5rem">🌐 Fetch from GitHub Repo</button>
+        <div class="exclude-list">🚫 Auto-excluded: .git, .vscode, assets, blank-bdes, blank-ixd, ixd, james, james-in-class, learning, log</div>
+
+        <!-- Option B: Upload txt file -->
+        <input type="file" id="folderFile" accept=".txt" />
+        <button onclick="loadFolderFile()" style="width: 100%">📄 Load from .txt file</button>
+
+        <div class="divider">— or —</div>
+
+        <!-- Option C: Manual paste -->
+        <textarea id="folderInput" placeholder="Paste folder names manually, one per line"></textarea>
+
+        <button onclick="reconcile()" class="btn-primary">🔄 Reconcile & Edit</button>
       </div>
 
-      <!-- Editor Section (hidden until folders parsed) -->
+      <!-- Step 3: Editor -->
       <div id="editorSection" class="hidden">
         <div class="card">
-          <h3>✏️ Step 3: Edit Student Data</h3>
-
-          <div id="diffSummary" class="diff-summary hidden"></div>
-
+          <h3>✏️ Step 3: Edit student data (changes preserved forever)</h3>
+          <div id="warningBox" class="warning hidden"></div>
           <div class="student-table">
-            <table id="studentTable">
+            <table>
               <thead>
                 <tr>
-                  <th>Folder</th>
+                  <th>Folder ID</th>
                   <th>Display Name</th>
                   <th>GitHub Username</th>
                   <th>Status</th>
@@ -276,52 +211,80 @@ tobin-eckstein"></textarea>
               <tbody id="studentTableBody"></tbody>
             </table>
           </div>
-
-          <div style="margin-top: 1rem">
-            <button onclick="generateJSON()">🔄 Generate JSON from Table</button>
-            <button onclick="downloadJSON()">💾 Download students.json</button>
-          </div>
+          <button onclick="downloadJSON()">💾 Download students.json</button>
         </div>
-
         <div class="card">
-          <h3>📄 Preview students.json</h3>
+          <h3>📄 Preview</h3>
           <pre id="output">{}</pre>
         </div>
       </div>
     </div>
 
     <script>
-      // Store data
-      let existingStudents = [];
-      let currentStudents = [];
-      let previousFolderList = [];
+      const REPO_OWNER = "jamesdneufeld";
+      const REPO_NAME = "ideawebring";
 
-      // Helper: folder name → display name
-      function toDisplayName(folder) {
-        return folder
-          .split("-")
-          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-          .join(" ");
-      }
+      // Your exclusion list — folders that are NOT students
+      const EXCLUDE_FOLDERS = [".git", ".vscode", "assets", "blank-bdes", "blank-ixd", "ixd", "james", "james-in-class", "learning", "log"];
+
+      let existingStudents = [];
+      let reconciledStudents = [];
 
       // Upload existing students.json
       document.getElementById("upload").addEventListener("change", async (e) => {
         const file = e.target.files[0];
         if (!file) return;
-
         try {
           const text = await file.text();
           const json = JSON.parse(text);
           existingStudents = json.students || [];
-          document.getElementById("uploadStatus").innerHTML = `✅ Loaded ${existingStudents.length} students from ${json.lastUpdated || "unknown date"}`;
+          document.getElementById("uploadStatus").innerHTML = `✅ Loaded ${existingStudents.length} students`;
         } catch (err) {
-          document.getElementById("uploadStatus").innerHTML = `❌ Error loading file: ${err.message}`;
+          document.getElementById("uploadStatus").innerHTML = `❌ Error: ${err.message}`;
           existingStudents = [];
         }
       });
 
-      // Parse folders and create editable table
-      function parseFolders() {
+      // Load folder list from .txt file
+      async function loadFolderFile() {
+        const file = document.getElementById("folderFile").files[0];
+        if (!file) {
+          alert("Please select a .txt file first");
+          return;
+        }
+        const text = await file.text();
+        document.getElementById("folderInput").value = text;
+      }
+
+      // Fetch folders directly from GitHub API with exclusions
+      async function fetchFoldersFromGitHub() {
+        const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/`;
+
+        try {
+          const res = await fetch(url);
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const data = await res.json();
+
+          // Filter to directories, exclude system folders AND your admin folders
+          const folders = data
+            .filter((item) => item.type === "dir")
+            .map((item) => item.name)
+            .filter((name) => {
+              if (EXCLUDE_FOLDERS.includes(name)) return false;
+              if (name.startsWith(".")) return false;
+              return true;
+            })
+            .sort();
+
+          document.getElementById("folderInput").value = folders.join("\n");
+          alert(`✅ Loaded ${folders.length} student folders from GitHub (excluded ${EXCLUDE_FOLDERS.length} admin folders)`);
+        } catch (err) {
+          alert("❌ Error fetching from GitHub: " + err.message);
+        }
+      }
+
+      // Reconcile folders with existing data
+      function reconcile() {
         const folderInput = document.getElementById("folderInput").value;
         const folders = folderInput
           .split("\n")
@@ -329,16 +292,12 @@ tobin-eckstein"></textarea>
           .filter((f) => f && !f.startsWith("#"));
 
         if (folders.length === 0) {
-          alert("Please paste at least one folder name");
+          alert("Please load or paste folder names first");
           return;
         }
 
-        previousFolderList = currentStudents.map((s) => s.id);
-
-        // Merge existing data with new folder list
-        currentStudents = folders.map((id) => {
+        reconciledStudents = folders.map((id) => {
           const existing = existingStudents.find((s) => s.id === id);
-
           return {
             id: id,
             displayName: existing?.displayName || toDisplayName(id),
@@ -349,76 +308,58 @@ tobin-eckstein"></textarea>
           };
         });
 
-        renderTable();
-        showDiffSummary();
-        generateJSON();
+        const missingFromFolders = existingStudents.filter((existing) => !folders.includes(existing.id));
 
+        if (missingFromFolders.length > 0) {
+          const warningBox = document.getElementById("warningBox");
+          warningBox.classList.remove("hidden");
+          warningBox.innerHTML = `⚠️ These students are in your JSON but not in the folder list: ${missingFromFolders.map((s) => s.id).join(", ")}.<br>They are preserved but won't appear in the table. Set status to "inactive" or "alumni" if they've left.`;
+        } else {
+          document.getElementById("warningBox").classList.add("hidden");
+        }
+
+        renderTable();
+        generateJSON();
         document.getElementById("editorSection").classList.remove("hidden");
       }
 
-      // Show what changed from previous generation
-      function showDiffSummary() {
-        if (previousFolderList.length === 0) {
-          document.getElementById("diffSummary").classList.add("hidden");
-          return;
-        }
-
-        const newFolders = currentStudents.map((s) => s.id);
-        const added = newFolders.filter((f) => !previousFolderList.includes(f));
-        const removed = previousFolderList.filter((f) => !newFolders.includes(f));
-
-        if (added.length === 0 && removed.length === 0) {
-          document.getElementById("diffSummary").classList.add("hidden");
-          return;
-        }
-
-        const diffDiv = document.getElementById("diffSummary");
-        diffDiv.classList.remove("hidden");
-        diffDiv.innerHTML = `
-      <strong>📊 Changes from last generation:</strong><br>
-      ${added.length > 0 ? `<span class="diff-added">➕ Added: ${added.join(", ")}</span><br>` : ""}
-      ${removed.length > 0 ? `<span class="diff-removed">➖ Removed: ${removed.join(", ")}</span><br>` : ""}
-      <span class="diff-changed">💡 Tip: Removed students won't be deleted — set their status to "inactive" or "alumni" instead to preserve data.</span>
-    `;
+      function toDisplayName(folder) {
+        return folder
+          .split("-")
+          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+          .join(" ");
       }
 
-      // Render editable table
       function renderTable() {
         const tbody = document.getElementById("studentTableBody");
         tbody.innerHTML = "";
 
-        currentStudents.forEach((student, idx) => {
+        reconciledStudents.forEach((student, idx) => {
           const row = tbody.insertRow();
 
-          // Folder (read-only)
-          const folderCell = row.insertCell(0);
-          folderCell.textContent = student.id;
-          folderCell.style.color = "#8b949e";
+          const idCell = row.insertCell(0);
+          idCell.textContent = student.id;
+          idCell.style.color = "#8b949e";
 
-          // Display Name (editable)
           const nameCell = row.insertCell(1);
           const nameInput = document.createElement("input");
-          nameInput.type = "text";
           nameInput.value = student.displayName;
           nameInput.addEventListener("change", (e) => {
-            currentStudents[idx].displayName = e.target.value;
+            reconciledStudents[idx].displayName = e.target.value;
             generateJSON();
           });
           nameCell.appendChild(nameInput);
 
-          // GitHub Username (editable)
           const githubCell = row.insertCell(2);
           const githubInput = document.createElement("input");
-          githubInput.type = "text";
           githubInput.placeholder = "github username";
           githubInput.value = student.githubUsername || "";
           githubInput.addEventListener("change", (e) => {
-            currentStudents[idx].githubUsername = e.target.value.trim();
+            reconciledStudents[idx].githubUsername = e.target.value.trim();
             generateJSON();
           });
           githubCell.appendChild(githubInput);
 
-          // Status dropdown (active/inactive/alumni)
           const statusCell = row.insertCell(3);
           const statusSelect = document.createElement("select");
           ["active", "inactive", "alumni"].forEach((opt) => {
@@ -429,53 +370,47 @@ tobin-eckstein"></textarea>
             statusSelect.appendChild(option);
           });
           statusSelect.addEventListener("change", (e) => {
-            currentStudents[idx].status = e.target.value;
+            reconciledStudents[idx].status = e.target.value;
             generateJSON();
           });
           statusCell.appendChild(statusSelect);
 
-          // Resume Requirement Met (checkbox)
           const resumeCell = row.insertCell(4);
           resumeCell.className = "checkbox-cell";
           const resumeCheckbox = document.createElement("input");
           resumeCheckbox.type = "checkbox";
-          resumeCheckbox.checked = student.resumeRequirementMet || false;
+          resumeCheckbox.checked = student.resumeRequirementMet;
           resumeCheckbox.addEventListener("change", (e) => {
-            currentStudents[idx].resumeRequirementMet = e.target.checked;
+            reconciledStudents[idx].resumeRequirementMet = e.target.checked;
             generateJSON();
           });
           resumeCell.appendChild(resumeCheckbox);
 
-          // Notes (editable)
           const notesCell = row.insertCell(5);
           const notesInput = document.createElement("input");
-          notesInput.type = "text";
           notesInput.placeholder = "optional notes";
           notesInput.value = student.notes || "";
           notesInput.addEventListener("change", (e) => {
-            currentStudents[idx].notes = e.target.value;
+            reconciledStudents[idx].notes = e.target.value;
             generateJSON();
           });
           notesCell.appendChild(notesInput);
         });
       }
 
-      // Generate JSON preview
       function generateJSON() {
         const output = {
           lastUpdated: new Date().toISOString().split("T")[0],
-          students: currentStudents,
+          students: reconciledStudents,
         };
         document.getElementById("output").textContent = JSON.stringify(output, null, 2);
       }
 
-      // Download JSON file
       function downloadJSON() {
         const output = {
           lastUpdated: new Date().toISOString().split("T")[0],
-          students: currentStudents,
+          students: reconciledStudents,
         };
-
         const blob = new Blob([JSON.stringify(output, null, 2)], { type: "application/json" });
         const a = document.createElement("a");
         a.href = URL.createObjectURL(blob);
