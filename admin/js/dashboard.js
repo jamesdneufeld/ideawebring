@@ -32,7 +32,7 @@ let filteredStudents = [];
 // =========================
 async function loadDashboardConfig() {
   try {
-    const res = await fetch("../config.json");
+    const res = await fetch("./config.json");
     if (!res.ok) return;
 
     const config = await res.json();

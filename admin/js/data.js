@@ -2,7 +2,7 @@
 
 export async function loadStudentsJson() {
   try {
-    const response = await fetch("students.json"); // ✅ FIXED PATH
+    const response = await fetch("../students.json");
 
     if (!response.ok) {
       throw new Error("students.json not found");
