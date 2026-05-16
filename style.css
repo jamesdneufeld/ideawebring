@@ -413,7 +413,7 @@ a:hover {
 }
 
 /* ===========================================================
-   SUMMER CODING MENTORSHIP — WEB RING BADGES
+   SUMMER CODING MENTORSHIP — CLEAN IDENTITY CARDS
    =========================================================== */
 
 .student {
@@ -421,48 +421,46 @@ a:hover {
   list-style: none;
 }
 
-/* ===========================================================
-   CARD BASE
-   =========================================================== */
+/* ---------------------------
+   CARD CONTAINER
+---------------------------- */
 
 .navigation-link {
   width: 100%;
   display: block;
   text-decoration: none;
-  padding: 0.85rem 1.25rem;
+  padding: 1rem 1.25rem;
   border-radius: 0.75rem;
   background: var(--color-blue-light);
-  transition: all 0.18s ease-in-out;
-  position: relative;
-  overflow: hidden;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .navigation-link:hover {
-  background: var(--color-purple);
   transform: translate(-4px, -8px);
   box-shadow: 8px 8px 0 0 black;
 }
 
-/* Subtle “premium edge” for Veterans */
-.navigation-link.veteran {
-  border: 1px solid rgba(255, 255, 255, 0.25);
-}
-
-/* ===========================================================
-   TEXT
-   =========================================================== */
+/* ---------------------------
+   NAME
+---------------------------- */
 
 .navigation-link h3 {
-  font-size: 1.225rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  margin: 0 0 0.25rem 0;
+  margin: 0 0 0.5rem 0;
   color: white;
 }
+
+/* ---------------------------
+   META (program/year row)
+---------------------------- */
 
 .student-meta {
   display: flex;
   gap: 0.5rem;
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.75rem 0;
   padding: 0;
   list-style: none;
 }
@@ -470,108 +468,51 @@ a:hover {
 .student-program,
 .student-year {
   font-size: 0.8rem;
-  opacity: 0.8;
+  opacity: 0.85;
   color: white;
 }
 
-/* ===========================================================
-   BADGES LAYOUT
-   =========================================================== */
+/* ---------------------------
+   TEXT LINES (NEW SYSTEM)
+---------------------------- */
 
 .student-badges {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
+  flex-direction: column;
+  gap: 0.35rem;
   margin: 0;
   padding: 0;
-  list-style: none;
 }
 
-.badge {
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.72rem;
+/* Each JS-generated line */
+.student-line {
+  font-size: 0.85rem;
   color: white;
-  opacity: 0.85;
-  padding: 0.15rem 0.35rem;
-  border-radius: 0.35rem;
-  background: rgba(255, 255, 255, 0.08);
-  letter-spacing: 0.2px;
-}
-
-/* ===========================================================
-   BADGE 1 — LAST SEEN (neutral metric)
-   =========================================================== */
-
-.badge-last-seen {
   opacity: 0.9;
-  font-variant-numeric: tabular-nums;
+  line-height: 1.4;
 }
 
-/* No emoji, intentionally clean */
-.badge-last-seen::before {
-  content: "Last Seen: ";
-  opacity: 0.7;
-  margin-right: 0.25rem;
-}
-
-/* ===========================================================
-   BADGE 2 — STATUS (identity tier)
-   =========================================================== */
-
-.badge-participation-Newcomer {
-  color: #cbd5e1;
-}
-
-.badge-participation-Contributor {
-  color: #93c5fd;
-}
-
-.badge-participation-Regular {
-  color: #4ade80;
-}
-
-.badge-participation-Veteran {
-  color: #fbbf24;
+/* Label emphasis (Name / Last Seen / etc) */
+.student-line::first-letter {
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-  background: rgba(251, 191, 36, 0.12);
-  border: 1px solid rgba(251, 191, 36, 0.35);
 }
 
-.badge-participation-Archive {
-  color: #6b7280;
-  opacity: 0.6;
+/* ---------------------------
+   OPTIONAL SUBTLE HIERARCHY
+---------------------------- */
+
+/* Make "Name" feel strongest */
+.student-line:first-child {
+  font-size: 0.95rem;
+  font-weight: 600;
+  opacity: 1;
 }
 
-/* ===========================================================
-   BADGE 3 — LIFETIME SCORE (irreversible prestige)
-   =========================================================== */
-
-.badge-lifetime {
-  font-weight: 500;
-  letter-spacing: 0.5px;
+/* Make Lifetime Score slightly more visible */
+.student-line:last-child {
+  letter-spacing: 0.05em;
 }
 
-/* star display (pure visual, no emoji dependency) */
-.badge-lifetime-stars {
-  font-family: monospace;
-}
-
-/* ===========================================================
-   SEPARATION DOT
-   =========================================================== */
-
-.badge:not(:last-child)::after {
-  content: "·";
-  margin-left: 0.6rem;
-  opacity: 0.4;
-}
-
-.badge:last-child::after {
-  display: none;
-}
 /* ===========================================================
    WEB RING COMPONENTS
    =========================================================== */

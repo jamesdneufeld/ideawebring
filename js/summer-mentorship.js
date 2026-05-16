@@ -1,5 +1,5 @@
 // summer-mentorship.js
-// Web Ring Badge System - Learning continuity model
+// Web Ring Badge System - Learning continuity model (clean UI version)
 
 const REPO_OWNER = "jamesdneufeld";
 const REPO_NAME = "ideawebring";
@@ -21,7 +21,7 @@ function setCache(key, value) {
   localStorage.setItem(key, JSON.stringify({ value, timestamp: Date.now() }));
 }
 
-// ISO week helper (for mentorship “seasons”)
+// ISO week helper
 function getWeekNumber(date) {
   const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
   const dayNum = d.getUTCDay() || 7;
@@ -42,9 +42,7 @@ async function getActivity(folder) {
     const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${folder}&per_page=50`;
     const res = await fetch(url);
 
-    if (!res.ok) {
-      return fallbackActivity();
-    }
+    if (!res.ok) return fallbackActivity();
 
     const data = await res.json();
     const commits = Array.isArray(data) ? data : [];
@@ -64,7 +62,6 @@ async function getActivity(folder) {
     });
 
     let days = null;
-
     if (date) {
       days = Math.floor((new Date() - new Date(date)) / (1000 * 60 * 60 * 24));
     }
@@ -104,61 +101,38 @@ async function loadStudents() {
 }
 
 // ------------------------------
-// LAST SEEN (pure metric)
+// DISPLAY HELPERS (TEXT ONLY)
 // ------------------------------
 function formatLastSeen(days) {
-  if (days === null || days === undefined) return "No pushes";
+  if (days === null || days === undefined) return "No pushes yet";
   if (days === 0) return "Today";
-  if (days === 1) return "1 day";
-  return `${days} days`;
+  if (days === 1) return "1 day ago";
+  return `${days} days ago`;
 }
 
-// ------------------------------
-// STATUS SYSTEM (identity tier)
-// ------------------------------
-function getStatus(activity, student) {
+function getMembershipStatus(activity) {
   const commits = activity.commitCount || 0;
   const weeks = activity.activeWeeks || 0;
 
-  // No collaboration yet
   if (commits === 0) return "Newcomer";
-
-  // Early engagement
   if (commits <= 3) return "Contributor";
-
-  // Consistent engagement in one season
   if (weeks <= 6) return "Regular";
-
-  // Multi-season engagement (your key definition)
-  if (weeks > 6 && student?.isAlumni) return "Veteran";
-
-  // Long inactive / legacy
+  if (weeks > 6) return "Veteran";
   return "Archive";
 }
 
 // ------------------------------
-// LIFETIME SCORE (5-star irreversible system)
+// LIFETIME SCORE (5 STAR SYSTEM)
 // ------------------------------
 function getLifetimeStars(activity, student) {
   const commits = activity.commitCount || 0;
   const weeks = activity.activeWeeks || 0;
 
-  // 0 stars: invited / no real contribution
   if (commits === 0) return 0;
-
-  // 1 star: first contribution
   if (commits <= 1) return 1;
-
-  // 2 stars: early engagement (multiple pushes same season)
   if (commits <= 5) return 2;
-
-  // 3 stars: sustained engagement across one mentorship cycle
   if (weeks <= 6) return 3;
-
-  // 4 stars: returning after graduation / multiple seasons
   if (student?.isAlumni && weeks > 6) return 4;
-
-  // 5 stars: long-term multi-year contributor (rare tier)
   if (student?.isAlumni && commits > 30 && weeks > 12) return 5;
 
   return 3;
@@ -169,21 +143,21 @@ function renderStars(n) {
 }
 
 // ------------------------------
-// BADGE CREATION
+// UI HELPERS
 // ------------------------------
-function createBadge(className, text = "", title = "") {
-  const li = document.createElement("li");
-  li.className = `badge ${className}`;
-  if (text) li.textContent = text;
-  if (title) li.title = title;
-  return li;
+function setLine(container, label, value) {
+  const div = document.createElement("div");
+  div.className = "student-line";
+  div.textContent = `${label}: ${value}`;
+  container.appendChild(div);
 }
 
 // ------------------------------
-// MAIN RENDER
+// MAIN
 // ------------------------------
 async function populateStudentData() {
   await loadStudents();
+
   const studentMap = new Map(studentsData.map((s) => [s.id, s]));
   const links = document.querySelectorAll(".student .navigation-link");
 
@@ -193,35 +167,29 @@ async function populateStudentData() {
     const student = studentMap.get(folder);
     const activity = await getActivity(folder);
 
-    // update meta
     const programEl = link.querySelector(".student-program");
     const yearEl = link.querySelector(".student-year");
 
     if (programEl && student?.program) programEl.textContent = student.program;
     if (yearEl && student?.year) yearEl.textContent = student.year;
 
-    const badgesContainer = link.querySelector(".student-badges");
-    if (!badgesContainer) continue;
+    const container = link.querySelector(".student-badges");
+    if (!container) continue;
 
-    badgesContainer.innerHTML = "";
-
-    // ------------------------------
-    // BADGE 1: LAST SEEN
-    // ------------------------------
-    const lastSeenText = formatLastSeen(activity.days);
-    badgesContainer.appendChild(createBadge("badge-last-seen", lastSeenText, activity.days !== null ? `${activity.days} days since last push` : ""));
+    container.innerHTML = "";
 
     // ------------------------------
-    // BADGE 2: STATUS (identity tier)
+    // FINAL CARD STRUCTURE
     // ------------------------------
-    const status = getStatus(activity, student);
-    badgesContainer.appendChild(createBadge(`badge-participation-${status}`, status));
+    setLine(container, "Name", student?.displayName || folder);
 
-    // ------------------------------
-    // BADGE 3: LIFETIME SCORE
-    // ------------------------------
-    const stars = getLifetimeStars(activity, student);
-    badgesContainer.appendChild(createBadge("badge-lifetime badge-lifetime-stars", renderStars(stars), `Lifetime Score: ${stars}/5`));
+    setLine(container, "Program", `${student?.program || ""} ${student?.year || ""}`.trim());
+
+    setLine(container, "Last seen", formatLastSeen(activity.days));
+
+    setLine(container, "Membership", getMembershipStatus(activity));
+
+    setLine(container, "Lifetime Score", renderStars(getLifetimeStars(activity, student)));
   }
 }
 
