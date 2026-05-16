@@ -1,5 +1,5 @@
 // js/github.js
-// Handles all GitHub API calls with caching (Dashboard only)
+// Handles all GitHub API calls with caching (Dashboard version)
 
 let REPO_OWNER = "jamesdneufeld";
 let REPO_NAME = "ideawebring";
@@ -7,21 +7,6 @@ let REPO_NAME = "ideawebring";
 export function setRepoConfig(owner, name) {
   REPO_OWNER = owner;
   REPO_NAME = name;
-}
-
-/**
- * -----------------------------
- * SYSTEM FOLDER FILTER (SOURCE OF TRUTH)
- * -----------------------------
- * These folders are NEVER treated as students anywhere in the dashboard.
- */
-const SYSTEM_FOLDERS = new Set(["admin", ".github", ".vscode", "node_modules"]);
-
-function isSystemFolder(name = "") {
-  if (!name) return true;
-  const n = name.toLowerCase();
-
-  return SYSTEM_FOLDERS.has(n) || n.startsWith(".");
 }
 
 function getCacheKey(folder) {
@@ -34,7 +19,11 @@ function getCached(key) {
 
   try {
     const { data, timestamp } = JSON.parse(cached);
-    if (Date.now() - timestamp < 60 * 60 * 1000) return data;
+
+    // 1 hour cache
+    if (Date.now() - timestamp < 60 * 60 * 1000) {
+      return data;
+    }
   } catch (e) {}
 
   return null;
@@ -50,66 +39,79 @@ function setCache(key, data) {
   );
 }
 
+/**
+ * Fetch activity for a single student folder
+ * Returns a normalized activity object used everywhere in dashboard
+ */
 export async function fetchActivityForFolder(folder) {
   const cacheKey = getCacheKey(folder);
   const cached = getCached(cacheKey);
-
   if (cached) return cached;
 
   try {
     const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${folder}&per_page=1`;
     const res = await fetch(url);
 
+    // Folder exists but no commits found
     if (res.status === 404) {
-      const result = { status: "dormant", date: null, lastCommit: null };
+      const result = {
+        status: "dormant",
+        date: null,
+        lastCommitDate: null,
+        lastCommit: null,
+      };
+
       setCache(cacheKey, result);
       return result;
     }
 
     const data = await res.json();
+
     const date = data?.[0]?.commit?.author?.date || null;
 
+    // Compute activity status
     let status = "dormant";
 
     if (date) {
-      const days = (new Date() - new Date(date)) / (1000 * 60 * 60 * 24);
+      const daysSince = (new Date() - new Date(date)) / (1000 * 60 * 60 * 24);
 
-      if (days <= 7) status = "active";
-      else if (days <= 30) status = "recent";
+      if (daysSince <= 7) status = "active";
+      else if (daysSince <= 30) status = "recent";
+      else status = "dormant";
     }
 
     const result = {
       status,
+
+      // raw ISO date from GitHub
       date,
+
+      // IMPORTANT: used by filters/sorting
+      lastCommitDate: date,
+
+      // formatted for UI display
       lastCommit: date ? new Date(date).toLocaleDateString() : null,
     };
 
     setCache(cacheKey, result);
     return result;
   } catch (err) {
-    return { status: "dormant", date: null, lastCommit: null };
+    const fallback = {
+      status: "dormant",
+      date: null,
+      lastCommitDate: null,
+      lastCommit: null,
+    };
+
+    return fallback;
   }
 }
 
 /**
- * MAIN SAFETY LAYER
- * This ensures ONLY valid student IDs are ever processed.
+ * Fetch activity for all students (parallelized)
  */
 export async function fetchActivityForAllStudents(students) {
-  const safeStudents = (students || []).filter((s) => {
-    if (!s?.id) return false;
-    if (isSystemFolder(s.id)) return false;
-    return true;
-  });
+  const promises = students.map((s) => fetchActivityForFolder(s.id));
 
-  const results = await Promise.all(safeStudents.map((s) => fetchActivityForFolder(s.id)));
-
-  // Return keyed map for safety (avoids index mismatch bugs)
-  const map = {};
-
-  safeStudents.forEach((s, i) => {
-    map[s.id] = results[i];
-  });
-
-  return map;
+  return Promise.all(promises);
 }

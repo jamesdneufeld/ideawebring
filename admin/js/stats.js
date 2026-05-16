@@ -1,33 +1,33 @@
 // js/stats.js
+// Canonical dashboard statistics (clean separation of concerns)
 
 export function computeStats(students) {
   const total = students.length;
 
-  const active = students.filter((s) => s.state?.isActiveParticipant).length;
+  // Lifecycle (student state)
+  const activeStudents = students.filter((s) => !s.isAlumni && !s.withdrawn).length;
 
-  const engaged = students.filter((s) => s.state?.isEngaged).length;
+  const alumni = students.filter((s) => s.isAlumni).length;
 
-  const alumni = students.filter((s) => s.state?.lifecycle === "alumni").length;
+  const withdrawn = students.filter((s) => s.withdrawn).length;
 
-  const studentsOnly = students.filter((s) => s.state?.lifecycle === "student").length;
+  // GitHub activity (independent system)
+  const gitHubActive = students.filter((s) => s.activity?.status === "active").length;
 
-  const withdrawn = students.filter((s) => s.state?.lifecycle === "withdrawn").length;
+  const gitHubInactive = students.filter((s) => s.activity?.status === "dormant").length;
 
   const resumeReady = students.filter((s) => s.resumeRequirementMet).length;
 
   const missingGithub = students.filter((s) => !s.githubUsername || s.githubUsername.trim() === "").length;
 
-  const gitHubActive = students.filter((s) => s.state?.activity === "active").length;
-
   return {
     total,
-    active,
-    engaged,
+    activeStudents,
     alumni,
-    studentsOnly,
     withdrawn,
     resumeReady,
     missingGithub,
     gitHubActive,
+    gitHubInactive,
   };
 }
