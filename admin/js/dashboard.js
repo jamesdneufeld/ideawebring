@@ -12,7 +12,9 @@ import { computeStats } from "./stats.js";
 import { exportToCSV } from "./export.js";
 import { renderStats, renderStudentGrid } from "./render.js";
 
+// -------------------------
 // Application state
+// -------------------------
 let state = {
   search: "",
   statusFilter: "all",
@@ -25,7 +27,9 @@ let state = {
 let allStudents = [];
 let filteredStudents = [];
 
-// Load config for repo owner/name
+// -------------------------
+// Load config
+// -------------------------
 async function loadDashboardConfig() {
   try {
     const res = await fetch("../config.json");
@@ -38,7 +42,9 @@ async function loadDashboardConfig() {
   }
 }
 
-// Render everything
+// -------------------------
+// Render pipeline
+// -------------------------
 function render() {
   const filtered = filterStudents(allStudents, state);
   const sorted = sortStudents(filtered, state.sortBy, state.sortDirection);
@@ -55,24 +61,28 @@ function render() {
   renderStudentGrid(sorted, "studentGrid");
 }
 
-// Load data and initialize
+// -------------------------
+// Init
+// -------------------------
 async function init() {
   await loadDashboardConfig();
 
-  // Load raw data
   const rawStudents = await loadStudentsJson();
 
-  // Normalize
+  // Normalize → enrich pipeline
   let processed = rawStudents.map(normalizeStudent);
-
-  // Add URLs
   processed = processed.map(enrichWithUrls);
 
-  // Fetch GitHub activity (NO local filtering)
+  // GitHub activity
   const activities = await fetchActivityForAllStudents(processed);
 
-  // Merge activity safely by index
   processed = processed.map((student, idx) => enrichWithActivity(student, activities[idx]));
+
+  // 🔥 SINGLE SOURCE OF TRUTH LAYER (IMPORTANT FIX)
+  processed = processed.map((student) => ({
+    ...student,
+    state: buildStudentState(student),
+  }));
 
   allStudents = processed;
 
@@ -80,6 +90,28 @@ async function init() {
   render();
 }
 
+// -------------------------
+// 🔥 CENTRAL STATE BUILDER (fixes your "all active" bug)
+// -------------------------
+function buildStudentState(student) {
+  const lifecycle = student.withdrawn ? "withdrawn" : student.isAlumni ? "alumni" : "student";
+
+  const activity = student.activity?.status || "dormant";
+
+  return {
+    lifecycle,
+    activity,
+
+    // UI-safe derived flags
+    isVisible: !student.withdrawn,
+    isActiveParticipant: activity === "active",
+    isEngaged: activity === "active" || activity === "recent",
+  };
+}
+
+// -------------------------
+// Event listeners
+// -------------------------
 function setupEventListeners() {
   // Search
   document.getElementById("searchInput")?.addEventListener("input", (e) => {
@@ -99,7 +131,7 @@ function setupEventListeners() {
     });
   });
 
-  // Sort buttons
+  // Sort
   document.querySelectorAll(".sort-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const sort = btn.dataset.sort;
@@ -134,5 +166,7 @@ function setupEventListeners() {
   });
 }
 
+// -------------------------
 // Start
+// -------------------------
 init();
