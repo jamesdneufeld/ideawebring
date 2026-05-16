@@ -63,16 +63,6 @@ async function getActivity(folder) {
     const date = lastCommit?.commit?.author?.date || null;
     const commitCount = commits.length;
 
-    // Debug log for Apsara
-    if (folder === "apsara") {
-      console.log(`Apsara - Commits found: ${commitCount}`);
-      console.log(`Apsara - Last commit date: ${date}`);
-      if (commits[0]) {
-        console.log(`Apsara - Commit author: ${commits[0]?.commit?.author?.name}`);
-        console.log(`Apsara - Commit message: ${commits[0]?.commit?.message}`);
-      }
-    }
-
     // Calculate active weeks (depth) using proper ISO week
     const activeWeeks = new Set();
     commits.forEach((c) => {
