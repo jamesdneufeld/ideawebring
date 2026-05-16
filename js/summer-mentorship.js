@@ -1,5 +1,5 @@
 // summer-mentorship.js
-// Web Ring Badge System - Clean & Simple
+// Web Ring Badge System - Learning continuity model
 
 const REPO_OWNER = "jamesdneufeld";
 const REPO_NAME = "ideawebring";
@@ -21,14 +21,14 @@ function setCache(key, value) {
   localStorage.setItem(key, JSON.stringify({ value, timestamp: Date.now() }));
 }
 
-// GitHub: commits (activity)
+// GitHub: commits with depth tracking (active weeks)
 async function getActivity(folder) {
   const cacheKey = `activity_${folder}`;
   const cached = getCache(cacheKey);
   if (cached) return cached;
 
   try {
-    const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${folder}&per_page=5`);
+    const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${folder}&per_page=50`);
     const data = await res.json();
     const commits = Array.isArray(data) ? data : [];
 
@@ -36,20 +36,75 @@ async function getActivity(folder) {
     const date = lastCommit?.commit?.author?.date || null;
     const commitCount = commits.length;
 
+    // Calculate active weeks (depth)
+    const activeWeeks = new Set();
+    commits.forEach((c) => {
+      const d = new Date(c?.commit?.author?.date);
+      if (!isNaN(d)) {
+        const yearWeek = `${d.getFullYear()}-${Math.ceil(d.getDate() / 7)}`;
+        activeWeeks.add(yearWeek);
+      }
+    });
+
     let status = "dormant";
     let days = null;
+    let recencyScore = 0;
+    let frequencyScore = 0;
+    let depthScore = 0;
+    let engagementScore = 0;
 
     if (date) {
       days = Math.floor((new Date() - new Date(date)) / (1000 * 60 * 60 * 24));
+
+      // Recency score (0-40)
+      if (days <= 7) recencyScore = 40;
+      else if (days <= 30) recencyScore = 25;
+      else if (days <= 90) recencyScore = 10;
+      else recencyScore = 5;
+
+      // Frequency score (0-35)
+      if (commitCount >= 30) frequencyScore = 35;
+      else if (commitCount >= 20) frequencyScore = 30;
+      else if (commitCount >= 10) frequencyScore = 22;
+      else if (commitCount >= 5) frequencyScore = 15;
+      else if (commitCount >= 1) frequencyScore = 5;
+
+      // Depth score (0-25) - based on active weeks
+      if (activeWeeks.size >= 20) depthScore = 25;
+      else if (activeWeeks.size >= 12) depthScore = 20;
+      else if (activeWeeks.size >= 8) depthScore = 15;
+      else if (activeWeeks.size >= 4) depthScore = 10;
+      else if (activeWeeks.size >= 1) depthScore = 5;
+
+      engagementScore = Math.min(100, recencyScore + frequencyScore + depthScore);
+
       if (days <= 7) status = "active";
       else if (days <= 30) status = "recent";
     }
 
-    const result = { status, date, days, commitCount };
+    const result = {
+      status,
+      days,
+      commitCount,
+      activeWeeks: activeWeeks.size,
+      engagementScore,
+      recencyScore,
+      frequencyScore,
+      depthScore,
+    };
     setCache(cacheKey, result);
     return result;
   } catch {
-    return { status: "dormant", date: null, days: null, commitCount: 0 };
+    return {
+      status: "dormant",
+      days: null,
+      commitCount: 0,
+      activeWeeks: 0,
+      engagementScore: 0,
+      recencyScore: 0,
+      frequencyScore: 0,
+      depthScore: 0,
+    };
   }
 }
 
@@ -64,51 +119,30 @@ async function loadStudents() {
   }
 }
 
-// Create badge LI element
-function createBadge(text, className, title = "") {
+// Engagement level based on multi-factor score (not just recency)
+function getEngagementLevel(activity) {
+  const score = activity.engagementScore || 0;
+  if (score >= 70) return 4; // highly engaged
+  if (score >= 50) return 3; // steady
+  if (score >= 30) return 2; // emerging
+  if (score >= 10) return 1; // low activity
+  return 0; // inactive
+}
+
+const engagementLabels = ["Inactive", "Low", "Emerging", "Steady", "Active"];
+const engagementColors = ["", "#999", "#4ade80", "#22c55e", "#16a34a"];
+
+function createBadge(className, text = "", title = "") {
   const li = document.createElement("li");
   li.className = `badge ${className}`;
-  li.textContent = text;
+  if (text) li.textContent = text;
   if (title) li.title = title;
   return li;
 }
 
-// Calculate star rating (1-5) based on commit recency and frequency
-function getStarRating(activity) {
-  if (!activity.date) return 0;
-
-  const days = activity.days;
-  const count = activity.commitCount;
-
-  // Base stars on recency
-  let stars = 0;
-  if (days <= 1) stars = 5;
-  else if (days <= 3) stars = 4;
-  else if (days <= 7) stars = 3;
-  else if (days <= 14) stars = 2;
-  else if (days <= 30) stars = 1;
-  else stars = 0;
-
-  // Boost stars for commit frequency (max 5)
-  if (count >= 10 && stars < 5) stars = Math.min(5, stars + 1);
-  if (count >= 20 && stars < 5) stars = Math.min(5, stars + 1);
-
-  return stars;
-}
-
-// Format program display
-function formatProgram(program) {
-  if (!program) return "";
-  return program === "BDes" ? "(BDes)" : "(IxD)";
-}
-
-// Main: populate everything
 async function populateStudentData() {
   await loadStudents();
-
-  const studentMap = new Map();
-  studentsData.forEach((s) => studentMap.set(s.id, s));
-
+  const studentMap = new Map(studentsData.map((s) => [s.id, s]));
   const links = document.querySelectorAll(".student .navigation-link");
 
   for (const link of links) {
@@ -116,42 +150,30 @@ async function populateStudentData() {
     const student = studentMap.get(folder);
 
     // Update program and year
-    const programSpan = link.querySelector(".student-program");
-    const yearSpan = link.querySelector(".student-year");
+    const programEl = link.querySelector(".student-program");
+    const yearEl = link.querySelector(".student-year");
+    if (programEl && student?.program) programEl.textContent = student.program;
+    if (yearEl && student?.year) yearEl.textContent = student.year;
 
-    if (programSpan && student?.program) {
-      programSpan.textContent = formatProgram(student.program);
-    }
-    if (yearSpan && student?.year) {
-      yearSpan.textContent = student.year;
-    }
-
-    // Clear existing badges
-    const badgesUl = link.querySelector(".student-badges");
-    if (badgesUl) {
-      badgesUl.innerHTML = "";
-    }
-
+    // Clear and rebuild badges
     const badgesContainer = link.querySelector(".student-badges");
     if (!badgesContainer) continue;
+    badgesContainer.innerHTML = "";
 
-    // Get activity data
     const activity = await getActivity(folder);
+    const level = getEngagementLevel(activity);
+    const levelLabel = engagementLabels[level];
 
-    // Days since last push (tooltip shows date)
-    const daysText = activity.days !== null ? `${activity.days} days` : "No pushes yet";
-    badgesContainer.appendChild(createBadge(`📅 ${daysText}`, "days", activity.date ? `Last push: ${new Date(activity.date).toLocaleDateString()}` : ""));
+    // Days badge
+    const daysText = activity.days !== null ? `${activity.days} days` : "No pushes";
+    badgesContainer.appendChild(createBadge("badge-days", daysText, activity.days ? `Last push: ${activity.days} days ago\nActive weeks: ${activity.activeWeeks}\nCommits: ${activity.commitCount}` : ""));
 
     // Status badge (active/recent/dormant)
-    const statusIcon = activity.status === "active" ? "🟢" : activity.status === "recent" ? "🟡" : "⚫";
-    badgesContainer.appendChild(createBadge(`${statusIcon} ${activity.status}`, `status-${activity.status}`));
+    badgesContainer.appendChild(createBadge(`badge-status-${activity.status}`, activity.status));
 
-    // Star rating (1-5)
-    const stars = getStarRating(activity);
-    const starDisplay = stars > 0 ? "★".repeat(stars) + "☆".repeat(5 - stars) : "☆☆☆☆☆";
-    badgesContainer.appendChild(createBadge(starDisplay, "stars", `${stars}/5 stars based on recency + frequency`));
+    // Engagement badge (replaces stars)
+    badgesContainer.appendChild(createBadge(`badge-engagement-${level}`, levelLabel, `${activity.engagementScore}/100 — based on recency (${activity.recencyScore}) + frequency (${activity.frequencyScore}) + depth (${activity.depthScore})`));
   }
 }
 
-// Run when page loads
 document.addEventListener("DOMContentLoaded", populateStudentData);

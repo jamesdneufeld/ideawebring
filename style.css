@@ -442,7 +442,6 @@ a:hover {
   box-shadow: 8px 8px 0 0 black;
 }
 
-/* Student name */
 .navigation-link h3 {
   font-size: 1.225rem;
   font-weight: 600;
@@ -450,7 +449,6 @@ a:hover {
   color: white;
 }
 
-/* Meta list - program and year */
 .student-meta {
   display: flex;
   gap: 0.5rem;
@@ -466,7 +464,6 @@ a:hover {
   color: white;
 }
 
-/* Badges list */
 .student-badges {
   display: flex;
   flex-wrap: wrap;
@@ -476,29 +473,62 @@ a:hover {
   list-style: none;
 }
 
-/* Badge items - simple text, no colored borders */
 .badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
   font-size: 0.7rem;
-  padding: 0;
-  background: none;
-  border: none;
   color: white;
   opacity: 0.85;
 }
 
-/* Optional subtle separator between badges */
+/* Days badge */
+.badge-days::before {
+  content: "📅 ";
+}
+
+/* Status badges */
+.badge-status-active::before {
+  content: "🟢 ";
+}
+.badge-status-recent::before {
+  content: "🟡 ";
+}
+.badge-status-dormant::before {
+  content: "⚫ ";
+}
+
+/* Engagement level badges */
+.badge-engagement-0 {
+  opacity: 0.4;
+}
+.badge-engagement-1 {
+  background: none;
+  color: #999;
+}
+.badge-engagement-2 {
+  background: none;
+  color: #4ade80;
+}
+.badge-engagement-3 {
+  background: none;
+  color: #22c55e;
+}
+.badge-engagement-4 {
+  background: none;
+  color: #16a34a;
+}
+
+/* Separator between badges */
 .badge:not(:last-child)::after {
   content: "·";
   margin-left: 0.75rem;
   opacity: 0.5;
 }
 
-/* Remove separator for last badge */
 .badge:last-child::after {
   display: none;
 }
-
 /* ===========================================================
    WEB RING COMPONENTS
    =========================================================== */
