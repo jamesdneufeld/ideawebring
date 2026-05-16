@@ -1,35 +1,17 @@
-/// js/render.js
-/// UI rendering layer (activity-aware dashboard)
+// js/render.js
+// Rendering logic for dashboard UI
 
 function getDaysAgo(date) {
   if (!date) return null;
-  return Math.floor((new Date() - new Date(date)) / (1000 * 60 * 60 * 24));
+  const diff = (new Date() - new Date(date)) / (1000 * 60 * 60 * 24);
+  return Math.floor(diff);
 }
 
-function getActivity(student) {
-  return student.activity || {};
-}
+function getEngagementBar(score = 0) {
+  const filled = Math.round(score / 10);
+  const empty = 10 - filled;
 
-function renderEngagementBar(score = 0) {
-  const totalBars = 10;
-  const filled = Math.round((score / 100) * totalBars);
-
-  const bar = "█".repeat(filled) + "░".repeat(totalBars - filled);
-
-  return `${bar} ${score} / 100`;
-}
-
-function getStatusLabel(activityStatus) {
-  switch (activityStatus) {
-    case "active":
-      return "Active";
-    case "recent":
-      return "Recent";
-    case "dormant":
-      return "At Risk";
-    default:
-      return "Unknown";
-  }
+  return `█`.repeat(filled) + `░`.repeat(empty);
 }
 
 export function renderStudentGrid(students, containerId) {
@@ -38,41 +20,25 @@ export function renderStudentGrid(students, containerId) {
 
   container.innerHTML = students
     .map((student) => {
-      const activity = getActivity(student);
+      const daysAgo = getDaysAgo(student.lastCommitDate);
+      const activity = student.activity || {};
 
-      const daysAgo = getDaysAgo(activity.lastCommitDate);
-
-      const status = activity.status || "unknown";
-
-      const engagement = activity.engagementScore ?? 0;
-
-      // =========================
-      // LAST SEEN BADGE
-      // =========================
       const lastSeenBadge =
         daysAgo !== null
           ? `
-            <div class="activity-timeline">
-              <span class="activity-dot ${status}"></span>
-              Last seen ${daysAgo} day${daysAgo === 1 ? "" : "s"} ago
-            </div>
-          `
+          <div class="activity-timeline">
+            <span class="activity-dot ${activity.status}"></span>
+            Last seen ${daysAgo} day${daysAgo === 1 ? "" : "s"} ago
+          </div>
+        `
           : `
-            <div class="activity-timeline">
-              <span class="activity-dot dormant"></span>
-              No activity recorded
-            </div>
-          `;
+          <div class="activity-timeline">
+            <span class="activity-dot dormant"></span>
+            No activity recorded
+          </div>
+        `;
 
-      // =========================
-      // ENGAGEMENT BAR
-      // =========================
-      const engagementBar = `
-        <div class="activity-timeline">
-          <span class="activity-dot ${status}"></span>
-          Engagement ${renderEngagementBar(engagement)}
-        </div>
-      `;
+      const engagement = activity.engagementScore ?? 0;
 
       return `
         <div class="student-card ${student.withdrawn ? "inactive" : ""}">
@@ -80,52 +46,57 @@ export function renderStudentGrid(students, containerId) {
           <div class="card-header">
             <div>
               <div class="student-name">
-                ${student.displayName}
+                📁 ${student.displayName}
               </div>
+
               <div class="student-folder">
                 ${student.id}
               </div>
             </div>
 
-            <div class="status-badge status-${status}">
-              ${getStatusLabel(status)}
+            <div class="status-badge">
+              ${student.isAlumni ? "Alumni" : "Student"}
             </div>
           </div>
 
           <div class="card-details">
             <div class="detail-row">
               <span class="detail-label">Program</span>
-              <span class="detail-value">${student.program}</span>
+              <span class="detail-value">
+                ${student.program ?? "—"}
+              </span>
             </div>
 
             <div class="detail-row">
               <span class="detail-label">Year</span>
-              <span class="detail-value">${student.year}</span>
-            </div>
-
-            <div class="detail-row">
-              <span class="detail-label">GitHub</span>
               <span class="detail-value">
-                ${student.githubUsername || "—"}
+                ${student.year ?? "—"}
               </span>
             </div>
           </div>
 
           ${lastSeenBadge}
 
-          ${engagementBar}
+          <div class="activity-timeline">
+            <span class="detail-label">Engagement</span>
+          </div>
+
+          <div class="activity-timeline">
+            <span>${getEngagementBar(engagement)} ${engagement}/100</span>
+          </div>
 
           <div class="card-actions">
             ${
               student.githubUsername
-                ? `
-                <a class="card-link" target="_blank"
-                   href="https://github.com/${student.githubUsername}">
-                  GitHub
-                </a>
-              `
+                ? `<a class="card-link" target="_blank" href="https://github.com/${student.githubUsername}">
+                    GitHub
+                   </a>`
                 : ""
             }
+
+            <a class="card-link" target="_blank" href="${student.portfolioUrl}">
+              Portfolio
+            </a>
           </div>
 
         </div>
@@ -139,34 +110,11 @@ export function renderStats(stats) {
   if (!el) return;
 
   el.innerHTML = `
-    <div class="stat-card">
-      <div class="stat-number">${stats.total}</div>
-      <div class="stat-label">Total</div>
-    </div>
-
-    <div class="stat-card">
-      <div class="stat-number">${stats.activeStudents}</div>
-      <div class="stat-label">Active</div>
-    </div>
-
-    <div class="stat-card">
-      <div class="stat-number">${stats.alumni}</div>
-      <div class="stat-label">Alumni</div>
-    </div>
-
-    <div class="stat-card">
-      <div class="stat-number">${stats.resumeReady}</div>
-      <div class="stat-label">Resume Ready</div>
-    </div>
-
-    <div class="stat-card">
-      <div class="stat-number">${stats.missingGithub}</div>
-      <div class="stat-label">Missing GitHub</div>
-    </div>
-
-    <div class="stat-card">
-      <div class="stat-number">${stats.gitHubActive}</div>
-      <div class="stat-label">GitHub Active</div>
-    </div>
+    <div>Total: ${stats.total}</div>
+    <div>Active: ${stats.activeStudents}</div>
+    <div>Alumni: ${stats.alumni}</div>
+    <div>Resume Ready: ${stats.resumeReady}</div>
+    <div>Missing GitHub: ${stats.missingGithub}</div>
+    <div>GitHub Active: ${stats.gitHubActive}</div>
   `;
 }
