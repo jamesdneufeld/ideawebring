@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <title>IDEA Web Ring · Student Directory</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Explore student websites in the IDEA Web Ring — a creative coding community of designers building their corner of the internet." />
     <style>
       * {
         margin: 0;
@@ -87,11 +86,6 @@
         text-align: center;
       }
 
-      .search-box input:focus {
-        outline: none;
-        border-color: #3fb950;
-      }
-
       .filter-section {
         display: flex;
         flex-wrap: wrap;
@@ -108,17 +102,12 @@
         border-radius: 999px;
         cursor: pointer;
         font-size: 0.8rem;
-        transition: all 0.1s;
       }
 
       .filter-pill.active {
         background: #1f6feb;
         border-color: #388bfd;
         color: white;
-      }
-
-      .filter-pill:hover {
-        background: #30363d;
       }
 
       .student-grid {
@@ -132,10 +121,10 @@
         border: 1px solid #30363d;
         border-radius: 12px;
         overflow: hidden;
-        transition: all 0.2s ease;
         text-decoration: none;
         color: inherit;
         display: block;
+        transition: all 0.2s ease;
       }
 
       .site-card:hover {
@@ -167,7 +156,6 @@
       .site-url {
         font-size: 0.7rem;
         color: #6e7681;
-        word-break: break-all;
         margin-bottom: 0.5rem;
       }
 
@@ -179,24 +167,15 @@
         flex-wrap: wrap;
       }
 
-      .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.2rem;
-      }
-
       .badge.active {
         color: #3fb950;
       }
-
       .badge.recent {
         color: #d29922;
       }
-
       .badge.occasional {
         color: #58a6ff;
       }
-
       .badge.inactive {
         color: #6e7681;
       }
@@ -216,15 +195,6 @@
         font-size: 0.8rem;
         color: #6e7681;
       }
-
-      .footer a {
-        color: #58a6ff;
-        text-decoration: none;
-      }
-
-      .footer a:hover {
-        text-decoration: underline;
-      }
     </style>
   </head>
   <body>
@@ -234,30 +204,25 @@
         <div class="tagline">Student websites — built with HTML, CSS, and curiosity</div>
       </div>
 
-      <div id="statsBar" class="stats-bar">Loading stats...</div>
+      <div id="statsBar" class="stats-bar">Loading...</div>
 
       <div class="search-section">
         <div class="search-box">
-          <input type="text" id="searchInput" placeholder="🔍 Search by name or username..." />
+          <input type="text" id="searchInput" placeholder="🔍 Search by name..." />
         </div>
       </div>
 
-      <div class="filter-section" id="filterSection">
+      <div class="filter-section">
         <button class="filter-pill active" data-filter="all">All</button>
-        <button class="filter-pill" data-filter="active">Active (&lt;30 days)</button>
-        <button class="filter-pill" data-filter="recent">Recent (30-60 days)</button>
-        <button class="filter-pill" data-filter="occasional">Occasional (60-90 days)</button>
-        <button class="filter-pill" data-filter="inactive">Inactive (90+ days)</button>
-        <button class="filter-pill" data-filter="alumni">Alumni Only</button>
+        <button class="filter-pill" data-filter="active">Active (&lt;30d)</button>
+        <button class="filter-pill" data-filter="recent">Recent (30-60d)</button>
+        <button class="filter-pill" data-filter="occasional">Occasional (60-90d)</button>
+        <button class="filter-pill" data-filter="alumni">Alumni</button>
       </div>
 
-      <div id="studentGrid" class="student-grid">
-        <div class="no-results">Loading students...</div>
-      </div>
+      <div id="studentGrid" class="student-grid">Loading students...</div>
 
-      <div class="footer">
-        <span>🕸️ Part of the IDEA Web Ring — <a href="summer-coding-mentorship.html">Join the mentorship</a></span>
-      </div>
+      <div class="footer">🕸️ IDEA Web Ring — <a href="summer-coding-mentorship.html" style="color: #58a6ff">Join the mentorship</a></div>
     </div>
 
     <script>
@@ -267,52 +232,29 @@
 
       async function loadStudents() {
         try {
-          const response = await fetch("../students.json");
-          if (!response.ok) throw new Error("students.json not found");
-          const data = await response.json();
-          allStudents = data.students || [];
-
-          // Filter out withdrawn students from display
-          allStudents = allStudents.filter((s) => !s.withdrawn);
-
-          document.getElementById("studentGrid").innerHTML = '<div class="no-results">📡 Loading activity data...</div>';
+          const res = await fetch("../students.json");
+          const data = await res.json();
+          allStudents = (data.students || []).filter((s) => !s.withdrawn);
 
           await loadActivityData();
           renderStats();
           renderGrid();
         } catch (err) {
-          document.getElementById("studentGrid").innerHTML = `<div class="no-results">❌ Failed to load student data: ${err.message}</div>`;
+          document.getElementById("studentGrid").innerHTML = `<div class="no-results">❌ Error loading data</div>`;
         }
-      }
-
-      function getActivityStatus(days) {
-        if (days === null) return "inactive";
-        if (days < 30) return "active";
-        if (days < 60) return "recent";
-        if (days < 90) return "occasional";
-        return "inactive";
       }
 
       async function loadActivityData() {
         const REPO_OWNER = "jamesdneufeld";
         const REPO_NAME = "ideawebring";
 
-        // Process in smaller batches to avoid rate limiting
-        const batchSize = 5;
-        for (let i = 0; i < allStudents.length; i += batchSize) {
-          const batch = allStudents.slice(i, i + batchSize);
+        // Process in batches of 5 to avoid rate limits
+        for (let i = 0; i < allStudents.length; i += 5) {
+          const batch = allStudents.slice(i, i + 5);
           await Promise.all(
             batch.map(async (student) => {
-              // If no GitHub username, they can't have pushed
-              if (!student.githubUsername || student.githubUsername.trim() === "") {
-                student.activityStatus = "inactive";
-                student.activityDays = null;
-                return student;
-              }
-
               try {
-                // Fetch commits by this student in their folder
-                const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${student.id}&author=${encodeURIComponent(student.githubUsername)}&per_page=1`;
+                const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${student.id}&per_page=1`;
                 const res = await fetch(url);
 
                 if (res.ok) {
@@ -321,121 +263,88 @@
                   if (date) {
                     const days = (new Date() - new Date(date)) / (1000 * 60 * 60 * 24);
                     student.activityDays = Math.floor(days);
-                    student.activityStatus = getActivityStatus(student.activityDays);
+                    if (days < 30) student.activityStatus = "active";
+                    else if (days < 60) student.activityStatus = "recent";
+                    else if (days < 90) student.activityStatus = "occasional";
+                    else student.activityStatus = "inactive";
                   } else {
                     student.activityStatus = "inactive";
-                    student.activityDays = null;
                   }
-                } else if (res.status === 409) {
-                  // Empty folder, no commits
-                  student.activityStatus = "inactive";
-                  student.activityDays = null;
                 } else {
                   student.activityStatus = "inactive";
-                  student.activityDays = null;
                 }
-              } catch (err) {
-                console.warn(`Failed to fetch activity for ${student.id}:`, err);
+              } catch {
                 student.activityStatus = "inactive";
-                student.activityDays = null;
               }
-              return student;
             }),
           );
 
-          // Small delay between batches to avoid rate limiting
-          if (i + batchSize < allStudents.length) {
-            await new Promise((r) => setTimeout(r, 500));
-          }
+          // Delay between batches
+          if (i + 5 < allStudents.length) await new Promise((r) => setTimeout(r, 300));
         }
-      }
-
-      function getFilteredStudents() {
-        let filtered = [...allStudents];
-
-        if (currentFilter === "active") {
-          filtered = filtered.filter((s) => s.activityStatus === "active");
-        } else if (currentFilter === "recent") {
-          filtered = filtered.filter((s) => s.activityStatus === "recent");
-        } else if (currentFilter === "occasional") {
-          filtered = filtered.filter((s) => s.activityStatus === "occasional");
-        } else if (currentFilter === "inactive") {
-          filtered = filtered.filter((s) => s.activityStatus === "inactive");
-        } else if (currentFilter === "alumni") {
-          filtered = filtered.filter((s) => s.isAlumni === true);
-        }
-
-        if (currentSearch) {
-          const q = currentSearch.toLowerCase();
-          filtered = filtered.filter((s) => (s.displayName || "").toLowerCase().includes(q) || (s.id || "").toLowerCase().includes(q) || (s.githubUsername || "").toLowerCase().includes(q));
-        }
-
-        return filtered;
       }
 
       function renderStats() {
-        const total = allStudents.length;
-        const active = allStudents.filter((s) => s.activityStatus === "active").length;
-        const recent = allStudents.filter((s) => s.activityStatus === "recent").length;
-        const occasional = allStudents.filter((s) => s.activityStatus === "occasional").length;
-        const inactive = allStudents.filter((s) => s.activityStatus === "inactive").length;
-        const alumni = allStudents.filter((s) => s.isAlumni === true).length;
-        const noGithub = allStudents.filter((s) => !s.githubUsername || s.githubUsername.trim() === "").length;
+        const stats = {
+          total: allStudents.length,
+          active: allStudents.filter((s) => s.activityStatus === "active").length,
+          recent: allStudents.filter((s) => s.activityStatus === "recent").length,
+          occasional: allStudents.filter((s) => s.activityStatus === "occasional").length,
+          alumni: allStudents.filter((s) => s.isAlumni).length,
+        };
 
-        const statsDiv = document.getElementById("statsBar");
-        statsDiv.innerHTML = `
-      <div class="stat-pill">📚 <span class="stat-number">${total}</span> sites</div>
-      <div class="stat-pill">🟢 <span class="stat-number">${active}</span> active (&lt;30d)</div>
-      <div class="stat-pill">🟡 <span class="stat-number">${recent}</span> recent (30-60d)</div>
-      <div class="stat-pill">🔵 <span class="stat-number">${occasional}</span> occasional (60-90d)</div>
-      <div class="stat-pill">⚫ <span class="stat-number">${inactive}</span> inactive (90+d)</div>
-      <div class="stat-pill">🎓 <span class="stat-number">${alumni}</span> alumni</div>
-      ${noGithub > 0 ? `<div class="stat-pill">❓ <span class="stat-number">${noGithub}</span> missing GitHub</div>` : ""}
+        document.getElementById("statsBar").innerHTML = `
+      <div class="stat-pill">📚 <span class="stat-number">${stats.total}</span> sites</div>
+      <div class="stat-pill">🟢 <span class="stat-number">${stats.active}</span> active</div>
+      <div class="stat-pill">🟡 <span class="stat-number">${stats.recent}</span> recent</div>
+      <div class="stat-pill">🔵 <span class="stat-number">${stats.occasional}</span> occasional</div>
+      <div class="stat-pill">🎓 <span class="stat-number">${stats.alumni}</span> alumni</div>
     `;
       }
 
       function renderGrid() {
-        const filtered = getFilteredStudents();
-        const grid = document.getElementById("studentGrid");
+        let filtered = [...allStudents];
 
+        if (currentFilter === "active") filtered = filtered.filter((s) => s.activityStatus === "active");
+        else if (currentFilter === "recent") filtered = filtered.filter((s) => s.activityStatus === "recent");
+        else if (currentFilter === "occasional") filtered = filtered.filter((s) => s.activityStatus === "occasional");
+        else if (currentFilter === "alumni") filtered = filtered.filter((s) => s.isAlumni);
+
+        if (currentSearch) {
+          const q = currentSearch.toLowerCase();
+          filtered = filtered.filter((s) => s.displayName?.toLowerCase().includes(q) || s.id?.toLowerCase().includes(q));
+        }
+
+        const grid = document.getElementById("studentGrid");
         if (filtered.length === 0) {
-          grid.innerHTML = '<div class="no-results">✨ No matching sites found</div>';
+          grid.innerHTML = '<div class="no-results">✨ No matching sites</div>';
           return;
         }
 
         grid.innerHTML = filtered
-          .map((student) => {
-            const siteUrl = `https://jamesdneufeld.github.io/ideawebring/${student.id}/`;
-            let statusIcon = "⚫";
-            let statusText = "Inactive (90+ days)";
-
-            if (student.activityStatus === "active") {
-              statusIcon = "🟢";
-              statusText = `Active (${student.activityDays}d ago)`;
-            } else if (student.activityStatus === "recent") {
-              statusIcon = "🟡";
-              statusText = `Recent (${student.activityDays}d ago)`;
-            } else if (student.activityStatus === "occasional") {
-              statusIcon = "🔵";
-              statusText = `Occasional (${student.activityDays}d ago)`;
-            } else if (student.activityStatus === "inactive" && student.activityDays !== null) {
-              statusText = `Inactive (${student.activityDays}d ago)`;
-            } else if (!student.githubUsername || student.githubUsername.trim() === "") {
-              statusText = "No GitHub linked";
+          .map((s) => {
+            let icon = "⚫",
+              label = "Inactive";
+            if (s.activityStatus === "active") {
+              icon = "🟢";
+              label = `Active (${s.activityDays}d ago)`;
+            } else if (s.activityStatus === "recent") {
+              icon = "🟡";
+              label = `Recent (${s.activityDays}d ago)`;
+            } else if (s.activityStatus === "occasional") {
+              icon = "🔵";
+              label = `Occasional (${s.activityDays}d ago)`;
             }
 
             return `
-        <a href="${siteUrl}" target="_blank" class="site-card">
-          <div class="site-preview">
-            🕸️
-          </div>
+        <a href="https://jamesdneufeld.github.io/ideawebring/${s.id}/" target="_blank" class="site-card">
+          <div class="site-preview">🕸️</div>
           <div class="site-info">
-            <div class="site-name">${escapeHtml(student.displayName || student.id)}</div>
-            <div class="site-url">${escapeHtml(student.id)}/</div>
+            <div class="site-name">${escapeHtml(s.displayName || s.id)}</div>
+            <div class="site-url">${s.id}/</div>
             <div class="site-meta">
-              <span class="badge ${student.activityStatus}">${statusIcon} ${statusText}</span>
-              ${student.githubUsername ? `<span class="badge">🐙 ${escapeHtml(student.githubUsername)}</span>` : '<span class="badge">❌ No GitHub</span>'}
-              ${student.isAlumni ? '<span class="badge">🎓</span>' : ""}
+              <span class="badge ${s.activityStatus}">${icon} ${label}</span>
+              ${s.isAlumni ? "<span>🎓</span>" : ""}
             </div>
           </div>
         </a>
@@ -446,32 +355,24 @@
 
       function escapeHtml(str) {
         if (!str) return "";
-        return str.replace(/[&<>]/g, (m) => {
-          if (m === "&") return "&amp;";
-          if (m === "<") return "&lt;";
-          if (m === ">") return "&gt;";
-          return m;
-        });
+        return str.replace(/[&<>]/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[m] || m);
       }
 
-      function setupEventListeners() {
-        document.getElementById("searchInput").addEventListener("input", (e) => {
-          currentSearch = e.target.value;
+      document.getElementById("searchInput").addEventListener("input", (e) => {
+        currentSearch = e.target.value;
+        renderGrid();
+      });
+
+      document.querySelectorAll(".filter-pill").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".filter-pill").forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.filter;
           renderGrid();
         });
-
-        document.querySelectorAll(".filter-pill").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            document.querySelectorAll(".filter-pill").forEach((b) => b.classList.remove("active"));
-            btn.classList.add("active");
-            currentFilter = btn.dataset.filter;
-            renderGrid();
-          });
-        });
-      }
+      });
 
       loadStudents();
-      setupEventListeners();
     </script>
   </body>
 </html>
