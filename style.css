@@ -514,6 +514,54 @@ a:hover {
 }
 
 /* ===========================================================
+   RETURNING STUDENT GLOW (1+ YEAR GAP RETURN)
+   =========================================================== */
+
+.student-return {
+  position: relative;
+}
+
+/* soft outer glow */
+.student-return::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 0.75rem;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.18), transparent 60%);
+  filter: blur(6px);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* subtle animated pulse */
+@keyframes returnPulse {
+  0% {
+    opacity: 0.4;
+    transform: scale(0.99);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.4;
+    transform: scale(0.99);
+  }
+}
+
+.student-return::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  animation: returnPulse 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===========================================================
    WEB RING COMPONENTS
    =========================================================== */
 

@@ -55,7 +55,7 @@ async function getActivity(folder) {
         commitCount: 0,
         activeYears: 0,
         activeWeeks: 0,
-        commits: [],
+        returnedAfterYear: false,
       };
     }
 
@@ -66,12 +66,20 @@ async function getActivity(folder) {
     const lastDate = lastCommit?.commit?.author?.date || null;
 
     let days = null;
+    let returnedAfterYear = false;
+
     if (lastDate) {
-      days = Math.floor((new Date() - new Date(lastDate)) / (1000 * 60 * 60 * 24));
+      const last = new Date(lastDate);
+      const now = new Date();
+
+      days = Math.floor((now - last) / (1000 * 60 * 60 * 24));
+
+      // 🔥 RETURN SIGNAL
+      returnedAfterYear = days >= 365 && commits.length > 0;
     }
 
     /* =========================
-       ACTIVITY ANALYTICS
+       CONTINUITY METRICS
     ========================= */
 
     const years = new Set();
@@ -90,6 +98,7 @@ async function getActivity(folder) {
       commitCount: commits.length,
       activeYears: years.size,
       activeWeeks: weeks.size,
+      returnedAfterYear,
     };
 
     setCache(cacheKey, result);
@@ -100,6 +109,7 @@ async function getActivity(folder) {
       commitCount: 0,
       activeYears: 0,
       activeWeeks: 0,
+      returnedAfterYear: false,
     };
   }
 }
@@ -111,30 +121,20 @@ async function getActivity(folder) {
 function getMembership(activity) {
   const commits = activity.commitCount;
   const years = activity.activeYears;
-  const gaps = activity.activeWeeks;
-
-  // Core idea:
-  // - commits = intensity
-  // - years = longevity
-  // - weeks = continuity
+  const weeks = activity.activeWeeks;
 
   if (years === 0 && commits === 0) return "Archive";
-
   if (years === 1 && commits <= 3) return "Newcomer";
-
   if (years <= 1 && commits <= 15) return "Contributor";
-
   if (years <= 2 && commits > 15) return "Regular";
-
-  if (years >= 2 && commits > 30 && gaps > 8) return "Veteran";
-
+  if (years >= 2 && commits > 30 && weeks > 8) return "Veteran";
   if (years >= 3) return "Veteran";
 
   return "Contributor";
 }
 
 /* =========================
-   LIFETIME SCORE (0–5 stars, never decreases conceptually)
+   LIFETIME SCORE (0–5 stars)
 ========================= */
 
 function getLifetimeScore(activity) {
@@ -188,12 +188,22 @@ async function populateStudentData() {
     const folder = link.dataset.folder || link.getAttribute("href").replace(/\/$/, "").toLowerCase();
 
     const student = studentMap.get(folder);
-    const container = link.querySelector(".student-badges");
 
+    const container = link.querySelector(".student-badges");
     if (!container) continue;
+
     container.innerHTML = "";
 
     const activity = await getActivity(folder);
+
+    /* =========================
+       RETURN GLOW CLASS
+    ========================= */
+    if (activity.returnedAfterYear) {
+      link.classList.add("student-return");
+    } else {
+      link.classList.remove("student-return");
+    }
 
     const membership = getMembership(activity);
     const lifetime = getLifetimeScore(activity);
@@ -201,7 +211,7 @@ async function populateStudentData() {
     const stars = "★".repeat(lifetime) + "☆".repeat(5 - lifetime);
 
     /* =========================
-       REQUIRED OUTPUT (ONLY 3 LINES)
+       REQUIRED OUTPUT
     ========================= */
 
     container.appendChild(createLine(activity.days !== null ? `Last seen: ${activity.days} days ago` : "Last seen: No activity"));
