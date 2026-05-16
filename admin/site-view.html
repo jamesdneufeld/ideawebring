@@ -282,7 +282,6 @@
         }
       }
 
-      // Get activity status based on days since last commit
       function getActivityStatus(days) {
         if (days === null) return "inactive";
         if (days < 30) return "active";
@@ -296,8 +295,17 @@
         const REPO_NAME = "ideawebring";
 
         const promises = allStudents.map(async (student) => {
+          // If no GitHub username, they can't have pushed
+          if (!student.githubUsername || student.githubUsername.trim() === "") {
+            student.activityStatus = "inactive";
+            student.activityDays = null;
+            student.commitCount = 0;
+            return student;
+          }
+
           try {
-            const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${student.id}&per_page=1`;
+            // Fetch commits by this student in their folder
+            const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${student.id}&author=${student.githubUsername}&per_page=1`;
             const res = await fetch(url);
 
             if (res.ok) {
@@ -307,18 +315,22 @@
                 const days = (new Date() - new Date(date)) / (1000 * 60 * 60 * 24);
                 student.activityDays = Math.floor(days);
                 student.activityStatus = getActivityStatus(student.activityDays);
+                student.commitCount = data.length;
               } else {
                 student.activityStatus = "inactive";
                 student.activityDays = null;
+                student.commitCount = 0;
               }
             } else {
               student.activityStatus = "inactive";
               student.activityDays = null;
+              student.commitCount = 0;
             }
           } catch (err) {
             console.warn(`Failed to fetch activity for ${student.id}:`, err);
             student.activityStatus = "inactive";
             student.activityDays = null;
+            student.commitCount = 0;
           }
           return student;
         });
@@ -356,6 +368,7 @@
         const occasional = allStudents.filter((s) => s.activityStatus === "occasional").length;
         const inactive = allStudents.filter((s) => s.activityStatus === "inactive").length;
         const alumni = allStudents.filter((s) => s.isAlumni === true).length;
+        const noGithub = allStudents.filter((s) => !s.githubUsername || s.githubUsername.trim() === "").length;
 
         const statsDiv = document.getElementById("statsBar");
         statsDiv.innerHTML = `
@@ -365,6 +378,7 @@
       <div class="stat-pill">🔵 <span class="stat-number">${occasional}</span> occasional (60-90d)</div>
       <div class="stat-pill">⚫ <span class="stat-number">${inactive}</span> inactive (90+d)</div>
       <div class="stat-pill">🎓 <span class="stat-number">${alumni}</span> alumni</div>
+      ${noGithub > 0 ? `<div class="stat-pill">❓ <span class="stat-number">${noGithub}</span> missing GitHub</div>` : ""}
     `;
       }
 
@@ -394,6 +408,8 @@
               statusText = `Occasional (${student.activityDays}d ago)`;
             } else if (student.activityStatus === "inactive" && student.activityDays !== null) {
               statusText = `Inactive (${student.activityDays}d ago)`;
+            } else if (!student.githubUsername) {
+              statusText = "No GitHub linked";
             }
 
             return `
@@ -406,7 +422,7 @@
             <div class="site-url">${escapeHtml(student.id)}/</div>
             <div class="site-meta">
               <span class="badge ${student.activityStatus}">${statusIcon} ${statusText}</span>
-              ${student.githubUsername ? `<span class="badge">🐙</span>` : ""}
+              ${student.githubUsername ? `<span class="badge">🐙 ${escapeHtml(student.githubUsername)}</span>` : '<span class="badge">❌ No GitHub</span>'}
               ${student.isAlumni ? '<span class="badge">🎓</span>' : ""}
             </div>
           </div>
