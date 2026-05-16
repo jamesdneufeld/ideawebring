@@ -3,32 +3,35 @@ import { getConfig } from "./config.js";
 
 export function createStudent(folderId, existing = null) {
   const config = getConfig();
+  const defaults = config.defaults || {};
 
   let tags = existing?.tags || [];
-  if (typeof tags === "string")
+  if (typeof tags === "string" && tags.trim()) {
     tags = tags
       .split(",")
       .map((t) => t.trim())
-      .filter((t) => t);
+      .filter((t) => t.length > 0);
+  }
 
   let formerIds = existing?.formerIds || [];
-  if (typeof formerIds === "string")
+  if (typeof formerIds === "string" && formerIds.trim()) {
     formerIds = formerIds
       .split(",")
       .map((f) => f.trim())
-      .filter((f) => f);
+      .filter((f) => f.length > 0);
+  }
 
   return {
     id: folderId,
     displayName: existing?.displayName || toDisplayName(folderId),
     githubUsername: existing?.githubUsername || "",
-    program: existing?.program || config.defaults.program,
-    year: existing?.year || config.defaults.year,
+    program: existing?.program || defaults.program,
+    year: existing?.year || defaults.year,
     isAlumni: existing?.isAlumni || false,
     withdrawn: existing?.withdrawn || false,
-    formerIds: formerIds,
-    tags: tags,
-    resumeRequirementMet: existing?.resumeRequirementMet || config.defaults.resumeRequirementMet,
+    formerIds,
+    tags,
+    resumeRequirementMet: existing?.resumeRequirementMet ?? defaults.resumeRequirementMet,
     notes: existing?.notes || "",
   };
 }
@@ -36,6 +39,7 @@ export function createStudent(folderId, existing = null) {
 export function toDisplayName(folder) {
   return folder
     .split("-")
+    .filter(Boolean)
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
     .join(" ");
 }

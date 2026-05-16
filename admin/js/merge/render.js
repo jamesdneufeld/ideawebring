@@ -1,9 +1,11 @@
-// js/merge/render.js (for merge engine table)
+// js/merge/render.js (fixed criticals only)
 import { getConfig } from "./config.js";
 import { getCohortDisplay } from "./student.js";
 
 export function renderTableHeader() {
   const thead = document.getElementById("tableHeader");
+  if (!thead) return;
+
   thead.innerHTML = `
     <tr>
       <th>Folder ID</th>
@@ -24,25 +26,28 @@ export function renderTableHeader() {
 
 export function renderTable(students, onUpdate) {
   const tbody = document.getElementById("studentTableBody");
+  if (!tbody) return;
+
   const config = getConfig();
+
+  const programs = config.options?.programs || [];
+  const years = config.options?.years || [];
+
   tbody.innerHTML = "";
 
   students.forEach((student, idx) => {
     const row = tbody.insertRow();
 
-    // Folder ID
     const idCell = row.insertCell(0);
     idCell.textContent = student.id;
     idCell.style.color = "#8b949e";
 
-    // Display Name
     const nameCell = row.insertCell(1);
     const nameInput = document.createElement("input");
     nameInput.value = student.displayName;
     nameInput.addEventListener("change", (e) => onUpdate(idx, "displayName", e.target.value));
     nameCell.appendChild(nameInput);
 
-    // GitHub Username
     const githubCell = row.insertCell(2);
     const githubInput = document.createElement("input");
     githubInput.placeholder = "github username";
@@ -50,10 +55,9 @@ export function renderTable(students, onUpdate) {
     githubInput.addEventListener("change", (e) => onUpdate(idx, "githubUsername", e.target.value.trim()));
     githubCell.appendChild(githubInput);
 
-    // Program
     const programCell = row.insertCell(3);
     const programSelect = document.createElement("select");
-    config.options.programs.forEach((opt) => {
+    programs.forEach((opt) => {
       const option = document.createElement("option");
       option.value = opt;
       option.textContent = opt;
@@ -63,11 +67,10 @@ export function renderTable(students, onUpdate) {
     programSelect.addEventListener("change", (e) => onUpdate(idx, "program", e.target.value));
     programCell.appendChild(programSelect);
 
-    // Year
     const yearCell = row.insertCell(4);
     const yearSelect = document.createElement("select");
     yearSelect.className = "year-input";
-    config.options.years.forEach((opt) => {
+    years.forEach((opt) => {
       const option = document.createElement("option");
       option.value = opt;
       option.textContent = opt;
@@ -77,7 +80,6 @@ export function renderTable(students, onUpdate) {
     yearSelect.addEventListener("change", (e) => onUpdate(idx, "year", e.target.value));
     yearCell.appendChild(yearSelect);
 
-    // Alumni
     const alumniCell = row.insertCell(5);
     alumniCell.className = "checkbox-cell";
     const alumniCheckbox = document.createElement("input");
@@ -86,7 +88,6 @@ export function renderTable(students, onUpdate) {
     alumniCheckbox.addEventListener("change", (e) => onUpdate(idx, "isAlumni", e.target.checked));
     alumniCell.appendChild(alumniCheckbox);
 
-    // Withdrawn
     const withdrawnCell = row.insertCell(6);
     withdrawnCell.className = "checkbox-cell";
     const withdrawnCheckbox = document.createElement("input");
@@ -95,7 +96,6 @@ export function renderTable(students, onUpdate) {
     withdrawnCheckbox.addEventListener("change", (e) => onUpdate(idx, "withdrawn", e.target.checked));
     withdrawnCell.appendChild(withdrawnCheckbox);
 
-    // Former IDs
     const formerIdsCell = row.insertCell(7);
     const formerIdsInput = document.createElement("input");
     formerIdsInput.type = "text";
@@ -105,17 +105,15 @@ export function renderTable(students, onUpdate) {
       const idsArray = e.target.value
         .split(",")
         .map((id) => id.trim())
-        .filter((id) => id);
+        .filter(Boolean);
       onUpdate(idx, "formerIds", idsArray);
     });
     formerIdsCell.appendChild(formerIdsInput);
 
-    // Cohort preview
     const cohortCell = row.insertCell(8);
     const cohortDisplay = getCohortDisplay(student.program, student.year, student.isAlumni, student.withdrawn);
     cohortCell.innerHTML = `<span class="cohort-preview">${cohortDisplay}</span>`;
 
-    // Tags
     const tagsCell = row.insertCell(9);
     const tagsInput = document.createElement("input");
     tagsInput.type = "text";
@@ -125,12 +123,11 @@ export function renderTable(students, onUpdate) {
       const tagsArray = e.target.value
         .split(",")
         .map((t) => t.trim())
-        .filter((t) => t);
+        .filter(Boolean);
       onUpdate(idx, "tags", tagsArray);
     });
     tagsCell.appendChild(tagsInput);
 
-    // Resume Requirement
     const resumeCell = row.insertCell(10);
     resumeCell.className = "checkbox-cell";
     const resumeCheckbox = document.createElement("input");
@@ -139,7 +136,6 @@ export function renderTable(students, onUpdate) {
     resumeCheckbox.addEventListener("change", (e) => onUpdate(idx, "resumeRequirementMet", e.target.checked));
     resumeCell.appendChild(resumeCheckbox);
 
-    // Notes
     const notesCell = row.insertCell(11);
     const notesInput = document.createElement("input");
     notesInput.placeholder = "optional notes";
@@ -149,31 +145,59 @@ export function renderTable(students, onUpdate) {
   });
 }
 
+function generateExcludeHint(excludeFolders = []) {
+  if (!excludeFolders.length) return "";
+  return `🚫 Auto-excluded: ${excludeFolders.join(", ")}`;
+}
+
 export function updateUIFromConfig() {
   const config = getConfig();
-  document.getElementById("pageTitle").textContent = config.ui.title || "🕸️ Web Ring · Merge Engine";
-  document.getElementById("pageSubhead").textContent = config.ui.subhead || "Ranked rule-based identity reconciliation";
-  document.getElementById("excludeHint").innerHTML = config.ui.excludeHint || "🚫 Auto-excluded folders configured in config.json";
+  const ui = config.ui || {};
+  const excludeFolders = config.excludeFolders || [];
+
+  const titleEl = document.getElementById("pageTitle");
+  const subheadEl = document.getElementById("pageSubhead");
+  const excludeEl = document.getElementById("excludeHint");
+
+  if (titleEl) {
+    titleEl.textContent = ui.title || "🕸️ Web Ring · Merge Engine";
+  }
+
+  if (subheadEl) {
+    subheadEl.textContent = ui.subhead || "Ranked rule-based identity reconciliation";
+  }
+
+  if (excludeEl) {
+    excludeEl.textContent = generateExcludeHint(excludeFolders) || "🚫 No folders excluded";
+  }
 }
 
 export function showWarning(message) {
   const warningBox = document.getElementById("warningBox");
+  if (!warningBox) return;
   warningBox.classList.remove("hidden");
   warningBox.innerHTML = message;
 }
 
 export function hideWarning() {
-  document.getElementById("warningBox").classList.add("hidden");
+  const warningBox = document.getElementById("warningBox");
+  if (!warningBox) return;
+  warningBox.classList.add("hidden");
 }
 
 export function showEditor() {
-  document.getElementById("editorSection").classList.remove("hidden");
+  const el = document.getElementById("editorSection");
+  if (el) el.classList.remove("hidden");
 }
 
 export function renderPreview(students) {
+  const el = document.getElementById("output");
+  if (!el) return;
+
   const output = {
     lastUpdated: new Date().toISOString().split("T")[0],
-    students: students,
+    students,
   };
-  document.getElementById("output").textContent = JSON.stringify(output, null, 2);
+
+  el.textContent = JSON.stringify(output, null, 2);
 }

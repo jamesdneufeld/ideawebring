@@ -1,6 +1,4 @@
-// js/merge/main.js
-
-import { loadConfig, getConfig } from "./config.js";
+import { loadConfig } from "./config.js";
 import { fetchStudentsFromGitHub, fetchFoldersFromGitHub } from "./github.js";
 import { reconcile } from "./reconcile.js";
 import { renderTableHeader, renderTable, updateUIFromConfig, showWarning, hideWarning, showEditor, renderPreview } from "./render.js";
@@ -17,18 +15,16 @@ async function init() {
 }
 
 function setupEventListeners() {
-  // Fetch students from GitHub
   document.getElementById("fetchStudentsBtn").addEventListener("click", async () => {
     try {
       const { students } = await fetchStudentsFromGitHub();
-      existingStudents = students;
-      document.getElementById("uploadStatus").innerHTML = `✅ Loaded ${students.length} students from repo`;
+      existingStudents = students || [];
+      document.getElementById("uploadStatus").innerHTML = `✅ Loaded ${existingStudents.length} students from repo`;
     } catch (err) {
       document.getElementById("uploadStatus").innerHTML = `❌ ${err.message}`;
     }
   });
 
-  // Upload local file
   document.getElementById("uploadBtn").addEventListener("click", () => {
     document.getElementById("upload").click();
   });
@@ -36,9 +32,9 @@ function setupEventListeners() {
   document.getElementById("upload").addEventListener("change", async (e) => {
     const file = e.target.files[0];
     if (!file) return;
+
     try {
-      const text = await file.text();
-      const json = JSON.parse(text);
+      const json = JSON.parse(await file.text());
       existingStudents = json.students || [];
       document.getElementById("uploadStatus").innerHTML = `✅ Loaded ${existingStudents.length} students from local file`;
     } catch (err) {
@@ -46,18 +42,18 @@ function setupEventListeners() {
     }
   });
 
-  // Fetch folders from GitHub
   document.getElementById("fetchFoldersBtn").addEventListener("click", async () => {
     try {
-      const { folders, excludedCount } = await fetchFoldersFromGitHub();
+      const result = await fetchFoldersFromGitHub();
+      const folders = Array.isArray(result.folders) ? result.folders : [];
+
       document.getElementById("folderInput").value = folders.join("\n");
-      alert(`✅ Loaded ${folders.length} student folders (excluded ${excludedCount} admin folders)`);
+      alert(`✅ Loaded ${folders.length} student folders`);
     } catch (err) {
       alert(`❌ ${err.message}`);
     }
   });
 
-  // Load .txt file
   document.getElementById("loadTxtBtn").addEventListener("click", () => {
     document.getElementById("folderFile").click();
   });
@@ -65,19 +61,17 @@ function setupEventListeners() {
   document.getElementById("folderFile").addEventListener("change", async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    const text = await file.text();
-    document.getElementById("folderInput").value = text;
+    document.getElementById("folderInput").value = await file.text();
   });
 
-  // Reconcile
   document.getElementById("reconcileBtn").addEventListener("click", () => {
-    const folderInput = document.getElementById("folderInput").value;
-    const folders = folderInput
-      .split("\n")
+    const folders = document
+      .getElementById("folderInput")
+      .value.split("\n")
       .map((f) => f.trim())
       .filter((f) => f && !f.startsWith("#"));
 
-    if (folders.length === 0) {
+    if (!folders.length) {
       alert("Please load or paste folder names first");
       return;
     }
@@ -87,11 +81,11 @@ function setupEventListeners() {
 
     if (summary.hasMissing) {
       showWarning(`
-        🔍 Identity Resolution Summary (Ranked Rules):<br>
-        🟢 High confidence: ${summary.highCount}<br>
-        🟡 Medium confidence: ${summary.mediumCount}<br>
-        🔴 No match (new student): ${summary.lowCount}<br>
-        <span class="diff-changed">💡 Match priority: ${summary.rulesList}</span>
+        🔍 Identity Resolution Summary:<br>
+        🟢 High: ${summary.highCount}<br>
+        🟡 Match: ${summary.matchCount}<br>
+        🔴 None: ${summary.noneCount}<br>
+        <span class="diff-changed">💡 ${summary.rulesList}</span>
       `);
     } else {
       hideWarning();
@@ -99,7 +93,6 @@ function setupEventListeners() {
 
     function handleUpdate(idx, field, value) {
       currentStudents[idx][field] = value;
-      renderTable(currentStudents, handleUpdate);
       renderPreview(currentStudents.map(cleanForExport));
     }
 
@@ -108,18 +101,22 @@ function setupEventListeners() {
     showEditor();
   });
 
-  // Download
   document.getElementById("downloadBtn").addEventListener("click", () => {
     const output = {
       lastUpdated: new Date().toISOString().split("T")[0],
       students: currentStudents.map(cleanForExport),
     };
-    const blob = new Blob([JSON.stringify(output, null, 2)], { type: "application/json" });
+
+    const blob = new Blob([JSON.stringify(output, null, 2)], {
+      type: "application/json",
+    });
+
+    const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
+    a.href = url;
     a.download = "students.json";
     a.click();
-    URL.revokeObjectURL(blob);
+    URL.revokeObjectURL(url);
   });
 }
 

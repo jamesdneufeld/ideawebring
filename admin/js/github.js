@@ -1,8 +1,13 @@
 // js/github.js
 // Handles all GitHub API calls with caching
 
-const REPO_OWNER = "jamesdneufeld";
-const REPO_NAME = "ideawebring";
+let REPO_OWNER = "jamesdneufeld";
+let REPO_NAME = "ideawebring";
+
+export function setRepoConfig(owner, name) {
+  REPO_OWNER = owner;
+  REPO_NAME = name;
+}
 
 function getCacheKey(folder) {
   return `dashboard_activity_${folder}`;

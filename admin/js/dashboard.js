@@ -3,7 +3,7 @@
 
 import { loadStudentsJson } from "./data.js";
 import { normalizeStudent, enrichWithUrls, enrichWithActivity } from "../lib/student.js";
-import { fetchActivityForAllStudents } from "./github.js";
+import { fetchActivityForAllStudents, setRepoConfig } from "./github.js";
 import { filterStudents, sortStudents, computeAvailableCohorts, computeAvailableTags } from "./filters.js";
 import { computeStats } from "./stats.js";
 import { exportToCSV } from "./export.js";
@@ -22,6 +22,19 @@ let state = {
 let allStudents = [];
 let filteredStudents = [];
 
+// Load config for repo owner/name
+async function loadDashboardConfig() {
+  try {
+    const res = await fetch("../config.json");
+    if (res.ok) {
+      const config = await res.json();
+      setRepoConfig(config.repo.owner, config.repo.name);
+    }
+  } catch (err) {
+    console.log("Using default repo config");
+  }
+}
+
 // Render everything
 function render() {
   const filtered = filterStudents(allStudents, state);
@@ -39,6 +52,8 @@ function render() {
 
 // Load data and initialize
 async function init() {
+  await loadDashboardConfig();
+
   // Load raw data
   const rawStudents = await loadStudentsJson();
 

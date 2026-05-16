@@ -1,4 +1,5 @@
 {
+  "version": 1,
   "repo": {
     "owner": "jamesdneufeld",
     "name": "ideawebring"
@@ -23,7 +24,6 @@
   ],
   "ui": {
     "title": "🕸️ Web Ring · Merge Engine",
-    "subhead": "Ranked rule-based identity reconciliation — stores static metadata only",
-    "excludeHint": "🚫 Auto-excluded: .git, .vscode, admin, assets, blank-bdes, blank-ixd, ixd, james, james-in-class, learning, log"
+    "subhead": "Ranked rule-based identity reconciliation — stores static metadata only"
   }
 }

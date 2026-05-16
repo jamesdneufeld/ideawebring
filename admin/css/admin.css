@@ -158,6 +158,12 @@ td select {
 }
 
 /* Badges */
+
+.confidence-match {
+  background: #d2992220;
+  color: #d29922;
+}
+
 .confidence-badge {
   display: inline-block;
   font-size: 0.55rem;

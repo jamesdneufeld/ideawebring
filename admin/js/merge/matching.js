@@ -2,13 +2,14 @@
 import { getConfig } from "./config.js";
 
 export function normalize(str) {
-  if (!str) return "";
+  // Guard against non-string input
+  if (typeof str !== "string") return "";
   return str.toLowerCase().replace(/[^a-z0-9]/g, "");
 }
 
 export function findBestMatch(folderId, students) {
   const config = getConfig();
-  let bestMatch = { student: null, rule: null, weight: 0 };
+  let bestMatch = { student: null, rule: null, weight: 0, matchedToId: null };
 
   for (const student of students) {
     for (const rule of config.matchRules) {
@@ -19,13 +20,19 @@ export function findBestMatch(folderId, students) {
       } else if (rule.name === "normalized") {
         matched = normalize(student.id) === normalize(folderId);
       } else if (rule.name === "formerId") {
-        matched = student.formerIds && Array.isArray(student.formerIds) && student.formerIds.some((fid) => normalize(fid) === normalize(folderId));
+        // Cleaner check: no redundant short-circuit
+        matched = Array.isArray(student.formerIds) && student.formerIds.some((fid) => normalize(fid) === normalize(folderId));
       } else if (rule.name === "github") {
         matched = student.githubUsername && normalize(student.githubUsername) === normalize(folderId);
       }
 
       if (matched && rule.weight > bestMatch.weight) {
-        bestMatch = { student, rule: rule.name, weight: rule.weight };
+        bestMatch = {
+          student,
+          rule: rule.name,
+          weight: rule.weight,
+          matchedToId: student.id,
+        };
       }
     }
   }
@@ -37,17 +44,16 @@ export function getConfidenceLevel(weight) {
   const config = getConfig();
   const maxWeight = Math.max(...config.matchRules.map((r) => r.weight));
   if (weight === maxWeight) return "high";
-  if (weight > 0) return "medium";
-  return "low";
+  return weight > 0 ? "match" : "none";
 }
 
 export function getConfidenceBadge(weight, rule, matchedToId) {
   const level = getConfidenceLevel(weight);
   if (level === "high") {
     return `<span class="confidence-badge confidence-high" title="Matched by rule: ${rule}">✅ High (${rule})</span>`;
-  } else if (level === "medium") {
-    return `<span class="confidence-badge confidence-medium" title="Matched by rule: ${rule} to ${matchedToId}">🟡 Medium (${rule})</span>`;
+  } else if (level === "match") {
+    return `<span class="confidence-badge confidence-match" title="Matched by rule: ${rule} to ${matchedToId || "unknown"}">🟡 Match (${rule})</span>`;
   } else {
-    return `<span class="confidence-badge confidence-low" title="No existing student found">❌ New student</span>`;
+    return `<span class="confidence-badge confidence-none" title="No existing student found">❌ New student</span>`;
   }
 }

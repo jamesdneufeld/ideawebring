@@ -1,10 +1,12 @@
-// js/merge/reconcile.js - CORRECTED
+// js/merge/reconcile.js
 import { getConfig } from "./config.js";
-import { findBestMatch, getConfidenceLevel } from "./matching.js";
-import { createStudent } from "./student.js"; // ← fixed: local merge version
+import { findBestMatch } from "./matching.js";
+import { createStudent } from "./student.js";
 
 export function reconcile(folders, existingStudents) {
   const config = getConfig();
+  const maxWeight = Math.max(...config.matchRules.map((r) => r.weight));
+
   const students = folders.map((folderId) => {
     const match = findBestMatch(folderId, existingStudents);
     const existing = match.student;
@@ -19,17 +21,18 @@ export function reconcile(folders, existingStudents) {
     };
   });
 
-  const highCount = students.filter((s) => getConfidenceLevel(s.matchWeight) === "high").length;
-  const mediumCount = students.filter((s) => getConfidenceLevel(s.matchWeight) === "medium").length;
-  const lowCount = students.filter((s) => s.matchWeight === 0).length;
+  const highCount = students.filter((s) => s.matchWeight === maxWeight).length;
+  const matchCount = students.filter((s) => s.matchWeight > 0 && s.matchWeight !== maxWeight).length;
+  const noneCount = students.filter((s) => s.matchWeight <= 0).length;
 
   const rulesList = config.matchRules.map((r) => r.name).join(" → ");
+
   const summary = {
     highCount,
-    mediumCount,
-    lowCount,
+    matchCount,
+    noneCount,
     rulesList,
-    hasMissing: lowCount > 0,
+    hasMissing: noneCount > 0,
   };
 
   return { students, summary };
