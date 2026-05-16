@@ -1,5 +1,5 @@
+// js/merge/render.js
 import { getConfig } from "./config.js";
-import { COHORT_OPTIONS } from "./cohorts.js";
 
 export function renderTableHeader() {
   const thead = document.getElementById("tableHeader");
@@ -13,7 +13,6 @@ export function renderTableHeader() {
       <th>GitHub</th>
       <th>Program</th>
       <th>Year</th>
-      <th>Cohort</th>
       <th>Alumni</th>
       <th>Withdrawn</th>
       <th>Tags</th>
@@ -49,6 +48,7 @@ export function renderTable(students, onUpdate) {
     // GitHub
     const githubCell = row.insertCell(2);
     const githubInput = document.createElement("input");
+    githubInput.placeholder = "github username";
     githubInput.value = student.githubUsername || "";
     githubInput.addEventListener("change", (e) => onUpdate(idx, "githubUsername", e.target.value.trim()));
     githubCell.appendChild(githubInput);
@@ -57,7 +57,7 @@ export function renderTable(students, onUpdate) {
     const programCell = row.insertCell(3);
     const programSelect = document.createElement("select");
 
-    config.options.programs.forEach((opt) => {
+    (config.options?.programs || []).forEach((opt) => {
       const option = document.createElement("option");
       option.value = opt;
       option.textContent = opt;
@@ -72,8 +72,9 @@ export function renderTable(students, onUpdate) {
     // Year
     const yearCell = row.insertCell(4);
     const yearSelect = document.createElement("select");
+    yearSelect.className = "year-input";
 
-    config.options.years.forEach((opt) => {
+    (config.options?.years || []).forEach((opt) => {
       const option = document.createElement("option");
       option.value = opt;
       option.textContent = opt;
@@ -85,24 +86,9 @@ export function renderTable(students, onUpdate) {
 
     yearCell.appendChild(yearSelect);
 
-    // Cohort (from external file)
-    const cohortCell = row.insertCell(5);
-    const cohortSelect = document.createElement("select");
-
-    COHORT_OPTIONS.forEach((c) => {
-      const option = document.createElement("option");
-      option.value = c;
-      option.textContent = c;
-      if (student.cohort === c) option.selected = true;
-      cohortSelect.appendChild(option);
-    });
-
-    cohortSelect.addEventListener("change", (e) => onUpdate(idx, "cohort", e.target.value));
-
-    cohortCell.appendChild(cohortSelect);
-
     // Alumni
-    const alumniCell = row.insertCell(6);
+    const alumniCell = row.insertCell(5);
+    alumniCell.className = "checkbox-cell";
     const alumniCheckbox = document.createElement("input");
     alumniCheckbox.type = "checkbox";
     alumniCheckbox.checked = student.isAlumni;
@@ -110,7 +96,8 @@ export function renderTable(students, onUpdate) {
     alumniCell.appendChild(alumniCheckbox);
 
     // Withdrawn
-    const withdrawnCell = row.insertCell(7);
+    const withdrawnCell = row.insertCell(6);
+    withdrawnCell.className = "checkbox-cell";
     const withdrawnCheckbox = document.createElement("input");
     withdrawnCheckbox.type = "checkbox";
     withdrawnCheckbox.checked = student.withdrawn;
@@ -118,8 +105,10 @@ export function renderTable(students, onUpdate) {
     withdrawnCell.appendChild(withdrawnCheckbox);
 
     // Tags
-    const tagsCell = row.insertCell(8);
+    const tagsCell = row.insertCell(7);
     const tagsInput = document.createElement("input");
+    tagsInput.type = "text";
+    tagsInput.placeholder = "comma separated tags";
     tagsInput.value = (student.tags || []).join(", ");
 
     tagsInput.addEventListener("change", (e) => {
@@ -134,7 +123,8 @@ export function renderTable(students, onUpdate) {
     tagsCell.appendChild(tagsInput);
 
     // Resume
-    const resumeCell = row.insertCell(9);
+    const resumeCell = row.insertCell(8);
+    resumeCell.className = "checkbox-cell";
     const resumeCheckbox = document.createElement("input");
     resumeCheckbox.type = "checkbox";
     resumeCheckbox.checked = student.resumeRequirementMet;
@@ -142,30 +132,25 @@ export function renderTable(students, onUpdate) {
     resumeCell.appendChild(resumeCheckbox);
 
     // Notes
-    const notesCell = row.insertCell(10);
+    const notesCell = row.insertCell(9);
     const notesInput = document.createElement("input");
+    notesInput.placeholder = "optional notes";
     notesInput.value = student.notes || "";
     notesInput.addEventListener("change", (e) => onUpdate(idx, "notes", e.target.value));
     notesCell.appendChild(notesInput);
   });
 }
 
-function generateExcludeHint(excludeFolders = []) {
-  if (!excludeFolders.length) return "";
-  return `🚫 Auto-excluded: ${excludeFolders.join(", ")}`;
-}
-
 export function updateUIFromConfig() {
   const config = getConfig();
   const ui = config.ui || {};
-  const excludeFolders = config.excludeFolders || [];
 
   const titleEl = document.getElementById("pageTitle");
   const subheadEl = document.getElementById("pageSubhead");
   const excludeEl = document.getElementById("excludeHint");
 
   if (titleEl) {
-    titleEl.textContent = ui.title || "🕸️ Web Ring · Merge Engine";
+    titleEl.textContent = ui.title || "Web Ring Admin";
   }
 
   if (subheadEl) {
@@ -173,21 +158,21 @@ export function updateUIFromConfig() {
   }
 
   if (excludeEl) {
-    excludeEl.innerHTML = generateExcludeHint(excludeFolders) || "🚫 No folders excluded";
+    excludeEl.textContent = config.excludeFolders?.length ? `🚫 Auto-excluded: ${config.excludeFolders.join(", ")}` : "🚫 No folders excluded";
   }
 }
 
 export function showWarning(message) {
-  const warningBox = document.getElementById("warningBox");
-  if (!warningBox) return;
-  warningBox.classList.remove("hidden");
-  warningBox.innerHTML = message;
+  const el = document.getElementById("warningBox");
+  if (!el) return;
+  el.classList.remove("hidden");
+  el.innerHTML = message;
 }
 
 export function hideWarning() {
-  const warningBox = document.getElementById("warningBox");
-  if (!warningBox) return;
-  warningBox.classList.add("hidden");
+  const el = document.getElementById("warningBox");
+  if (!el) return;
+  el.classList.add("hidden");
 }
 
 export function showEditor() {
@@ -202,5 +187,7 @@ export function renderPreview(students) {
   };
 
   const el = document.getElementById("output");
-  if (el) el.textContent = JSON.stringify(output, null, 2);
+  if (el) {
+    el.textContent = JSON.stringify(output, null, 2);
+  }
 }

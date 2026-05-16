@@ -1,3 +1,4 @@
+// js/merge/student.js
 import { getConfig } from "./config.js";
 
 export function createStudent(folderId, existing = null) {
@@ -17,7 +18,6 @@ export function createStudent(folderId, existing = null) {
     githubUsername: existing?.githubUsername || "",
     program: existing?.program || config.defaults.program,
     year: existing?.year || config.defaults.year,
-    cohort: existing?.cohort || "", // ✅ NEW
     isAlumni: existing?.isAlumni || false,
     withdrawn: existing?.withdrawn || false,
     tags,
