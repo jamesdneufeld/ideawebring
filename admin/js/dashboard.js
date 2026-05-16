@@ -55,10 +55,8 @@ function render() {
 
   const stats = computeStats(allStudents);
 
-  renderStats(stats, (filter) => {
-    state.statusFilter = filter;
-    render();
-  });
+  // ✅ FIX: renderStats now ONLY takes stats (no callback)
+  renderStats(stats);
 
   renderStudentGrid(sorted, "studentGrid");
 }
