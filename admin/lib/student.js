@@ -1,8 +1,12 @@
-// lib/student.js
-// Pure data transformations — no DOM, no side effects
+/// lib/student.js
+/// SAFE PURE TRANSFORMATIONS (IMMUTABLE + NO FIELD LOSS)
 
+// =========================
+// 1. NORMALIZE (SAFE BASE OBJECT)
+// =========================
 export function normalizeStudent(raw) {
   return {
+    // CORE IDENTITY (NEVER TOUCH IN ENRICHERS)
     id: raw.id,
     displayName:
       raw.displayName ||
@@ -10,20 +14,39 @@ export function normalizeStudent(raw) {
         .split("-")
         .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
         .join(" "),
+
+    // STUDENT DATA
     githubUsername: raw.githubUsername || null,
-    status: raw.status || "active",
-    resumeRequirementMet: raw.resumeRequirementMet || false,
+    program: raw.program || "Unknown",
+    year: raw.year || "Unknown",
     cohort: raw.cohort || "Unassigned",
+
+    isAlumni: !!raw.isAlumni,
+    withdrawn: !!raw.withdrawn,
+
     tags: raw.tags || [],
     notes: raw.notes || "",
-    // Derived fields (set after enrichment)
+
+    resumeRequirementMet: !!raw.resumeRequirementMet,
+
+    // =========================
+    // DERIVED / PLACEHOLDER FIELDS
+    // =========================
     portfolioUrl: null,
-    activity: null,
-    activityStatus: "dormant",
-    lastCommitDate: null,
+
+    activity: {
+      status: "unknown",
+      lastCommitDate: null,
+      lastCommit: null,
+      daysSinceLastCommit: null,
+      engagementScore: 0,
+    },
   };
 }
 
+// =========================
+// 2. URL ENRICHMENT (PURE MERGE)
+// =========================
 export function enrichWithUrls(student) {
   return {
     ...student,
@@ -31,23 +54,34 @@ export function enrichWithUrls(student) {
   };
 }
 
+// =========================
+// 3. ACTIVITY ENRICHMENT (SINGLE SOURCE OF TRUTH)
+// =========================
 export function enrichWithActivity(student, activityData) {
   return {
     ...student,
-    activity: activityData,
-    activityStatus: activityData?.status || "dormant",
-    lastCommitDate: activityData?.lastCommit || null,
+
+    activity: {
+      status: activityData?.status || "unknown",
+      lastCommitDate: activityData?.lastCommitDate || null,
+      lastCommit: activityData?.lastCommit || null,
+      daysSinceLastCommit: activityData?.daysSinceLastCommit ?? null,
+      engagementScore: activityData?.engagementScore ?? 0,
+    },
   };
 }
 
+// =========================
+// 4. HELPERS (SAFE)
+// =========================
 export function isResumeReady(student) {
   return student.resumeRequirementMet === true;
 }
 
 export function hasGithubLinked(student) {
-  return student.githubUsername && student.githubUsername !== "";
+  return !!student.githubUsername && student.githubUsername.trim() !== "";
 }
 
 export function getGithubUrl(student) {
-  return student.githubUsername ? `https://github.com/${student.githubUsername}` : null;
+  return hasGithubLinked(student) ? `https://github.com/${student.githubUsername}` : null;
 }
