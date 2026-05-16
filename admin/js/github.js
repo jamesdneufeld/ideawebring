@@ -1,5 +1,5 @@
 // js/github.js
-// Handles all GitHub API calls with caching (Enhanced status system)
+// GitHub activity + engagement system (single source of truth)
 
 let REPO_OWNER = "jamesdneufeld";
 let REPO_NAME = "ideawebring";
@@ -9,6 +9,11 @@ export function setRepoConfig(owner, name) {
   REPO_NAME = name;
 }
 
+/**
+ * -------------------------
+ * CACHE
+ * -------------------------
+ */
 function getCacheKey(folder) {
   return `dashboard_activity_${folder}`;
 }
@@ -20,6 +25,7 @@ function getCached(key) {
   try {
     const { data, timestamp } = JSON.parse(cached);
 
+    // 1 hour cache
     if (Date.now() - timestamp < 60 * 60 * 1000) {
       return data;
     }
@@ -39,7 +45,9 @@ function setCache(key, data) {
 }
 
 /**
- * Core activity fetcher
+ * -------------------------
+ * CORE FETCH
+ * -------------------------
  */
 export async function fetchActivityForFolder(folder) {
   const cacheKey = getCacheKey(folder);
@@ -51,7 +59,7 @@ export async function fetchActivityForFolder(folder) {
     const res = await fetch(url);
 
     if (res.status === 404) {
-      const result = buildActivityObject(null);
+      const result = buildActivity(null);
       setCache(cacheKey, result);
       return result;
     }
@@ -59,24 +67,26 @@ export async function fetchActivityForFolder(folder) {
     const data = await res.json();
     const date = data?.[0]?.commit?.author?.date || null;
 
-    const result = buildActivityObject(date);
+    const result = buildActivity(date);
     setCache(cacheKey, result);
     return result;
   } catch (err) {
-    return buildActivityObject(null);
+    return buildActivity(null);
   }
 }
 
 /**
- * Convert raw date → full dashboard activity object
+ * -------------------------
+ * SINGLE SOURCE OF TRUTH
+ * -------------------------
  */
-function buildActivityObject(date) {
+function buildActivity(date) {
+  // No data case
   if (!date) {
     return {
       status: "unknown",
       lastCommitDate: null,
       lastCommit: null,
-      lastSeenLabel: "Never seen",
       daysSinceLastCommit: null,
       engagementScore: 0,
     };
@@ -84,53 +94,42 @@ function buildActivityObject(date) {
 
   const now = new Date();
   const commitDate = new Date(date);
+  const days = (now - commitDate) / (1000 * 60 * 60 * 24);
 
-  const daysSince = Math.floor((now - commitDate) / (1000 * 60 * 60 * 24));
-
-  // -----------------------------
-  // STATUS SYSTEM (clean + stable)
-  // -----------------------------
+  // STATUS SYSTEM (ONLY HERE)
   let status = "dormant";
 
-  if (daysSince <= 7) status = "active";
-  else if (daysSince <= 30) status = "recent";
+  if (days <= 7) status = "active";
+  else if (days <= 30) status = "recent";
   else status = "dormant";
 
-  // -----------------------------
-  // LAST SEEN LABEL (UI FRIENDLY)
-  // -----------------------------
-  const lastSeenLabel = daysSince === 0 ? "Today" : daysSince === 1 ? "1 day ago" : `${daysSince} days ago`;
-
-  // -----------------------------
   // ENGAGEMENT SCORE (0–100)
-  // -----------------------------
-  let engagementScore = 0;
+  let score = 0;
 
-  if (daysSince <= 7) {
-    engagementScore = 100 - daysSince * 5;
-  } else if (daysSince <= 30) {
-    engagementScore = 60 - (daysSince - 7) * 1.8;
+  if (days <= 7) {
+    score = 100 - days * 5;
+  } else if (days <= 30) {
+    score = 60 - (days - 7) * 1.8;
   } else {
-    engagementScore = 30 - daysSince * 0.2;
+    score = Math.max(5, 30 - days * 0.2);
   }
 
-  engagementScore = Math.max(0, Math.min(100, Math.round(engagementScore)));
+  score = Math.max(0, Math.round(score));
 
   return {
     status,
     lastCommitDate: date,
     lastCommit: commitDate.toLocaleDateString(),
-    lastSeenLabel,
-    daysSinceLastCommit: daysSince,
-    engagementScore,
+    daysSinceLastCommit: Math.floor(days),
+    engagementScore: score,
   };
 }
 
 /**
- * Batch fetch
+ * -------------------------
+ * BATCH
+ * -------------------------
  */
 export async function fetchActivityForAllStudents(students) {
-  const promises = students.map((s) => fetchActivityForFolder(s.id));
-
-  return Promise.all(promises);
+  return Promise.all(students.map((s) => fetchActivityForFolder(s.id)));
 }
