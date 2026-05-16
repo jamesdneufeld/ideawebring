@@ -19,9 +19,17 @@ export function computeStats(students) {
   const resumeReady = students.filter((s) => s.resumeRequirementMet === true).length;
   const missingGithub = students.filter((s) => !s.githubUsername || s.githubUsername.trim() === "").length;
 
-  // Engagement presence (any positive engagement score)
-  const engaged = students.filter((s) => (s.activity?.engagementScore || 0) > 0).length;
-  const disengaged = students.filter((s) => (s.activity?.engagementScore || 0) === 0).length;
+  // Engagement tiers (cleaner than binary engaged/disengaged)
+  const highEngagement = students.filter((s) => (s.activity?.engagementScore || 0) >= 70).length;
+  const mediumEngagement = students.filter((s) => {
+    const score = s.activity?.engagementScore || 0;
+    return score >= 40 && score < 70;
+  }).length;
+  const lowEngagement = students.filter((s) => {
+    const score = s.activity?.engagementScore || 0;
+    return score >= 1 && score < 40;
+  }).length;
+  const noEngagement = students.filter((s) => (s.activity?.engagementScore || 0) === 0).length;
 
   return {
     total,
@@ -41,8 +49,10 @@ export function computeStats(students) {
     resumeReady,
     missingGithub,
 
-    // engagement presence
-    engaged,
-    disengaged,
+    // engagement tiers (analytics)
+    highEngagement,
+    mediumEngagement,
+    lowEngagement,
+    noEngagement,
   };
 }
