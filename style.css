@@ -421,27 +421,32 @@ a:hover {
 /* ===========================================================
    SUMMER CODING MENTORSHIP
    =========================================================== */
+
+/* Student list item - keeps each student on its own line */
 .student {
-  display: flex;
-  flex-direction: column;
   margin-bottom: 0.75rem;
-  font-family: monospace;
+  list-style: none;
 }
 
-.badges {
-  display: flex;
-  gap: 0.4rem;
+/* Navigation link acts as a pill container */
+.navigation-link {
+  display: inline-flex;
   flex-wrap: wrap;
-  margin-top: 0.25rem;
+  align-items: center;
+  gap: 0.3rem;
 }
 
+/* Badge styles - now inside the <a> tag */
 .badge {
+  display: inline-block;
   font-size: 0.65rem;
   padding: 0.15rem 0.5rem;
   border-radius: 999px;
   border: 1px solid currentColor;
+  white-space: nowrap;
 }
 
+/* Activity status badges */
 .status-active {
   color: #3fb950;
 }
@@ -453,11 +458,22 @@ a:hover {
   opacity: 0.8;
 }
 
+/* Page existence badges */
 .page {
   color: #8b949e;
 }
+
+/* Resume requirement met badge */
 .resume-ok {
   color: #58a6ff;
+}
+
+/* Engagement badge (✨) - special styling */
+.badge.engagement {
+  color: #f1c40f;
+  border-color: #f1c40f40;
+  background: #f1c40f10;
+  cursor: help;
 }
 
 /* ===========================================================

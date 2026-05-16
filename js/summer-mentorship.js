@@ -1,5 +1,5 @@
 // summer-mentorship.js
-// Web Ring Badge System - Populates badges and metadata inside existing <a> tags
+// Web Ring Badge System with Gamified Engagement
 
 const REPO_OWNER = "jamesdneufeld";
 const REPO_NAME = "ideawebring";
@@ -21,29 +21,35 @@ function setCache(key, value) {
   localStorage.setItem(key, JSON.stringify({ value, timestamp: Date.now() }));
 }
 
-// GitHub: commits (activity)
+// GitHub: commits (activity with commit count for fun stats)
 async function getActivity(folder) {
   const cacheKey = `activity_${folder}`;
   const cached = getCache(cacheKey);
   if (cached) return cached;
 
   try {
-    const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${folder}&per_page=1`);
+    const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${folder}&per_page=10`);
     const data = await res.json();
-    const date = data?.[0]?.commit?.author?.date || null;
+    const commits = Array.isArray(data) ? data : [];
+
+    const lastCommit = commits[0];
+    const date = lastCommit?.commit?.author?.date || null;
+    const commitCount = commits.length;
 
     let status = "dormant";
+    let days = null;
+
     if (date) {
-      const days = (new Date() - new Date(date)) / (1000 * 60 * 60 * 24);
+      days = Math.floor((new Date() - new Date(date)) / (1000 * 60 * 60 * 24));
       if (days <= 7) status = "active";
       else if (days <= 30) status = "recent";
     }
 
-    const result = { status, date };
+    const result = { status, date, days, commitCount };
     setCache(cacheKey, result);
     return result;
   } catch {
-    return { status: "dormant", date: null };
+    return { status: "dormant", date: null, days: null, commitCount: 0 };
   }
 }
 
@@ -78,7 +84,7 @@ async function getFiles(folder) {
   }
 }
 
-// Load students.json for overrides (resumeRequirementMet, program, year, etc.)
+// Load students.json for overrides
 async function loadStudents() {
   try {
     const res = await fetch("./students.json");
@@ -99,51 +105,94 @@ function createBadge(text, className, title = "") {
   return el;
 }
 
-// Format program display (BDes or IxD)
+// Gamified engagement message
+function getEngagementMessage(activity) {
+  if (!activity.date) {
+    return "🌱 Just getting started!";
+  }
+
+  const days = activity.days;
+  const count = activity.commitCount;
+
+  if (days <= 1) return "🔥 On fire! Pushed today!";
+  if (days <= 3) return "⚡ Super fresh!";
+  if (days <= 7) return "💪 Active this week!";
+  if (days <= 14) return "👍 Still warming up";
+  if (days <= 30) return "😴 Been a few weeks";
+  if (days <= 60) return "🦥 Taking a break?";
+  return "💤 Dormant — time to push!";
+}
+
+// Get fun commit streak emoji
+function getCommitEmoji(count) {
+  if (count >= 50) return "🏆";
+  if (count >= 30) return "🔥";
+  if (count >= 20) return "⚡";
+  if (count >= 10) return "📈";
+  if (count >= 5) return "🌱";
+  if (count >= 1) return "✨";
+  return "🍃";
+}
+
+// Format last push date nicely
+function formatLastPush(date) {
+  if (!date) return "Never";
+  const days = Math.floor((new Date() - new Date(date)) / (1000 * 60 * 60 * 24));
+  if (days === 0) return "Today";
+  if (days === 1) return "Yesterday";
+  if (days < 7) return `${days} days ago`;
+  if (days < 30) return `${Math.floor(days / 7)} weeks ago`;
+  return `${Math.floor(days / 30)} months ago`;
+}
+
+// Format program display
 function formatProgram(program) {
   if (!program) return "";
   return program === "BDes" ? "(BDes)" : "(IxD)";
 }
 
-// Main: populate badges and metadata into existing <a> tags
+// Main: populate everything
 async function populateStudentData() {
   await loadStudents();
 
-  // Build map of folder -> student data
   const studentMap = new Map();
   studentsData.forEach((s) => studentMap.set(s.id, s));
 
-  // Find all student links
   const links = document.querySelectorAll(".student .navigation-link");
 
   for (const link of links) {
-    // Get folder from data-folder or href
     const folder = link.dataset.folder || link.getAttribute("href").replace(/\/$/, "").toLowerCase();
-
     const student = studentMap.get(folder);
 
-    // Update program and year spans inside the link
+    // Update program and year
     const programSpan = link.querySelector(".student-program");
     const yearSpan = link.querySelector(".student-year");
 
     if (programSpan && student?.program) {
       programSpan.textContent = ` ${formatProgram(student.program)}`;
     }
-
     if (yearSpan && student?.year) {
       yearSpan.textContent = ` ${student.year}`;
     }
 
-    // Clear existing badges (if any)
+    // Clear existing badges
     const existingBadges = link.querySelectorAll(".badge");
     existingBadges.forEach((badge) => badge.remove());
 
-    // Activity badge
+    // Get activity data
     const activity = await getActivity(folder);
-    link.appendChild(createBadge(activity.status, `status-${activity.status}`, activity.date || "No commits"));
+    const files = await getFiles(folder);
+
+    // Activity badge with fun emoji
+    const statusEmoji = activity.status === "active" ? "🟢" : activity.status === "recent" ? "🟡" : "⚫";
+    const commitEmoji = getCommitEmoji(activity.commitCount);
+    link.appendChild(createBadge(`${statusEmoji} ${activity.status} ${commitEmoji}`, `status-${activity.status}`, `${activity.commitCount} commits · last push ${formatLastPush(activity.date)}`));
+
+    // Engagement message (gamified tooltip)
+    const engagementMsg = getEngagementMessage(activity);
+    link.appendChild(createBadge("✨", "engagement", engagementMsg));
 
     // Page badges
-    const files = await getFiles(folder);
     if (files.about) link.appendChild(createBadge("👤", "page", "about.html exists"));
     if (files.playground) link.appendChild(createBadge("🎮", "page", "playground.html exists"));
     if (files.links) link.appendChild(createBadge("🔗", "page", "links.html exists"));
@@ -158,5 +207,4 @@ async function populateStudentData() {
   }
 }
 
-// Run when page loads
 document.addEventListener("DOMContentLoaded", populateStudentData);
