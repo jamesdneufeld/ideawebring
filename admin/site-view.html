@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>IDEA Web Ring · Student Directory</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Explore student websites in the IDEA Web Ring — a creative coding community of designers building their corner of the internet." />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #0d0f12;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Arial, sans-serif;
+        padding: 2rem;
+        color: #e6edf3;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      /* Header */
+      .site-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      h1 {
+        font-size: 3rem;
+        font-weight: 600;
+        background: linear-gradient(135deg, #3fb950, #58a6ff);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 0.5rem;
+      }
+
+      .tagline {
+        color: #8b949e;
+        font-size: 1.1rem;
+      }
+
+      /* Stats bar */
+      .stats-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        margin-bottom: 2rem;
+      }
+
+      .stat-pill {
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 999px;
+        padding: 0.5rem 1.25rem;
+        font-size: 0.85rem;
+      }
+
+      .stat-number {
+        font-weight: bold;
+        color: #3fb950;
+      }
+
+      /* Search */
+      .search-section {
+        margin-bottom: 2rem;
+      }
+
+      .search-box {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: #0d0f12;
+        border: 1px solid #30363d;
+        color: #e6edf3;
+        border-radius: 999px;
+        font-family: inherit;
+        font-size: 1rem;
+        text-align: center;
+      }
+
+      .search-box input:focus {
+        outline: none;
+        border-color: #3fb950;
+      }
+
+      /* Filter pills */
+      .filter-section {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+        margin-bottom: 2rem;
+      }
+
+      .filter-pill {
+        padding: 0.4rem 1rem;
+        background: #21262d;
+        border: 1px solid #30363d;
+        color: #c9d1d9;
+        border-radius: 999px;
+        cursor: pointer;
+        font-size: 0.8rem;
+        transition: all 0.1s;
+      }
+
+      .filter-pill.active {
+        background: #1f6feb;
+        border-color: #388bfd;
+        color: white;
+      }
+
+      .filter-pill:hover {
+        background: #30363d;
+      }
+
+      /* Student grid - Neocities style */
+      .student-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+
+      /* Site card - minimal, directory style */
+      .site-card {
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        color: inherit;
+        display: block;
+      }
+
+      .site-card:hover {
+        transform: translateY(-4px);
+        border-color: #3fb950;
+      }
+
+      /* Simple screenshot placeholder / favicon area */
+      .site-preview {
+        background: #0d0f12;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid #30363d;
+        font-size: 3rem;
+      }
+
+      .site-info {
+        padding: 1rem;
+      }
+
+      .site-name {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #f0f6fc;
+        margin-bottom: 0.25rem;
+      }
+
+      .site-url {
+        font-size: 0.7rem;
+        color: #6e7681;
+        word-break: break-all;
+        margin-bottom: 0.5rem;
+      }
+
+      .site-meta {
+        display: flex;
+        gap: 0.75rem;
+        font-size: 0.7rem;
+        color: #8b949e;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.2rem;
+      }
+
+      .badge.active {
+        color: #3fb950;
+      }
+
+      .badge.recent {
+        color: #d29922;
+      }
+
+      .badge.dormant {
+        color: #6e7681;
+      }
+
+      .no-results {
+        text-align: center;
+        padding: 3rem;
+        color: #6e7681;
+        grid-column: 1 / -1;
+      }
+
+      .footer {
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #21262d;
+        text-align: center;
+        font-size: 0.8rem;
+        color: #6e7681;
+      }
+
+      .footer a {
+        color: #58a6ff;
+        text-decoration: none;
+      }
+
+      .footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="site-header">
+        <h1>🕸️ IDEA Web Ring</h1>
+        <div class="tagline">Student websites — built with HTML, CSS, and curiosity</div>
+      </div>
+
+      <div id="statsBar" class="stats-bar"></div>
+
+      <div class="search-section">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="🔍 Search by name or username..." />
+        </div>
+      </div>
+
+      <div class="filter-section" id="filterSection">
+        <button class="filter-pill active" data-filter="all">All</button>
+        <button class="filter-pill" data-filter="active">Active</button>
+        <button class="filter-pill" data-filter="recent">Recent</button>
+        <button class="filter-pill" data-filter="alumni">Alumni</button>
+      </div>
+
+      <div id="studentGrid" class="student-grid">
+        <div class="no-results">Loading students...</div>
+      </div>
+
+      <div class="footer">
+        <span>🕸️ Part of the IDEA Web Ring — <a href="summer-coding-mentorship.html">Join the mentorship</a></span>
+      </div>
+    </div>
+
+    <script>
+      // Site View Mode - Minimal directory listing
+      let allStudents = [];
+      let currentFilter = "all";
+      let currentSearch = "";
+
+      // Load students.json
+      async function loadStudents() {
+        try {
+          const response = await fetch("../students.json");
+          if (!response.ok) throw new Error("students.json not found");
+          const data = await response.json();
+          allStudents = data.students || [];
+          await loadActivityData();
+          renderStats();
+          renderGrid();
+        } catch (err) {
+          document.getElementById("studentGrid").innerHTML = `<div class="no-results">❌ Failed to load student data</div>`;
+        }
+      }
+
+      // Load GitHub activity for all students
+      async function loadActivityData() {
+        const REPO_OWNER = "jamesdneufeld";
+        const REPO_NAME = "ideawebring";
+
+        for (const student of allStudents) {
+          try {
+            const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${student.id}&per_page=1`;
+            const res = await fetch(url);
+            if (res.ok) {
+              const data = await res.json();
+              const date = data?.[0]?.commit?.author?.date;
+              if (date) {
+                const days = (new Date() - new Date(date)) / (1000 * 60 * 60 * 24);
+                if (days <= 7) student.activityStatus = "active";
+                else if (days <= 30) student.activityStatus = "recent";
+                else student.activityStatus = "dormant";
+              } else {
+                student.activityStatus = "dormant";
+              }
+            } else {
+              student.activityStatus = "dormant";
+            }
+          } catch {
+            student.activityStatus = "dormant";
+          }
+
+          // Small delay to avoid rate limiting
+          await new Promise((r) => setTimeout(r, 100));
+        }
+      }
+
+      function getFilteredStudents() {
+        let filtered = [...allStudents];
+
+        if (currentFilter === "active") {
+          filtered = filtered.filter((s) => s.activityStatus === "active");
+        } else if (currentFilter === "recent") {
+          filtered = filtered.filter((s) => s.activityStatus === "recent");
+        } else if (currentFilter === "alumni") {
+          filtered = filtered.filter((s) => s.isAlumni === true);
+        }
+
+        if (currentSearch) {
+          const q = currentSearch.toLowerCase();
+          filtered = filtered.filter((s) => s.displayName?.toLowerCase().includes(q) || s.id?.toLowerCase().includes(q) || s.githubUsername?.toLowerCase().includes(q));
+        }
+
+        return filtered;
+      }
+
+      function renderStats() {
+        const total = allStudents.length;
+        const active = allStudents.filter((s) => s.activityStatus === "active").length;
+        const alumni = allStudents.filter((s) => s.isAlumni === true).length;
+
+        const statsDiv = document.getElementById("statsBar");
+        statsDiv.innerHTML = `
+      <div class="stat-pill">📚 <span class="stat-number">${total}</span> sites</div>
+      <div class="stat-pill">🟢 <span class="stat-number">${active}</span> active</div>
+      <div class="stat-pill">🎓 <span class="stat-number">${alumni}</span> alumni</div>
+    `;
+      }
+
+      function renderGrid() {
+        const filtered = getFilteredStudents();
+        const grid = document.getElementById("studentGrid");
+
+        if (filtered.length === 0) {
+          grid.innerHTML = '<div class="no-results">✨ No matching sites found</div>';
+          return;
+        }
+
+        grid.innerHTML = filtered
+          .map((student) => {
+            const siteUrl = `https://jamesdneufeld.github.io/ideawebring/${student.id}/`;
+            const statusIcon = student.activityStatus === "active" ? "🟢" : student.activityStatus === "recent" ? "🟡" : "⚫";
+            const statusText = student.activityStatus === "active" ? "Active" : student.activityStatus === "recent" ? "Recent" : "Dormant";
+
+            return `
+        <a href="${siteUrl}" target="_blank" class="site-card">
+          <div class="site-preview">
+            🕸️
+          </div>
+          <div class="site-info">
+            <div class="site-name">${escapeHtml(student.displayName || student.id)}</div>
+            <div class="site-url">${escapeHtml(student.id)}/</div>
+            <div class="site-meta">
+              <span class="badge ${student.activityStatus}">${statusIcon} ${statusText}</span>
+              ${student.githubUsername ? `<span class="badge">🐙</span>` : ""}
+              ${student.isAlumni ? '<span class="badge">🎓</span>' : ""}
+            </div>
+          </div>
+        </a>
+      `;
+          })
+          .join("");
+      }
+
+      function escapeHtml(str) {
+        if (!str) return "";
+        return str.replace(/[&<>]/g, (m) => {
+          if (m === "&") return "&amp;";
+          if (m === "<") return "&lt;";
+          if (m === ">") return "&gt;";
+          return m;
+        });
+      }
+
+      function setupEventListeners() {
+        document.getElementById("searchInput").addEventListener("input", (e) => {
+          currentSearch = e.target.value;
+          renderGrid();
+        });
+
+        document.querySelectorAll(".filter-pill").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            document.querySelectorAll(".filter-pill").forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+            currentFilter = btn.dataset.filter;
+            renderGrid();
+          });
+        });
+      }
+
+      loadStudents();
+      setupEventListeners();
+    </script>
+  </body>
+</html>
