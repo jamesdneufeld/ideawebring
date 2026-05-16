@@ -4,15 +4,21 @@
     <meta charset="UTF-8" />
     <title>Web Ring Admin · students.json Generator</title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
       body {
         background: #0d0f12;
-        font-family: monospace;
+        font-family: "Courier New", "SF Mono", monospace;
         padding: 2rem;
         color: #e6edf3;
       }
 
       .container {
-        max-width: 900px;
+        max-width: 1200px;
         margin: 0 auto;
       }
 
@@ -20,18 +26,57 @@
         font-size: 1.4rem;
         border-left: 3px solid #3fb950;
         padding-left: 1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .subhead {
+        color: #8b949e;
+        margin-bottom: 2rem;
+        padding-left: 1rem;
+        font-size: 0.8rem;
+      }
+
+      .card {
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 8px;
+        padding: 1.25rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .card h3 {
         margin-bottom: 1rem;
+        font-size: 0.9rem;
+        color: #f0f6fc;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-size: 0.8rem;
+        color: #8b949e;
       }
 
       textarea {
         width: 100%;
-        height: 250px;
-        background: #161b22;
+        height: 200px;
+        background: #0d0f12;
         color: #e6edf3;
         border: 1px solid #30363d;
-        padding: 1rem;
+        padding: 0.75rem;
         border-radius: 6px;
         font-family: monospace;
+        font-size: 0.8rem;
+      }
+
+      input[type="file"] {
+        background: #0d0f12;
+        color: #e6edf3;
+        border: 1px solid #30363d;
+        padding: 0.5rem;
+        border-radius: 6px;
+        font-family: monospace;
+        width: 100%;
       }
 
       button {
@@ -43,82 +88,400 @@
         color: #c9d1d9;
         border-radius: 6px;
         cursor: pointer;
+        font-family: monospace;
+        font-size: 0.8rem;
       }
 
       button:hover {
         background: #30363d;
+        border-color: #8b949e;
+      }
+
+      .btn-primary {
+        background: #1f6feb;
+        border-color: #388bfd;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: #388bfd;
+      }
+
+      .student-table {
+        margin-top: 1rem;
+        background: #0d0f12;
+        border: 1px solid #30363d;
+        border-radius: 6px;
+        overflow-x: auto;
+        max-height: 400px;
+        overflow-y: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.75rem;
+      }
+
+      th,
+      td {
+        padding: 0.5rem;
+        text-align: left;
+        border-bottom: 1px solid #21262d;
+      }
+
+      th {
+        background: #161b22;
+        color: #8b949e;
+        font-weight: normal;
+        position: sticky;
+        top: 0;
+      }
+
+      input,
+      select {
+        background: #0d0f12;
+        border: 1px solid #30363d;
+        color: #e6edf3;
+        padding: 0.3rem 0.5rem;
+        border-radius: 4px;
+        font-family: monospace;
+        width: 100%;
+        font-size: 0.7rem;
+      }
+
+      input:focus,
+      select:focus {
+        outline: none;
+        border-color: #3fb950;
+      }
+
+      .checkbox-cell {
+        text-align: center;
+        width: 30px;
+      }
+
+      .checkbox-cell input {
+        width: auto;
+        transform: scale(1.2);
+        cursor: pointer;
+      }
+
+      .status-badge {
+        display: inline-block;
+        font-size: 0.6rem;
+        padding: 0.1rem 0.4rem;
+        border-radius: 999px;
+      }
+
+      .status-active {
+        background: #3fb95020;
+        color: #3fb950;
+      }
+      .status-inactive {
+        background: #6e768120;
+        color: #6e7681;
+      }
+      .status-alumni {
+        background: #d2992220;
+        color: #d29922;
+      }
+
+      .diff-summary {
+        margin: 1rem 0;
+        padding: 0.75rem;
+        background: #161b22;
+        border-radius: 6px;
+        font-size: 0.7rem;
+      }
+
+      .diff-added {
+        color: #3fb950;
+      }
+      .diff-removed {
+        color: #f85149;
+      }
+      .diff-changed {
+        color: #d29922;
       }
 
       pre {
-        margin-top: 1rem;
         background: #0d0f12;
         border: 1px solid #30363d;
         padding: 1rem;
         border-radius: 6px;
-        max-height: 400px;
+        max-height: 300px;
         overflow: auto;
+        font-size: 0.7rem;
+      }
+
+      .hidden {
+        display: none;
       }
     </style>
   </head>
-
   <body>
     <div class="container">
-      <h1>🕸️ students.json Generator</h1>
+      <h1>🕸️ Web Ring Admin</h1>
+      <div class="subhead">students.json · Merge Editor (preserves GitHub usernames, notes, and flags)</div>
 
-      <textarea id="input" placeholder="Paste folder names, one per line"></textarea>
-
-      <div>
-        <button onclick="generate()">Generate JSON</button>
-        <button onclick="download()">Download students.json</button>
+      <!-- Upload Section -->
+      <div class="card">
+        <h3>📥 Step 1: Load Existing students.json</h3>
+        <input type="file" id="upload" accept="application/json" />
+        <div id="uploadStatus" style="margin-top: 0.5rem; font-size: 0.7rem; color: #6e7681"></div>
       </div>
 
-      <pre id="output">{}</pre>
+      <!-- Folder Input Section -->
+      <div class="card">
+        <h3>📁 Step 2: Student Folders (one per line)</h3>
+        <textarea
+          id="folderInput"
+          placeholder="alexia-sogai
+alyssa-cheng
+andy-poystila
+anna-burtseva
+apsara
+cecil-susi
+giao-nguyen
+hedia-chan
+maren-brophy
+mena-mcgill
+scarlett-side
+siobhan-barry
+taylore-lawrence
+tobin-eckstein"></textarea>
+        <button onclick="parseFolders()" class="btn-primary">📋 Parse Folders</button>
+      </div>
+
+      <!-- Editor Section (hidden until folders parsed) -->
+      <div id="editorSection" class="hidden">
+        <div class="card">
+          <h3>✏️ Step 3: Edit Student Data</h3>
+
+          <div id="diffSummary" class="diff-summary hidden"></div>
+
+          <div class="student-table">
+            <table id="studentTable">
+              <thead>
+                <tr>
+                  <th>Folder</th>
+                  <th>Display Name</th>
+                  <th>GitHub Username</th>
+                  <th>Status</th>
+                  <th>Resume Met</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody id="studentTableBody"></tbody>
+            </table>
+          </div>
+
+          <div style="margin-top: 1rem">
+            <button onclick="generateJSON()">🔄 Generate JSON from Table</button>
+            <button onclick="downloadJSON()">💾 Download students.json</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>📄 Preview students.json</h3>
+          <pre id="output">{}</pre>
+        </div>
+      </div>
     </div>
 
     <script>
-      let data = [];
+      // Store data
+      let existingStudents = [];
+      let currentStudents = [];
+      let previousFolderList = [];
 
-      function toName(folder) {
+      // Helper: folder name → display name
+      function toDisplayName(folder) {
         return folder
           .split("-")
           .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
           .join(" ");
       }
 
-      function generate() {
-        const folders = document
-          .getElementById("input")
-          .value.split("\n")
+      // Upload existing students.json
+      document.getElementById("upload").addEventListener("change", async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        try {
+          const text = await file.text();
+          const json = JSON.parse(text);
+          existingStudents = json.students || [];
+          document.getElementById("uploadStatus").innerHTML = `✅ Loaded ${existingStudents.length} students from ${json.lastUpdated || "unknown date"}`;
+        } catch (err) {
+          document.getElementById("uploadStatus").innerHTML = `❌ Error loading file: ${err.message}`;
+          existingStudents = [];
+        }
+      });
+
+      // Parse folders and create editable table
+      function parseFolders() {
+        const folderInput = document.getElementById("folderInput").value;
+        const folders = folderInput
+          .split("\n")
           .map((f) => f.trim())
-          .filter(Boolean);
+          .filter((f) => f && !f.startsWith("#"));
 
-        data = folders.map((id) => ({
-          id,
-          displayName: toName(id),
-          resumeRequirementMet: false,
-          notes: "",
-        }));
+        if (folders.length === 0) {
+          alert("Please paste at least one folder name");
+          return;
+        }
 
+        previousFolderList = currentStudents.map((s) => s.id);
+
+        // Merge existing data with new folder list
+        currentStudents = folders.map((id) => {
+          const existing = existingStudents.find((s) => s.id === id);
+
+          return {
+            id: id,
+            displayName: existing?.displayName || toDisplayName(id),
+            githubUsername: existing?.githubUsername || "",
+            status: existing?.status || "active",
+            resumeRequirementMet: existing?.resumeRequirementMet || false,
+            notes: existing?.notes || "",
+          };
+        });
+
+        renderTable();
+        showDiffSummary();
+        generateJSON();
+
+        document.getElementById("editorSection").classList.remove("hidden");
+      }
+
+      // Show what changed from previous generation
+      function showDiffSummary() {
+        if (previousFolderList.length === 0) {
+          document.getElementById("diffSummary").classList.add("hidden");
+          return;
+        }
+
+        const newFolders = currentStudents.map((s) => s.id);
+        const added = newFolders.filter((f) => !previousFolderList.includes(f));
+        const removed = previousFolderList.filter((f) => !newFolders.includes(f));
+
+        if (added.length === 0 && removed.length === 0) {
+          document.getElementById("diffSummary").classList.add("hidden");
+          return;
+        }
+
+        const diffDiv = document.getElementById("diffSummary");
+        diffDiv.classList.remove("hidden");
+        diffDiv.innerHTML = `
+      <strong>📊 Changes from last generation:</strong><br>
+      ${added.length > 0 ? `<span class="diff-added">➕ Added: ${added.join(", ")}</span><br>` : ""}
+      ${removed.length > 0 ? `<span class="diff-removed">➖ Removed: ${removed.join(", ")}</span><br>` : ""}
+      <span class="diff-changed">💡 Tip: Removed students won't be deleted — set their status to "inactive" or "alumni" instead to preserve data.</span>
+    `;
+      }
+
+      // Render editable table
+      function renderTable() {
+        const tbody = document.getElementById("studentTableBody");
+        tbody.innerHTML = "";
+
+        currentStudents.forEach((student, idx) => {
+          const row = tbody.insertRow();
+
+          // Folder (read-only)
+          const folderCell = row.insertCell(0);
+          folderCell.textContent = student.id;
+          folderCell.style.color = "#8b949e";
+
+          // Display Name (editable)
+          const nameCell = row.insertCell(1);
+          const nameInput = document.createElement("input");
+          nameInput.type = "text";
+          nameInput.value = student.displayName;
+          nameInput.addEventListener("change", (e) => {
+            currentStudents[idx].displayName = e.target.value;
+            generateJSON();
+          });
+          nameCell.appendChild(nameInput);
+
+          // GitHub Username (editable)
+          const githubCell = row.insertCell(2);
+          const githubInput = document.createElement("input");
+          githubInput.type = "text";
+          githubInput.placeholder = "github username";
+          githubInput.value = student.githubUsername || "";
+          githubInput.addEventListener("change", (e) => {
+            currentStudents[idx].githubUsername = e.target.value.trim();
+            generateJSON();
+          });
+          githubCell.appendChild(githubInput);
+
+          // Status dropdown (active/inactive/alumni)
+          const statusCell = row.insertCell(3);
+          const statusSelect = document.createElement("select");
+          ["active", "inactive", "alumni"].forEach((opt) => {
+            const option = document.createElement("option");
+            option.value = opt;
+            option.textContent = opt;
+            if (student.status === opt) option.selected = true;
+            statusSelect.appendChild(option);
+          });
+          statusSelect.addEventListener("change", (e) => {
+            currentStudents[idx].status = e.target.value;
+            generateJSON();
+          });
+          statusCell.appendChild(statusSelect);
+
+          // Resume Requirement Met (checkbox)
+          const resumeCell = row.insertCell(4);
+          resumeCell.className = "checkbox-cell";
+          const resumeCheckbox = document.createElement("input");
+          resumeCheckbox.type = "checkbox";
+          resumeCheckbox.checked = student.resumeRequirementMet || false;
+          resumeCheckbox.addEventListener("change", (e) => {
+            currentStudents[idx].resumeRequirementMet = e.target.checked;
+            generateJSON();
+          });
+          resumeCell.appendChild(resumeCheckbox);
+
+          // Notes (editable)
+          const notesCell = row.insertCell(5);
+          const notesInput = document.createElement("input");
+          notesInput.type = "text";
+          notesInput.placeholder = "optional notes";
+          notesInput.value = student.notes || "";
+          notesInput.addEventListener("change", (e) => {
+            currentStudents[idx].notes = e.target.value;
+            generateJSON();
+          });
+          notesCell.appendChild(notesInput);
+        });
+      }
+
+      // Generate JSON preview
+      function generateJSON() {
         const output = {
           lastUpdated: new Date().toISOString().split("T")[0],
-          students: data,
+          students: currentStudents,
         };
-
         document.getElementById("output").textContent = JSON.stringify(output, null, 2);
       }
 
-      function download() {
+      // Download JSON file
+      function downloadJSON() {
         const output = {
           lastUpdated: new Date().toISOString().split("T")[0],
-          students: data,
+          students: currentStudents,
         };
 
         const blob = new Blob([JSON.stringify(output, null, 2)], { type: "application/json" });
-
         const a = document.createElement("a");
         a.href = URL.createObjectURL(blob);
         a.download = "students.json";
         a.click();
+        URL.revokeObjectURL(blob);
       }
     </script>
   </body>
