@@ -4,313 +4,521 @@
     {
       "id": "alejandra",
       "displayName": "Alejandra",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "alex",
       "displayName": "Alex",
+      "githubUsername": "alexbaidanuta",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "alexia-sogai",
       "displayName": "Alexia Sogai",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "Summer 2026",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "alyssa-cheng",
       "displayName": "Alyssa Cheng",
+      "githubUsername": "alyssacheng3",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "Summer 2026",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "andy-poystila",
       "displayName": "Andy Poystila",
+      "githubUsername": "ukkop",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "Summer 2026",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "anna",
       "displayName": "Anna",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "anna-burtseva",
       "displayName": "Anna Burtseva",
+      "githubUsername": "AnnaBurGit",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "Summer 2026",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "apsara",
-      "displayName": "Apsara",
+      "displayName": "Apsara Coeffic-Neou",
+      "githubUsername": "laufiend",
+      "status": "active",
       "resumeRequirementMet": false,
-      "notes": ""
+      "cohort": "Summer 2026",
+      "tags": ["11ty", "indie-web"],
+      "notes": "Uses Eleventy static site generator"
     },
     {
       "id": "aurod-ashrafi",
       "displayName": "Aurod Ashrafi",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "avery-brodeur",
       "displayName": "Avery Brodeur",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "bel",
       "displayName": "Bel",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "cameron",
       "displayName": "Cameron",
+      "githubUsername": "Cskorulski",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "cecil-susi",
       "displayName": "Cecil Susi",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "Summer 2026",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "emilyn",
       "displayName": "Emilyn",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "giao-nguyen",
-      "displayName": "Giao Nguyen",
+      "displayName": "Giao (Joy) Nguyen",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "Summer 2026",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "hedia-chan",
       "displayName": "Hedia Chan",
+      "githubUsername": "ckwanh",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "Summer 2026",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "ian-johnstone",
       "displayName": "Ian Johnstone",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "iona-campbell",
       "displayName": "Iona Campbell",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "jaden-prevost",
       "displayName": "Jaden Prevost",
+      "githubUsername": "Jadenlp7",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "jazzy-linton",
       "displayName": "Jazzy Linton",
+      "githubUsername": "jazzy7731",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "jojo",
       "displayName": "Jojo",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "jordan-mak",
       "displayName": "Jordan Mak",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "kara",
       "displayName": "Kara",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "kat-jung",
       "displayName": "Kat Jung",
+      "githubUsername": "kataalstrophic",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "kayla",
       "displayName": "Kayla",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "kendra",
       "displayName": "Kendra",
+      "githubUsername": "VermetteDesigns",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "lily-jones",
       "displayName": "Lily Jones",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "lily-rosen",
       "displayName": "Lily Rosen",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "maren-brophy",
       "displayName": "Maren Brophy",
+      "githubUsername": "Moonlightmaren",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "Summer 2026",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "maya",
       "displayName": "Maya",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "meghan-vogt",
       "displayName": "Meghan Vogt",
+      "githubUsername": "m3ghan903",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "mena-mcgill",
-      "displayName": "Mena Mcgill",
+      "displayName": "Mena McGill",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "Summer 2026",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "mia",
       "displayName": "Mia",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "minh",
       "displayName": "Minh",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "narinder",
       "displayName": "Narinder",
+      "githubUsername": "Narinderpk",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "neeka",
       "displayName": "Neeka",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "nhi-pham",
       "displayName": "Nhi Pham",
+      "githubUsername": "NhiPham110",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "riley",
       "displayName": "Riley",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "rita-mcdonald",
-      "displayName": "Rita Mcdonald",
+      "displayName": "Rita McDonald",
+      "githubUsername": "RitaMcDonald",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "ryan-leskiw",
       "displayName": "Ryan Leskiw",
+      "githubUsername": "RyanLeskiw",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "sara-hurst",
       "displayName": "Sara Hurst",
+      "githubUsername": "SaraHurst",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "scarlett-side",
       "displayName": "Scarlett Side",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "Summer 2026",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "siobhan-barry",
       "displayName": "Siobhan Barry",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "Summer 2026",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "sofia",
       "displayName": "Sofia",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "sophia-pan",
       "displayName": "Sophia Pan",
+      "githubUsername": "suwreal",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "tanner",
       "displayName": "Tanner",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "taylore-lawrence",
       "displayName": "Taylore Lawrence",
+      "githubUsername": "loreofthetay",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "Summer 2026",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "thomas-gagne",
       "displayName": "Thomas Gagne",
+      "githubUsername": "thomawin22",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "tin",
       "displayName": "Tin",
+      "githubUsername": "",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "tobin-eckstein",
       "displayName": "Tobin Eckstein",
+      "githubUsername": "tobineliasart",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "Summer 2026",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "tom-eccles",
       "displayName": "Tom Eccles",
+      "githubUsername": "tomosaurus04",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     },
     {
       "id": "victor-pon-diep",
       "displayName": "Victor Pon Diep",
+      "githubUsername": "bestcoderintheworld8",
+      "status": "active",
       "resumeRequirementMet": false,
+      "cohort": "",
+      "tags": [],
       "notes": ""
     }
   ]
