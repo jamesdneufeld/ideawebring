@@ -1,5 +1,5 @@
 // js/github.js
-// Handles all GitHub API calls with caching (Dashboard version)
+// Handles all GitHub API calls with caching (Enhanced status system)
 
 let REPO_OWNER = "jamesdneufeld";
 let REPO_NAME = "ideawebring";
@@ -20,7 +20,6 @@ function getCached(key) {
   try {
     const { data, timestamp } = JSON.parse(cached);
 
-    // 1 hour cache
     if (Date.now() - timestamp < 60 * 60 * 1000) {
       return data;
     }
@@ -39,6 +38,9 @@ function setCache(key, data) {
   );
 }
 
+/**
+ * Core activity fetcher
+ */
 export async function fetchActivityForFolder(folder) {
   const cacheKey = getCacheKey(folder);
   const cached = getCached(cacheKey);
@@ -49,13 +51,7 @@ export async function fetchActivityForFolder(folder) {
     const res = await fetch(url);
 
     if (res.status === 404) {
-      const result = {
-        status: "dormant",
-        date: null,
-        lastCommitDate: null,
-        lastCommit: null,
-      };
-
+      const result = buildActivityObject(null);
       setCache(cacheKey, result);
       return result;
     }
@@ -63,35 +59,76 @@ export async function fetchActivityForFolder(folder) {
     const data = await res.json();
     const date = data?.[0]?.commit?.author?.date || null;
 
-    let status = "dormant";
-
-    if (date) {
-      const days = (new Date() - new Date(date)) / (1000 * 60 * 60 * 24);
-
-      if (days <= 7) status = "active";
-      else if (days <= 30) status = "recent";
-      else status = "dormant";
-    }
-
-    const result = {
-      status,
-      date,
-      lastCommitDate: date,
-      lastCommit: date ? new Date(date).toLocaleDateString() : null,
-    };
-
+    const result = buildActivityObject(date);
     setCache(cacheKey, result);
     return result;
   } catch (err) {
-    return {
-      status: "dormant",
-      date: null,
-      lastCommitDate: null,
-      lastCommit: null,
-    };
+    return buildActivityObject(null);
   }
 }
 
+/**
+ * Convert raw date → full dashboard activity object
+ */
+function buildActivityObject(date) {
+  if (!date) {
+    return {
+      status: "unknown",
+      lastCommitDate: null,
+      lastCommit: null,
+      lastSeenLabel: "Never seen",
+      daysSinceLastCommit: null,
+      engagementScore: 0,
+    };
+  }
+
+  const now = new Date();
+  const commitDate = new Date(date);
+
+  const daysSince = Math.floor((now - commitDate) / (1000 * 60 * 60 * 24));
+
+  // -----------------------------
+  // STATUS SYSTEM (clean + stable)
+  // -----------------------------
+  let status = "dormant";
+
+  if (daysSince <= 7) status = "active";
+  else if (daysSince <= 30) status = "recent";
+  else status = "dormant";
+
+  // -----------------------------
+  // LAST SEEN LABEL (UI FRIENDLY)
+  // -----------------------------
+  const lastSeenLabel = daysSince === 0 ? "Today" : daysSince === 1 ? "1 day ago" : `${daysSince} days ago`;
+
+  // -----------------------------
+  // ENGAGEMENT SCORE (0–100)
+  // -----------------------------
+  let engagementScore = 0;
+
+  if (daysSince <= 7) {
+    engagementScore = 100 - daysSince * 5;
+  } else if (daysSince <= 30) {
+    engagementScore = 60 - (daysSince - 7) * 1.8;
+  } else {
+    engagementScore = 30 - daysSince * 0.2;
+  }
+
+  engagementScore = Math.max(0, Math.min(100, Math.round(engagementScore)));
+
+  return {
+    status,
+    lastCommitDate: date,
+    lastCommit: commitDate.toLocaleDateString(),
+    lastSeenLabel,
+    daysSinceLastCommit: daysSince,
+    engagementScore,
+  };
+}
+
+/**
+ * Batch fetch
+ */
 export async function fetchActivityForAllStudents(students) {
   const promises = students.map((s) => fetchActivityForFolder(s.id));
 
