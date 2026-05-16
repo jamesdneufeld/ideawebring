@@ -3,8 +3,8 @@
   "students": [
     {
       "id": "alejandra",
-      "displayName": "Alejandra",
-      "githubUsername": "",
+      "displayName": "Alejandra Bernuy",
+      "githubUsername": "AleB404",
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "",
@@ -24,7 +24,7 @@
     {
       "id": "alexia-sogai",
       "displayName": "Alexia Sogai",
-      "githubUsername": "",
+      "githubUsername": "alexiasogai",
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "Summer 2026",
@@ -54,7 +54,7 @@
     {
       "id": "anna",
       "displayName": "Anna",
-      "githubUsername": "",
+      "githubUsername": null,
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "",
@@ -84,7 +84,7 @@
     {
       "id": "aurod-ashrafi",
       "displayName": "Aurod Ashrafi",
-      "githubUsername": "",
+      "githubUsername": "Aurod8",
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "",
@@ -94,7 +94,7 @@
     {
       "id": "avery-brodeur",
       "displayName": "Avery Brodeur",
-      "githubUsername": "",
+      "githubUsername": "Averybrodeur",
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "",
@@ -104,7 +104,7 @@
     {
       "id": "bel",
       "displayName": "Bel",
-      "githubUsername": "",
+      "githubUsername": null,
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "",
@@ -124,7 +124,7 @@
     {
       "id": "cecil-susi",
       "displayName": "Cecil Susi",
-      "githubUsername": "",
+      "githubUsername": "cecilsusi",
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "Summer 2026",
@@ -134,7 +134,7 @@
     {
       "id": "emilyn",
       "displayName": "Emilyn",
-      "githubUsername": "",
+      "githubUsername": "3mi3mi",
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "",
@@ -144,12 +144,12 @@
     {
       "id": "giao-nguyen",
       "displayName": "Giao (Joy) Nguyen",
-      "githubUsername": "",
+      "githubUsername": null,
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "Summer 2026",
       "tags": [],
-      "notes": ""
+      "notes": "Awaiting GitHub username"
     },
     {
       "id": "hedia-chan",
@@ -164,7 +164,7 @@
     {
       "id": "ian-johnstone",
       "displayName": "Ian Johnstone",
-      "githubUsername": "",
+      "githubUsername": "ianjohnstone4",
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "",
@@ -174,7 +174,7 @@
     {
       "id": "iona-campbell",
       "displayName": "Iona Campbell",
-      "githubUsername": "",
+      "githubUsername": "ionacamp",
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "",
@@ -204,7 +204,7 @@
     {
       "id": "jojo",
       "displayName": "Jojo",
-      "githubUsername": "",
+      "githubUsername": null,
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "",
@@ -214,7 +214,7 @@
     {
       "id": "jordan-mak",
       "displayName": "Jordan Mak",
-      "githubUsername": "",
+      "githubUsername": "mxkjordan",
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "",
@@ -224,7 +224,7 @@
     {
       "id": "kara",
       "displayName": "Kara",
-      "githubUsername": "",
+      "githubUsername": "k4r444",
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "",
@@ -244,7 +244,7 @@
     {
       "id": "kayla",
       "displayName": "Kayla",
-      "githubUsername": "",
+      "githubUsername": null,
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "",
@@ -264,7 +264,7 @@
     {
       "id": "lily-jones",
       "displayName": "Lily Jones",
-      "githubUsername": "",
+      "githubUsername": null,
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "",
@@ -274,7 +274,7 @@
     {
       "id": "lily-rosen",
       "displayName": "Lily Rosen",
-      "githubUsername": "",
+      "githubUsername": null,
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "",
@@ -294,7 +294,7 @@
     {
       "id": "maya",
       "displayName": "Maya",
-      "githubUsername": "",
+      "githubUsername": null,
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "",
@@ -314,17 +314,17 @@
     {
       "id": "mena-mcgill",
       "displayName": "Mena McGill",
-      "githubUsername": "",
+      "githubUsername": null,
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "Summer 2026",
       "tags": [],
-      "notes": ""
+      "notes": "Invite expired, need to re-send"
     },
     {
       "id": "mia",
       "displayName": "Mia",
-      "githubUsername": "",
+      "githubUsername": null,
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "",
@@ -334,7 +334,7 @@
     {
       "id": "minh",
       "displayName": "Minh",
-      "githubUsername": "",
+      "githubUsername": null,
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "",
@@ -354,7 +354,7 @@
     {
       "id": "neeka",
       "displayName": "Neeka",
-      "githubUsername": "",
+      "githubUsername": null,
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "",
@@ -374,7 +374,7 @@
     {
       "id": "riley",
       "displayName": "Riley",
-      "githubUsername": "",
+      "githubUsername": null,
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "",
@@ -414,27 +414,27 @@
     {
       "id": "scarlett-side",
       "displayName": "Scarlett Side",
-      "githubUsername": "",
-      "status": "active",
+      "githubUsername": null,
+      "status": "pending",
       "resumeRequirementMet": false,
       "cohort": "Summer 2026",
       "tags": [],
-      "notes": ""
+      "notes": "Not yet invited to GitHub"
     },
     {
       "id": "siobhan-barry",
       "displayName": "Siobhan Barry",
-      "githubUsername": "",
-      "status": "active",
+      "githubUsername": null,
+      "status": "inactive",
       "resumeRequirementMet": false,
       "cohort": "Summer 2026",
       "tags": [],
-      "notes": ""
+      "notes": "Invite expired, removed from collaborators"
     },
     {
       "id": "sofia",
       "displayName": "Sofia",
-      "githubUsername": "",
+      "githubUsername": null,
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "",
@@ -454,7 +454,7 @@
     {
       "id": "tanner",
       "displayName": "Tanner",
-      "githubUsername": "",
+      "githubUsername": "TannerM19",
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "",
@@ -484,7 +484,7 @@
     {
       "id": "tin",
       "displayName": "Tin",
-      "githubUsername": "",
+      "githubUsername": null,
       "status": "active",
       "resumeRequirementMet": false,
       "cohort": "",
