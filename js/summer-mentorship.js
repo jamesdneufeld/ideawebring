@@ -21,6 +21,15 @@ function setCache(key, value) {
   localStorage.setItem(key, JSON.stringify({ value, timestamp: Date.now() }));
 }
 
+// Helper: get ISO week number (1-53)
+function getWeekNumber(date) {
+  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  const dayNum = d.getUTCDay() || 7;
+  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  return Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
+}
+
 // GitHub: commits with depth tracking (active weeks)
 async function getActivity(folder) {
   const cacheKey = `activity_${folder}`;
@@ -28,7 +37,25 @@ async function getActivity(folder) {
   if (cached) return cached;
 
   try {
-    const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${folder}&per_page=50`);
+    const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${folder}&per_page=50`;
+    const res = await fetch(url);
+
+    if (!res.ok) {
+      console.warn(`GitHub API error for ${folder}: ${res.status}`);
+      const result = {
+        status: "dormant",
+        days: null,
+        commitCount: 0,
+        activeWeeks: 0,
+        engagementScore: 0,
+        recencyScore: 0,
+        frequencyScore: 0,
+        depthScore: 0,
+      };
+      setCache(cacheKey, result);
+      return result;
+    }
+
     const data = await res.json();
     const commits = Array.isArray(data) ? data : [];
 
@@ -36,13 +63,23 @@ async function getActivity(folder) {
     const date = lastCommit?.commit?.author?.date || null;
     const commitCount = commits.length;
 
-    // Calculate active weeks (depth)
+    // Debug log for Apsara
+    if (folder === "apsara") {
+      console.log(`Apsara - Commits found: ${commitCount}`);
+      console.log(`Apsara - Last commit date: ${date}`);
+      if (commits[0]) {
+        console.log(`Apsara - Commit author: ${commits[0]?.commit?.author?.name}`);
+        console.log(`Apsara - Commit message: ${commits[0]?.commit?.message}`);
+      }
+    }
+
+    // Calculate active weeks (depth) using proper ISO week
     const activeWeeks = new Set();
     commits.forEach((c) => {
       const d = new Date(c?.commit?.author?.date);
       if (!isNaN(d)) {
-        const yearWeek = `${d.getFullYear()}-${Math.ceil(d.getDate() / 7)}`;
-        activeWeeks.add(yearWeek);
+        const weekKey = `${d.getFullYear()}-W${getWeekNumber(d)}`;
+        activeWeeks.add(weekKey);
       }
     });
 
@@ -94,7 +131,8 @@ async function getActivity(folder) {
     };
     setCache(cacheKey, result);
     return result;
-  } catch {
+  } catch (err) {
+    console.error(`Error fetching activity for ${folder}:`, err);
     return {
       status: "dormant",
       days: null,
@@ -130,7 +168,6 @@ function getEngagementLevel(activity) {
 }
 
 const engagementLabels = ["Inactive", "Low", "Emerging", "Steady", "Active"];
-const engagementColors = ["", "#999", "#4ade80", "#22c55e", "#16a34a"];
 
 function createBadge(className, text = "", title = "") {
   const li = document.createElement("li");
@@ -171,8 +208,8 @@ async function populateStudentData() {
     // Status badge (active/recent/dormant)
     badgesContainer.appendChild(createBadge(`badge-status-${activity.status}`, activity.status));
 
-    // Engagement badge (replaces stars)
-    badgesContainer.appendChild(createBadge(`badge-engagement-${level}`, levelLabel, `${activity.engagementScore}/100 — based on recency (${activity.recencyScore}) + frequency (${activity.frequencyScore}) + depth (${activity.depthScore})`));
+    // Engagement badge
+    badgesContainer.appendChild(createBadge(`badge-engagement-${level}`, levelLabel, `${activity.engagementScore}/100 — recency:${activity.recencyScore} freq:${activity.frequencyScore} depth:${activity.depthScore}`));
   }
 }
 
