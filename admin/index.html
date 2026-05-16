@@ -68,6 +68,7 @@
         border-radius: 6px;
         cursor: pointer;
         font-family: monospace;
+        margin-right: 0.5rem;
       }
       button:hover {
         background: #30363d;
@@ -157,6 +158,12 @@
         background: #0d0f12;
         border-radius: 4px;
       }
+      .button-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+      }
     </style>
   </head>
   <body>
@@ -164,10 +171,14 @@
       <h1>🕸️ Web Ring · Merge Engine</h1>
       <div class="subhead">Reconciles folders with existing students.json — preserves GitHub usernames, status, notes</div>
 
-      <!-- Step 1: Upload existing JSON -->
+      <!-- Step 1: Load existing JSON -->
       <div class="card">
         <h3>📥 Step 1: Load existing students.json (your source of truth)</h3>
-        <input type="file" id="upload" accept="application/json" />
+        <div class="button-group">
+          <button onclick="fetchStudentsFromGitHub()" class="btn-primary">🌐 Fetch from Repo</button>
+          <button onclick="document.getElementById('upload').click()">📁 Upload Local File</button>
+        </div>
+        <input type="file" id="upload" accept="application/json" style="display: none" />
         <div id="uploadStatus" style="margin-top: 0.5rem; font-size: 0.7rem; color: #6e7681"></div>
       </div>
 
@@ -176,7 +187,7 @@
         <h3>📁 Step 2: Get current student folders</h3>
 
         <!-- Option A: Fetch from GitHub (auto-excludes admin folders) -->
-        <button onclick="fetchFoldersFromGitHub()" class="btn-primary" style="width: 100%; margin-bottom: 0.5rem">🌐 Fetch from GitHub Repo</button>
+        <button onclick="fetchFoldersFromGitHub()" class="btn-primary" style="width: 100%; margin-bottom: 0.5rem">🌐 Fetch Student Folders from Repo</button>
         <div class="exclude-list">🚫 Auto-excluded: .git, .vscode, assets, blank-bdes, blank-ixd, ixd, james, james-in-class, learning, log</div>
 
         <!-- Option B: Upload txt file -->
@@ -197,7 +208,7 @@
           <h3>✏️ Step 3: Edit student data (changes preserved forever)</h3>
           <div id="warningBox" class="warning hidden"></div>
           <div class="student-table">
-            <table>
+            <table id="studentTable">
               <thead>
                 <tr>
                   <th>Folder ID</th>
@@ -230,7 +241,22 @@
       let existingStudents = [];
       let reconciledStudents = [];
 
-      // Upload existing students.json
+      // Fetch students.json directly from GitHub repo
+      async function fetchStudentsFromGitHub() {
+        const url = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/students.json`;
+        try {
+          const res = await fetch(url);
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const json = await res.json();
+          existingStudents = json.students || [];
+          document.getElementById("uploadStatus").innerHTML = `✅ Fetched ${existingStudents.length} students from repo (${json.lastUpdated || "unknown date"})`;
+        } catch (err) {
+          document.getElementById("uploadStatus").innerHTML = `❌ Error fetching from repo: ${err.message}`;
+          existingStudents = [];
+        }
+      }
+
+      // Upload local students.json file
       document.getElementById("upload").addEventListener("change", async (e) => {
         const file = e.target.files[0];
         if (!file) return;
@@ -238,9 +264,9 @@
           const text = await file.text();
           const json = JSON.parse(text);
           existingStudents = json.students || [];
-          document.getElementById("uploadStatus").innerHTML = `✅ Loaded ${existingStudents.length} students`;
+          document.getElementById("uploadStatus").innerHTML = `✅ Loaded ${existingStudents.length} students from local file (${json.lastUpdated || "unknown date"})`;
         } catch (err) {
-          document.getElementById("uploadStatus").innerHTML = `❌ Error: ${err.message}`;
+          document.getElementById("uploadStatus").innerHTML = `❌ Error loading file: ${err.message}`;
           existingStudents = [];
         }
       });
@@ -265,7 +291,6 @@
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           const data = await res.json();
 
-          // Filter to directories, exclude system folders AND your admin folders
           const folders = data
             .filter((item) => item.type === "dir")
             .map((item) => item.name)
