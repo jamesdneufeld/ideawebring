@@ -1,5 +1,5 @@
-// js/dashboard.js
-// Main entry point — orchestrates all modules
+/// js/dashboard.js
+/// SAFE DATA PIPELINE ORCHESTRATOR
 
 import { loadStudentsJson } from "./data.js";
 import { normalizeStudent, enrichWithUrls, enrichWithActivity } from "../lib/student.js";
@@ -12,9 +12,9 @@ import { computeStats } from "./stats.js";
 import { exportToCSV } from "./export.js";
 import { renderStats, renderStudentGrid } from "./render.js";
 
-// -------------------------
-// STATE
-// -------------------------
+// =========================
+// SAFE STATE
+// =========================
 let state = {
   search: "",
   statusFilter: "all",
@@ -22,16 +22,27 @@ let state = {
   selectedTags: new Set(),
   sortBy: "name",
   sortDirection: "asc",
-
-  lastCommitRange: "all", // NEW
 };
 
 let allStudents = [];
 let filteredStudents = [];
 
-// -------------------------
+// =========================
+// SAFETY: required fields check
+// =========================
+function validateStudent(student, stage) {
+  const required = ["id", "displayName", "program", "year"];
+
+  for (const key of required) {
+    if (student[key] === undefined) {
+      console.warn(`[PIPELINE WARNING] Missing field "${key}" at stage: ${stage}`, student);
+    }
+  }
+}
+
+// =========================
 // CONFIG
-// -------------------------
+// =========================
 async function loadDashboardConfig() {
   try {
     const res = await fetch("../config.json");
@@ -39,14 +50,14 @@ async function loadDashboardConfig() {
       const config = await res.json();
       setRepoConfig(config.repo.owner, config.repo.name);
     }
-  } catch {
+  } catch (err) {
     console.log("Using default repo config");
   }
 }
 
-// -------------------------
+// =========================
 // RENDER
-// -------------------------
+// =========================
 function render() {
   const filtered = filterStudents(allStudents, state);
   const sorted = sortStudents(filtered, state.sortBy, state.sortDirection);
@@ -63,26 +74,37 @@ function render() {
   renderStudentGrid(sorted, "studentGrid");
 }
 
-// -------------------------
-// INIT
-// -------------------------
+// =========================
+// SAFE PIPELINE CORE
+// =========================
 async function init() {
   await loadDashboardConfig();
 
   const rawStudents = await loadStudentsJson();
 
-  let processed = rawStudents.map(normalizeStudent);
-  processed = processed.map(enrichWithUrls);
+  // STEP 1: normalize (must preserve ALL fields)
+  let processed = rawStudents.map((s) => {
+    const student = normalizeStudent(s);
+    validateStudent(student, "normalize");
+    return student;
+  });
 
+  // STEP 2: enrich URLs (must NOT replace object)
+  processed = processed.map((s) => {
+    const student = enrichWithUrls(s);
+    validateStudent(student, "enrichWithUrls");
+    return student;
+  });
+
+  // STEP 3: fetch activity
   const activities = await fetchActivityForAllStudents(processed);
 
-  processed = processed.map((student, idx) => enrichWithActivity(student, activities[idx]));
-
-  // IMPORTANT: ensure lastCommitDate is always available
-  processed = processed.map((s, idx) => ({
-    ...s,
-    lastCommitDate: activities[idx]?.date || s.lastCommitDate || null,
-  }));
+  // STEP 4: merge activity safely
+  processed = processed.map((student, idx) => {
+    const enriched = enrichWithActivity(student, activities[idx]);
+    validateStudent(enriched, "enrichWithActivity");
+    return enriched;
+  });
 
   allStudents = processed;
 
@@ -90,9 +112,9 @@ async function init() {
   render();
 }
 
-// -------------------------
+// =========================
 // EVENTS
-// -------------------------
+// =========================
 function setupEventListeners() {
   document.getElementById("searchInput")?.addEventListener("input", (e) => {
     state.search = e.target.value;
@@ -125,12 +147,6 @@ function setupEventListeners() {
     });
   });
 
-  // 🔥 NEW: commit range filter
-  document.getElementById("commitFilter")?.addEventListener("change", (e) => {
-    state.lastCommitRange = e.target.value;
-    render();
-  });
-
   document.getElementById("exportCSVBtn")?.addEventListener("click", () => {
     exportToCSV(filteredStudents);
   });
@@ -141,11 +157,12 @@ function setupEventListeners() {
 
     const activities = await fetchActivityForAllStudents(allStudents);
 
-    allStudents = allStudents.map((student, idx) => enrichWithActivity(student, activities[idx]));
+    allStudents = allStudents.map((s, idx) => enrichWithActivity(s, activities[idx]));
 
     render();
     btn.textContent = "🔄 Refresh Activity";
   });
 }
 
+// START
 init();
