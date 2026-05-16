@@ -1,30 +1,21 @@
 // js/data.js
-// Safe loader with strict validation
 
 export async function loadStudentsJson() {
   try {
-    const response = await fetch("../students.json");
+    const response = await fetch("students.json"); // ✅ FIXED PATH
 
     if (!response.ok) {
-      throw new Error(`students.json not found (${response.status})`);
+      throw new Error("students.json not found");
     }
 
     const data = await response.json();
 
-    // ✅ STRICT validation (this is the fix)
-    if (!data) {
-      throw new Error("students.json is empty or invalid");
-    }
+    // Ensure structure is always safe
+    const students = Array.isArray(data?.students) ? data.students : Array.isArray(data) ? data : [];
 
-    if (!Array.isArray(data.students)) {
-      throw new Error("students.json must contain { students: [...] }");
-    }
-
-    return data.students;
+    return students;
   } catch (err) {
-    console.error("❌ Failed to load students.json:", err);
-
-    // Fail loudly instead of silently breaking dashboard
+    console.error("Failed to load students.json:", err);
     return [];
   }
 }
