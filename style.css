@@ -422,21 +422,61 @@ a:hover {
    SUMMER CODING MENTORSHIP
    =========================================================== */
 
-/* Student list item - keeps each student on its own line */
 .student {
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
   list-style: none;
 }
 
-/* Navigation link acts as a pill container */
 .navigation-link {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.3rem;
+  display: block;
+  text-decoration: none;
+  padding: 1rem 1.5rem;
+  border-radius: 2rem;
+  background: var(--color-blue-light);
+  transition: all 0.15s ease-in-out;
 }
 
-/* Badge styles - now inside the <a> tag */
+.navigation-link:hover {
+  background: var(--color-purple);
+  transform: translate(-4px, -8px);
+  box-shadow: 8px 8px 0 0 black;
+}
+
+/* Student name - h3 inside link */
+.navigation-link h3 {
+  font-size: 1.225rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+  color: white;
+}
+
+/* Meta list - program and year */
+.student-meta {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0 0 0.5rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.student-program,
+.student-year {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  color: white;
+}
+
+/* Badges list */
+.student-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Badge items */
 .badge {
   display: inline-block;
   font-size: 0.65rem;
@@ -468,7 +508,7 @@ a:hover {
   color: #58a6ff;
 }
 
-/* Engagement badge (✨) - special styling */
+/* Engagement badge (✨) */
 .badge.engagement {
   color: #f1c40f;
   border-color: #f1c40f40;
