@@ -115,18 +115,20 @@ async function loadStudents() {
 }
 
 // ----------------------------
-// CREATE BADGE ELEMENT
+// CREATE BADGE ELEMENT (inline pill)
 // ----------------------------
 function createBadge(text, className, title = "") {
   const el = document.createElement("span");
   el.className = `badge ${className}`;
   el.textContent = text;
   if (title) el.title = title;
+  // Add spacing between text and badges
+  el.style.marginLeft = "0.4rem";
   return el;
 }
 
 // ----------------------------
-// ADD BADGES TO EXISTING STUDENT LIST
+// ADD BADGES INSIDE THE <a> TAG
 // ----------------------------
 async function addBadgesToExistingList() {
   await loadStudents();
@@ -149,7 +151,7 @@ async function addBadgesToExistingList() {
 
   // Process each student item
   for (const item of studentItems) {
-    const link = item.querySelector("a");
+    const link = item.querySelector("a.navigation-link");
     if (!link) continue;
 
     // Extract folder name from href (e.g., "alexia-sogai/")
@@ -159,34 +161,31 @@ async function addBadgesToExistingList() {
     // Get override data if exists
     const override = overrideMap.get(folder);
 
-    // Create badges container if it doesn't exist
-    let badgesContainer = item.querySelector(".badges");
-    if (!badgesContainer) {
-      badgesContainer = document.createElement("div");
-      badgesContainer.className = "badges";
-      item.appendChild(badgesContainer);
-    } else {
-      // Clear existing badges
-      badgesContainer.innerHTML = "";
-    }
+    // Remove any existing badges container (old method)
+    const oldBadges = item.querySelector(".badges");
+    if (oldBadges) oldBadges.remove();
+
+    // Clear any existing badges inside the link
+    const existingBadges = link.querySelectorAll(".badge");
+    existingBadges.forEach((badge) => badge.remove());
 
     // 1. Activity badge (from GitHub commits)
     const activity = await getActivity(folder);
-    badgesContainer.appendChild(createBadge(activity.status, `status-${activity.status}`, activity.date || "No commits"));
+    link.appendChild(createBadge(activity.status, `status-${activity.status}`, activity.date || "No commits"));
 
     // 2. Page badges (from GitHub contents)
     const files = await getFiles(folder);
 
-    if (files.about) badgesContainer.appendChild(createBadge("👤", "page", "about.html exists"));
-    if (files.playground) badgesContainer.appendChild(createBadge("🎮", "page", "playground.html exists"));
-    if (files.links) badgesContainer.appendChild(createBadge("🔗", "page", "links.html exists"));
-    if (files.event) badgesContainer.appendChild(createBadge("📅", "page", "event.html exists"));
+    if (files.about) link.appendChild(createBadge("👤", "page", "about.html exists"));
+    if (files.playground) link.appendChild(createBadge("🎮", "page", "playground.html exists"));
+    if (files.links) link.appendChild(createBadge("🔗", "page", "links.html exists"));
+    if (files.event) link.appendChild(createBadge("📅", "page", "event.html exists"));
 
     // 3. Resume badge (override-aware)
     if (override?.resumeRequirementMet) {
-      badgesContainer.appendChild(createBadge("✓ resume", "resume-ok", "Requirement met from prior course"));
+      link.appendChild(createBadge("✓ resume", "resume-ok", "Requirement met from prior course"));
     } else if (files.resume) {
-      badgesContainer.appendChild(createBadge("📄 resume", "page", "resume.html exists"));
+      link.appendChild(createBadge("📄 resume", "page", "resume.html exists"));
     }
   }
 }
