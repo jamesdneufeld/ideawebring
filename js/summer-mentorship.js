@@ -1,5 +1,5 @@
 // summer-mentorship.js
-// Web Ring Badge System with Gamified Engagement
+// Web Ring Badge System with Gamified Engagement - Semantic HTML version
 
 const REPO_OWNER = "jamesdneufeld";
 const REPO_NAME = "ideawebring";
@@ -95,14 +95,13 @@ async function loadStudents() {
   }
 }
 
-// Create badge element
+// Create badge LI element
 function createBadge(text, className, title = "") {
-  const el = document.createElement("span");
-  el.className = `badge ${className}`;
-  el.textContent = text;
-  if (title) el.title = title;
-  el.style.marginLeft = "0.4rem";
-  return el;
+  const li = document.createElement("li");
+  li.className = `badge ${className}`;
+  li.textContent = text;
+  if (title) li.title = title;
+  return li;
 }
 
 // Gamified engagement message
@@ -151,7 +150,7 @@ function formatProgram(program) {
   return program === "BDes" ? "(BDes)" : "(IxD)";
 }
 
-// Main: populate everything
+// Main: populate everything into semantic HTML
 async function populateStudentData() {
   await loadStudents();
 
@@ -164,20 +163,30 @@ async function populateStudentData() {
     const folder = link.dataset.folder || link.getAttribute("href").replace(/\/$/, "").toLowerCase();
     const student = studentMap.get(folder);
 
-    // Update program and year
-    const programSpan = link.querySelector(".student-program");
-    const yearSpan = link.querySelector(".student-year");
+    // Update program and year in meta list
+    const programLi = link.querySelector(".student-program");
+    const yearLi = link.querySelector(".student-year");
 
-    if (programSpan && student?.program) {
-      programSpan.textContent = ` ${formatProgram(student.program)}`;
+    if (programLi && student?.program) {
+      programLi.textContent = formatProgram(student.program);
     }
-    if (yearSpan && student?.year) {
-      yearSpan.textContent = ` ${student.year}`;
+    if (yearLi && student?.year) {
+      yearLi.textContent = student.year;
     }
 
-    // Clear existing badges
-    const existingBadges = link.querySelectorAll(".badge");
-    existingBadges.forEach((badge) => badge.remove());
+    // Clear existing badges list
+    const badgesUl = link.querySelector(".student-badges");
+    if (badgesUl) {
+      badgesUl.innerHTML = "";
+    } else {
+      // Fallback: create badges container if missing
+      const newBadgesUl = document.createElement("ul");
+      newBadgesUl.className = "student-badges";
+      link.appendChild(newBadgesUl);
+    }
+
+    const badgesContainer = link.querySelector(".student-badges");
+    if (!badgesContainer) continue;
 
     // Get activity data
     const activity = await getActivity(folder);
@@ -186,25 +195,26 @@ async function populateStudentData() {
     // Activity badge with fun emoji
     const statusEmoji = activity.status === "active" ? "🟢" : activity.status === "recent" ? "🟡" : "⚫";
     const commitEmoji = getCommitEmoji(activity.commitCount);
-    link.appendChild(createBadge(`${statusEmoji} ${activity.status} ${commitEmoji}`, `status-${activity.status}`, `${activity.commitCount} commits · last push ${formatLastPush(activity.date)}`));
+    badgesContainer.appendChild(createBadge(`${statusEmoji} ${activity.status} ${commitEmoji}`, `status-${activity.status}`, `${activity.commitCount} commits · last push ${formatLastPush(activity.date)}`));
 
     // Engagement message (gamified tooltip)
     const engagementMsg = getEngagementMessage(activity);
-    link.appendChild(createBadge("✨", "engagement", engagementMsg));
+    badgesContainer.appendChild(createBadge("✨", "engagement", engagementMsg));
 
     // Page badges
-    if (files.about) link.appendChild(createBadge("👤", "page", "about.html exists"));
-    if (files.playground) link.appendChild(createBadge("🎮", "page", "playground.html exists"));
-    if (files.links) link.appendChild(createBadge("🔗", "page", "links.html exists"));
-    if (files.event) link.appendChild(createBadge("📅", "page", "event.html exists"));
+    if (files.about) badgesContainer.appendChild(createBadge("👤", "page", "about.html exists"));
+    if (files.playground) badgesContainer.appendChild(createBadge("🎮", "page", "playground.html exists"));
+    if (files.links) badgesContainer.appendChild(createBadge("🔗", "page", "links.html exists"));
+    if (files.event) badgesContainer.appendChild(createBadge("📅", "page", "event.html exists"));
 
     // Resume badge
     if (student?.resumeRequirementMet) {
-      link.appendChild(createBadge("✓ resume", "resume-ok", "Requirement met from prior course"));
+      badgesContainer.appendChild(createBadge("✓ resume", "resume-ok", "Requirement met from prior course"));
     } else if (files.resume) {
-      link.appendChild(createBadge("📄 resume", "page", "resume.html exists"));
+      badgesContainer.appendChild(createBadge("📄 resume", "page", "resume.html exists"));
     }
   }
 }
 
+// Run when page loads
 document.addEventListener("DOMContentLoaded", populateStudentData);
