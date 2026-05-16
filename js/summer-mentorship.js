@@ -1,41 +1,27 @@
 // summer-mentorship.js
-// Web Ring Badge System for Summer Coding Mentorship page
+// Web Ring Badge System - Populates badges and metadata inside existing <a> tags
 
 const REPO_OWNER = "jamesdneufeld";
 const REPO_NAME = "ideawebring";
 
 let studentsData = [];
 
-// ----------------------------
-// CACHE HELPERS (1 hour TTL)
-// ----------------------------
+// Cache helpers (1 hour TTL)
 function getCache(key) {
   const raw = localStorage.getItem(key);
   if (!raw) return null;
-
   try {
     const data = JSON.parse(raw);
-    if (Date.now() - data.timestamp < 60 * 60 * 1000) {
-      return data.value;
-    }
+    if (Date.now() - data.timestamp < 60 * 60 * 1000) return data.value;
   } catch {}
-
   return null;
 }
 
 function setCache(key, value) {
-  localStorage.setItem(
-    key,
-    JSON.stringify({
-      value,
-      timestamp: Date.now(),
-    }),
-  );
+  localStorage.setItem(key, JSON.stringify({ value, timestamp: Date.now() }));
 }
 
-// ----------------------------
-// GITHUB: COMMITS (activity)
-// ----------------------------
+// GitHub: commits (activity)
 async function getActivity(folder) {
   const cacheKey = `activity_${folder}`;
   const cached = getCache(cacheKey);
@@ -43,18 +29,14 @@ async function getActivity(folder) {
 
   try {
     const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${folder}&per_page=1`);
-
     const data = await res.json();
     const date = data?.[0]?.commit?.author?.date || null;
 
     let status = "dormant";
-
     if (date) {
       const days = (new Date() - new Date(date)) / (1000 * 60 * 60 * 24);
-
       if (days <= 7) status = "active";
       else if (days <= 30) status = "recent";
-      else status = "dormant";
     }
 
     const result = { status, date };
@@ -65,9 +47,7 @@ async function getActivity(folder) {
   }
 }
 
-// ----------------------------
-// GITHUB: FILES (page existence)
-// ----------------------------
+// GitHub: files (page existence)
 async function getFiles(folder) {
   const cacheKey = `files_${folder}`;
   const cached = getCache(cacheKey);
@@ -75,7 +55,6 @@ async function getFiles(folder) {
 
   try {
     const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${folder}`);
-
     const data = await res.json();
     const files = (data || []).map((f) => f.name);
 
@@ -86,7 +65,6 @@ async function getFiles(folder) {
       event: files.includes("event.html"),
       resume: files.includes("resume.html"),
     };
-
     setCache(cacheKey, result);
     return result;
   } catch {
@@ -100,89 +78,79 @@ async function getFiles(folder) {
   }
 }
 
-// ----------------------------
-// LOAD STUDENTS.JSON
-// ----------------------------
+// Load students.json for overrides (resumeRequirementMet, program, year, etc.)
 async function loadStudents() {
   try {
     const res = await fetch("./students.json");
     const data = await res.json();
-    studentsData = data.students;
+    studentsData = data.students || [];
   } catch (e) {
-    console.warn("No students.json found, using defaults");
     studentsData = [];
   }
 }
 
-// ----------------------------
-// CREATE BADGE ELEMENT (inline pill)
-// ----------------------------
+// Create badge element
 function createBadge(text, className, title = "") {
   const el = document.createElement("span");
   el.className = `badge ${className}`;
   el.textContent = text;
   if (title) el.title = title;
-  // Add spacing between text and badges
   el.style.marginLeft = "0.4rem";
   return el;
 }
 
-// ----------------------------
-// ADD BADGES INSIDE THE <a> TAG
-// ----------------------------
-async function addBadgesToExistingList() {
+// Format program display (BDes or IxD)
+function formatProgram(program) {
+  if (!program) return "";
+  return program === "BDes" ? "(BDes)" : "(IxD)";
+}
+
+// Main: populate badges and metadata into existing <a> tags
+async function populateStudentData() {
   await loadStudents();
 
-  // Get all existing student list items
-  const studentItems = document.querySelectorAll(".student-group .student");
+  // Build map of folder -> student data
+  const studentMap = new Map();
+  studentsData.forEach((s) => studentMap.set(s.id, s));
 
-  if (studentItems.length === 0) {
-    console.warn("No student items found");
-    return;
-  }
+  // Find all student links
+  const links = document.querySelectorAll(".student .navigation-link");
 
-  // Create a map from folder name to student override data
-  const overrideMap = new Map();
-  if (studentsData.length) {
-    studentsData.forEach((s) => {
-      overrideMap.set(s.id, s);
-    });
-  }
+  for (const link of links) {
+    // Get folder from data-folder or href
+    const folder = link.dataset.folder || link.getAttribute("href").replace(/\/$/, "").toLowerCase();
 
-  // Process each student item
-  for (const item of studentItems) {
-    const link = item.querySelector("a.navigation-link");
-    if (!link) continue;
+    const student = studentMap.get(folder);
 
-    // Extract folder name from href (e.g., "alexia-sogai/")
-    const href = link.getAttribute("href");
-    const folder = href.replace(/\/$/, "").toLowerCase();
+    // Update program and year spans inside the link
+    const programSpan = link.querySelector(".student-program");
+    const yearSpan = link.querySelector(".student-year");
 
-    // Get override data if exists
-    const override = overrideMap.get(folder);
+    if (programSpan && student?.program) {
+      programSpan.textContent = ` ${formatProgram(student.program)}`;
+    }
 
-    // Remove any existing badges container (old method)
-    const oldBadges = item.querySelector(".badges");
-    if (oldBadges) oldBadges.remove();
+    if (yearSpan && student?.year) {
+      yearSpan.textContent = ` ${student.year}`;
+    }
 
-    // Clear any existing badges inside the link
+    // Clear existing badges (if any)
     const existingBadges = link.querySelectorAll(".badge");
     existingBadges.forEach((badge) => badge.remove());
 
-    // 1. Activity badge (from GitHub commits)
+    // Activity badge
     const activity = await getActivity(folder);
     link.appendChild(createBadge(activity.status, `status-${activity.status}`, activity.date || "No commits"));
 
-    // 2. Page badges (from GitHub contents)
+    // Page badges
     const files = await getFiles(folder);
-
     if (files.about) link.appendChild(createBadge("👤", "page", "about.html exists"));
     if (files.playground) link.appendChild(createBadge("🎮", "page", "playground.html exists"));
     if (files.links) link.appendChild(createBadge("🔗", "page", "links.html exists"));
     if (files.event) link.appendChild(createBadge("📅", "page", "event.html exists"));
 
-    // 3. Resume badge (override-aware)
-    if (override?.resumeRequirementMet) {
+    // Resume badge
+    if (student?.resumeRequirementMet) {
       link.appendChild(createBadge("✓ resume", "resume-ok", "Requirement met from prior course"));
     } else if (files.resume) {
       link.appendChild(createBadge("📄 resume", "page", "resume.html exists"));
@@ -191,4 +159,4 @@ async function addBadgesToExistingList() {
 }
 
 // Run when page loads
-document.addEventListener("DOMContentLoaded", addBadgesToExistingList);
+document.addEventListener("DOMContentLoaded", populateStudentData);
