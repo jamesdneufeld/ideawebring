@@ -1,5 +1,5 @@
 // js/render.js
-// Rendering logic for dashboard UI (Site-based system)
+// SAFE UI RENDERING
 
 function getDaysAgo(date) {
   if (!date) return null;
@@ -7,15 +7,19 @@ function getDaysAgo(date) {
 }
 
 function getEngagementBar(score) {
-  const totalBars = 10;
-  const filledBars = Math.round((score / 100) * totalBars);
-
-  return "█".repeat(filledBars) + "░".repeat(totalBars - filledBars);
+  const total = 10;
+  const filled = Math.round((score / 100) * total);
+  return "█".repeat(filled) + "░".repeat(total - filled);
 }
 
 export function renderStudentGrid(students, containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
+
+  if (!Array.isArray(students)) {
+    container.innerHTML = `<div class="no-results">No data</div>`;
+    return;
+  }
 
   container.innerHTML = students
     .map((student) => {
@@ -83,13 +87,15 @@ export function renderStudentGrid(students, containerId) {
           <div class="card-actions">
             ${
               student.githubUsername
-                ? `<a class="card-link" target="_blank" href="https://github.com/${student.githubUsername}">
+                ? `<a class="card-link" target="_blank"
+                    href="https://github.com/${student.githubUsername}">
                     GitHub
                    </a>`
                 : ""
             }
 
-            <a class="card-link" target="_blank" href="${student.portfolioUrl}">
+            <a class="card-link" target="_blank"
+               href="${student.portfolioUrl}">
               🕸️ Site
             </a>
           </div>
@@ -101,7 +107,7 @@ export function renderStudentGrid(students, containerId) {
 }
 
 export function renderStats(stats) {
-  const el = document.getElementById("stats");
+  const el = document.getElementById("statsBar"); // FIXED
   if (!el) return;
 
   el.innerHTML = `

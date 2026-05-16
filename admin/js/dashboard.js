@@ -1,5 +1,5 @@
-/// js/dashboard.js
-/// SAFE DATA PIPELINE ORCHESTRATOR
+// js/dashboard.js
+// Main entry point — SAFE PIPELINE VERSION
 
 import { loadStudentsJson } from "./data.js";
 import { normalizeStudent, enrichWithUrls, enrichWithActivity } from "../lib/student.js";
@@ -13,7 +13,7 @@ import { exportToCSV } from "./export.js";
 import { renderStats, renderStudentGrid } from "./render.js";
 
 // =========================
-// SAFE STATE
+// STATE
 // =========================
 let state = {
   search: "",
@@ -28,37 +28,26 @@ let allStudents = [];
 let filteredStudents = [];
 
 // =========================
-// SAFETY: required fields check
-// =========================
-function validateStudent(student, stage) {
-  const required = ["id", "displayName", "program", "year"];
-
-  for (const key of required) {
-    if (student[key] === undefined) {
-      console.warn(`[PIPELINE WARNING] Missing field "${key}" at stage: ${stage}`, student);
-    }
-  }
-}
-
-// =========================
 // CONFIG
 // =========================
 async function loadDashboardConfig() {
   try {
     const res = await fetch("../config.json");
-    if (res.ok) {
-      const config = await res.json();
-      setRepoConfig(config.repo.owner, config.repo.name);
-    }
+    if (!res.ok) return;
+
+    const config = await res.json();
+    setRepoConfig(config.repo.owner, config.repo.name);
   } catch (err) {
     console.log("Using default repo config");
   }
 }
 
 // =========================
-// RENDER
+// RENDER PIPELINE
 // =========================
 function render() {
+  if (!Array.isArray(allStudents)) return;
+
   const filtered = filterStudents(allStudents, state);
   const sorted = sortStudents(filtered, state.sortBy, state.sortDirection);
 
@@ -75,41 +64,42 @@ function render() {
 }
 
 // =========================
-// SAFE PIPELINE CORE
+// INIT (SAFE)
 // =========================
 async function init() {
-  await loadDashboardConfig();
+  try {
+    await loadDashboardConfig();
 
-  const rawStudents = await loadStudentsJson();
+    const rawStudents = await loadStudentsJson();
 
-  // STEP 1: normalize (must preserve ALL fields)
-  let processed = rawStudents.map((s) => {
-    const student = normalizeStudent(s);
-    validateStudent(student, "normalize");
-    return student;
-  });
+    if (!Array.isArray(rawStudents)) {
+      throw new Error("students.json must return an array");
+    }
 
-  // STEP 2: enrich URLs (must NOT replace object)
-  processed = processed.map((s) => {
-    const student = enrichWithUrls(s);
-    validateStudent(student, "enrichWithUrls");
-    return student;
-  });
+    // PIPELINE
+    let processed = rawStudents.map(normalizeStudent);
+    processed = processed.map(enrichWithUrls);
 
-  // STEP 3: fetch activity
-  const activities = await fetchActivityForAllStudents(processed);
+    const activities = await fetchActivityForAllStudents(processed);
 
-  // STEP 4: merge activity safely
-  processed = processed.map((student, idx) => {
-    const enriched = enrichWithActivity(student, activities[idx]);
-    validateStudent(enriched, "enrichWithActivity");
-    return enriched;
-  });
+    processed = processed.map((student, idx) => enrichWithActivity(student, activities[idx]));
 
-  allStudents = processed;
+    allStudents = processed;
 
-  setupEventListeners();
-  render();
+    setupEventListeners();
+    render();
+  } catch (err) {
+    console.error("Dashboard failed:", err);
+
+    const grid = document.getElementById("studentGrid");
+    if (grid) {
+      grid.innerHTML = `
+        <div class="no-results">
+          ⚠️ Failed to load dashboard data
+        </div>
+      `;
+    }
+  }
 }
 
 // =========================
@@ -153,6 +143,8 @@ function setupEventListeners() {
 
   document.getElementById("refreshBtn")?.addEventListener("click", async () => {
     const btn = document.getElementById("refreshBtn");
+    if (!btn) return;
+
     btn.textContent = "⟳ Loading...";
 
     const activities = await fetchActivityForAllStudents(allStudents);
