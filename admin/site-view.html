@@ -176,6 +176,7 @@
         gap: 0.75rem;
         font-size: 0.7rem;
         color: #8b949e;
+        flex-wrap: wrap;
       }
 
       .badge {
@@ -192,7 +193,11 @@
         color: #d29922;
       }
 
-      .badge.dormant {
+      .badge.occasional {
+        color: #58a6ff;
+      }
+
+      .badge.inactive {
         color: #6e7681;
       }
 
@@ -239,9 +244,11 @@
 
       <div class="filter-section" id="filterSection">
         <button class="filter-pill active" data-filter="all">All</button>
-        <button class="filter-pill" data-filter="active">Active (&lt;7 days)</button>
-        <button class="filter-pill" data-filter="recent">Recent (8-30 days)</button>
-        <button class="filter-pill" data-filter="alumni">Alumni</button>
+        <button class="filter-pill" data-filter="active">Active (&lt;30 days)</button>
+        <button class="filter-pill" data-filter="recent">Recent (30-60 days)</button>
+        <button class="filter-pill" data-filter="occasional">Occasional (60-90 days)</button>
+        <button class="filter-pill" data-filter="inactive">Inactive (90+ days)</button>
+        <button class="filter-pill" data-filter="alumni">Alumni Only</button>
       </div>
 
       <div id="studentGrid" class="student-grid">
@@ -265,7 +272,6 @@
           const data = await response.json();
           allStudents = data.students || [];
 
-          // Show loading state
           document.getElementById("studentGrid").innerHTML = '<div class="no-results">📡 Loading activity data...</div>';
 
           await loadActivityData();
@@ -276,11 +282,19 @@
         }
       }
 
+      // Get activity status based on days since last commit
+      function getActivityStatus(days) {
+        if (days === null) return "inactive";
+        if (days < 30) return "active";
+        if (days < 60) return "recent";
+        if (days < 90) return "occasional";
+        return "inactive";
+      }
+
       async function loadActivityData() {
         const REPO_OWNER = "jamesdneufeld";
         const REPO_NAME = "ideawebring";
 
-        // Process in parallel with Promise.all for speed
         const promises = allStudents.map(async (student) => {
           try {
             const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${student.id}&per_page=1`;
@@ -291,27 +305,19 @@
               const date = data?.[0]?.commit?.author?.date;
               if (date) {
                 const days = (new Date() - new Date(date)) / (1000 * 60 * 60 * 24);
-                if (days <= 7) {
-                  student.activityStatus = "active";
-                  student.activityDays = Math.floor(days);
-                } else if (days <= 30) {
-                  student.activityStatus = "recent";
-                  student.activityDays = Math.floor(days);
-                } else {
-                  student.activityStatus = "dormant";
-                  student.activityDays = Math.floor(days);
-                }
+                student.activityDays = Math.floor(days);
+                student.activityStatus = getActivityStatus(student.activityDays);
               } else {
-                student.activityStatus = "dormant";
+                student.activityStatus = "inactive";
                 student.activityDays = null;
               }
             } else {
-              student.activityStatus = "dormant";
+              student.activityStatus = "inactive";
               student.activityDays = null;
             }
           } catch (err) {
             console.warn(`Failed to fetch activity for ${student.id}:`, err);
-            student.activityStatus = "dormant";
+            student.activityStatus = "inactive";
             student.activityDays = null;
           }
           return student;
@@ -327,6 +333,10 @@
           filtered = filtered.filter((s) => s.activityStatus === "active");
         } else if (currentFilter === "recent") {
           filtered = filtered.filter((s) => s.activityStatus === "recent");
+        } else if (currentFilter === "occasional") {
+          filtered = filtered.filter((s) => s.activityStatus === "occasional");
+        } else if (currentFilter === "inactive") {
+          filtered = filtered.filter((s) => s.activityStatus === "inactive");
         } else if (currentFilter === "alumni") {
           filtered = filtered.filter((s) => s.isAlumni === true);
         }
@@ -343,13 +353,17 @@
         const total = allStudents.length;
         const active = allStudents.filter((s) => s.activityStatus === "active").length;
         const recent = allStudents.filter((s) => s.activityStatus === "recent").length;
+        const occasional = allStudents.filter((s) => s.activityStatus === "occasional").length;
+        const inactive = allStudents.filter((s) => s.activityStatus === "inactive").length;
         const alumni = allStudents.filter((s) => s.isAlumni === true).length;
 
         const statsDiv = document.getElementById("statsBar");
         statsDiv.innerHTML = `
       <div class="stat-pill">📚 <span class="stat-number">${total}</span> sites</div>
-      <div class="stat-pill">🟢 <span class="stat-number">${active}</span> active (&lt;7d)</div>
-      <div class="stat-pill">🟡 <span class="stat-number">${recent}</span> recent (8-30d)</div>
+      <div class="stat-pill">🟢 <span class="stat-number">${active}</span> active (&lt;30d)</div>
+      <div class="stat-pill">🟡 <span class="stat-number">${recent}</span> recent (30-60d)</div>
+      <div class="stat-pill">🔵 <span class="stat-number">${occasional}</span> occasional (60-90d)</div>
+      <div class="stat-pill">⚫ <span class="stat-number">${inactive}</span> inactive (90+d)</div>
       <div class="stat-pill">🎓 <span class="stat-number">${alumni}</span> alumni</div>
     `;
       }
@@ -367,7 +381,7 @@
           .map((student) => {
             const siteUrl = `https://jamesdneufeld.github.io/ideawebring/${student.id}/`;
             let statusIcon = "⚫";
-            let statusText = "Dormant";
+            let statusText = "Inactive (90+ days)";
 
             if (student.activityStatus === "active") {
               statusIcon = "🟢";
@@ -375,6 +389,11 @@
             } else if (student.activityStatus === "recent") {
               statusIcon = "🟡";
               statusText = `Recent (${student.activityDays}d ago)`;
+            } else if (student.activityStatus === "occasional") {
+              statusIcon = "🔵";
+              statusText = `Occasional (${student.activityDays}d ago)`;
+            } else if (student.activityStatus === "inactive" && student.activityDays !== null) {
+              statusText = `Inactive (${student.activityDays}d ago)`;
             }
 
             return `
