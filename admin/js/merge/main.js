@@ -1,4 +1,4 @@
-// js/main.js
+// js/merge/main.js
 
 import { loadConfig, getConfig } from "./config.js";
 import { fetchStudentsFromGitHub, fetchFoldersFromGitHub } from "./github.js";

@@ -1,4 +1,4 @@
-// js/matching.js
+// js/merge/matching.js
 import { getConfig } from "./config.js";
 
 export function normalize(str) {
