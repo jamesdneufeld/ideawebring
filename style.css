@@ -413,7 +413,7 @@ a:hover {
 }
 
 /* ===========================================================
-   SUMMER CODING MENTORSHIP
+   SUMMER CODING MENTORSHIP — WEB RING BADGES
    =========================================================== */
 
 .student {
@@ -421,14 +421,20 @@ a:hover {
   list-style: none;
 }
 
+/* ===========================================================
+   CARD BASE
+   =========================================================== */
+
 .navigation-link {
   width: 100%;
   display: block;
   text-decoration: none;
-  padding: 0.75rem 1.25rem;
-  border-radius: 0.5rem;
+  padding: 0.85rem 1.25rem;
+  border-radius: 0.75rem;
   background: var(--color-blue-light);
-  transition: all 0.15s ease-in-out;
+  transition: all 0.18s ease-in-out;
+  position: relative;
+  overflow: hidden;
 }
 
 .navigation-link:hover {
@@ -436,6 +442,15 @@ a:hover {
   transform: translate(-4px, -8px);
   box-shadow: 8px 8px 0 0 black;
 }
+
+/* Subtle “premium edge” for Veterans */
+.navigation-link.veteran {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* ===========================================================
+   TEXT
+   =========================================================== */
 
 .navigation-link h3 {
   font-size: 1.225rem;
@@ -459,10 +474,14 @@ a:hover {
   color: white;
 }
 
+/* ===========================================================
+   BADGES LAYOUT
+   =========================================================== */
+
 .student-badges {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 0.6rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -471,54 +490,83 @@ a:hover {
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   color: white;
   opacity: 0.85;
+  padding: 0.15rem 0.35rem;
+  border-radius: 0.35rem;
+  background: rgba(255, 255, 255, 0.08);
+  letter-spacing: 0.2px;
 }
 
-/* Days badge */
-.badge-days::before {
-  content: "📅 ";
+/* ===========================================================
+   BADGE 1 — LAST SEEN (neutral metric)
+   =========================================================== */
+
+.badge-last-seen {
+  opacity: 0.9;
+  font-variant-numeric: tabular-nums;
 }
 
-/* Status badges */
-.badge-status-active::before {
-  content: "🟢 ";
-}
-.badge-status-recent::before {
-  content: "🟡 ";
-}
-.badge-status-dormant::before {
-  content: "⚫ ";
+/* No emoji, intentionally clean */
+.badge-last-seen::before {
+  content: "Last Seen: ";
+  opacity: 0.7;
+  margin-right: 0.25rem;
 }
 
-/* Engagement level badges */
-.badge-engagement-0 {
-  opacity: 0.4;
+/* ===========================================================
+   BADGE 2 — STATUS (identity tier)
+   =========================================================== */
+
+.badge-participation-Newcomer {
+  color: #cbd5e1;
 }
-.badge-engagement-1 {
-  background: none;
-  color: #999;
+
+.badge-participation-Contributor {
+  color: #93c5fd;
 }
-.badge-engagement-2 {
-  background: none;
+
+.badge-participation-Regular {
   color: #4ade80;
 }
-.badge-engagement-3 {
-  background: none;
-  color: #22c55e;
-}
-.badge-engagement-4 {
-  background: none;
-  color: #16a34a;
+
+.badge-participation-Veteran {
+  color: #fbbf24;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  background: rgba(251, 191, 36, 0.12);
+  border: 1px solid rgba(251, 191, 36, 0.35);
 }
 
-/* Separator between badges */
+.badge-participation-Archive {
+  color: #6b7280;
+  opacity: 0.6;
+}
+
+/* ===========================================================
+   BADGE 3 — LIFETIME SCORE (irreversible prestige)
+   =========================================================== */
+
+.badge-lifetime {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* star display (pure visual, no emoji dependency) */
+.badge-lifetime-stars {
+  font-family: monospace;
+}
+
+/* ===========================================================
+   SEPARATION DOT
+   =========================================================== */
+
 .badge:not(:last-child)::after {
   content: "·";
-  margin-left: 0.75rem;
-  opacity: 0.5;
+  margin-left: 0.6rem;
+  opacity: 0.4;
 }
 
 .badge:last-child::after {
