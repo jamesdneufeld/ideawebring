@@ -1,7 +1,9 @@
+// lib/student.js
+// Pure data pipeline layer
+
 export function normalizeStudent(raw) {
   return {
     id: raw.id,
-
     displayName:
       raw.displayName ||
       raw.id
@@ -11,21 +13,17 @@ export function normalizeStudent(raw) {
 
     githubUsername: raw.githubUsername || null,
 
-    // FIX: preserve truthy values properly
-    status: raw.status ?? "active",
-
+    // lifecycle
     isAlumni: !!raw.isAlumni,
     withdrawn: !!raw.withdrawn,
+
+    program: raw.program || null,
+    year: raw.year || null,
 
     resumeRequirementMet: !!raw.resumeRequirementMet,
 
     cohort: raw.cohort || "Unassigned",
     tags: raw.tags || [],
-
-    // FIX: prevent undefined rendering bugs
-    program: raw.program || "—",
-    year: raw.year || "—",
-
     notes: raw.notes || "",
 
     portfolioUrl: null,
