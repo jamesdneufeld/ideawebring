@@ -24,7 +24,6 @@
         margin: 0 auto;
       }
 
-      /* Header */
       .site-header {
         text-align: center;
         margin-bottom: 3rem;
@@ -45,7 +44,6 @@
         font-size: 1.1rem;
       }
 
-      /* Stats bar */
       .stats-bar {
         display: flex;
         flex-wrap: wrap;
@@ -67,7 +65,6 @@
         color: #3fb950;
       }
 
-      /* Search */
       .search-section {
         margin-bottom: 2rem;
       }
@@ -95,7 +92,6 @@
         border-color: #3fb950;
       }
 
-      /* Filter pills */
       .filter-section {
         display: flex;
         flex-wrap: wrap;
@@ -125,14 +121,12 @@
         background: #30363d;
       }
 
-      /* Student grid - Neocities style */
       .student-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         gap: 1.5rem;
       }
 
-      /* Site card - minimal, directory style */
       .site-card {
         background: #161b22;
         border: 1px solid #30363d;
@@ -149,7 +143,6 @@
         border-color: #3fb950;
       }
 
-      /* Simple screenshot placeholder / favicon area */
       .site-preview {
         background: #0d0f12;
         height: 120px;
@@ -246,8 +239,8 @@
 
       <div class="filter-section" id="filterSection">
         <button class="filter-pill active" data-filter="all">All</button>
-        <button class="filter-pill" data-filter="active">Active</button>
-        <button class="filter-pill" data-filter="recent">Recent</button>
+        <button class="filter-pill" data-filter="active">Active (&lt;7 days)</button>
+        <button class="filter-pill" data-filter="recent">Recent (8-30 days)</button>
         <button class="filter-pill" data-filter="alumni">Alumni</button>
       </div>
 
@@ -261,56 +254,70 @@
     </div>
 
     <script>
-      // Site View Mode - Minimal directory listing
       let allStudents = [];
       let currentFilter = "all";
       let currentSearch = "";
 
-      // Load students.json
       async function loadStudents() {
         try {
           const response = await fetch("../students.json");
           if (!response.ok) throw new Error("students.json not found");
           const data = await response.json();
           allStudents = data.students || [];
+
+          // Show loading state
+          document.getElementById("studentGrid").innerHTML = '<div class="no-results">📡 Loading activity data...</div>';
+
           await loadActivityData();
           renderStats();
           renderGrid();
         } catch (err) {
-          document.getElementById("studentGrid").innerHTML = `<div class="no-results">❌ Failed to load student data</div>`;
+          document.getElementById("studentGrid").innerHTML = `<div class="no-results">❌ Failed to load student data: ${err.message}</div>`;
         }
       }
 
-      // Load GitHub activity for all students
       async function loadActivityData() {
         const REPO_OWNER = "jamesdneufeld";
         const REPO_NAME = "ideawebring";
 
-        for (const student of allStudents) {
+        // Process in parallel with Promise.all for speed
+        const promises = allStudents.map(async (student) => {
           try {
             const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${student.id}&per_page=1`;
             const res = await fetch(url);
+
             if (res.ok) {
               const data = await res.json();
               const date = data?.[0]?.commit?.author?.date;
               if (date) {
                 const days = (new Date() - new Date(date)) / (1000 * 60 * 60 * 24);
-                if (days <= 7) student.activityStatus = "active";
-                else if (days <= 30) student.activityStatus = "recent";
-                else student.activityStatus = "dormant";
+                if (days <= 7) {
+                  student.activityStatus = "active";
+                  student.activityDays = Math.floor(days);
+                } else if (days <= 30) {
+                  student.activityStatus = "recent";
+                  student.activityDays = Math.floor(days);
+                } else {
+                  student.activityStatus = "dormant";
+                  student.activityDays = Math.floor(days);
+                }
               } else {
                 student.activityStatus = "dormant";
+                student.activityDays = null;
               }
             } else {
               student.activityStatus = "dormant";
+              student.activityDays = null;
             }
-          } catch {
+          } catch (err) {
+            console.warn(`Failed to fetch activity for ${student.id}:`, err);
             student.activityStatus = "dormant";
+            student.activityDays = null;
           }
+          return student;
+        });
 
-          // Small delay to avoid rate limiting
-          await new Promise((r) => setTimeout(r, 100));
-        }
+        await Promise.all(promises);
       }
 
       function getFilteredStudents() {
@@ -326,7 +333,7 @@
 
         if (currentSearch) {
           const q = currentSearch.toLowerCase();
-          filtered = filtered.filter((s) => s.displayName?.toLowerCase().includes(q) || s.id?.toLowerCase().includes(q) || s.githubUsername?.toLowerCase().includes(q));
+          filtered = filtered.filter((s) => (s.displayName || "").toLowerCase().includes(q) || (s.id || "").toLowerCase().includes(q) || (s.githubUsername || "").toLowerCase().includes(q));
         }
 
         return filtered;
@@ -335,12 +342,14 @@
       function renderStats() {
         const total = allStudents.length;
         const active = allStudents.filter((s) => s.activityStatus === "active").length;
+        const recent = allStudents.filter((s) => s.activityStatus === "recent").length;
         const alumni = allStudents.filter((s) => s.isAlumni === true).length;
 
         const statsDiv = document.getElementById("statsBar");
         statsDiv.innerHTML = `
       <div class="stat-pill">📚 <span class="stat-number">${total}</span> sites</div>
-      <div class="stat-pill">🟢 <span class="stat-number">${active}</span> active</div>
+      <div class="stat-pill">🟢 <span class="stat-number">${active}</span> active (&lt;7d)</div>
+      <div class="stat-pill">🟡 <span class="stat-number">${recent}</span> recent (8-30d)</div>
       <div class="stat-pill">🎓 <span class="stat-number">${alumni}</span> alumni</div>
     `;
       }
@@ -357,8 +366,16 @@
         grid.innerHTML = filtered
           .map((student) => {
             const siteUrl = `https://jamesdneufeld.github.io/ideawebring/${student.id}/`;
-            const statusIcon = student.activityStatus === "active" ? "🟢" : student.activityStatus === "recent" ? "🟡" : "⚫";
-            const statusText = student.activityStatus === "active" ? "Active" : student.activityStatus === "recent" ? "Recent" : "Dormant";
+            let statusIcon = "⚫";
+            let statusText = "Dormant";
+
+            if (student.activityStatus === "active") {
+              statusIcon = "🟢";
+              statusText = `Active (${student.activityDays}d ago)`;
+            } else if (student.activityStatus === "recent") {
+              statusIcon = "🟡";
+              statusText = `Recent (${student.activityDays}d ago)`;
+            }
 
             return `
         <a href="${siteUrl}" target="_blank" class="site-card">
