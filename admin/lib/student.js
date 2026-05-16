@@ -1,34 +1,43 @@
 // lib/student.js
-// Pure data pipeline layer
+// Pure data transformations — safe pipeline version
 
 export function normalizeStudent(raw) {
   return {
-    id: raw.id,
-    displayName:
-      raw.displayName ||
-      raw.id
-        .split("-")
-        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-        .join(" "),
+    id: raw.id ?? "unknown",
+    displayName: raw.displayName ?? formatName(raw.id),
 
-    githubUsername: raw.githubUsername || null,
+    githubUsername: raw.githubUsername ?? null,
 
-    // lifecycle
-    isAlumni: !!raw.isAlumni,
-    withdrawn: !!raw.withdrawn,
+    // lifecycle flags
+    isAlumni: Boolean(raw.isAlumni),
+    withdrawn: Boolean(raw.withdrawn),
 
-    program: raw.program || null,
-    year: raw.year || null,
+    // academic info (SAFE DEFAULTS FIX)
+    program: raw.program ?? "—",
+    year: raw.year ?? "—",
 
-    resumeRequirementMet: !!raw.resumeRequirementMet,
+    cohort: raw.cohort ?? "Unassigned",
+    tags: Array.isArray(raw.tags) ? raw.tags : [],
 
-    cohort: raw.cohort || "Unassigned",
-    tags: raw.tags || [],
-    notes: raw.notes || "",
+    resumeRequirementMet: Boolean(raw.resumeRequirementMet),
+    notes: raw.notes ?? "",
 
+    // derived
     portfolioUrl: null,
+
     activity: null,
+    activityStatus: "unknown",
+    lastCommitDate: null,
   };
+}
+
+function formatName(id) {
+  if (!id) return "Unknown";
+
+  return id
+    .split("-")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
 }
 
 export function enrichWithUrls(student) {
@@ -42,5 +51,7 @@ export function enrichWithActivity(student, activity) {
   return {
     ...student,
     activity,
+    activityStatus: activity?.status ?? "unknown",
+    lastCommitDate: activity?.lastCommitDate ?? null,
   };
 }
