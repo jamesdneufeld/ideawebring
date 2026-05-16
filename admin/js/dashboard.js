@@ -3,8 +3,11 @@
 
 import { loadStudentsJson } from "./data.js";
 import { normalizeStudent, enrichWithUrls, enrichWithActivity } from "../lib/student.js";
+
 import { fetchActivityForAllStudents, setRepoConfig } from "./github.js";
-import { filterStudents, sortStudents, computeAvailableCohorts, computeAvailableTags } from "./filters.js";
+
+import { filterStudents, sortStudents } from "./filters.js";
+
 import { computeStats } from "./stats.js";
 import { exportToCSV } from "./export.js";
 import { renderStats, renderStudentGrid } from "./render.js";
@@ -39,9 +42,11 @@ async function loadDashboardConfig() {
 function render() {
   const filtered = filterStudents(allStudents, state);
   const sorted = sortStudents(filtered, state.sortBy, state.sortDirection);
+
   filteredStudents = sorted;
 
   const stats = computeStats(allStudents);
+
   renderStats(stats, (filter) => {
     state.statusFilter = filter;
     render();
@@ -58,18 +63,19 @@ async function init() {
   const rawStudents = await loadStudentsJson();
 
   // Normalize
-  let processed = rawStudents.map((s) => normalizeStudent(s));
+  let processed = rawStudents.map(normalizeStudent);
 
   // Add URLs
-  processed = processed.map((s) => enrichWithUrls(s));
+  processed = processed.map(enrichWithUrls);
 
-  // Fetch GitHub activity
+  // Fetch GitHub activity (NO local filtering)
   const activities = await fetchActivityForAllStudents(processed);
-  processed = processed.map((s, idx) => enrichWithActivity(s, activities[idx]));
+
+  // Merge activity safely by index
+  processed = processed.map((student, idx) => enrichWithActivity(student, activities[idx]));
 
   allStudents = processed;
 
-  // Setup UI
   setupEventListeners();
   render();
 }
@@ -85,7 +91,9 @@ function setupEventListeners() {
   document.querySelectorAll("#statusFilterGroup .filter-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       state.statusFilter = btn.dataset.filter;
+
       document.querySelectorAll("#statusFilterGroup .filter-btn").forEach((b) => b.classList.remove("active"));
+
       btn.classList.add("active");
       render();
     });
@@ -95,12 +103,14 @@ function setupEventListeners() {
   document.querySelectorAll(".sort-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const sort = btn.dataset.sort;
+
       if (state.sortBy === sort) {
         state.sortDirection = state.sortDirection === "asc" ? "desc" : "asc";
       } else {
         state.sortBy = sort;
         state.sortDirection = "asc";
       }
+
       render();
     });
   });
@@ -114,8 +124,11 @@ function setupEventListeners() {
   document.getElementById("refreshBtn")?.addEventListener("click", async () => {
     const btn = document.getElementById("refreshBtn");
     btn.textContent = "⟳ Loading...";
+
     const activities = await fetchActivityForAllStudents(allStudents);
-    allStudents = allStudents.map((s, idx) => enrichWithActivity(s, activities[idx]));
+
+    allStudents = allStudents.map((student, idx) => enrichWithActivity(student, activities[idx]));
+
     render();
     btn.textContent = "🔄 Refresh Activity";
   });
