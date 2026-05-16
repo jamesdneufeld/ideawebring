@@ -204,7 +204,7 @@
   <body>
     <div class="container">
       <h1>🕸️ Web Ring · Merge Engine</h1>
-      <div class="subhead">Stores static metadata only — program, grad year, alumni status, tags, GitHub username, resume flag (activity status is live from GitHub)</div>
+      <div class="subhead">Stores static metadata only — program, grad year, alumni status, withdrawn, tags, GitHub, resume flag (activity status is live from GitHub)</div>
 
       <!-- Step 1: Load existing JSON -->
       <div class="card">
@@ -249,6 +249,7 @@
                   <th>Program</th>
                   <th>Year</th>
                   <th>Alumni</th>
+                  <th>Withdrawn</th>
                   <th>Cohort</th>
                   <th>Tags</th>
                   <th>Resume Met</th>
@@ -293,7 +294,8 @@
       let reconciledStudents = [];
 
       // Generate cohort display string
-      function getCohortDisplay(program, year, isAlumni) {
+      function getCohortDisplay(program, year, isAlumni, withdrawn) {
+        if (withdrawn) return "Withdrawn";
         if (!program || !year) return "Unassigned";
         const suffix = isAlumni ? " (Alumni)" : "";
         return `${program} ${year}${suffix}`;
@@ -439,6 +441,7 @@
           let program = existing?.program || "BDes";
           let year = existing?.year || "2026";
           let isAlumni = existing?.isAlumni || false;
+          let withdrawn = existing?.withdrawn || false;
 
           // If existing has cohort string but no program/year, try to parse
           if (existing?.cohort && !existing?.program) {
@@ -457,6 +460,7 @@
             program: program,
             year: year,
             isAlumni: isAlumni,
+            withdrawn: withdrawn,
             tags: tags,
             resumeRequirementMet: existing?.resumeRequirementMet || false,
             notes: existing?.notes || "",
@@ -509,7 +513,7 @@
 
       function updateCohortPreview(rowIdx) {
         const student = reconciledStudents[rowIdx];
-        const cohortDisplay = getCohortDisplay(student.program, student.year, student.isAlumni);
+        const cohortDisplay = getCohortDisplay(student.program, student.year, student.isAlumni, student.withdrawn);
         const previewSpan = document.getElementById(`cohort_preview_${rowIdx}`);
         if (previewSpan) {
           previewSpan.textContent = cohortDisplay;
@@ -598,13 +602,26 @@
           });
           alumniCell.appendChild(alumniCheckbox);
 
+          // Withdrawn checkbox
+          const withdrawnCell = row.insertCell(6);
+          withdrawnCell.className = "checkbox-cell";
+          const withdrawnCheckbox = document.createElement("input");
+          withdrawnCheckbox.type = "checkbox";
+          withdrawnCheckbox.checked = student.withdrawn;
+          withdrawnCheckbox.addEventListener("change", (e) => {
+            reconciledStudents[idx].withdrawn = e.target.checked;
+            updateCohortPreview(idx);
+            generateJSON();
+          });
+          withdrawnCell.appendChild(withdrawnCheckbox);
+
           // Cohort display (read-only preview)
-          const cohortCell = row.insertCell(6);
-          const cohortDisplay = getCohortDisplay(student.program, student.year, student.isAlumni);
+          const cohortCell = row.insertCell(7);
+          const cohortDisplay = getCohortDisplay(student.program, student.year, student.isAlumni, student.withdrawn);
           cohortCell.innerHTML = `<span id="cohort_preview_${idx}" class="cohort-preview">${cohortDisplay}</span>`;
 
           // Tags (comma-separated input)
-          const tagsCell = row.insertCell(7);
+          const tagsCell = row.insertCell(8);
           const tagsInput = document.createElement("input");
           tagsInput.type = "text";
           tagsInput.placeholder = "comma, separated, tags";
@@ -622,7 +639,7 @@
           tagsCell.appendChild(tagsInput);
 
           // Resume Requirement Met
-          const resumeCell = row.insertCell(8);
+          const resumeCell = row.insertCell(9);
           resumeCell.className = "checkbox-cell";
           const resumeCheckbox = document.createElement("input");
           resumeCheckbox.type = "checkbox";
@@ -634,7 +651,7 @@
           resumeCell.appendChild(resumeCheckbox);
 
           // Notes
-          const notesCell = row.insertCell(9);
+          const notesCell = row.insertCell(10);
           const notesInput = document.createElement("input");
           notesInput.placeholder = "optional notes";
           notesInput.value = student.notes || "";
