@@ -1,9 +1,9 @@
-// js/merge/render.js (fixed criticals only)
 import { getConfig } from "./config.js";
-import { getCohortDisplay } from "./student.js";
+import { COHORT_OPTIONS } from "./cohorts.js";
 
 export function renderTableHeader() {
   const thead = document.getElementById("tableHeader");
+
   if (!thead) return;
 
   thead.innerHTML = `
@@ -13,10 +13,9 @@ export function renderTableHeader() {
       <th>GitHub</th>
       <th>Program</th>
       <th>Year</th>
+      <th>Cohort</th>
       <th>Alumni</th>
       <th>Withdrawn</th>
-      <th>Former IDs</th>
-      <th>Cohort</th>
       <th>Tags</th>
       <th>Resume Met</th>
       <th>Notes</th>
@@ -26,119 +25,125 @@ export function renderTableHeader() {
 
 export function renderTable(students, onUpdate) {
   const tbody = document.getElementById("studentTableBody");
-  if (!tbody) return;
-
   const config = getConfig();
 
-  const programs = config.options?.programs || [];
-  const years = config.options?.years || [];
+  if (!tbody) return;
 
   tbody.innerHTML = "";
 
   students.forEach((student, idx) => {
     const row = tbody.insertRow();
 
+    // Folder ID
     const idCell = row.insertCell(0);
     idCell.textContent = student.id;
     idCell.style.color = "#8b949e";
 
+    // Display Name
     const nameCell = row.insertCell(1);
     const nameInput = document.createElement("input");
     nameInput.value = student.displayName;
     nameInput.addEventListener("change", (e) => onUpdate(idx, "displayName", e.target.value));
     nameCell.appendChild(nameInput);
 
+    // GitHub
     const githubCell = row.insertCell(2);
     const githubInput = document.createElement("input");
-    githubInput.placeholder = "github username";
     githubInput.value = student.githubUsername || "";
     githubInput.addEventListener("change", (e) => onUpdate(idx, "githubUsername", e.target.value.trim()));
     githubCell.appendChild(githubInput);
 
+    // Program
     const programCell = row.insertCell(3);
     const programSelect = document.createElement("select");
-    programs.forEach((opt) => {
+
+    config.options.programs.forEach((opt) => {
       const option = document.createElement("option");
       option.value = opt;
       option.textContent = opt;
       if (student.program === opt) option.selected = true;
       programSelect.appendChild(option);
     });
+
     programSelect.addEventListener("change", (e) => onUpdate(idx, "program", e.target.value));
+
     programCell.appendChild(programSelect);
 
+    // Year
     const yearCell = row.insertCell(4);
     const yearSelect = document.createElement("select");
-    yearSelect.className = "year-input";
-    years.forEach((opt) => {
+
+    config.options.years.forEach((opt) => {
       const option = document.createElement("option");
       option.value = opt;
       option.textContent = opt;
       if (student.year === opt) option.selected = true;
       yearSelect.appendChild(option);
     });
+
     yearSelect.addEventListener("change", (e) => onUpdate(idx, "year", e.target.value));
+
     yearCell.appendChild(yearSelect);
 
-    const alumniCell = row.insertCell(5);
-    alumniCell.className = "checkbox-cell";
+    // Cohort (from external file)
+    const cohortCell = row.insertCell(5);
+    const cohortSelect = document.createElement("select");
+
+    COHORT_OPTIONS.forEach((c) => {
+      const option = document.createElement("option");
+      option.value = c;
+      option.textContent = c;
+      if (student.cohort === c) option.selected = true;
+      cohortSelect.appendChild(option);
+    });
+
+    cohortSelect.addEventListener("change", (e) => onUpdate(idx, "cohort", e.target.value));
+
+    cohortCell.appendChild(cohortSelect);
+
+    // Alumni
+    const alumniCell = row.insertCell(6);
     const alumniCheckbox = document.createElement("input");
     alumniCheckbox.type = "checkbox";
     alumniCheckbox.checked = student.isAlumni;
     alumniCheckbox.addEventListener("change", (e) => onUpdate(idx, "isAlumni", e.target.checked));
     alumniCell.appendChild(alumniCheckbox);
 
-    const withdrawnCell = row.insertCell(6);
-    withdrawnCell.className = "checkbox-cell";
+    // Withdrawn
+    const withdrawnCell = row.insertCell(7);
     const withdrawnCheckbox = document.createElement("input");
     withdrawnCheckbox.type = "checkbox";
     withdrawnCheckbox.checked = student.withdrawn;
     withdrawnCheckbox.addEventListener("change", (e) => onUpdate(idx, "withdrawn", e.target.checked));
     withdrawnCell.appendChild(withdrawnCheckbox);
 
-    const formerIdsCell = row.insertCell(7);
-    const formerIdsInput = document.createElement("input");
-    formerIdsInput.type = "text";
-    formerIdsInput.placeholder = "former folder names, comma, separated";
-    formerIdsInput.value = (student.formerIds || []).join(", ");
-    formerIdsInput.addEventListener("change", (e) => {
-      const idsArray = e.target.value
-        .split(",")
-        .map((id) => id.trim())
-        .filter(Boolean);
-      onUpdate(idx, "formerIds", idsArray);
-    });
-    formerIdsCell.appendChild(formerIdsInput);
-
-    const cohortCell = row.insertCell(8);
-    const cohortDisplay = getCohortDisplay(student.program, student.year, student.isAlumni, student.withdrawn);
-    cohortCell.innerHTML = `<span class="cohort-preview">${cohortDisplay}</span>`;
-
-    const tagsCell = row.insertCell(9);
+    // Tags
+    const tagsCell = row.insertCell(8);
     const tagsInput = document.createElement("input");
-    tagsInput.type = "text";
-    tagsInput.placeholder = "comma, separated, tags";
     tagsInput.value = (student.tags || []).join(", ");
+
     tagsInput.addEventListener("change", (e) => {
       const tagsArray = e.target.value
         .split(",")
         .map((t) => t.trim())
         .filter(Boolean);
+
       onUpdate(idx, "tags", tagsArray);
     });
+
     tagsCell.appendChild(tagsInput);
 
-    const resumeCell = row.insertCell(10);
-    resumeCell.className = "checkbox-cell";
+    // Resume
+    const resumeCell = row.insertCell(9);
     const resumeCheckbox = document.createElement("input");
     resumeCheckbox.type = "checkbox";
     resumeCheckbox.checked = student.resumeRequirementMet;
     resumeCheckbox.addEventListener("change", (e) => onUpdate(idx, "resumeRequirementMet", e.target.checked));
     resumeCell.appendChild(resumeCheckbox);
 
-    const notesCell = row.insertCell(11);
+    // Notes
+    const notesCell = row.insertCell(10);
     const notesInput = document.createElement("input");
-    notesInput.placeholder = "optional notes";
     notesInput.value = student.notes || "";
     notesInput.addEventListener("change", (e) => onUpdate(idx, "notes", e.target.value));
     notesCell.appendChild(notesInput);
@@ -168,7 +173,7 @@ export function updateUIFromConfig() {
   }
 
   if (excludeEl) {
-    excludeEl.textContent = generateExcludeHint(excludeFolders) || "🚫 No folders excluded";
+    excludeEl.innerHTML = generateExcludeHint(excludeFolders) || "🚫 No folders excluded";
   }
 }
 
@@ -191,13 +196,11 @@ export function showEditor() {
 }
 
 export function renderPreview(students) {
-  const el = document.getElementById("output");
-  if (!el) return;
-
   const output = {
     lastUpdated: new Date().toISOString().split("T")[0],
     students,
   };
 
-  el.textContent = JSON.stringify(output, null, 2);
+  const el = document.getElementById("output");
+  if (el) el.textContent = JSON.stringify(output, null, 2);
 }
