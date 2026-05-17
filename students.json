@@ -11,6 +11,7 @@
       "program": "BDes",
       "year": "2026",
       "totalPushes": 13,
+      "lastCommitDate": "2025-07-23T00:26:13Z",
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -24,6 +25,7 @@
       "program": "BDes",
       "year": "2026",
       "totalPushes": 1,
+      "lastCommitDate": null,
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -37,6 +39,7 @@
       "program": "BDes",
       "year": "2028",
       "totalPushes": 7,
+      "lastCommitDate": "2026-05-13T22:37:14Z",
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -50,12 +53,12 @@
       "program": "IxD",
       "year": "2027",
       "totalPushes": 22,
+      "lastCommitDate": "2026-02-05T02:38:56Z",
       "tags": [],
       "resumeRequirementMet": false
     },
     {
       "id": "andy-poystila",
-      "formerIds": ["andy"],
       "displayName": "Andy Poystila",
       "githubUsername": "ukkop",
       "status": "alumni",
@@ -64,6 +67,7 @@
       "program": "BDes",
       "year": "2026",
       "totalPushes": 11,
+      "lastCommitDate": null,
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -77,6 +81,7 @@
       "program": "BDes",
       "year": "2026",
       "totalPushes": 1,
+      "lastCommitDate": "2026-05-13T00:08:33Z",
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -90,6 +95,7 @@
       "program": "BDes",
       "year": "2028",
       "totalPushes": 16,
+      "lastCommitDate": "2026-04-20T09:18:43Z",
       "tags": ["11ty", "indie-web"],
       "resumeRequirementMet": false
     },
@@ -103,6 +109,7 @@
       "program": "IxD",
       "year": "2027",
       "totalPushes": 10,
+      "lastCommitDate": "2026-02-05T02:18:09Z",
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -116,6 +123,7 @@
       "program": "IxD",
       "year": "2027",
       "totalPushes": 15,
+      "lastCommitDate": "2026-02-04T09:58:29Z",
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -129,6 +137,7 @@
       "program": "BDes",
       "year": "2026",
       "totalPushes": 7,
+      "lastCommitDate": "2025-07-02T00:02:40Z",
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -142,6 +151,7 @@
       "program": "IxD",
       "year": "2027",
       "totalPushes": 22,
+      "lastCommitDate": "2026-02-05T06:31:33Z",
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -155,6 +165,7 @@
       "program": "BDes",
       "year": "2026",
       "totalPushes": 4,
+      "lastCommitDate": "2025-06-04T00:31:22Z",
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -168,6 +179,7 @@
       "program": "IxD",
       "year": "2026",
       "totalPushes": 0,
+      "lastCommitDate": null,
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -181,6 +193,7 @@
       "program": "IxD",
       "year": "2027",
       "totalPushes": 47,
+      "lastCommitDate": "2026-02-05T02:24:58Z",
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -194,6 +207,7 @@
       "program": "IxD",
       "year": "2027",
       "totalPushes": 44,
+      "lastCommitDate": "2026-02-07T02:21:06Z",
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -207,6 +221,7 @@
       "program": "IxD",
       "year": "2027",
       "totalPushes": 25,
+      "lastCommitDate": "2026-02-05T01:40:33Z",
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -220,12 +235,12 @@
       "program": "IxD",
       "year": "2027",
       "totalPushes": 20,
+      "lastCommitDate": "2026-02-05T00:47:27Z",
       "tags": [],
       "resumeRequirementMet": false
     },
     {
       "id": "jazzy-linton",
-      "formerIds": ["jazzy"],
       "displayName": "Jazzy Linton",
       "githubUsername": "jazzy7731",
       "status": "alumni",
@@ -234,6 +249,7 @@
       "program": "BDes",
       "year": "2024",
       "totalPushes": 2,
+      "lastCommitDate": null,
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -247,6 +263,7 @@
       "program": "IxD",
       "year": "2027",
       "totalPushes": 10,
+      "lastCommitDate": "2026-02-05T03:01:54Z",
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -260,6 +277,7 @@
       "program": "BDes",
       "year": "2026",
       "totalPushes": 2,
+      "lastCommitDate": "2025-06-04T01:13:27Z",
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -273,6 +291,7 @@
       "program": "IxD",
       "year": "2027",
       "totalPushes": 61,
+      "lastCommitDate": "2026-02-05T02:11:24Z",
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -286,6 +305,7 @@
       "program": "BDes",
       "year": "2026",
       "totalPushes": 0,
+      "lastCommitDate": null,
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -299,6 +319,7 @@
       "program": "BDes",
       "year": "2026",
       "totalPushes": 0,
+      "lastCommitDate": null,
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -312,6 +333,7 @@
       "program": "IxD",
       "year": "2027",
       "totalPushes": 16,
+      "lastCommitDate": "2026-02-05T00:40:00Z",
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -325,6 +347,7 @@
       "program": "BDes",
       "year": "2026",
       "totalPushes": 0,
+      "lastCommitDate": null,
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -338,6 +361,7 @@
       "program": "IxD",
       "year": "2027",
       "totalPushes": 23,
+      "lastCommitDate": "2026-02-05T01:22:52Z",
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -351,6 +375,7 @@
       "program": "IxD",
       "year": "2027",
       "totalPushes": 26,
+      "lastCommitDate": "2026-02-04T23:49:05Z",
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -364,6 +389,7 @@
       "program": "IxD",
       "year": "2027",
       "totalPushes": 25,
+      "lastCommitDate": "2026-02-05T01:17:30Z",
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -377,6 +403,7 @@
       "program": "IxD",
       "year": "2026",
       "totalPushes": 25,
+      "lastCommitDate": "2026-02-05T02:47:48Z",
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -390,6 +417,7 @@
       "program": "IxD",
       "year": "2027",
       "totalPushes": 24,
+      "lastCommitDate": "2026-02-05T02:58:44Z",
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -403,6 +431,7 @@
       "program": "BDes",
       "year": "2026",
       "totalPushes": 0,
+      "lastCommitDate": null,
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -416,6 +445,7 @@
       "program": "BDes",
       "year": "2026",
       "totalPushes": 1,
+      "lastCommitDate": "2025-11-07T00:56:10Z",
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -429,12 +459,12 @@
       "program": "BDes",
       "year": "2026",
       "totalPushes": 3,
+      "lastCommitDate": "2025-05-21T01:04:44Z",
       "tags": [],
       "resumeRequirementMet": false
     },
     {
       "id": "taylore-lawrence",
-      "formerIds": ["taylore"],
       "displayName": "Taylore Lawrence",
       "githubUsername": "loreofthetay",
       "status": "student",
@@ -443,6 +473,7 @@
       "program": "BDes",
       "year": "2026",
       "totalPushes": 16,
+      "lastCommitDate": null,
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -456,12 +487,12 @@
       "program": "IxD",
       "year": "2026",
       "totalPushes": 28,
+      "lastCommitDate": "2026-03-09T20:36:33Z",
       "tags": [],
       "resumeRequirementMet": false
     },
     {
       "id": "tobin-eckstein",
-      "formerIds": ["tobin"],
       "displayName": "Tobin Eckstein",
       "githubUsername": "tobineliasart",
       "status": "alumni",
@@ -470,6 +501,7 @@
       "program": "BDes",
       "year": "2024",
       "totalPushes": 8,
+      "lastCommitDate": null,
       "tags": [],
       "resumeRequirementMet": false
     },
@@ -483,6 +515,7 @@
       "program": "IxD",
       "year": "2026",
       "totalPushes": 19,
+      "lastCommitDate": "2026-02-06T02:00:45Z",
       "tags": [],
       "resumeRequirementMet": false
     }
