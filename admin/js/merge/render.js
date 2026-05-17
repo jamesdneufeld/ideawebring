@@ -10,7 +10,7 @@ export function renderTableHeader() {
   if (!thead) return;
 
   thead.innerHTML = `
-    <tr>
+    <table>
       <th>Folder ID</th>
       <th>Display Name</th>
       <th>GitHub</th>
@@ -20,9 +20,10 @@ export function renderTableHeader() {
       <th>Program</th>
       <th>Grad Year</th>
       <th>Total Pushes</th>
+      <th>Last Commit</th>
       <th>Tags</th>
       <th>Resume Met</th>
-    </tr>
+    </table>
   `;
 }
 
@@ -145,8 +146,20 @@ export function renderTable(students, onUpdate) {
     pushesSpan.style.color = "#8b949e";
     pushesCell.appendChild(pushesSpan);
 
+    // Last Commit Date (read-only)
+    const lastCommitCell = row.insertCell(9);
+    const lastCommitSpan = document.createElement("span");
+    if (student.lastCommitDate) {
+      const date = new Date(student.lastCommitDate);
+      lastCommitSpan.textContent = date.toLocaleDateString();
+    } else {
+      lastCommitSpan.textContent = "Never";
+    }
+    lastCommitSpan.style.color = "#8b949e";
+    lastCommitCell.appendChild(lastCommitSpan);
+
     // Tags
-    const tagsCell = row.insertCell(9);
+    const tagsCell = row.insertCell(10);
     const tagsInput = document.createElement("input");
     tagsInput.type = "text";
     tagsInput.placeholder = "comma separated tags";
@@ -161,7 +174,7 @@ export function renderTable(students, onUpdate) {
     tagsCell.appendChild(tagsInput);
 
     // Resume
-    const resumeCell = row.insertCell(10);
+    const resumeCell = row.insertCell(11);
     resumeCell.className = "checkbox-cell";
     const resumeCheckbox = document.createElement("input");
     resumeCheckbox.type = "checkbox";
