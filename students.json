@@ -24,7 +24,7 @@
       "returning": true,
       "program": "BDes",
       "year": "2026",
-      "totalPushes": 0,
+      "totalPushes": 1,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Volunteered last summer, pushed at least once"
@@ -59,6 +59,7 @@
     },
     {
       "id": "andy-poystila",
+      "formerIds": ["andy"],
       "displayName": "Andy Poystila",
       "githubUsername": "ukkop",
       "status": "alumni",
@@ -241,6 +242,7 @@
     },
     {
       "id": "jazzy-linton",
+      "formerIds": ["jazzy"],
       "displayName": "Jazzy Linton",
       "githubUsername": "jazzy7731",
       "status": "alumni",
@@ -349,7 +351,7 @@
       "totalPushes": 0,
       "tags": [],
       "resumeRequirementMet": false,
-      "notes": "Invite pending â€” will become Participating Alumni if accepted"
+      "notes": "Invite pending — will become Participating Alumni if accepted"
     },
     {
       "id": "narinder",
@@ -433,7 +435,7 @@
       "totalPushes": 0,
       "tags": [],
       "resumeRequirementMet": false,
-      "notes": "Invite pending â€” will become Participating Alumni if accepted"
+      "notes": "Invite pending — will become Participating Alumni if accepted"
     },
     {
       "id": "sophia-pan",
@@ -465,6 +467,7 @@
     },
     {
       "id": "taylore-lawrence",
+      "formerIds": ["taylore"],
       "displayName": "Taylore Lawrence",
       "githubUsername": "loreofthetay",
       "status": "student",
@@ -493,6 +496,7 @@
     },
     {
       "id": "tobin-eckstein",
+      "formerIds": ["tobin"],
       "displayName": "Tobin Eckstein",
       "githubUsername": "tobineliasart",
       "status": "alumni",
