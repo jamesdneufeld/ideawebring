@@ -29,7 +29,6 @@ export function createStudent(folderId, existing = null) {
     selectedForFetch: false,
     tags,
     resumeRequirementMet: existing?.resumeRequirementMet ?? config.defaults.resumeRequirementMet,
-    notes: existing?.notes || "",
   };
 }
 

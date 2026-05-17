@@ -10,7 +10,7 @@ export function renderTableHeader() {
   if (!thead) return;
 
   thead.innerHTML = `
-    <table>
+    <tr>
       <th style="width: 30px;">✓</th>
       <th>Folder ID</th>
       <th>Display Name</th>
@@ -48,19 +48,19 @@ export function renderTable(students, onUpdate) {
     selectCheckbox.addEventListener("change", (e) => onUpdate(idx, "selectedForFetch", e.target.checked));
     selectCell.appendChild(selectCheckbox);
 
-    // Folder ID
+    // Folder ID (read-only)
     const idCell = row.insertCell(1);
     idCell.textContent = student.id;
     idCell.style.color = "#8b949e";
 
-    // Display Name
+    // Display Name (editable)
     const nameCell = row.insertCell(2);
     const nameInput = document.createElement("input");
     nameInput.value = student.displayName;
     nameInput.addEventListener("change", (e) => onUpdate(idx, "displayName", e.target.value));
     nameCell.appendChild(nameInput);
 
-    // GitHub
+    // GitHub (editable)
     const githubCell = row.insertCell(3);
     const githubInput = document.createElement("input");
     githubInput.placeholder = "github username";
@@ -149,26 +149,25 @@ export function renderTable(students, onUpdate) {
     yearSelect.addEventListener("change", (e) => onUpdate(idx, "year", e.target.value));
     yearCell.appendChild(yearSelect);
 
-    // Total Pushes (read-only)
+    // Total Pushes (editable)
     const pushesCell = row.insertCell(9);
-    const pushesSpan = document.createElement("span");
-    pushesSpan.textContent = student.totalPushes || "0";
-    pushesSpan.style.color = "#8b949e";
-    pushesCell.appendChild(pushesSpan);
+    const pushesInput = document.createElement("input");
+    pushesInput.type = "number";
+    pushesInput.value = student.totalPushes || 0;
+    pushesInput.style.width = "70px";
+    pushesInput.addEventListener("change", (e) => onUpdate(idx, "totalPushes", parseInt(e.target.value) || 0));
+    pushesCell.appendChild(pushesInput);
 
-    // Last Commit Date (read-only)
+    // Last Commit Date (editable)
     const lastCommitCell = row.insertCell(10);
-    const lastCommitSpan = document.createElement("span");
-    if (student.lastCommitDate) {
-      const date = new Date(student.lastCommitDate);
-      lastCommitSpan.textContent = date.toLocaleDateString();
-    } else {
-      lastCommitSpan.textContent = "Never";
-    }
-    lastCommitSpan.style.color = "#8b949e";
-    lastCommitCell.appendChild(lastCommitSpan);
+    const lastCommitInput = document.createElement("input");
+    lastCommitInput.type = "date";
+    lastCommitInput.value = student.lastCommitDate ? student.lastCommitDate.split("T")[0] : "";
+    lastCommitInput.style.width = "110px";
+    lastCommitInput.addEventListener("change", (e) => onUpdate(idx, "lastCommitDate", e.target.value || null));
+    lastCommitCell.appendChild(lastCommitInput);
 
-    // Tags
+    // Tags (editable)
     const tagsCell = row.insertCell(11);
     const tagsInput = document.createElement("input");
     tagsInput.type = "text";
@@ -183,7 +182,7 @@ export function renderTable(students, onUpdate) {
     });
     tagsCell.appendChild(tagsInput);
 
-    // Resume
+    // Resume (checkbox)
     const resumeCell = row.insertCell(12);
     resumeCell.className = "checkbox-cell";
     const resumeCheckbox = document.createElement("input");
