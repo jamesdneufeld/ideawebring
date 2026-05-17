@@ -1,6 +1,7 @@
 // js/merge/github.js
 // Fetches students.json from GitHub repo, fetches folder list from repo contents, and fetches commit counts (total pushes) for all students
 // Uses batch processing to avoid GitHub API rate limits
+// Commit counts check both current folder and all formerIds (for renamed folders)
 
 import { getConfig } from "./config.js";
 import { isSystemFolder } from "../../lib/system.js";
@@ -77,18 +78,21 @@ export async function fetchCommitCountsForAllStudents(students) {
             return { id: student.id, commitCount: 0 };
           }
 
-          // Fetch commits by this specific author only
-          const url = `https://api.github.com/repos/${config.repo.owner}/${config.repo.name}/commits?path=${student.id}&author=${student.githubUsername}&per_page=100`;
-          const res = await fetch(url);
+          // Check current folder + all former IDs
+          const allPaths = [student.id, ...(student.formerIds || [])];
+          let totalCommits = 0;
 
-          if (!res.ok) {
-            return { id: student.id, commitCount: 0 };
+          for (const path of allPaths) {
+            const url = `https://api.github.com/repos/${config.repo.owner}/${config.repo.name}/commits?path=${path}&author=${student.githubUsername}&per_page=100`;
+            const res = await fetch(url);
+
+            if (res.ok) {
+              const data = await res.json();
+              totalCommits += Array.isArray(data) ? data.length : 0;
+            }
           }
 
-          const data = await res.json();
-          const commitCount = Array.isArray(data) ? data.length : 0;
-
-          return { id: student.id, commitCount };
+          return { id: student.id, commitCount: totalCommits };
         } catch (err) {
           console.warn(`Failed to fetch commit count for ${student.id}:`, err);
           return { id: student.id, commitCount: 0 };
