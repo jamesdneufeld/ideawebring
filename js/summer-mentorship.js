@@ -1,14 +1,15 @@
 // summer-mentorship.js
-// Web Ring Badge System - Deterministic Membership Model
+// Deterministic Membership + Lifetime System (stable model)
 
 const REPO_OWNER = "jamesdneufeld";
 const REPO_NAME = "ideawebring";
 
 let studentsData = [];
 
-/* ===========================================================
+/* =========================
    CACHE
-   =========================================================== */
+========================= */
+
 function getCache(key) {
   const raw = localStorage.getItem(key);
   if (!raw) return null;
@@ -22,72 +23,19 @@ function getCache(key) {
 }
 
 function setCache(key, value) {
-  localStorage.setItem(key, JSON.stringify({ value, timestamp: Date.now() }));
+  localStorage.setItem(
+    key,
+    JSON.stringify({
+      value,
+      timestamp: Date.now(),
+    }),
+  );
 }
 
-/* ===========================================================
-   GITHUB ACTIVITY
-   =========================================================== */
-async function getActivity(folder) {
-  const cacheKey = `activity_${folder}`;
-  const cached = getCache(cacheKey);
-  if (cached) return cached;
+/* =========================
+   LOAD STUDENTS
+========================= */
 
-  try {
-    const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${folder}&per_page=50`;
-    const res = await fetch(url);
-
-    if (!res.ok) {
-      const fallback = {
-        commitCount: 0,
-        lastSeenDays: null,
-        firstSeenYear: null,
-        yearsActive: 0,
-      };
-      setCache(cacheKey, fallback);
-      return fallback;
-    }
-
-    const data = await res.json();
-    const commits = Array.isArray(data) ? data : [];
-
-    const commitCount = commits.length;
-
-    const dates = commits.map((c) => new Date(c?.commit?.author?.date)).filter((d) => !isNaN(d));
-
-    let lastSeenDays = null;
-
-    if (dates.length) {
-      const last = dates[0];
-      lastSeenDays = Math.floor((Date.now() - last.getTime()) / (1000 * 60 * 60 * 24));
-    }
-
-    // deterministic: years active from commit timestamps
-    const years = new Set();
-    for (const d of dates) {
-      years.add(d.getFullYear());
-    }
-
-    const result = {
-      commitCount,
-      lastSeenDays,
-      yearsActive: years.size,
-    };
-
-    setCache(cacheKey, result);
-    return result;
-  } catch {
-    return {
-      commitCount: 0,
-      lastSeenDays: null,
-      yearsActive: 0,
-    };
-  }
-}
-
-/* ===========================================================
-   STUDENTS
-   =========================================================== */
 async function loadStudents() {
   try {
     const res = await fetch("./students.json");
@@ -98,60 +46,121 @@ async function loadStudents() {
   }
 }
 
-/* ===========================================================
-   MEMBERSHIP (DETERMINISTIC RULES)
-   =========================================================== */
-function getMembership(activity, student) {
-  const commits = activity.commitCount || 0;
-  const years = activity.yearsActive || 0;
-  const invitedButNoAccess = commits === 0 && !student?.githubUsername;
+/* =========================
+   GITHUB ACTIVITY
+========================= */
 
-  // 1. not yet in system
-  if (invitedButNoAccess) return "Archive";
+async function getActivity(folder) {
+  const cacheKey = `activity_${folder}`;
+  const cached = getCache(cacheKey);
+  if (cached) return cached;
 
-  // 2. never contributed
-  if (commits === 0) return "Newcomer";
+  try {
+    const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${folder}&per_page=100`;
+    const res = await fetch(url);
 
-  // 3. first summer
-  if (years === 1) {
-    if (commits < 3) return "Contributor";
-    return "Regular";
+    if (!res.ok) {
+      return makeEmptyActivity();
+    }
+
+    const data = await res.json();
+    const commits = Array.isArray(data) ? data : [];
+
+    if (!commits.length) {
+      const empty = makeEmptyActivity();
+      setCache(cacheKey, empty);
+      return empty;
+    }
+
+    const lastDate = commits[0]?.commit?.author?.date || null;
+
+    const commitDates = commits.map((c) => new Date(c?.commit?.author?.date)).filter((d) => !isNaN(d));
+
+    const commitCount = commits.length;
+
+    const result = {
+      lastDate,
+      commitCount,
+      commitDates,
+    };
+
+    setCache(cacheKey, result);
+    return result;
+  } catch {
+    return makeEmptyActivity();
+  }
+}
+
+function makeEmptyActivity() {
+  return {
+    lastDate: null,
+    commitCount: 0,
+    commitDates: [],
+  };
+}
+
+/* =========================
+   CORE DERIVED VALUES
+========================= */
+
+function daysSince(date) {
+  if (!date) return null;
+  return Math.floor((Date.now() - new Date(date)) / (1000 * 60 * 60 * 24));
+}
+
+/* =========================
+   MEMBERSHIP (DETERMINISTIC)
+========================= */
+
+function getMembership(student, activity) {
+  const commits = activity.commitCount;
+  const hasGithub = commits > 0;
+
+  // 1. Not yet active (invited / no commits)
+  if (!hasGithub) {
+    if (student?.githubUsername) return "Newcomer";
+    return "Archive";
   }
 
-  // 4. returning students
-  if (years === 2) return "Regular";
-  if (years >= 3) return "Veteran";
+  // 2. First contribution
+  if (commits === 1) return "Newcomer";
+
+  // 3. Regular activity
+  if (commits >= 2 && commits < 10) return "Contributor";
+
+  // 4. Active recurring participant
+  if (commits >= 10 && commits < 30) return "Regular";
+
+  // 5. Veteran threshold (graduated or long-term return)
+  if (commits >= 30) return "Veteran";
 
   return "Contributor";
 }
 
-/* ===========================================================
-   LIFETIME SCORE (STARS - STABLE)
-   =========================================================== */
-function getLifetimeStars(activity, student) {
-  const commits = activity.commitCount || 0;
-  const years = activity.yearsActive || 0;
+/* =========================
+   LIFETIME SCORE (5★)
+   NEVER DECREASES
+========================= */
+
+function getLifetimeScore(activity) {
+  const commits = activity.commitCount;
 
   if (commits === 0) return 0;
-  if (commits < 2) return 1;
-  if (years === 1) return 2;
-  if (years === 2) return 3;
-  if (years === 3) return 4;
-  if (years >= 4) return 5;
-
-  return 1;
+  if (commits === 1) return 1;
+  if (commits >= 2 && commits < 10) return 2;
+  if (commits >= 10 && commits < 25) return 3;
+  if (commits >= 25 && commits < 50) return 4;
+  return 5;
 }
 
-function renderStars(n) {
-  return "★★★★★"
-    .split("")
-    .map((_, i) => (i < n ? "★" : "☆"))
-    .join("");
+function stars(n) {
+  return "★".repeat(n) + "☆".repeat(5 - n);
 }
 
-/* ===========================================================
-   BADGE CREATION
-   =========================================================== */
+/* =========================
+   UI RENDER HELPERS
+========================= */
+
 function createBadge(className, text = "", title = "") {
   const li = document.createElement("li");
   li.className = `badge ${className}`;
@@ -160,14 +169,14 @@ function createBadge(className, text = "", title = "") {
   return li;
 }
 
-/* ===========================================================
-   MAIN RENDER
-   =========================================================== */
+/* =========================
+   MAIN RENDER LOOP
+========================= */
+
 async function populateStudentData() {
   await loadStudents();
 
   const studentMap = new Map(studentsData.map((s) => [s.id, s]));
-
   const links = document.querySelectorAll(".student .navigation-link");
 
   for (const link of links) {
@@ -176,31 +185,38 @@ async function populateStudentData() {
     const student = studentMap.get(folder);
     const activity = await getActivity(folder);
 
-    const badges = link.querySelector(".student-badges");
-    if (!badges) continue;
+    const lastSeenDays = daysSince(activity.lastDate);
+    const membership = getMembership(student || {}, activity);
+    const lifetime = getLifetimeScore(activity);
 
-    badges.innerHTML = "";
+    // Update program and year
+    const programEl = link.querySelector(".student-program");
+    const yearEl = link.querySelector(".student-year");
+    if (programEl && student?.program) programEl.textContent = student.program;
+    if (yearEl && student?.year) yearEl.textContent = student.year;
 
-    /* =======================================================
-       LAST SEEN (ONLY METRIC, NO STATUS LOGIC)
-    ======================================================= */
-    const lastSeen = activity.lastSeenDays != null ? `Last seen: ${activity.lastSeenDays} days ago` : "Last seen: no activity";
+    const container = link.querySelector(".student-badges");
+    if (!container) continue;
 
-    badges.appendChild(createBadge("badge-lastseen", lastSeen));
+    container.innerHTML = "";
 
-    /* =======================================================
-       MEMBERSHIP (DETERMINISTIC)
-    ======================================================= */
-    const membership = getMembership(activity, student);
+    // Last Seen
+    const lastSeenText = lastSeenDays === null ? "Last seen: No activity" : `Last seen: ${lastSeenDays} days ago`;
 
-    badges.appendChild(createBadge("badge-membership", `Membership: ${membership}`));
+    container.appendChild(createBadge("badge-lastseen", lastSeenText));
 
-    /* =======================================================
-       LIFETIME SCORE (STARS)
-    ======================================================= */
-    const stars = getLifetimeStars(activity, student);
+    // Membership
+    container.appendChild(createBadge("badge-membership", `Membership: ${membership}`));
 
-    badges.appendChild(createBadge("badge-lifetime", `Lifetime Score: ${renderStars(stars)}`));
+    // Lifetime Score
+    container.appendChild(createBadge("badge-lifetime", `Lifetime Score: ${stars(lifetime)}`));
+
+    // Return glow (optional CSS hook)
+    if (lastSeenDays !== null && lastSeenDays > 365 && activity.commitCount > 0) {
+      link.classList.add("return-glow");
+    } else {
+      link.classList.remove("return-glow");
+    }
   }
 }
 
