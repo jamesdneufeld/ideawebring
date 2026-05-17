@@ -1,10 +1,10 @@
 // js/merge/main.js
 // Main entry point — orchestrates the entire merge tool workflow
-// Sets up event listeners for all UI buttons (Fetch JSON, Upload, Fetch Folders, Reconcile, Download, Fetch Push Counts)
+// Sets up event listeners for all UI buttons (Fetch JSON, Upload, Fetch Folders, Reconcile, Download, Fetch Push Counts, Fetch Last Commit Dates)
 // Handles the reconciliation pipeline and student data updates
 
 import { loadConfig } from "./config.js";
-import { fetchStudentsFromGitHub, fetchFoldersFromGitHub, fetchCommitCountsForAllStudents } from "./github.js";
+import { fetchStudentsFromGitHub, fetchFoldersFromGitHub, fetchCommitCountsForAllStudents, fetchLastCommitDatesForStudents } from "./github.js";
 import { reconcile } from "./reconcile.js";
 import { renderTableHeader, renderTable, updateUIFromConfig, showWarning, hideWarning, showEditor, renderPreview } from "./render.js";
 import { cleanForExport } from "./student.js";
@@ -191,7 +191,7 @@ function setupEventListeners() {
         const student = currentStudents.find((s) => s.id === id);
         if (student) {
           student.totalPushes = commitCount;
-          student.lastCommitDate = lastCommitDate;
+          if (lastCommitDate) student.lastCommitDate = lastCommitDate;
         }
       });
 
@@ -211,6 +211,53 @@ function setupEventListeners() {
       alert(`✅ Fetched push counts for ${counts.length} students`);
     } catch (err) {
       alert(`❌ Error fetching push counts: ${err.message}`);
+    } finally {
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }
+  });
+
+  // Fetch Last Commit Dates for selected students only
+  document.getElementById("fetchLastCommitBtn")?.addEventListener("click", async () => {
+    if (!currentStudents.length) {
+      alert("Please reconcile students first");
+      return;
+    }
+
+    const selectedStudents = currentStudents.filter((s) => s.selectedForFetch === true);
+
+    if (selectedStudents.length === 0) {
+      alert("Please check the checkbox for students you want to update, or click 'Select All'");
+      return;
+    }
+
+    const btn = document.getElementById("fetchLastCommitBtn");
+    const originalText = btn.textContent;
+    btn.textContent = `⟳ Fetching ${selectedStudents.length}...`;
+    btn.disabled = true;
+
+    try {
+      const results = await fetchLastCommitDatesForStudents(selectedStudents);
+
+      results.forEach(({ id, lastCommitDate }) => {
+        const student = currentStudents.find((s) => s.id === id);
+        if (student && lastCommitDate) {
+          student.lastCommitDate = lastCommitDate;
+        }
+      });
+
+      function handleUpdate(idx, field, value) {
+        currentStudents[idx][field] = value;
+        renderTable(currentStudents, handleUpdate);
+        renderPreview(currentStudents.map(cleanForExport));
+      }
+
+      renderTable(currentStudents, handleUpdate);
+      renderPreview(currentStudents.map(cleanForExport));
+
+      alert(`✅ Fetched last commit dates for ${results.length} students`);
+    } catch (err) {
+      alert(`❌ Error fetching last commit dates: ${err.message}`);
     } finally {
       btn.textContent = originalText;
       btn.disabled = false;
