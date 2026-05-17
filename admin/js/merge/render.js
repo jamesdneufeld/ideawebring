@@ -39,7 +39,7 @@ export function renderTable(students, onUpdate) {
   students.forEach((student, idx) => {
     const row = tbody.insertRow();
 
-    // Checkbox for selecting which students to update
+    // Checkbox
     const selectCell = row.insertCell(0);
     selectCell.className = "checkbox-cell";
     const selectCheckbox = document.createElement("input");
@@ -53,14 +53,14 @@ export function renderTable(students, onUpdate) {
     idCell.textContent = student.id;
     idCell.style.color = "#8b949e";
 
-    // Display Name (editable)
+    // Display Name
     const nameCell = row.insertCell(2);
     const nameInput = document.createElement("input");
-    nameInput.value = student.displayName;
+    nameInput.value = student.displayName || "";
     nameInput.addEventListener("change", (e) => onUpdate(idx, "displayName", e.target.value));
     nameCell.appendChild(nameInput);
 
-    // GitHub (editable)
+    // GitHub
     const githubCell = row.insertCell(3);
     const githubInput = document.createElement("input");
     githubInput.placeholder = "github username";
@@ -105,7 +105,7 @@ export function renderTable(students, onUpdate) {
     });
     participationCell.appendChild(participationSelect);
 
-    // Returning dropdown (New / Returning)
+    // Returning dropdown
     const returningCell = row.insertCell(6);
     const returningSelect = document.createElement("select");
     const returningOptions = [
@@ -135,7 +135,7 @@ export function renderTable(students, onUpdate) {
     programSelect.addEventListener("change", (e) => onUpdate(idx, "program", e.target.value));
     programCell.appendChild(programSelect);
 
-    // Year dropdown (Grad Year)
+    // Year dropdown
     const yearCell = row.insertCell(8);
     const yearSelect = document.createElement("select");
     yearSelect.className = "year-input";
@@ -149,25 +149,36 @@ export function renderTable(students, onUpdate) {
     yearSelect.addEventListener("change", (e) => onUpdate(idx, "year", e.target.value));
     yearCell.appendChild(yearSelect);
 
-    // Total Pushes (editable number input)
+    // Total Pushes (editable number) - make sure it shows current value
     const pushesCell = row.insertCell(9);
     const pushesInput = document.createElement("input");
     pushesInput.type = "number";
-    pushesInput.value = student.totalPushes || 0;
+    pushesInput.value = student.totalPushes !== undefined ? student.totalPushes : 0;
     pushesInput.style.width = "70px";
-    pushesInput.addEventListener("change", (e) => onUpdate(idx, "totalPushes", parseInt(e.target.value) || 0));
+    pushesInput.addEventListener("change", (e) => {
+      const val = parseInt(e.target.value) || 0;
+      onUpdate(idx, "totalPushes", val);
+    });
     pushesCell.appendChild(pushesInput);
 
-    // Last Commit Date (editable date picker)
+    // Last Commit Date (editable date picker) - show existing date if present
     const lastCommitCell = row.insertCell(10);
     const lastCommitInput = document.createElement("input");
     lastCommitInput.type = "date";
-    lastCommitInput.value = student.lastCommitDate ? student.lastCommitDate.split("T")[0] : "";
+    // Format date correctly if it exists
+    if (student.lastCommitDate) {
+      const date = new Date(student.lastCommitDate);
+      if (!isNaN(date)) {
+        lastCommitInput.value = date.toISOString().split("T")[0];
+      }
+    }
     lastCommitInput.style.width = "110px";
-    lastCommitInput.addEventListener("change", (e) => onUpdate(idx, "lastCommitDate", e.target.value || null));
+    lastCommitInput.addEventListener("change", (e) => {
+      onUpdate(idx, "lastCommitDate", e.target.value || null);
+    });
     lastCommitCell.appendChild(lastCommitInput);
 
-    // Tags (editable)
+    // Tags
     const tagsCell = row.insertCell(11);
     const tagsInput = document.createElement("input");
     tagsInput.type = "text";
@@ -182,12 +193,12 @@ export function renderTable(students, onUpdate) {
     });
     tagsCell.appendChild(tagsInput);
 
-    // Resume (checkbox)
+    // Resume checkbox
     const resumeCell = row.insertCell(12);
     resumeCell.className = "checkbox-cell";
     const resumeCheckbox = document.createElement("input");
     resumeCheckbox.type = "checkbox";
-    resumeCheckbox.checked = student.resumeRequirementMet;
+    resumeCheckbox.checked = student.resumeRequirementMet || false;
     resumeCheckbox.addEventListener("change", (e) => onUpdate(idx, "resumeRequirementMet", e.target.checked));
     resumeCell.appendChild(resumeCheckbox);
   });
