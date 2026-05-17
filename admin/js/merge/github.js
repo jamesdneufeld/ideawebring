@@ -110,7 +110,11 @@ export async function fetchCommitCountsForAllStudents(students) {
             await new Promise((r) => setTimeout(r, 200));
           }
 
-          return { id: student.id, commitCount: totalCommits, lastCommitDate: latestCommitDate };
+          return {
+            id: student.id,
+            commitCount: totalCommits,
+            lastCommitDate: latestCommitDate,
+          };
         } catch (err) {
           console.warn(`Failed to fetch commit count for ${student.id}:`, err);
           return { id: student.id, commitCount: 0, lastCommitDate: null };
@@ -190,6 +194,6 @@ export async function fetchLastCommitDatesForStudents(students) {
     }
   }
 
-  console.log(`fetchLastCommitDatesForStudents complete. Results:`, results);
+  console.log("fetchLastCommitDatesForStudents complete. Results:", results);
   return results;
 }
