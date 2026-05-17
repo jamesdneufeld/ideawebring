@@ -244,20 +244,23 @@ function setupEventListeners() {
       const results = await fetchLastCommitDatesForStudents(selectedStudents);
       console.log("Results:", results);
 
-      results.forEach(({ id, lastCommitDate }) => {
-        const student = currentStudents.find((s) => s.id === id);
-        if (student && lastCommitDate) {
-          student.lastCommitDate = lastCommitDate;
+      // Update the student objects
+      for (const { id, lastCommitDate } of results) {
+        const studentIndex = currentStudents.findIndex((s) => s.id === id);
+        if (studentIndex !== -1 && lastCommitDate) {
+          currentStudents[studentIndex].lastCommitDate = lastCommitDate;
           console.log(`Updated ${id}: ${lastCommitDate}`);
         }
-      });
+      }
 
+      // Force a complete re-render of the table
       function handleUpdate(idx, field, value) {
         currentStudents[idx][field] = value;
         renderTable(currentStudents, handleUpdate);
         renderPreview(currentStudents.map(cleanForExport));
       }
 
+      // Re-render the entire table to show updated dates
       renderTable(currentStudents, handleUpdate);
       renderPreview(currentStudents.map(cleanForExport));
 
