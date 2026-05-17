@@ -4,11 +4,14 @@
 const REPO_OWNER = "jamesdneufeld";
 const REPO_NAME = "ideawebring";
 
-let studentsData = [];
+// ============================================================
+// CONFIGURATION
+// ============================================================
+const CACHE_TTL_HOURS = 12; // Cache duration in hours (12 hours = 43200 seconds)
 
-/* =========================
-   CACHE
-========================= */
+// ============================================================
+// CACHE HELPERS
+// ============================================================
 
 function getCache(key) {
   const raw = localStorage.getItem(key);
@@ -16,7 +19,7 @@ function getCache(key) {
 
   try {
     const data = JSON.parse(raw);
-    if (Date.now() - data.timestamp < 60 * 60 * 1000) {
+    if (Date.now() - data.timestamp < CACHE_TTL_HOURS * 60 * 60 * 1000) {
       return data.value;
     }
   } catch {}
@@ -33,6 +36,8 @@ function setCache(key, value) {
     }),
   );
 }
+
+let studentsData = [];
 
 /* =========================
    LOAD STUDENTS

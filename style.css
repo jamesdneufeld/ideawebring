@@ -235,7 +235,7 @@ a:hover {
 
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 1rem;
   padding-top: 2rem;
 }
@@ -442,17 +442,6 @@ a:hover {
 }
 
 /* ---------------------------
-   NAME
----------------------------- */
-
-.navigation-link h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 0 0 0.5rem 0;
-  color: white;
-}
-
-/* ---------------------------
    META (program/year row)
 ---------------------------- */
 
@@ -476,11 +465,15 @@ a:hover {
 ---------------------------- */
 
 .student-badges {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: repeat(3, auto);
+  gap: 0.5rem;
+}
+.badge {
+  font-size: 0.9rem;
+  font-weight: 300;
   margin: 0;
-  padding: 0;
 }
 
 /* Each JS-generated line */
