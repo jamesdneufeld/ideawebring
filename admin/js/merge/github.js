@@ -54,3 +54,48 @@ export async function fetchFoldersFromGitHub() {
     throw new Error(`Failed to fetch folders: ${err.message}`);
   }
 }
+
+export async function fetchCommitCountsForAllStudents(students) {
+  const config = getConfig();
+  const results = [];
+
+  // Process in batches to avoid rate limiting
+  const batchSize = 5;
+  for (let i = 0; i < students.length; i += batchSize) {
+    const batch = students.slice(i, i + batchSize);
+    const batchResults = await Promise.all(
+      batch.map(async (student) => {
+        try {
+          const url = `https://api.github.com/repos/${config.repo.owner}/${config.repo.name}/commits?path=${student.id}&per_page=1`;
+          const res = await fetch(url);
+
+          if (!res.ok) {
+            return { id: student.id, commitCount: 0 };
+          }
+
+          const data = await res.json();
+          // GitHub API returns an array of commits, length is total count (up to per_page)
+          // For accurate count, we need to check the Link header or fetch more
+          // Simpler: fetch with per_page=100 and count
+          const countUrl = `https://api.github.com/repos/${config.repo.owner}/${config.repo.name}/commits?path=${student.id}&per_page=100`;
+          const countRes = await fetch(countUrl);
+          const countData = await countRes.json();
+          const commitCount = Array.isArray(countData) ? countData.length : 0;
+
+          return { id: student.id, commitCount };
+        } catch (err) {
+          console.warn(`Failed to fetch commit count for ${student.id}:`, err);
+          return { id: student.id, commitCount: 0 };
+        }
+      }),
+    );
+    results.push(...batchResults);
+
+    // Delay between batches
+    if (i + batchSize < students.length) {
+      await new Promise((r) => setTimeout(r, 500));
+    }
+  }
+
+  return results;
+}
