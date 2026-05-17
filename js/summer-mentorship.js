@@ -61,6 +61,18 @@ function makeEmptyActivity() {
 }
 
 /* =========================
+   ISO WEEK HELPER
+========================= */
+
+function getWeekNumber(date) {
+  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  const dayNum = d.getUTCDay() || 7;
+  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  return Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
+}
+
+/* =========================
    GITHUB ACTIVITY (WITH FORMERIDS SUPPORT)
 ========================= */
 
@@ -191,42 +203,42 @@ function getLifetimeScore(activity) {
 
   if (dates.length < 2) return 1;
 
-  const sorted = [...dates].sort((a, b) => a - b);
+  // Filter out invalid dates first
+  const validDates = dates.filter((d) => d && !isNaN(d.getTime()));
+
+  if (validDates.length < 2) return 1;
+
+  const sorted = [...validDates].sort((a, b) => a - b);
   const firstCommit = sorted[0];
   const lastCommit = sorted[sorted.length - 1];
 
   const spanDays = Math.ceil((lastCommit - firstCommit) / (1000 * 60 * 60 * 24));
 
+  // Use ISO week numbers with safety check
   const activeWeeks = new Set();
-  dates.forEach((d) => {
+  validDates.forEach((d) => {
     const year = d.getFullYear();
-    const week = Math.ceil(d.getDate() / 7);
-    activeWeeks.add(`${year}-${week}`);
+    const weekNum = getWeekNumber(d);
+    activeWeeks.add(`${year}-W${weekNum}`);
   });
 
   const weeksActive = activeWeeks.size;
-  const commitsPerWeek = weeksActive > 0 ? commits / weeksActive : commits;
 
-  // Single burst (1 day of activity)
+  // SUSTAINED ENGAGEMENT MODEL (not raw commit count)
+
   if (spanDays === 0) return 1;
+  if (spanDays < 7) return 1;
 
-  // Short burst (less than a week)
-  if (spanDays < 7 && commitsPerWeek < 10) return 1;
-  if (spanDays < 7 && commitsPerWeek >= 10) return 2;
-
-  // Across weeks (2-4 weeks)
   if (spanDays < 30) {
     if (weeksActive >= 2) return 3;
     return 2;
   }
 
-  // Across months (1-3 months)
   if (spanDays < 90) {
     if (weeksActive >= 6) return 4;
     return 3;
   }
 
-  // Long-term builder (3+ months)
   if (spanDays >= 90) {
     if (weeksActive >= 12) return 5;
     if (weeksActive >= 8) return 4;
