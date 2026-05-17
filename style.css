@@ -490,6 +490,7 @@ a:hover {
   color: white;
   opacity: 0.9;
   line-height: 1.4;
+  margin: 0;
 }
 
 /* Label emphasis (Name / Last Seen / etc) */
