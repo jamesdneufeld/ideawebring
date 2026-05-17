@@ -4,6 +4,20 @@
 
 import { getConfig } from "./config.js";
 
+// Learning goal options (from signup form)
+const LEARNING_GOAL_OPTIONS = [
+  { value: "", label: "—" },
+  { value: "practice", label: "Here for More Practice" },
+  { value: "portfolio", label: "Portfolio Building" },
+  { value: "indie_web", label: "Indie Web Explorer" },
+  { value: "career_prep", label: "Career Prep" },
+  { value: "returning_practice", label: "Returning for Practice" },
+  { value: "learning_html_css", label: "Learning HTML & CSS" },
+];
+
+// Cohort options
+const COHORT_OPTIONS = ["Summer 2024", "Summer 2025", "Summer 2026", "Summer 2027"];
+
 export function renderTableHeader() {
   const thead = document.getElementById("tableHeader");
 
@@ -16,16 +30,21 @@ export function renderTableHeader() {
       <th>Display Name</th>
       <th>GitHub</th>
       <th>Status</th>
-      <th>Participation Type</th>
-      <th>New / Returning</th>
+      <th>Participation</th>
+      <th>Returning</th>
       <th>Program</th>
       <th>Grad Year</th>
+      <th>Cohort</th>
+      <th>Joined Web Ring</th>
+      <th>Joined Mentorship</th>
+      <th>Learning Goal</th>
+      <th>Focus Areas</th>
       <th>Total Pushes</th>
       <th>Last Commit</th>
       <th>Former IDs</th>
       <th>Tags</th>
       <th>Resume Met</th>
-    </tr>
+    </table>
   `;
 }
 
@@ -106,7 +125,7 @@ export function renderTable(students, onUpdate) {
     });
     participationCell.appendChild(participationSelect);
 
-    // Returning dropdown (New / Returning)
+    // Returning dropdown
     const returningCell = row.insertCell(6);
     const returningSelect = document.createElement("select");
     const returningOptions = [
@@ -136,11 +155,11 @@ export function renderTable(students, onUpdate) {
     programSelect.addEventListener("change", (e) => onUpdate(idx, "program", e.target.value));
     programCell.appendChild(programSelect);
 
-    // Year dropdown (Grad Year)
+    // Year dropdown
     const yearCell = row.insertCell(8);
     const yearSelect = document.createElement("select");
     yearSelect.className = "year-input";
-    (config.options?.years || ["2024", "2025", "2026", "2027", "2028"]).forEach((opt) => {
+    (config.options?.years || ["2024", "2025", "2026", "2027", "2028", "2029"]).forEach((opt) => {
       const option = document.createElement("option");
       option.value = opt;
       option.textContent = opt;
@@ -150,8 +169,81 @@ export function renderTable(students, onUpdate) {
     yearSelect.addEventListener("change", (e) => onUpdate(idx, "year", e.target.value));
     yearCell.appendChild(yearSelect);
 
+    // Cohort dropdown
+    const cohortCell = row.insertCell(9);
+    const cohortSelect = document.createElement("select");
+    COHORT_OPTIONS.forEach((opt) => {
+      const option = document.createElement("option");
+      option.value = opt;
+      option.textContent = opt;
+      if (student.cohort === opt) option.selected = true;
+      cohortSelect.appendChild(option);
+    });
+    cohortSelect.addEventListener("change", (e) => onUpdate(idx, "cohort", e.target.value));
+    cohortCell.appendChild(cohortSelect);
+
+    // Joined Web Ring (date picker)
+    const joinedWebRingCell = row.insertCell(10);
+    const joinedWebRingInput = document.createElement("input");
+    joinedWebRingInput.type = "date";
+    joinedWebRingInput.style.width = "110px";
+    if (student.joinedWebRing) {
+      const dateStr = student.joinedWebRing.split("T")[0];
+      joinedWebRingInput.value = dateStr;
+    }
+    joinedWebRingInput.addEventListener("change", (e) => {
+      onUpdate(idx, "joinedWebRing", e.target.value || null);
+    });
+    joinedWebRingCell.appendChild(joinedWebRingInput);
+
+    // Joined Mentorship (date picker)
+    const joinedMentorshipCell = row.insertCell(11);
+    const joinedMentorshipInput = document.createElement("input");
+    joinedMentorshipInput.type = "date";
+    joinedMentorshipInput.style.width = "110px";
+    if (student.joinedMentorship) {
+      const dateStr = student.joinedMentorship.split("T")[0];
+      joinedMentorshipInput.value = dateStr;
+    }
+    joinedMentorshipInput.addEventListener("change", (e) => {
+      onUpdate(idx, "joinedMentorship", e.target.value || null);
+    });
+    joinedMentorshipCell.appendChild(joinedMentorshipInput);
+
+    // Learning Goal dropdown
+    const learningGoalCell = row.insertCell(12);
+    const learningGoalSelect = document.createElement("select");
+    LEARNING_GOAL_OPTIONS.forEach((opt) => {
+      const option = document.createElement("option");
+      option.value = opt.value;
+      option.textContent = opt.label;
+      if (student.learningGoal === opt.value) option.selected = true;
+      learningGoalSelect.appendChild(option);
+    });
+    learningGoalSelect.addEventListener("change", (e) => {
+      const value = e.target.value === "" ? null : e.target.value;
+      onUpdate(idx, "learningGoal", value);
+    });
+    learningGoalCell.appendChild(learningGoalSelect);
+
+    // Focus Areas (comma-separated text input)
+    const focusAreasCell = row.insertCell(13);
+    const focusAreasInput = document.createElement("input");
+    focusAreasInput.type = "text";
+    focusAreasInput.placeholder = "comma separated focus areas";
+    focusAreasInput.value = (student.focusAreas || []).join(", ");
+    focusAreasInput.style.width = "150px";
+    focusAreasInput.addEventListener("change", (e) => {
+      const areasArray = e.target.value
+        .split(",")
+        .map((a) => a.trim())
+        .filter(Boolean);
+      onUpdate(idx, "focusAreas", areasArray);
+    });
+    focusAreasCell.appendChild(focusAreasInput);
+
     // Total Pushes (editable number)
-    const pushesCell = row.insertCell(9);
+    const pushesCell = row.insertCell(14);
     const pushesInput = document.createElement("input");
     pushesInput.type = "number";
     pushesInput.value = student.totalPushes !== undefined ? student.totalPushes : 0;
@@ -163,16 +255,12 @@ export function renderTable(students, onUpdate) {
     pushesCell.appendChild(pushesInput);
 
     // Last Commit Date (editable date picker)
-    const lastCommitCell = row.insertCell(10);
+    const lastCommitCell = row.insertCell(15);
     const lastCommitInput = document.createElement("input");
     lastCommitInput.type = "date";
     lastCommitInput.style.width = "110px";
-    // Set the value if it exists - extract just the date part
     if (student.lastCommitDate) {
-      let dateStr = student.lastCommitDate;
-      if (dateStr.includes("T")) {
-        dateStr = dateStr.split("T")[0];
-      }
+      const dateStr = student.lastCommitDate.split("T")[0];
       lastCommitInput.value = dateStr;
     }
     lastCommitInput.addEventListener("change", (e) => {
@@ -180,8 +268,8 @@ export function renderTable(students, onUpdate) {
     });
     lastCommitCell.appendChild(lastCommitInput);
 
-    // Former IDs (editable - comma separated)
-    const formerIdsCell = row.insertCell(11);
+    // Former IDs (comma-separated text input)
+    const formerIdsCell = row.insertCell(16);
     const formerIdsInput = document.createElement("input");
     formerIdsInput.type = "text";
     formerIdsInput.placeholder = "comma separated former folder names";
@@ -196,8 +284,8 @@ export function renderTable(students, onUpdate) {
     });
     formerIdsCell.appendChild(formerIdsInput);
 
-    // Tags (editable)
-    const tagsCell = row.insertCell(12);
+    // Tags (comma-separated text input)
+    const tagsCell = row.insertCell(17);
     const tagsInput = document.createElement("input");
     tagsInput.type = "text";
     tagsInput.placeholder = "comma separated tags";
@@ -212,7 +300,7 @@ export function renderTable(students, onUpdate) {
     tagsCell.appendChild(tagsInput);
 
     // Resume checkbox
-    const resumeCell = row.insertCell(13);
+    const resumeCell = row.insertCell(18);
     resumeCell.className = "checkbox-cell";
     const resumeCheckbox = document.createElement("input");
     resumeCheckbox.type = "checkbox";

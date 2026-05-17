@@ -18,7 +18,7 @@ const PER_PAGE_COMMITS = 100; // Number of commits to fetch per API call
 const RETURN_GLOW_DAYS = 365; // Days after which a returning student gets the glow effect
 
 // Lookup tables for human-readable labels
-const PURPOSE_LABELS = {
+const LEARNING_GOAL_LABELS = {
   practice: "Here for More Practice",
   portfolio: "Portfolio Building",
   indie_web: "Indie Web Explorer",
@@ -235,13 +235,13 @@ function daysSince(date) {
 // Simplified handcrafted style
 function getLastActiveLabel(days) {
   if (days === null) return "No activity";
-  if (days === 0) return "Last active today";
-  if (days === 1) return "Last active yesterday";
-  return `Last active ${days} days ago`;
+  if (days === 0) return "Last active: Today";
+  if (days === 1) return "Last active: Yesterday";
+  return `Last active: ${days} days ago`;
 }
 
 /* =========================
-   MEMBERSHIP LABEL (COMPOSABLE)
+   IDENTITY LABEL
 ========================= */
 
 function getIdentityLabel(student) {
@@ -300,12 +300,20 @@ async function populateStudentData() {
     }
 
     const joinedDate = formatDate(student?.joinedWebRing);
+    const joinedMentorshipDate = formatDate(student?.joinedMentorship);
     const identityLabel = getIdentityLabel(student);
 
-    const purpose = student?.purpose ? PURPOSE_LABELS[student.purpose] || student.purpose : null;
-    const focusArea = student?.focusArea ? FOCUS_AREA_LABELS[student.focusArea] || student.focusArea : null;
+    const learningGoal = student?.learningGoal ? LEARNING_GOAL_LABELS[student.learningGoal] || student.learningGoal : null;
+
+    // Format focus areas (array to comma-separated string)
+    let focusAreasText = null;
+    if (student?.focusAreas && student.focusAreas.length > 0) {
+      const formattedAreas = student.focusAreas.map((area) => FOCUS_AREA_LABELS[area] || area);
+      focusAreasText = formattedAreas.join(" · ");
+    }
 
     const lastActiveLabel = getLastActiveLabel(lastSeenDays);
+    const cohort = student?.cohort;
 
     const programEl = link.querySelector(".student-program");
     const yearEl = link.querySelector(".student-year");
@@ -321,19 +329,29 @@ async function populateStudentData() {
     // Identity badge
     container.appendChild(createBadge("badge-identity", identityLabel));
 
-    // Purpose (why they joined)
-    if (purpose) {
-      container.appendChild(createBadge("badge-purpose", purpose));
+    // Cohort (if available)
+    if (cohort) {
+      container.appendChild(createBadge("badge-cohort", cohort));
     }
 
-    // Focus area (what they're working on)
-    if (focusArea) {
-      container.appendChild(createBadge("badge-focus", focusArea));
+    // Learning goal (why they joined)
+    if (learningGoal) {
+      container.appendChild(createBadge("badge-learning-goal", learningGoal));
+    }
+
+    // Focus areas (what they're working on)
+    if (focusAreasText) {
+      container.appendChild(createBadge("badge-focus-areas", focusAreasText));
     }
 
     // Joined Web Ring
     if (joinedDate) {
       container.appendChild(createBadge("badge-joined", `Joined Web Ring: ${joinedDate}`));
+    }
+
+    // Joined Mentorship (if different from Web Ring)
+    if (joinedMentorshipDate && joinedMentorshipDate !== joinedDate) {
+      container.appendChild(createBadge("badge-joined-mentorship", `Joined Mentorship: ${joinedMentorshipDate}`));
     }
 
     // Activity (Last Active + Contributions)

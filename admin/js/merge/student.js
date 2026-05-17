@@ -1,6 +1,7 @@
 // js/merge/student.js
 // Student object factory — creates new student records from folder names or existing data
-// Handles default values (status, participation, returning, program, year) and cleans data for JSON export
+// Handles default values (status, participation, returning, program, year, cohort, dates, learning goals, focus areas)
+// Preserves formerIds and cleans data for JSON export
 
 import { getConfig } from "./config.js";
 
@@ -12,6 +13,14 @@ export function createStudent(folderId, existing = null) {
     tags = tags
       .split(",")
       .map((t) => t.trim())
+      .filter(Boolean);
+  }
+
+  let focusAreas = existing?.focusAreas || [];
+  if (typeof focusAreas === "string" && focusAreas.trim()) {
+    focusAreas = focusAreas
+      .split(",")
+      .map((f) => f.trim())
       .filter(Boolean);
   }
 
@@ -30,6 +39,12 @@ export function createStudent(folderId, existing = null) {
     totalPushes: existing?.totalPushes || 0,
     lastCommitDate: existing?.lastCommitDate || null,
     formerIds: formerIds,
+    // New fields
+    cohort: existing?.cohort || "Summer 2026",
+    joinedWebRing: existing?.joinedWebRing || null,
+    joinedMentorship: existing?.joinedMentorship || null,
+    learningGoal: existing?.learningGoal || null,
+    focusAreas: focusAreas,
     selectedForFetch: false,
     tags,
     resumeRequirementMet: existing?.resumeRequirementMet ?? config.defaults.resumeRequirementMet,
@@ -45,7 +60,7 @@ export function toDisplayName(folder) {
 }
 
 export function cleanForExport(student) {
-  // Remove internal match fields and selectedForFetch, but KEEP formerIds
+  // Remove internal match fields and selectedForFetch, but KEEP all data fields
   const { matchRule, matchWeight, matchedToId, selectedForFetch, ...clean } = student;
   return clean;
 }
