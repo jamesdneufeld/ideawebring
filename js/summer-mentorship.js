@@ -1,5 +1,5 @@
 // summer-mentorship.js
-// Deterministic Membership + Lifetime System (stable + corrected)
+// Production Web Ring System — deterministic + stable + bug-fixed
 
 const REPO_OWNER = "jamesdneufeld";
 const REPO_NAME = "ideawebring";
@@ -16,9 +16,7 @@ function getCache(key) {
 
   try {
     const data = JSON.parse(raw);
-    if (Date.now() - data.timestamp < 60 * 60 * 1000) {
-      return data.value; // 🔥 FIXED (was missing in Deepseek version)
-    }
+    if (Date.now() - data.timestamp < 60 * 60 * 1000) return data.value;
   } catch {}
 
   return null;
@@ -35,7 +33,7 @@ function setCache(key, value) {
 }
 
 /* =========================
-   LOAD STUDENTS
+   STUDENTS
 ========================= */
 
 async function loadStudents() {
@@ -49,7 +47,7 @@ async function loadStudents() {
 }
 
 /* =========================
-   GITHUB ACTIVITY
+   GITHUB ACTIVITY (FIXED)
 ========================= */
 
 async function getActivity(folder) {
@@ -74,15 +72,16 @@ async function getActivity(folder) {
       return empty;
     }
 
-    const lastDate = commits[0]?.commit?.author?.date || null;
-
     const commitDates = commits.map((c) => new Date(c?.commit?.author?.date)).filter((d) => !isNaN(d));
 
-    const commitCount = commits.length;
+    if (!commitDates.length) return makeEmptyActivity();
+
+    /* 🔥 FIX: reliable last commit */
+    const lastDate = new Date(Math.max(...commitDates));
 
     const result = {
-      lastDate,
-      commitCount,
+      lastDate: lastDate.toISOString(),
+      commitCount: commits.length,
       commitDates,
     };
 
@@ -111,33 +110,21 @@ function daysSince(date) {
 }
 
 /* =========================
-   MEMBERSHIP (FIXED LOGIC)
+   MEMBERSHIP (STABLE + LOGICAL)
 ========================= */
 
 function getMembership(activity) {
   const commits = activity.commitCount;
-  const days = daysSince(activity.lastDate);
 
-  // ❗ no commits = never actually joined GitHub activity
   if (commits === 0) return "Newcomer";
-
-  // first contribution
   if (commits === 1) return "Newcomer";
-
-  // small participation
   if (commits >= 2 && commits < 10) return "Contributor";
-
-  // steady participation
   if (commits >= 10 && commits < 30) return "Regular";
-
-  // long-term / returning / alumni
-  if (commits >= 30) return "Veteran";
-
-  return "Contributor";
+  return "Veteran";
 }
 
 /* =========================
-   LIFETIME SCORE (STABLE 1–5★)
+   LIFETIME SCORE (STABLE)
 ========================= */
 
 function getLifetimeScore(activity) {
@@ -168,7 +155,7 @@ function createBadge(className, text = "", title = "") {
 }
 
 /* =========================
-   RENDER
+   MAIN RENDER
 ========================= */
 
 async function populateStudentData() {
@@ -187,28 +174,31 @@ async function populateStudentData() {
     const membership = getMembership(activity);
     const lifetime = getLifetimeScore(activity);
 
+    /* update meta */
+    const programEl = link.querySelector(".student-program");
+    const yearEl = link.querySelector(".student-year");
+
+    if (programEl && student?.program) programEl.textContent = student.program;
+    if (yearEl && student?.year) yearEl.textContent = student.year;
+
     const container = link.querySelector(".student-badges");
     if (!container) continue;
 
     container.innerHTML = "";
 
-    /* Last Seen */
-    const lastSeenText = lastSeenDays === null ? "Last seen: No activity" : `Last seen: ${lastSeenDays} days ago`;
+    /* LAST SEEN */
+    container.appendChild(createBadge("badge-lastseen", lastSeenDays === null ? "Last seen: No activity" : `Last seen: ${lastSeenDays} days ago`));
 
-    container.appendChild(createBadge("badge-lastseen", lastSeenText));
-
-    /* Membership */
+    /* MEMBERSHIP */
     container.appendChild(createBadge("badge-membership", `Membership: ${membership}`));
 
-    /* Lifetime Score */
+    /* LIFETIME SCORE */
     container.appendChild(createBadge("badge-lifetime", `Lifetime Score: ${stars(lifetime)}`));
 
-    /* Return Glow (deterministic rule) */
-    if (lastSeenDays !== null && lastSeenDays > 365 && activity.commitCount > 0) {
-      link.classList.add("return-glow");
-    } else {
-      link.classList.remove("return-glow");
-    }
+    /* RETURN GLOW (fixed + safe) */
+    const isReturning = lastSeenDays !== null && lastSeenDays > 365 && activity.commitCount > 0;
+
+    link.classList.toggle("return-glow", isReturning);
   }
 }
 
