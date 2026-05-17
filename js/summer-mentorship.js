@@ -172,27 +172,23 @@ function getMembership(activity) {
 
   const lastSeenDays = daysSince(lastDate);
 
-  // 1. ARCHIVE override (inactive for long time)
   if (lastSeenDays !== null && lastSeenDays > 365 && commits > 0) {
     return "Archive";
   }
 
-  // 2. Veteran (multi-cycle participation signal)
   if (commits >= 30 && activeDays >= 60) {
     return "Veteran";
   }
 
-  // 3. Regular
   if (commits >= 10 && activeDays >= 30) {
     return "Regular";
   }
 
-  // 4. Default active participant
   return "Contributor";
 }
 
 /* =========================
-   LIFETIME SCORE (SUSTAINED ENGAGEMENT, NOT RAW COMMITS)
+   LIFETIME SCORE (SUSTAINED ENGAGEMENT)
 ========================= */
 
 function getLifetimeScore(activity) {
@@ -200,11 +196,10 @@ function getLifetimeScore(activity) {
   const dates = activity.commitDates || [];
 
   if (commits === 0) return 0;
-
   if (dates.length < 2) return 1;
 
-  // Filter out invalid dates first
-  const validDates = dates.filter((d) => d && !isNaN(d.getTime()));
+  // Filter out invalid dates - ensure each is a Date object
+  const validDates = dates.filter((d) => d && d instanceof Date && !isNaN(d.getTime()));
 
   if (validDates.length < 2) return 1;
 
@@ -214,17 +209,16 @@ function getLifetimeScore(activity) {
 
   const spanDays = Math.ceil((lastCommit - firstCommit) / (1000 * 60 * 60 * 24));
 
-  // Use ISO week numbers with safety check
   const activeWeeks = new Set();
   validDates.forEach((d) => {
-    const year = d.getFullYear();
-    const weekNum = getWeekNumber(d);
-    activeWeeks.add(`${year}-W${weekNum}`);
+    if (d instanceof Date) {
+      const year = d.getFullYear();
+      const weekNum = getWeekNumber(d);
+      activeWeeks.add(`${year}-W${weekNum}`);
+    }
   });
 
   const weeksActive = activeWeeks.size;
-
-  // SUSTAINED ENGAGEMENT MODEL (not raw commit count)
 
   if (spanDays === 0) return 1;
   if (spanDays < 7) return 1;
@@ -284,7 +278,6 @@ async function populateStudentData() {
     const membership = getMembership(activity);
     const lifetime = getLifetimeScore(activity);
 
-    // Program / Year
     const programEl = link.querySelector(".student-program");
     const yearEl = link.querySelector(".student-year");
 
@@ -296,16 +289,12 @@ async function populateStudentData() {
 
     container.innerHTML = "";
 
-    /* LAST SEEN */
     container.appendChild(createBadge("badge-lastseen", lastSeenDays === null ? "Last seen: No activity" : `Last seen: ${lastSeenDays} days ago`));
 
-    /* MEMBERSHIP */
     container.appendChild(createBadge("badge-membership", `Membership: ${membership}`));
 
-    /* LIFETIME SCORE */
     container.appendChild(createBadge("badge-lifetime", `Lifetime Score: ${stars(lifetime)}`));
 
-    /* RETURN GLOW */
     const returnGlow = lastSeenDays !== null && lastSeenDays > 365 && activity.commitCount > 0;
 
     link.classList.toggle("return-glow", returnGlow);
