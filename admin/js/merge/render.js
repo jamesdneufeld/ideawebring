@@ -10,7 +10,7 @@ export function renderTableHeader() {
   if (!thead) return;
 
   thead.innerHTML = `
-    <tr>
+    <table>
       <th style="width: 30px;">✓</th>
       <th>Folder ID</th>
       <th>Display Name</th>
@@ -140,7 +140,7 @@ export function renderTable(students, onUpdate) {
     const yearCell = row.insertCell(8);
     const yearSelect = document.createElement("select");
     yearSelect.className = "year-input";
-    (config.options?.years || ["2024", "2025", "2026", "2027", "2028", "2029", "2030"]).forEach((opt) => {
+    (config.options?.years || ["2024", "2025", "2026", "2027", "2028"]).forEach((opt) => {
       const option = document.createElement("option");
       option.value = opt;
       option.textContent = opt;
@@ -167,10 +167,12 @@ export function renderTable(students, onUpdate) {
     const lastCommitInput = document.createElement("input");
     lastCommitInput.type = "date";
     lastCommitInput.style.width = "110px";
-    // Set the value if it exists
+    // Set the value if it exists - extract just the date part
     if (student.lastCommitDate) {
-      // Handle both full ISO strings and date-only strings
-      const dateStr = student.lastCommitDate.split("T")[0];
+      let dateStr = student.lastCommitDate;
+      if (dateStr.includes("T")) {
+        dateStr = dateStr.split("T")[0];
+      }
       lastCommitInput.value = dateStr;
     }
     lastCommitInput.addEventListener("change", (e) => {
