@@ -62,8 +62,7 @@ async function getActivity(folder) {
     const data = await res.json();
     const commits = Array.isArray(data) ? data : [];
 
-    const lastCommit = commits[0];
-    const lastDate = lastCommit?.commit?.author?.date || null;
+    const lastDate = commits[0]?.commit?.author?.date || null;
 
     let days = null;
     let returnedAfterYear = false;
@@ -71,16 +70,11 @@ async function getActivity(folder) {
     if (lastDate) {
       const last = new Date(lastDate);
       const now = new Date();
-
       days = Math.floor((now - last) / (1000 * 60 * 60 * 24));
 
-      // 🔥 RETURN SIGNAL
+      // return glow trigger
       returnedAfterYear = days >= 365 && commits.length > 0;
     }
-
-    /* =========================
-       CONTINUITY METRICS
-    ========================= */
 
     const years = new Set();
     const weeks = new Set();
@@ -115,7 +109,21 @@ async function getActivity(folder) {
 }
 
 /* =========================
-   MEMBERSHIP MODEL
+   STUDENT DATA
+========================= */
+
+async function loadStudents() {
+  try {
+    const res = await fetch("./students.json");
+    const data = await res.json();
+    studentsData = data.students || [];
+  } catch {
+    studentsData = [];
+  }
+}
+
+/* =========================
+   MEMBERSHIP SYSTEM
 ========================= */
 
 function getMembership(activity) {
@@ -124,17 +132,16 @@ function getMembership(activity) {
   const weeks = activity.activeWeeks;
 
   if (years === 0 && commits === 0) return "Archive";
-  if (years === 1 && commits <= 3) return "Newcomer";
-  if (years <= 1 && commits <= 15) return "Contributor";
-  if (years <= 2 && commits > 15) return "Regular";
-  if (years >= 2 && commits > 30 && weeks > 8) return "Veteran";
-  if (years >= 3) return "Veteran";
+  if (commits <= 1) return "Newcomer";
+  if (commits <= 15) return "Contributor";
+  if (years >= 2 && commits > 15 && weeks > 6) return "Regular";
+  if (years >= 3 || (years >= 2 && commits > 30)) return "Veteran";
 
   return "Contributor";
 }
 
 /* =========================
-   LIFETIME SCORE (0–5 stars)
+   LIFETIME SCORE (0–5)
 ========================= */
 
 function getLifetimeScore(activity) {
@@ -147,20 +154,6 @@ function getLifetimeScore(activity) {
   if (activity.activeYears >= 2 && activity.commitCount >= 20) score = 5;
 
   return score;
-}
-
-/* =========================
-   LOAD STUDENTS
-========================= */
-
-async function loadStudents() {
-  try {
-    const res = await fetch("./students.json");
-    const data = await res.json();
-    studentsData = data.students || [];
-  } catch {
-    studentsData = [];
-  }
 }
 
 /* =========================
@@ -197,22 +190,38 @@ async function populateStudentData() {
     const activity = await getActivity(folder);
 
     /* =========================
-       RETURN GLOW CLASS
+       RETURN GLOW
     ========================= */
+
     if (activity.returnedAfterYear) {
       link.classList.add("student-return");
     } else {
       link.classList.remove("student-return");
     }
 
+    /* =========================
+       META (RESTORED)
+    ========================= */
+
+    const programEl = link.querySelector(".student-program");
+    const yearEl = link.querySelector(".student-year");
+
+    if (programEl && student?.program) {
+      programEl.textContent = student.program;
+    }
+
+    if (yearEl && student?.year) {
+      yearEl.textContent = student.year;
+    }
+
+    /* =========================
+       OUTPUT (3 LINES ONLY)
+    ========================= */
+
     const membership = getMembership(activity);
     const lifetime = getLifetimeScore(activity);
 
     const stars = "★".repeat(lifetime) + "☆".repeat(5 - lifetime);
-
-    /* =========================
-       REQUIRED OUTPUT
-    ========================= */
 
     container.appendChild(createLine(activity.days !== null ? `Last seen: ${activity.days} days ago` : "Last seen: No activity"));
 
