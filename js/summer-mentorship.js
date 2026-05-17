@@ -28,12 +28,42 @@ const LEARNING_GOAL_LABELS = {
 };
 
 const FOCUS_AREA_LABELS = {
+  // Layout & Design
   layout_foundations: "Layout Foundations",
   responsive_design: "Responsive Design",
-  debugging_tools: "Debugging Tools",
   flexbox_layouts: "Flexbox Layouts",
+  flexbox_confident: "Confident with Flexbox",
+  css_grid: "CSS Grid",
+  positioning: "CSS Positioning",
+
+  // Core Concepts
   box_model: "The Box Model",
   media_queries: "Media Queries",
+  semantic_html: "Semantic HTML",
+  accessibility: "Accessibility",
+
+  // Development Tools
+  debugging_tools: "Debugging Tools",
+  inspector: "Browser Inspector",
+  dev_tools: "Developer Tools",
+
+  // Styling & Design
+  color_theory: "Color Theory",
+  typography: "Typography",
+  animations: "CSS Animations",
+  transitions: "CSS Transitions",
+
+  // Student-specific notes (from signup form)
+  box_model_unclear: "Learning the Box Model",
+  media_queries_confusing: "Exploring Media Queries",
+  new_to_html: "New to HTML & CSS",
+  inspector_user: "Uses Browser Inspector",
+
+  // Additional mappings
+  layout: "Layout Design",
+  responsive: "Responsive Design",
+  flexbox: "Flexbox",
+  debugging: "Debugging Techniques",
 };
 
 const TOOL_LABELS = {
@@ -42,6 +72,10 @@ const TOOL_LABELS = {
   codepen: "CodePen",
   github: "GitHub",
   vs_code: "VS Code",
+  vscode: "VS Code",
+  git: "Git",
+  terminal: "Terminal/Command Line",
+  responsive_design_tools: "Responsive Design Tools",
 };
 
 // ============================================================
@@ -271,6 +305,21 @@ function getIdentityLabel(student) {
 }
 
 /* =========================
+   HELPER: GET HUMAN-READABLE LABEL
+========================= */
+
+function getHumanLabel(value, labelMap) {
+  if (!value) return null;
+  // If it's an array, map each item
+  if (Array.isArray(value)) {
+    const mapped = value.map((item) => labelMap[item] || item);
+    return mapped.filter(Boolean);
+  }
+  // If it's a string, return mapped or original
+  return labelMap[value] || value;
+}
+
+/* =========================
    UI
 ========================= */
 
@@ -322,16 +371,16 @@ async function populateStudentData() {
     const identityLabel = getIdentityLabel(student);
     const cohort = student?.cohort;
 
-    const learningGoal = student?.learningGoal ? LEARNING_GOAL_LABELS[student.learningGoal] || student.learningGoal : null;
+    const learningGoal = getHumanLabel(student?.learningGoal, LEARNING_GOAL_LABELS);
 
-    // Format focus areas
+    // Format focus areas using lookup table
     let focusAreasText = null;
     if (student?.focusAreas && student.focusAreas.length > 0) {
       const formattedAreas = student.focusAreas.map((area) => FOCUS_AREA_LABELS[area] || area);
       focusAreasText = formattedAreas.join(" · ");
     }
 
-    // Format tools
+    // Format tools using lookup table
     let toolsText = null;
     if (student?.tools && student.tools.length > 0) {
       const formattedTools = student.tools.map((tool) => TOOL_LABELS[tool] || tool);
