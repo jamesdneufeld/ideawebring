@@ -12,8 +12,7 @@
       "year": "2026",
       "totalPushes": 13,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Volunteered last summer, pushed multiple times"
+      "resumeRequirementMet": false
     },
     {
       "id": "alex",
@@ -26,8 +25,7 @@
       "year": "2026",
       "totalPushes": 1,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Volunteered last summer, pushed at least once"
+      "resumeRequirementMet": false
     },
     {
       "id": "alexia-sogai",
@@ -40,8 +38,7 @@
       "year": "2028",
       "totalPushes": 7,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": ""
+      "resumeRequirementMet": false
     },
     {
       "id": "alyssa-cheng",
@@ -54,8 +51,7 @@
       "year": "2027",
       "totalPushes": 22,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Completed required coursework Jan-May 2026"
+      "resumeRequirementMet": false
     },
     {
       "id": "andy-poystila",
@@ -69,8 +65,7 @@
       "year": "2026",
       "totalPushes": 11,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Graduated 2026"
+      "resumeRequirementMet": false
     },
     {
       "id": "anna-burtseva",
@@ -83,8 +78,7 @@
       "year": "2026",
       "totalPushes": 1,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": ""
+      "resumeRequirementMet": false
     },
     {
       "id": "apsara",
@@ -97,8 +91,7 @@
       "year": "2028",
       "totalPushes": 16,
       "tags": ["11ty", "indie-web"],
-      "resumeRequirementMet": false,
-      "notes": "Uses Eleventy static site generator"
+      "resumeRequirementMet": false
     },
     {
       "id": "aurod-ashrafi",
@@ -111,8 +104,7 @@
       "year": "2027",
       "totalPushes": 10,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Completed required webring coursework"
+      "resumeRequirementMet": false
     },
     {
       "id": "avery-brodeur",
@@ -125,8 +117,7 @@
       "year": "2027",
       "totalPushes": 15,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Completed required webring coursework"
+      "resumeRequirementMet": false
     },
     {
       "id": "cameron",
@@ -139,8 +130,7 @@
       "year": "2026",
       "totalPushes": 7,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Volunteered last summer, pushed at least once"
+      "resumeRequirementMet": false
     },
     {
       "id": "cecil-susi",
@@ -153,8 +143,7 @@
       "year": "2027",
       "totalPushes": 22,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Completed required coursework Jan-May 2026"
+      "resumeRequirementMet": false
     },
     {
       "id": "emilyn",
@@ -167,8 +156,7 @@
       "year": "2026",
       "totalPushes": 4,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Volunteered last summer, pushed at least once"
+      "resumeRequirementMet": false
     },
     {
       "id": "giao-nguyen",
@@ -181,8 +169,7 @@
       "year": "2026",
       "totalPushes": 0,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Awaiting GitHub username"
+      "resumeRequirementMet": false
     },
     {
       "id": "hedia-chan",
@@ -195,8 +182,7 @@
       "year": "2027",
       "totalPushes": 47,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Completed required coursework Jan-May 2026"
+      "resumeRequirementMet": false
     },
     {
       "id": "ian-johnstone",
@@ -209,8 +195,7 @@
       "year": "2027",
       "totalPushes": 44,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Completed required webring coursework"
+      "resumeRequirementMet": false
     },
     {
       "id": "iona-campbell",
@@ -223,8 +208,7 @@
       "year": "2027",
       "totalPushes": 25,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Completed required webring coursework"
+      "resumeRequirementMet": false
     },
     {
       "id": "jaden-prevost",
@@ -237,8 +221,7 @@
       "year": "2027",
       "totalPushes": 20,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Completed required webring coursework"
+      "resumeRequirementMet": false
     },
     {
       "id": "jazzy-linton",
@@ -252,8 +235,7 @@
       "year": "2024",
       "totalPushes": 2,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Graduated 2024, volunteered last summer, pushed multiple times"
+      "resumeRequirementMet": false
     },
     {
       "id": "jordan-mak",
@@ -266,8 +248,7 @@
       "year": "2027",
       "totalPushes": 10,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Completed required webring coursework"
+      "resumeRequirementMet": false
     },
     {
       "id": "kara",
@@ -280,8 +261,7 @@
       "year": "2026",
       "totalPushes": 2,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Volunteered last summer, pushed at least once"
+      "resumeRequirementMet": false
     },
     {
       "id": "kat-jung",
@@ -294,8 +274,7 @@
       "year": "2027",
       "totalPushes": 61,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Completed required webring coursework"
+      "resumeRequirementMet": false
     },
     {
       "id": "kendra-vermette",
@@ -308,8 +287,7 @@
       "year": "2026",
       "totalPushes": 0,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Accepted invite only, never pushed"
+      "resumeRequirementMet": false
     },
     {
       "id": "maren-brophy",
@@ -322,8 +300,7 @@
       "year": "2026",
       "totalPushes": 0,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": ""
+      "resumeRequirementMet": false
     },
     {
       "id": "meghan-vogt",
@@ -336,8 +313,7 @@
       "year": "2027",
       "totalPushes": 16,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Completed required webring coursework"
+      "resumeRequirementMet": false
     },
     {
       "id": "mena-mcgill",
@@ -350,8 +326,7 @@
       "year": "2026",
       "totalPushes": 0,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Invite pending — will become Participating Alumni if accepted"
+      "resumeRequirementMet": false
     },
     {
       "id": "narinder",
@@ -364,8 +339,7 @@
       "year": "2027",
       "totalPushes": 23,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Completed required webring coursework"
+      "resumeRequirementMet": false
     },
     {
       "id": "nhi-pham",
@@ -378,8 +352,7 @@
       "year": "2027",
       "totalPushes": 26,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Completed required webring coursework"
+      "resumeRequirementMet": false
     },
     {
       "id": "rita-mcdonald",
@@ -392,8 +365,7 @@
       "year": "2027",
       "totalPushes": 25,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": ""
+      "resumeRequirementMet": false
     },
     {
       "id": "ryan-leskiw",
@@ -406,8 +378,7 @@
       "year": "2026",
       "totalPushes": 25,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Participated as required coursework"
+      "resumeRequirementMet": false
     },
     {
       "id": "sara-hurst",
@@ -420,8 +391,7 @@
       "year": "2027",
       "totalPushes": 24,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Completed required webring coursework"
+      "resumeRequirementMet": false
     },
     {
       "id": "siobhan-barry",
@@ -434,8 +404,7 @@
       "year": "2026",
       "totalPushes": 0,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Invite pending — will become Participating Alumni if accepted"
+      "resumeRequirementMet": false
     },
     {
       "id": "sophia-pan",
@@ -448,8 +417,7 @@
       "year": "2026",
       "totalPushes": 1,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Volunteered last summer, pushed at least once"
+      "resumeRequirementMet": false
     },
     {
       "id": "tanner",
@@ -462,8 +430,7 @@
       "year": "2026",
       "totalPushes": 3,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Volunteered last summer, pushed at least once"
+      "resumeRequirementMet": false
     },
     {
       "id": "taylore-lawrence",
@@ -477,8 +444,7 @@
       "year": "2026",
       "totalPushes": 16,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": ""
+      "resumeRequirementMet": false
     },
     {
       "id": "thomas-gagne",
@@ -491,8 +457,7 @@
       "year": "2026",
       "totalPushes": 28,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Completed required webring coursework"
+      "resumeRequirementMet": false
     },
     {
       "id": "tobin-eckstein",
@@ -506,8 +471,7 @@
       "year": "2024",
       "totalPushes": 8,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Graduated 2024, rejoining"
+      "resumeRequirementMet": false
     },
     {
       "id": "tom-eccles",
@@ -520,8 +484,7 @@
       "year": "2026",
       "totalPushes": 19,
       "tags": [],
-      "resumeRequirementMet": false,
-      "notes": "Completed required webring coursework"
+      "resumeRequirementMet": false
     }
   ]
 }
