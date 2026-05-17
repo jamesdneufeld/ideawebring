@@ -83,6 +83,7 @@ export async function fetchCommitCountsForAllStudents(students) {
           let totalCommits = 0;
 
           for (const path of allPaths) {
+            // Use path (folder name), not github username for the path parameter
             const url = `https://api.github.com/repos/${config.repo.owner}/${config.repo.name}/commits?path=${path}&author=${student.githubUsername}&per_page=100`;
             const res = await fetch(url);
 

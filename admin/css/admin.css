@@ -113,22 +113,18 @@ button:hover {
 }
 
 #studentTable {
-  min-width: 1300px;
+  min-width: 1200px;
   width: 100%;
   border-collapse: collapse;
 }
 
-/* Table headers and folder ID column */
-th,
-#studentTable td:first-child {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-weight: 500;
-}
-
+/* Table headers - smaller font */
 th {
   background: #0d0f12;
   color: #8b949e;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-weight: 600;
+  font-size: 0.7rem;
   position: sticky;
   top: 0;
   padding: 0.5rem;
@@ -136,22 +132,22 @@ th {
   border-bottom: 1px solid #21262d;
 }
 
-/* Keep monospace for folder ID content */
-#studentTable td:first-child {
-  font-family: "SF Mono", "Courier New", monospace;
-  font-size: 0.75rem;
-  padding: 0.5rem;
-  text-align: left;
-  border-bottom: 1px solid #21262d;
-}
-
-/* Other table cells */
+/* All table cells - sans-serif */
 td {
   padding: 0.5rem;
   text-align: left;
   border-bottom: 1px solid #21262d;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-size: 0.75rem;
+}
+
+/* First column (Folder ID) - sans-serif */
+#studentTable td:first-child {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.75rem;
+  padding: 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid #21262d;
 }
 
 /* Form controls inside table */

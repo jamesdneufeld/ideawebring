@@ -15,14 +15,13 @@ export function renderTableHeader() {
       <th>Display Name</th>
       <th>GitHub</th>
       <th>Status</th>
-      <th>Participation</th>
-      <th>Returning</th>
+      <th>Participation Type</th>
+      <th>New / Returning</th>
       <th>Program</th>
-      <th>Year</th>
+      <th>Grad Year</th>
       <th>Total Pushes</th>
       <th>Tags</th>
       <th>Resume Met</th>
-      <th>Notes</th>
     </tr>
   `;
 }
@@ -125,7 +124,7 @@ export function renderTable(students, onUpdate) {
     programSelect.addEventListener("change", (e) => onUpdate(idx, "program", e.target.value));
     programCell.appendChild(programSelect);
 
-    // Year dropdown
+    // Year dropdown (Grad Year)
     const yearCell = row.insertCell(7);
     const yearSelect = document.createElement("select");
     yearSelect.className = "year-input";
@@ -169,14 +168,6 @@ export function renderTable(students, onUpdate) {
     resumeCheckbox.checked = student.resumeRequirementMet;
     resumeCheckbox.addEventListener("change", (e) => onUpdate(idx, "resumeRequirementMet", e.target.checked));
     resumeCell.appendChild(resumeCheckbox);
-
-    // Notes
-    const notesCell = row.insertCell(11);
-    const notesInput = document.createElement("input");
-    notesInput.placeholder = "optional notes";
-    notesInput.value = student.notes || "";
-    notesInput.addEventListener("change", (e) => onUpdate(idx, "notes", e.target.value));
-    notesCell.appendChild(notesInput);
   });
 }
 
