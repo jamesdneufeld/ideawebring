@@ -1,5 +1,5 @@
 // summer-mentorship.js
-// Web Ring Badge System — Two-axis deterministic membership (fixed)
+// Web Ring Badge System — Two-axis deterministic membership with formerIds support
 
 const REPO_OWNER = "jamesdneufeld";
 const REPO_NAME = "ideawebring";
@@ -61,40 +61,46 @@ function makeEmptyActivity() {
 }
 
 /* =========================
-   GITHUB ACTIVITY (HARDENED)
+   GITHUB ACTIVITY (WITH FORMERIDS SUPPORT)
 ========================= */
 
-async function getActivity(folder) {
+async function getActivity(folder, formerIds = []) {
+  const allIds = [folder, ...formerIds].filter(Boolean);
   const cacheKey = `activity_${folder}`;
   const cached = getCache(cacheKey);
   if (cached) return cached;
 
   try {
-    const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${folder}&per_page=100`;
-    const res = await fetch(url);
+    // Fetch commits from all related folders and merge
+    const allCommits = [];
 
-    if (!res.ok) {
+    for (const id of allIds) {
+      const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${id}&per_page=100`;
+      const res = await fetch(url);
+
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          allCommits.push(...data);
+        }
+      }
+    }
+
+    if (allCommits.length === 0) {
       const empty = makeEmptyActivity();
       setCache(cacheKey, empty);
       return empty;
     }
 
-    const data = await res.json();
-
-    if (!Array.isArray(data)) {
-      console.warn("Unexpected GitHub response:", data);
-      const empty = makeEmptyActivity();
-      setCache(cacheKey, empty);
-      return empty;
+    // Deduplicate commits by SHA
+    const uniqueCommits = new Map();
+    for (const commit of allCommits) {
+      if (commit?.sha && !uniqueCommits.has(commit.sha)) {
+        uniqueCommits.set(commit.sha, commit);
+      }
     }
 
-    const commits = data;
-
-    if (commits.length === 0) {
-      const empty = makeEmptyActivity();
-      setCache(cacheKey, empty);
-      return empty;
-    }
+    const commits = Array.from(uniqueCommits.values());
 
     const commitDates = commits
       .map((c) => c?.commit?.author?.date)
@@ -135,7 +141,7 @@ function daysSince(date) {
 }
 
 /* =========================
-   MEMBERSHIP (FIXED + CONSISTENT)
+   MEMBERSHIP (TWO-AXIS + ARCHIVE STATE)
 ========================= */
 
 function getMembership(activity) {
@@ -147,21 +153,31 @@ function getMembership(activity) {
 
   if (commitDates.length < 2) return "Contributor";
 
-  // FIXED: correct sorting-based activeDays calculation
   const sorted = [...commitDates].sort((a, b) => a - b);
 
-  const activeDays = Math.ceil((sorted[sorted.length - 1] - sorted[0]) / (1000 * 60 * 60 * 24));
+  const firstDate = sorted[0];
+  const lastDate = sorted[sorted.length - 1];
 
-  // Tier hierarchy (safe + deterministic)
+  const activeDays = Math.ceil((lastDate - firstDate) / (1000 * 60 * 60 * 24));
 
+  const lastSeenDays = daysSince(lastDate);
+
+  // 1. ARCHIVE override (inactive for long time)
+  if (lastSeenDays !== null && lastSeenDays > 365 && commits > 0) {
+    return "Archive";
+  }
+
+  // 2. Veteran (multi-cycle participation signal)
   if (commits >= 30 && activeDays >= 60) {
     return "Veteran";
   }
 
+  // 3. Regular
   if (commits >= 10 && activeDays >= 30) {
     return "Regular";
   }
 
+  // 4. Default active participant
   return "Contributor";
 }
 
@@ -210,7 +226,7 @@ async function populateStudentData() {
     const folder = link.dataset.folder || link.getAttribute("href").replace(/\/$/, "").toLowerCase();
 
     const student = studentMap.get(folder);
-    const activity = await getActivity(folder);
+    const activity = await getActivity(folder, student?.formerIds || []);
 
     const lastSeenDays = daysSince(activity.lastDate);
     const membership = getMembership(activity);
