@@ -232,18 +232,12 @@ function daysSince(date) {
   return Math.floor((Date.now() - new Date(date)) / (1000 * 60 * 60 * 24));
 }
 
+// Simplified handcrafted style
 function getLastActiveLabel(days) {
   if (days === null) return "No activity";
-  if (days === 0) return "Active today";
-  if (days === 1) return "Active yesterday";
-  if (days < 7) return `Active this week (${days} days ago)`;
-  if (days < 14) return "Active within 2 weeks";
-  if (days < 30) return "Active this month";
-  if (days < 60) return "Active last month";
-  if (days < 90) return "Active 2 months ago";
-  if (days < 180) return "Active 3+ months ago";
-  if (days < 365) return "Active 6+ months ago";
-  return "Active over a year ago";
+  if (days === 0) return "Last active today";
+  if (days === 1) return "Last active yesterday";
+  return `Last active ${days} days ago`;
 }
 
 /* =========================
