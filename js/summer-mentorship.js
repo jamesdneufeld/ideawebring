@@ -19,35 +19,60 @@ const RETURN_GLOW_DAYS = 365; // Days after which a returning student gets the g
 
 // Lookup tables for human-readable labels
 const PURPOSE_LABELS = {
-  practice: "Here for More Practice",
-  portfolio: "Portfolio Building",
+  learning_basics: "Learning HTML & CSS",
+  learning_foundations: "Building Core Concepts",
+  learning_responsive: "Exploring Responsive Design",
+  practice_build: "Building Projects",
+  practice_refine: "Refining Skills",
+  explorer: "Confident with DevTools",
   indie_web: "Indie Web Explorer",
+  portfolio: "Portfolio Building",
   career_prep: "Career Prep",
-  returning_practice: "Returning for Practice",
-  learning_html_css: "Learning HTML & CSS",
 };
 
-const LEARNING_GOAL_LABELS = {
-  practice: "Here for More Practice",
-  portfolio: "Portfolio Building",
-  indie_web: "Indie Web Explorer",
-  career_prep: "Career Prep",
-  returning_practice: "Returning for Practice",
-  learning_html_css: "Learning HTML & CSS",
+const LEARNING_STAGE_LABELS = {
+  early: "Early Stage",
+  developing: "Developing",
+  advanced: "Advanced",
 };
 
 const FOCUS_AREA_LABELS = {
+  // Layout & Design
   layout_foundations: "Layout Foundations",
   responsive_design: "Responsive Design",
-  debugging_tools: "Debugging Tools",
   flexbox_layouts: "Flexbox Layouts",
   flexbox_confident: "Confident with Flexbox",
+  css_grid: "CSS Grid",
+  positioning: "CSS Positioning",
+  flexbox: "Flexbox",
+
+  // Core Concepts
   box_model: "The Box Model",
   media_queries: "Media Queries",
+  semantic_html: "Semantic HTML",
+  accessibility: "Accessibility",
+
+  // Development Tools
+  debugging_tools: "Debugging Tools",
+  inspector: "Browser Inspector",
+  dev_tools: "Developer Tools",
+
+  // Styling & Design
+  color_theory: "Color Theory",
+  typography: "Typography",
+  animations: "CSS Animations",
+  transitions: "CSS Transitions",
+
+  // Student-specific notes
   box_model_unclear: "Learning the Box Model",
   media_queries_confusing: "Exploring Media Queries",
   new_to_html: "New to HTML & CSS",
   inspector_user: "Uses Browser Inspector",
+
+  // Additional mappings
+  layout: "Layout Design",
+  responsive: "Responsive Design",
+  debugging: "Debugging Techniques",
 };
 
 const TOOL_LABELS = {
@@ -355,7 +380,7 @@ async function populateStudentData() {
     const cohort = student?.cohort;
 
     const purpose = getHumanLabel(student?.purpose, PURPOSE_LABELS);
-    const learningGoal = getHumanLabel(student?.learningGoal, LEARNING_GOAL_LABELS);
+    const learningStage = getHumanLabel(student?.learning_stage, LEARNING_STAGE_LABELS);
 
     // Format focus areas using lookup table
     let focusAreasText = null;
@@ -397,9 +422,9 @@ async function populateStudentData() {
       container.appendChild(createBadge("badge-purpose", purpose));
     }
 
-    // Learning goal (if different from purpose)
-    if (learningGoal && learningGoal !== purpose) {
-      container.appendChild(createBadge("badge-learning-goal", learningGoal));
+    // Learning Stage
+    if (learningStage) {
+      container.appendChild(createBadge("badge-learning-stage", learningStage));
     }
 
     // Focus areas (what they're working on)
