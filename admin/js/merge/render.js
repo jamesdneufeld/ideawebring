@@ -11,10 +11,11 @@ export function renderTableHeader() {
       <th>Folder ID</th>
       <th>Display Name</th>
       <th>GitHub</th>
+      <th>Status</th>
+      <th>Participation</th>
+      <th>Returning</th>
       <th>Program</th>
       <th>Year</th>
-      <th>Alumni</th>
-      <th>Withdrawn</th>
       <th>Tags</th>
       <th>Resume Met</th>
       <th>Notes</th>
@@ -53,77 +54,96 @@ export function renderTable(students, onUpdate) {
     githubInput.addEventListener("change", (e) => onUpdate(idx, "githubUsername", e.target.value.trim()));
     githubCell.appendChild(githubInput);
 
-    // Program
-    const programCell = row.insertCell(3);
-    const programSelect = document.createElement("select");
+    // Status dropdown (student / alumni / withdrawn)
+    const statusCell = row.insertCell(3);
+    const statusSelect = document.createElement("select");
+    const statusOptions = ["student", "alumni", "withdrawn"];
+    statusOptions.forEach((opt) => {
+      const option = document.createElement("option");
+      option.value = opt;
+      option.textContent = opt.charAt(0).toUpperCase() + opt.slice(1);
+      if (student.status === opt) option.selected = true;
+      statusSelect.appendChild(option);
+    });
+    statusSelect.addEventListener("change", (e) => onUpdate(idx, "status", e.target.value));
+    statusCell.appendChild(statusSelect);
 
-    (config.options?.programs || []).forEach((opt) => {
+    // Participation dropdown (summer-mentorship / coursework / null)
+    const participationCell = row.insertCell(4);
+    const participationSelect = document.createElement("select");
+    const participationOptions = [
+      { value: "", label: "None" },
+      { value: "summer-mentorship", label: "Summer Mentorship" },
+      { value: "coursework", label: "Coursework" },
+    ];
+    participationOptions.forEach((opt) => {
+      const option = document.createElement("option");
+      option.value = opt.value;
+      option.textContent = opt.label;
+      if (student.participation === opt.value || (opt.value === "" && !student.participation)) {
+        option.selected = true;
+      }
+      participationSelect.appendChild(option);
+    });
+    participationSelect.addEventListener("change", (e) => {
+      const value = e.target.value === "" ? null : e.target.value;
+      onUpdate(idx, "participation", value);
+    });
+    participationCell.appendChild(participationSelect);
+
+    // Returning checkbox
+    const returningCell = row.insertCell(5);
+    returningCell.className = "checkbox-cell";
+    const returningCheckbox = document.createElement("input");
+    returningCheckbox.type = "checkbox";
+    returningCheckbox.checked = student.returning;
+    returningCheckbox.addEventListener("change", (e) => onUpdate(idx, "returning", e.target.checked));
+    returningCell.appendChild(returningCheckbox);
+
+    // Program dropdown
+    const programCell = row.insertCell(6);
+    const programSelect = document.createElement("select");
+    (config.options?.programs || ["BDes", "IxD"]).forEach((opt) => {
       const option = document.createElement("option");
       option.value = opt;
       option.textContent = opt;
       if (student.program === opt) option.selected = true;
       programSelect.appendChild(option);
     });
-
     programSelect.addEventListener("change", (e) => onUpdate(idx, "program", e.target.value));
-
     programCell.appendChild(programSelect);
 
-    // Year
-    const yearCell = row.insertCell(4);
+    // Year dropdown
+    const yearCell = row.insertCell(7);
     const yearSelect = document.createElement("select");
     yearSelect.className = "year-input";
-
-    (config.options?.years || []).forEach((opt) => {
+    (config.options?.years || ["2024", "2025", "2026", "2027", "2028"]).forEach((opt) => {
       const option = document.createElement("option");
       option.value = opt;
       option.textContent = opt;
       if (student.year === opt) option.selected = true;
       yearSelect.appendChild(option);
     });
-
     yearSelect.addEventListener("change", (e) => onUpdate(idx, "year", e.target.value));
-
     yearCell.appendChild(yearSelect);
 
-    // Alumni
-    const alumniCell = row.insertCell(5);
-    alumniCell.className = "checkbox-cell";
-    const alumniCheckbox = document.createElement("input");
-    alumniCheckbox.type = "checkbox";
-    alumniCheckbox.checked = student.isAlumni;
-    alumniCheckbox.addEventListener("change", (e) => onUpdate(idx, "isAlumni", e.target.checked));
-    alumniCell.appendChild(alumniCheckbox);
-
-    // Withdrawn
-    const withdrawnCell = row.insertCell(6);
-    withdrawnCell.className = "checkbox-cell";
-    const withdrawnCheckbox = document.createElement("input");
-    withdrawnCheckbox.type = "checkbox";
-    withdrawnCheckbox.checked = student.withdrawn;
-    withdrawnCheckbox.addEventListener("change", (e) => onUpdate(idx, "withdrawn", e.target.checked));
-    withdrawnCell.appendChild(withdrawnCheckbox);
-
     // Tags
-    const tagsCell = row.insertCell(7);
+    const tagsCell = row.insertCell(8);
     const tagsInput = document.createElement("input");
     tagsInput.type = "text";
     tagsInput.placeholder = "comma separated tags";
     tagsInput.value = (student.tags || []).join(", ");
-
     tagsInput.addEventListener("change", (e) => {
       const tagsArray = e.target.value
         .split(",")
         .map((t) => t.trim())
         .filter(Boolean);
-
       onUpdate(idx, "tags", tagsArray);
     });
-
     tagsCell.appendChild(tagsInput);
 
     // Resume
-    const resumeCell = row.insertCell(8);
+    const resumeCell = row.insertCell(9);
     resumeCell.className = "checkbox-cell";
     const resumeCheckbox = document.createElement("input");
     resumeCheckbox.type = "checkbox";
@@ -132,7 +152,7 @@ export function renderTable(students, onUpdate) {
     resumeCell.appendChild(resumeCheckbox);
 
     // Notes
-    const notesCell = row.insertCell(9);
+    const notesCell = row.insertCell(10);
     const notesInput = document.createElement("input");
     notesInput.placeholder = "optional notes";
     notesInput.value = student.notes || "";
