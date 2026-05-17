@@ -71,7 +71,6 @@ async function getActivity(folder, formerIds = []) {
   if (cached) return cached;
 
   try {
-    // Fetch commits from all related folders and merge
     const allCommits = [];
 
     for (const id of allIds) {
@@ -92,7 +91,6 @@ async function getActivity(folder, formerIds = []) {
       return empty;
     }
 
-    // Deduplicate commits by SHA
     const uniqueCommits = new Map();
     for (const commit of allCommits) {
       if (commit?.sha && !uniqueCommits.has(commit.sha)) {
@@ -182,18 +180,60 @@ function getMembership(activity) {
 }
 
 /* =========================
-   LIFETIME SCORE
+   LIFETIME SCORE (SUSTAINED ENGAGEMENT, NOT RAW COMMITS)
 ========================= */
 
 function getLifetimeScore(activity) {
-  const c = activity.commitCount;
+  const commits = activity.commitCount;
+  const dates = activity.commitDates || [];
 
-  if (c === 0) return 0;
-  if (c === 1) return 1;
-  if (c < 10) return 2;
-  if (c < 25) return 3;
-  if (c < 50) return 4;
-  return 5;
+  if (commits === 0) return 0;
+
+  if (dates.length < 2) return 1;
+
+  const sorted = [...dates].sort((a, b) => a - b);
+  const firstCommit = sorted[0];
+  const lastCommit = sorted[sorted.length - 1];
+
+  const spanDays = Math.ceil((lastCommit - firstCommit) / (1000 * 60 * 60 * 24));
+
+  const activeWeeks = new Set();
+  dates.forEach((d) => {
+    const year = d.getFullYear();
+    const week = Math.ceil(d.getDate() / 7);
+    activeWeeks.add(`${year}-${week}`);
+  });
+
+  const weeksActive = activeWeeks.size;
+  const commitsPerWeek = weeksActive > 0 ? commits / weeksActive : commits;
+
+  // Single burst (1 day of activity)
+  if (spanDays === 0) return 1;
+
+  // Short burst (less than a week)
+  if (spanDays < 7 && commitsPerWeek < 10) return 1;
+  if (spanDays < 7 && commitsPerWeek >= 10) return 2;
+
+  // Across weeks (2-4 weeks)
+  if (spanDays < 30) {
+    if (weeksActive >= 2) return 3;
+    return 2;
+  }
+
+  // Across months (1-3 months)
+  if (spanDays < 90) {
+    if (weeksActive >= 6) return 4;
+    return 3;
+  }
+
+  // Long-term builder (3+ months)
+  if (spanDays >= 90) {
+    if (weeksActive >= 12) return 5;
+    if (weeksActive >= 8) return 4;
+    return 4;
+  }
+
+  return 3;
 }
 
 function stars(n) {
