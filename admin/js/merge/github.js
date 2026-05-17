@@ -72,7 +72,13 @@ export async function fetchCommitCountsForAllStudents(students) {
     const batchResults = await Promise.all(
       batch.map(async (student) => {
         try {
-          const url = `https://api.github.com/repos/${config.repo.owner}/${config.repo.name}/commits?path=${student.id}&per_page=100`;
+          // If no GitHub username, cannot filter by author
+          if (!student.githubUsername || student.githubUsername.trim() === "") {
+            return { id: student.id, commitCount: 0 };
+          }
+
+          // Fetch commits by this specific author only
+          const url = `https://api.github.com/repos/${config.repo.owner}/${config.repo.name}/commits?path=${student.id}&author=${student.githubUsername}&per_page=100`;
           const res = await fetch(url);
 
           if (!res.ok) {
