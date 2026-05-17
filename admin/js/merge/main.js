@@ -153,10 +153,11 @@ function setupEventListeners() {
     try {
       const counts = await fetchCommitCountsForAllStudents(currentStudents);
 
-      counts.forEach(({ id, commitCount }) => {
+      counts.forEach(({ id, commitCount, lastCommitDate }) => {
         const student = currentStudents.find((s) => s.id === id);
         if (student) {
           student.totalPushes = commitCount;
+          student.lastCommitDate = lastCommitDate;
         }
       });
 
