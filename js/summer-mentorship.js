@@ -1,17 +1,49 @@
 // summer-mentorship.js
-// Web Ring Badge System — Composable membership labels
-
-const REPO_OWNER = "jamesdneufeld";
-const REPO_NAME = "ideawebring";
+// Web Ring Badge System — Hybrid: API first, JSON fallback
 
 // ============================================================
 // CONFIGURATION
 // ============================================================
-const CACHE_TTL_HOURS = 12; // Cache duration in hours (12 hours = 43200 seconds)
+
+// GitHub repository settings
+const REPO_OWNER = "jamesdneufeld";
+const REPO_NAME = "ideawebring";
+
+// Cache settings
+const CACHE_TTL_HOURS = 12; // How long to cache GitHub data (hours)
+const PER_PAGE_COMMITS = 100; // Number of commits to fetch per API call
+
+// UI thresholds
+const RETURN_GLOW_DAYS = 365; // Days after which a returning student gets the glow effect
+
+// Lookup tables for human-readable labels
+const PURPOSE_LABELS = {
+  practice: "Here for More Practice",
+  portfolio: "Portfolio Building",
+  indie_web: "Indie Web Explorer",
+  career_prep: "Career Prep",
+  returning_practice: "Returning for Practice",
+  learning_html_css: "Learning HTML & CSS",
+};
+
+const FOCUS_AREA_LABELS = {
+  layout_foundations: "Layout Foundations",
+  responsive_design: "Responsive Design",
+  debugging_tools: "Debugging Tools",
+  flexbox_layouts: "Flexbox Layouts",
+  box_model: "The Box Model",
+  media_queries: "Media Queries",
+};
 
 // ============================================================
-// CACHE HELPERS
+// END CONFIGURATION
 // ============================================================
+
+let studentsData = [];
+
+/* =========================
+   CACHE HELPERS
+========================= */
 
 function getCache(key) {
   const raw = localStorage.getItem(key);
@@ -36,8 +68,6 @@ function setCache(key, value) {
     }),
   );
 }
-
-let studentsData = [];
 
 /* =========================
    LOAD STUDENTS
@@ -66,6 +96,23 @@ function makeEmptyActivity() {
 }
 
 /* =========================
+   GET STORED ACTIVITY FROM JSON (FALLBACK)
+========================= */
+
+function getStoredActivity(student) {
+  if (student?.latestPushDate) {
+    const lastSeenDays = daysSince(student.latestPushDate);
+    return {
+      lastDate: student.latestPushDate,
+      lastSeenDays: lastSeenDays,
+      commitCount: student.totalPushes || 0,
+      isFromAPI: false,
+    };
+  }
+  return null;
+}
+
+/* =========================
    ISO WEEK HELPER
 ========================= */
 
@@ -81,7 +128,7 @@ function getWeekNumber(date) {
    GITHUB ACTIVITY (WITH FORMERIDS SUPPORT)
 ========================= */
 
-async function getActivity(folder, formerIds = []) {
+async function getActivityFromAPI(folder, formerIds = []) {
   const allIds = [folder, ...formerIds].filter(Boolean);
   const cacheKey = `activity_${folder}`;
   const cached = getCache(cacheKey);
@@ -91,7 +138,7 @@ async function getActivity(folder, formerIds = []) {
     const allCommits = [];
 
     for (const id of allIds) {
-      const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${id}&per_page=100`;
+      const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${id}&per_page=${PER_PAGE_COMMITS}`;
       const res = await fetch(url);
 
       if (res.ok) {
@@ -134,16 +181,39 @@ async function getActivity(folder, formerIds = []) {
       lastDate: commitDates[0].toISOString(),
       commitCount: commits.length,
       commitDates,
+      isFromAPI: true,
     };
 
     setCache(cacheKey, result);
     return result;
   } catch (err) {
     console.warn(`GitHub fetch failed for ${folder}:`, err);
-    const empty = makeEmptyActivity();
-    setCache(cacheKey, empty);
-    return empty;
+    return null;
   }
+}
+
+/* =========================
+   GET ACTIVITY (HYBRID: API FIRST, FALLBACK TO STORED)
+========================= */
+
+async function getActivity(folder, student) {
+  // Try API first
+  const apiActivity = await getActivityFromAPI(folder, student?.formerIds || []);
+
+  // If API returned valid data, use it
+  if (apiActivity && apiActivity.lastDate) {
+    return apiActivity;
+  }
+
+  // If API failed, fall back to stored data from students.json
+  const storedActivity = getStoredActivity(student);
+  if (storedActivity) {
+    console.log(`Using stored fallback data for ${folder}`);
+    return storedActivity;
+  }
+
+  // If all fails, return empty
+  return makeEmptyActivity();
 }
 
 /* =========================
@@ -155,128 +225,35 @@ function daysSince(date) {
   return Math.floor((Date.now() - new Date(date)) / (1000 * 60 * 60 * 24));
 }
 
+function getLastActiveLabel(days) {
+  if (days === null) return "No activity";
+  if (days === 0) return "Active today";
+  if (days === 1) return "Active yesterday";
+  if (days < 7) return `Active this week (${days} days ago)`;
+  if (days < 14) return "Active within 2 weeks";
+  if (days < 30) return "Active this month";
+  if (days < 60) return "Active last month";
+  if (days < 90) return "Active 2 months ago";
+  if (days < 180) return "Active 3+ months ago";
+  if (days < 365) return "Active 6+ months ago";
+  return "Active over a year ago";
+}
+
 /* =========================
    MEMBERSHIP LABEL (COMPOSABLE)
 ========================= */
 
-function getMembershipLabel(student) {
-  // Withdrawn students
-  if (student?.withdrawn) {
-    return "Archived Member";
-  }
-
-  // Alumni
-  if (student?.isAlumni) {
-    if (student?.isMentor) return "Alumni Mentor";
-    if (student?.isReturning && student?.isActive) return "Active Returning Alumni";
-    if (student?.isReturning) return "Returning Alumni";
-    if (student?.isActive) return "Active Alumni";
-    return "Alumni";
-  }
-
-  // Current students
-  if (student?.isReturning && student?.isActive) return "Active Returning Student";
-  if (student?.isReturning) return "Returning Student";
-  if (student?.isActive) return "Active Student";
-
+function getIdentityLabel(student) {
+  if (student?.status === "alumni" && student?.returning) return "Returning Alumni";
+  if (student?.status === "alumni") return "Alumni";
+  if (student?.returning) return "Returning Student";
   return "New Student";
 }
 
-/* =========================
-   MEMBERSHIP (WITH COMPOSABLE FIELDS)
-========================= */
-
-function getMembership(activity, student) {
-  // Use explicit membership label if available
-  if (student?.membershipLabel) {
-    return student.membershipLabel;
-  }
-
-  // Generate from composable fields
-  if (student?.isAlumni !== undefined || student?.isReturning !== undefined || student?.isActive !== undefined) {
-    return getMembershipLabel(student);
-  }
-
-  // Fallback to Git-based inference (for students without any metadata)
-  const commits = activity.commitCount;
-  const commitDates = activity.commitDates || [];
-
-  if (commits === 0) return "New Student";
-  if (commits === 1) return "New Student";
-  if (commitDates.length < 2) return "Contributor";
-
-  const sorted = [...commitDates].sort((a, b) => a - b);
-  const firstDate = sorted[0];
-  const lastDate = sorted[sorted.length - 1];
-  const activeDays = Math.ceil((lastDate - firstDate) / (1000 * 60 * 60 * 24));
-  const lastSeenDays = daysSince(lastDate);
-
-  if (lastSeenDays !== null && lastSeenDays > 365 && commits > 0) {
-    return "Archived Member";
-  }
-
-  if (commits >= 30 && activeDays >= 60) return "Veteran Contributor";
-  if (commits >= 10 && activeDays >= 30) return "Regular Contributor";
-
-  return "Contributor";
-}
-
-/* =========================
-   LIFETIME SCORE (SUSTAINED ENGAGEMENT)
-========================= */
-
-function getLifetimeScore(activity) {
-  const commits = activity.commitCount;
-  const dates = activity.commitDates || [];
-
-  if (commits === 0) return 0;
-  if (dates.length < 2) return 1;
-
-  const validDates = dates.filter((d) => d && d instanceof Date && !isNaN(d.getTime()));
-
-  if (validDates.length < 2) return 1;
-
-  const sorted = [...validDates].sort((a, b) => a - b);
-  const firstCommit = sorted[0];
-  const lastCommit = sorted[sorted.length - 1];
-
-  const spanDays = Math.ceil((lastCommit - firstCommit) / (1000 * 60 * 60 * 24));
-
-  const activeWeeks = new Set();
-  validDates.forEach((d) => {
-    if (d instanceof Date) {
-      const year = d.getFullYear();
-      const weekNum = getWeekNumber(d);
-      activeWeeks.add(`${year}-W${weekNum}`);
-    }
-  });
-
-  const weeksActive = activeWeeks.size;
-
-  if (spanDays === 0) return 1;
-  if (spanDays < 7) return 1;
-
-  if (spanDays < 30) {
-    if (weeksActive >= 2) return 3;
-    return 2;
-  }
-
-  if (spanDays < 90) {
-    if (weeksActive >= 6) return 4;
-    return 3;
-  }
-
-  if (spanDays >= 90) {
-    if (weeksActive >= 12) return 5;
-    if (weeksActive >= 8) return 4;
-    return 4;
-  }
-
-  return 3;
-}
-
-function stars(n) {
-  return "★".repeat(n) + "☆".repeat(5 - n);
+function formatDate(dateString) {
+  if (!dateString) return null;
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", { year: "numeric", month: "short" });
 }
 
 /* =========================
@@ -305,11 +282,29 @@ async function populateStudentData() {
     const folder = link.dataset.folder || link.getAttribute("href").replace(/\/$/, "").toLowerCase();
 
     const student = studentMap.get(folder);
-    const activity = await getActivity(folder, student?.formerIds || []);
 
-    const lastSeenDays = daysSince(activity.lastDate);
-    const membership = getMembership(activity, student);
-    const lifetime = getLifetimeScore(activity);
+    // Get activity (API first, fallback to stored)
+    const activity = await getActivity(folder, student);
+
+    // Use API data if available, otherwise stored
+    let lastSeenDays = null;
+    let totalPushes = 0;
+
+    if (activity?.isFromAPI || activity?.lastDate) {
+      lastSeenDays = daysSince(activity.lastDate);
+      totalPushes = activity.commitCount || 0;
+    } else if (activity?.lastSeenDays !== undefined) {
+      lastSeenDays = activity.lastSeenDays;
+      totalPushes = activity.commitCount || 0;
+    }
+
+    const joinedDate = formatDate(student?.joinedWebRing);
+    const identityLabel = getIdentityLabel(student);
+
+    const purpose = student?.purpose ? PURPOSE_LABELS[student.purpose] || student.purpose : null;
+    const focusArea = student?.focusArea ? FOCUS_AREA_LABELS[student.focusArea] || student.focusArea : null;
+
+    const lastActiveLabel = getLastActiveLabel(lastSeenDays);
 
     const programEl = link.querySelector(".student-program");
     const yearEl = link.querySelector(".student-year");
@@ -322,14 +317,33 @@ async function populateStudentData() {
 
     container.innerHTML = "";
 
-    container.appendChild(createBadge("badge-lastseen", lastSeenDays === null ? "Last seen: No activity" : `Last seen: ${lastSeenDays} days ago`));
+    // Identity badge
+    container.appendChild(createBadge("badge-identity", identityLabel));
 
-    container.appendChild(createBadge("badge-membership", `Membership: ${membership}`));
+    // Purpose (why they joined)
+    if (purpose) {
+      container.appendChild(createBadge("badge-purpose", purpose));
+    }
 
-    container.appendChild(createBadge("badge-lifetime", `Lifetime Score: ${stars(lifetime)}`));
+    // Focus area (what they're working on)
+    if (focusArea) {
+      container.appendChild(createBadge("badge-focus", focusArea));
+    }
 
-    const returnGlow = lastSeenDays !== null && lastSeenDays > 365 && activity.commitCount > 0;
+    // Joined Web Ring
+    if (joinedDate) {
+      container.appendChild(createBadge("badge-joined", `Joined Web Ring: ${joinedDate}`));
+    }
 
+    // Activity (Last Active + Contributions)
+    let activityText = lastActiveLabel;
+    if (totalPushes > 0) {
+      activityText += ` · ${totalPushes} contribution${totalPushes !== 1 ? "s" : ""}`;
+    }
+    container.appendChild(createBadge("badge-activity", activityText));
+
+    // Return glow
+    const returnGlow = lastSeenDays !== null && lastSeenDays > RETURN_GLOW_DAYS && totalPushes > 0;
     link.classList.toggle("return-glow", returnGlow);
   }
 }
