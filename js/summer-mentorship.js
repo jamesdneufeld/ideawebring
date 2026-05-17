@@ -1,5 +1,5 @@
 // summer-mentorship.js
-// Web Ring Badge System — Explicit cohortStatus for membership
+// Web Ring Badge System — Composable membership labels
 
 const REPO_OWNER = "jamesdneufeld";
 const REPO_NAME = "ideawebring";
@@ -151,48 +151,67 @@ function daysSince(date) {
 }
 
 /* =========================
-   MEMBERSHIP (EXPLICIT COHORT STATUS FIRST)
+   MEMBERSHIP LABEL (COMPOSABLE)
+========================= */
+
+function getMembershipLabel(student) {
+  // Withdrawn students
+  if (student?.withdrawn) {
+    return "Archived Member";
+  }
+
+  // Alumni
+  if (student?.isAlumni) {
+    if (student?.isMentor) return "Alumni Mentor";
+    if (student?.isReturning && student?.isActive) return "Active Returning Alumni";
+    if (student?.isReturning) return "Returning Alumni";
+    if (student?.isActive) return "Active Alumni";
+    return "Alumni";
+  }
+
+  // Current students
+  if (student?.isReturning && student?.isActive) return "Active Returning Student";
+  if (student?.isReturning) return "Returning Student";
+  if (student?.isActive) return "Active Student";
+
+  return "New Student";
+}
+
+/* =========================
+   MEMBERSHIP (WITH COMPOSABLE FIELDS)
 ========================= */
 
 function getMembership(activity, student) {
-  // If explicit cohort status exists, use it
-  if (student?.cohortStatus) {
-    const status = student.cohortStatus;
-    if (status === "newcomer") return "Newcomer";
-    if (status === "returning") return "Regular";
-    if (status === "alumni") return "Alumni";
-    if (status === "inactive") return "Archive";
-    if (status === "withdrawn") return "Archive";
+  // Use explicit membership label if available
+  if (student?.membershipLabel) {
+    return student.membershipLabel;
   }
 
-  // Fallback to Git-based inference (for students without cohortStatus)
+  // Generate from composable fields
+  if (student?.isAlumni !== undefined || student?.isReturning !== undefined || student?.isActive !== undefined) {
+    return getMembershipLabel(student);
+  }
+
+  // Fallback to Git-based inference (for students without any metadata)
   const commits = activity.commitCount;
   const commitDates = activity.commitDates || [];
 
-  if (commits === 0) return "Newcomer";
-  if (commits === 1) return "Newcomer";
-
+  if (commits === 0) return "New Student";
+  if (commits === 1) return "New Student";
   if (commitDates.length < 2) return "Contributor";
 
   const sorted = [...commitDates].sort((a, b) => a - b);
   const firstDate = sorted[0];
   const lastDate = sorted[sorted.length - 1];
-
   const activeDays = Math.ceil((lastDate - firstDate) / (1000 * 60 * 60 * 24));
-
   const lastSeenDays = daysSince(lastDate);
 
   if (lastSeenDays !== null && lastSeenDays > 365 && commits > 0) {
-    return "Archive";
+    return "Archived Member";
   }
 
-  if (commits >= 30 && activeDays >= 60) {
-    return "Veteran";
-  }
-
-  if (commits >= 10 && activeDays >= 30) {
-    return "Regular";
-  }
+  if (commits >= 30 && activeDays >= 60) return "Veteran Contributor";
+  if (commits >= 10 && activeDays >= 30) return "Regular Contributor";
 
   return "Contributor";
 }
