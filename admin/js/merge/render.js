@@ -7,7 +7,7 @@ export function renderTableHeader() {
   if (!thead) return;
 
   thead.innerHTML = `
-    <table>
+    <tr>
       <th>Folder ID</th>
       <th>Display Name</th>
       <th>GitHub</th>
@@ -20,7 +20,7 @@ export function renderTableHeader() {
       <th>Tags</th>
       <th>Resume Met</th>
       <th>Notes</th>
-    </table>
+    </tr>
   `;
 }
 
@@ -55,7 +55,7 @@ export function renderTable(students, onUpdate) {
     githubInput.addEventListener("change", (e) => onUpdate(idx, "githubUsername", e.target.value.trim()));
     githubCell.appendChild(githubInput);
 
-    // Status dropdown (student / alumni / withdrawn)
+    // Status dropdown
     const statusCell = row.insertCell(3);
     const statusSelect = document.createElement("select");
     const statusOptions = ["student", "alumni", "withdrawn"];
@@ -69,7 +69,7 @@ export function renderTable(students, onUpdate) {
     statusSelect.addEventListener("change", (e) => onUpdate(idx, "status", e.target.value));
     statusCell.appendChild(statusSelect);
 
-    // Participation dropdown (summer-mentorship / coursework / null)
+    // Participation dropdown
     const participationCell = row.insertCell(4);
     const participationSelect = document.createElement("select");
     const participationOptions = [
@@ -92,14 +92,22 @@ export function renderTable(students, onUpdate) {
     });
     participationCell.appendChild(participationSelect);
 
-    // Returning checkbox
+    // Returning dropdown (New / Returning)
     const returningCell = row.insertCell(5);
-    returningCell.className = "checkbox-cell";
-    const returningCheckbox = document.createElement("input");
-    returningCheckbox.type = "checkbox";
-    returningCheckbox.checked = student.returning;
-    returningCheckbox.addEventListener("change", (e) => onUpdate(idx, "returning", e.target.checked));
-    returningCell.appendChild(returningCheckbox);
+    const returningSelect = document.createElement("select");
+    const returningOptions = [
+      { value: false, label: "New" },
+      { value: true, label: "Returning" },
+    ];
+    returningOptions.forEach((opt) => {
+      const option = document.createElement("option");
+      option.value = opt.value;
+      option.textContent = opt.label;
+      if (student.returning === opt.value) option.selected = true;
+      returningSelect.appendChild(option);
+    });
+    returningSelect.addEventListener("change", (e) => onUpdate(idx, "returning", e.target.value === "true"));
+    returningCell.appendChild(returningSelect);
 
     // Program dropdown
     const programCell = row.insertCell(6);
@@ -128,7 +136,7 @@ export function renderTable(students, onUpdate) {
     yearSelect.addEventListener("change", (e) => onUpdate(idx, "year", e.target.value));
     yearCell.appendChild(yearSelect);
 
-    // Total Pushes (read-only, from GitHub)
+    // Total Pushes (read-only)
     const pushesCell = row.insertCell(8);
     const pushesSpan = document.createElement("span");
     pushesSpan.textContent = student.totalPushes || "0";

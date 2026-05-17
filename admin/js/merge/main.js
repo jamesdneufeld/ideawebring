@@ -1,7 +1,7 @@
 // js/merge/main.js
 
 import { loadConfig } from "./config.js";
-import { fetchStudentsFromGitHub, fetchFoldersFromGitHub } from "./github.js";
+import { fetchStudentsFromGitHub, fetchFoldersFromGitHub, fetchCommitCountsForAllStudents } from "./github.js";
 import { reconcile } from "./reconcile.js";
 import { renderTableHeader, renderTable, updateUIFromConfig, showWarning, hideWarning, showEditor, renderPreview } from "./render.js";
 import { cleanForExport } from "./student.js";
@@ -133,49 +133,45 @@ function setupEventListeners() {
 
     URL.revokeObjectURL(url);
   });
-}
 
-// Add this after the existing event listeners
-
-document.getElementById("fetchPushCountsBtn").addEventListener("click", async () => {
-  if (!currentStudents.length) {
-    alert("Please reconcile students first");
-    return;
-  }
-
-  const btn = document.getElementById("fetchPushCountsBtn");
-  const originalText = btn.textContent;
-  btn.textContent = "⟳ Fetching...";
-  btn.disabled = true;
-
-  try {
-    const counts = await fetchCommitCountsForAllStudents(currentStudents);
-
-    // Update currentStudents with commit counts
-    counts.forEach(({ id, commitCount }) => {
-      const student = currentStudents.find((s) => s.id === id);
-      if (student) {
-        student.totalPushes = commitCount;
-      }
-    });
-
-    // Re-render table and preview
-    function handleUpdate(idx, field, value) {
-      currentStudents[idx][field] = value;
-      renderTable(currentStudents, handleUpdate);
-      renderPreview(currentStudents.map(cleanForExport));
+  document.getElementById("fetchPushCountsBtn").addEventListener("click", async () => {
+    if (!currentStudents.length) {
+      alert("Please reconcile students first");
+      return;
     }
 
-    renderTable(currentStudents, handleUpdate);
-    renderPreview(currentStudents.map(cleanForExport));
+    const btn = document.getElementById("fetchPushCountsBtn");
+    const originalText = btn.textContent;
+    btn.textContent = "⟳ Fetching...";
+    btn.disabled = true;
 
-    alert(`✅ Fetched push counts for ${counts.length} students`);
-  } catch (err) {
-    alert(`❌ Error fetching push counts: ${err.message}`);
-  } finally {
-    btn.textContent = originalText;
-    btn.disabled = false;
-  }
-});
+    try {
+      const counts = await fetchCommitCountsForAllStudents(currentStudents);
+
+      counts.forEach(({ id, commitCount }) => {
+        const student = currentStudents.find((s) => s.id === id);
+        if (student) {
+          student.totalPushes = commitCount;
+        }
+      });
+
+      function handleUpdate(idx, field, value) {
+        currentStudents[idx][field] = value;
+        renderTable(currentStudents, handleUpdate);
+        renderPreview(currentStudents.map(cleanForExport));
+      }
+
+      renderTable(currentStudents, handleUpdate);
+      renderPreview(currentStudents.map(cleanForExport));
+
+      alert(`✅ Fetched push counts for ${counts.length} students`);
+    } catch (err) {
+      alert(`❌ Error fetching push counts: ${err.message}`);
+    } finally {
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }
+  });
+}
 
 init();
