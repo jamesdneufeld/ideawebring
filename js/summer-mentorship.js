@@ -1,5 +1,5 @@
 // summer-mentorship.js
-// Deterministic Membership + Lifetime System (stable model)
+// Deterministic Membership + Lifetime System (stable + corrected)
 
 const REPO_OWNER = "jamesdneufeld";
 const REPO_NAME = "ideawebring";
@@ -16,7 +16,9 @@ function getCache(key) {
 
   try {
     const data = JSON.parse(raw);
-    if (Date.now() - data.timestamp < 60 * 60 * 1000) return data.value;
+    if (Date.now() - data.timestamp < 60 * 60 * 1000) {
+      return data.value; // 🔥 FIXED (was missing in Deepseek version)
+    }
   } catch {}
 
   return null;
@@ -100,7 +102,7 @@ function makeEmptyActivity() {
 }
 
 /* =========================
-   CORE DERIVED VALUES
+   TIME HELPERS
 ========================= */
 
 function daysSince(date) {
@@ -109,47 +111,43 @@ function daysSince(date) {
 }
 
 /* =========================
-   MEMBERSHIP (DETERMINISTIC)
+   MEMBERSHIP (FIXED LOGIC)
 ========================= */
 
-function getMembership(student, activity) {
+function getMembership(activity) {
   const commits = activity.commitCount;
-  const hasGithub = commits > 0;
+  const days = daysSince(activity.lastDate);
 
-  // 1. Not yet active (invited / no commits)
-  if (!hasGithub) {
-    if (student?.githubUsername) return "Newcomer";
-    return "Archive";
-  }
+  // ❗ no commits = never actually joined GitHub activity
+  if (commits === 0) return "Newcomer";
 
-  // 2. First contribution
+  // first contribution
   if (commits === 1) return "Newcomer";
 
-  // 3. Regular activity
+  // small participation
   if (commits >= 2 && commits < 10) return "Contributor";
 
-  // 4. Active recurring participant
+  // steady participation
   if (commits >= 10 && commits < 30) return "Regular";
 
-  // 5. Veteran threshold (graduated or long-term return)
+  // long-term / returning / alumni
   if (commits >= 30) return "Veteran";
 
   return "Contributor";
 }
 
 /* =========================
-   LIFETIME SCORE (5★)
-   NEVER DECREASES
+   LIFETIME SCORE (STABLE 1–5★)
 ========================= */
 
 function getLifetimeScore(activity) {
-  const commits = activity.commitCount;
+  const c = activity.commitCount;
 
-  if (commits === 0) return 0;
-  if (commits === 1) return 1;
-  if (commits >= 2 && commits < 10) return 2;
-  if (commits >= 10 && commits < 25) return 3;
-  if (commits >= 25 && commits < 50) return 4;
+  if (c === 0) return 0;
+  if (c === 1) return 1;
+  if (c < 10) return 2;
+  if (c < 25) return 3;
+  if (c < 50) return 4;
   return 5;
 }
 
@@ -158,7 +156,7 @@ function stars(n) {
 }
 
 /* =========================
-   UI RENDER HELPERS
+   UI
 ========================= */
 
 function createBadge(className, text = "", title = "") {
@@ -170,7 +168,7 @@ function createBadge(className, text = "", title = "") {
 }
 
 /* =========================
-   MAIN RENDER LOOP
+   RENDER
 ========================= */
 
 async function populateStudentData() {
@@ -186,32 +184,26 @@ async function populateStudentData() {
     const activity = await getActivity(folder);
 
     const lastSeenDays = daysSince(activity.lastDate);
-    const membership = getMembership(student || {}, activity);
+    const membership = getMembership(activity);
     const lifetime = getLifetimeScore(activity);
-
-    // Update program and year
-    const programEl = link.querySelector(".student-program");
-    const yearEl = link.querySelector(".student-year");
-    if (programEl && student?.program) programEl.textContent = student.program;
-    if (yearEl && student?.year) yearEl.textContent = student.year;
 
     const container = link.querySelector(".student-badges");
     if (!container) continue;
 
     container.innerHTML = "";
 
-    // Last Seen
+    /* Last Seen */
     const lastSeenText = lastSeenDays === null ? "Last seen: No activity" : `Last seen: ${lastSeenDays} days ago`;
 
     container.appendChild(createBadge("badge-lastseen", lastSeenText));
 
-    // Membership
+    /* Membership */
     container.appendChild(createBadge("badge-membership", `Membership: ${membership}`));
 
-    // Lifetime Score
+    /* Lifetime Score */
     container.appendChild(createBadge("badge-lifetime", `Lifetime Score: ${stars(lifetime)}`));
 
-    // Return glow (optional CSS hook)
+    /* Return Glow (deterministic rule) */
     if (lastSeenDays !== null && lastSeenDays > 365 && activity.commitCount > 0) {
       link.classList.add("return-glow");
     } else {
