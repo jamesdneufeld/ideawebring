@@ -15,6 +15,17 @@ const LEARNING_GOAL_OPTIONS = [
   { value: "learning_html_css", label: "Learning HTML & CSS" },
 ];
 
+// Purpose options (primary reason for joining)
+const PURPOSE_OPTIONS = [
+  { value: "", label: "—" },
+  { value: "practice", label: "Here for More Practice" },
+  { value: "portfolio", label: "Portfolio Building" },
+  { value: "indie_web", label: "Indie Web Explorer" },
+  { value: "career_prep", label: "Career Prep" },
+  { value: "returning_practice", label: "Returning for Practice" },
+  { value: "learning_html_css", label: "Learning HTML & CSS" },
+];
+
 // Cohort options
 const COHORT_OPTIONS = ["Summer 2024", "Summer 2025", "Summer 2026", "Summer 2027"];
 
@@ -30,17 +41,17 @@ export function renderTableHeader() {
   if (!thead) return;
 
   thead.innerHTML = `
-    <tr>
+    <table>
       <th style="width: 30px;">✓</th>
       <th>Folder ID</th>
       <th>Display Name</th>
       <th>GitHub</th>
       <th>Status</th>
       <th>Entry Type</th>
-      <th>Participation</th>
       <th>Program</th>
       <th>Grad Year</th>
       <th>Cohort</th>
+      <th>Purpose</th>
       <th>Joined Web Ring</th>
       <th>Joined Mentorship</th>
       <th>First Commit</th>
@@ -52,7 +63,7 @@ export function renderTableHeader() {
       <th>Former IDs</th>
       <th>Tags</th>
       <th>Resume Met</th>
-    </table>
+    </tr>
   `;
 }
 
@@ -110,7 +121,7 @@ export function renderTable(students, onUpdate) {
     statusSelect.addEventListener("change", (e) => onUpdate(idx, "status", e.target.value));
     statusCell.appendChild(statusSelect);
 
-    // Entry Type dropdown (New / Returning)
+    // Entry Type dropdown
     const entryTypeCell = row.insertCell(5);
     const entryTypeSelect = document.createElement("select");
     ENTRY_TYPE_OPTIONS.forEach((opt) => {
@@ -123,31 +134,8 @@ export function renderTable(students, onUpdate) {
     entryTypeSelect.addEventListener("change", (e) => onUpdate(idx, "entryType", e.target.value));
     entryTypeCell.appendChild(entryTypeSelect);
 
-    // Participation dropdown
-    const participationCell = row.insertCell(6);
-    const participationSelect = document.createElement("select");
-    const participationOptions = [
-      { value: "", label: "None" },
-      { value: "summer-mentorship", label: "Summer Mentorship" },
-      { value: "coursework", label: "Coursework" },
-    ];
-    participationOptions.forEach((opt) => {
-      const option = document.createElement("option");
-      option.value = opt.value;
-      option.textContent = opt.label;
-      if (student.participation === opt.value || (opt.value === "" && !student.participation)) {
-        option.selected = true;
-      }
-      participationSelect.appendChild(option);
-    });
-    participationSelect.addEventListener("change", (e) => {
-      const value = e.target.value === "" ? null : e.target.value;
-      onUpdate(idx, "participation", value);
-    });
-    participationCell.appendChild(participationSelect);
-
     // Program dropdown
-    const programCell = row.insertCell(7);
+    const programCell = row.insertCell(6);
     const programSelect = document.createElement("select");
     (config.options?.programs || ["BDes", "IxD"]).forEach((opt) => {
       const option = document.createElement("option");
@@ -160,7 +148,7 @@ export function renderTable(students, onUpdate) {
     programCell.appendChild(programSelect);
 
     // Year dropdown
-    const yearCell = row.insertCell(8);
+    const yearCell = row.insertCell(7);
     const yearSelect = document.createElement("select");
     yearSelect.className = "year-input";
     (config.options?.years || ["2024", "2025", "2026", "2027", "2028", "2029"]).forEach((opt) => {
@@ -174,7 +162,7 @@ export function renderTable(students, onUpdate) {
     yearCell.appendChild(yearSelect);
 
     // Cohort dropdown
-    const cohortCell = row.insertCell(9);
+    const cohortCell = row.insertCell(8);
     const cohortSelect = document.createElement("select");
     COHORT_OPTIONS.forEach((opt) => {
       const option = document.createElement("option");
@@ -185,6 +173,22 @@ export function renderTable(students, onUpdate) {
     });
     cohortSelect.addEventListener("change", (e) => onUpdate(idx, "cohort", e.target.value));
     cohortCell.appendChild(cohortSelect);
+
+    // Purpose dropdown
+    const purposeCell = row.insertCell(9);
+    const purposeSelect = document.createElement("select");
+    PURPOSE_OPTIONS.forEach((opt) => {
+      const option = document.createElement("option");
+      option.value = opt.value;
+      option.textContent = opt.label;
+      if (student.purpose === opt.value) option.selected = true;
+      purposeSelect.appendChild(option);
+    });
+    purposeSelect.addEventListener("change", (e) => {
+      const value = e.target.value === "" ? null : e.target.value;
+      onUpdate(idx, "purpose", value);
+    });
+    purposeCell.appendChild(purposeSelect);
 
     // Joined Web Ring (date picker)
     const joinedWebRingCell = row.insertCell(10);

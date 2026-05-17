@@ -18,6 +18,15 @@ const PER_PAGE_COMMITS = 100; // Number of commits to fetch per API call
 const RETURN_GLOW_DAYS = 365; // Days after which a returning student gets the glow effect
 
 // Lookup tables for human-readable labels
+const PURPOSE_LABELS = {
+  practice: "Here for More Practice",
+  portfolio: "Portfolio Building",
+  indie_web: "Indie Web Explorer",
+  career_prep: "Career Prep",
+  returning_practice: "Returning for Practice",
+  learning_html_css: "Learning HTML & CSS",
+};
+
 const LEARNING_GOAL_LABELS = {
   practice: "Here for More Practice",
   portfolio: "Portfolio Building",
@@ -28,42 +37,17 @@ const LEARNING_GOAL_LABELS = {
 };
 
 const FOCUS_AREA_LABELS = {
-  // Layout & Design
   layout_foundations: "Layout Foundations",
   responsive_design: "Responsive Design",
+  debugging_tools: "Debugging Tools",
   flexbox_layouts: "Flexbox Layouts",
   flexbox_confident: "Confident with Flexbox",
-  css_grid: "CSS Grid",
-  positioning: "CSS Positioning",
-
-  // Core Concepts
   box_model: "The Box Model",
   media_queries: "Media Queries",
-  semantic_html: "Semantic HTML",
-  accessibility: "Accessibility",
-
-  // Development Tools
-  debugging_tools: "Debugging Tools",
-  inspector: "Browser Inspector",
-  dev_tools: "Developer Tools",
-
-  // Styling & Design
-  color_theory: "Color Theory",
-  typography: "Typography",
-  animations: "CSS Animations",
-  transitions: "CSS Transitions",
-
-  // Student-specific notes (from signup form)
   box_model_unclear: "Learning the Box Model",
   media_queries_confusing: "Exploring Media Queries",
   new_to_html: "New to HTML & CSS",
   inspector_user: "Uses Browser Inspector",
-
-  // Additional mappings
-  layout: "Layout Design",
-  responsive: "Responsive Design",
-  flexbox: "Flexbox",
-  debugging: "Debugging Techniques",
 };
 
 const TOOL_LABELS = {
@@ -75,7 +59,6 @@ const TOOL_LABELS = {
   vscode: "VS Code",
   git: "Git",
   terminal: "Terminal/Command Line",
-  responsive_design_tools: "Responsive Design Tools",
 };
 
 // ============================================================
@@ -371,6 +354,7 @@ async function populateStudentData() {
     const identityLabel = getIdentityLabel(student);
     const cohort = student?.cohort;
 
+    const purpose = getHumanLabel(student?.purpose, PURPOSE_LABELS);
     const learningGoal = getHumanLabel(student?.learningGoal, LEARNING_GOAL_LABELS);
 
     // Format focus areas using lookup table
@@ -408,8 +392,13 @@ async function populateStudentData() {
       container.appendChild(createBadge("badge-cohort", cohort));
     }
 
-    // Learning goal (why they joined)
-    if (learningGoal) {
+    // Purpose (primary reason for joining)
+    if (purpose) {
+      container.appendChild(createBadge("badge-purpose", purpose));
+    }
+
+    // Learning goal (if different from purpose)
+    if (learningGoal && learningGoal !== purpose) {
       container.appendChild(createBadge("badge-learning-goal", learningGoal));
     }
 

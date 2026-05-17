@@ -1,6 +1,6 @@
 // js/merge/student.js
 // Student object factory — creates new student records from folder names or existing data
-// Handles default values (status, entryType, participation, program, year, cohort, dates, learning goals, focus areas, tools)
+// Handles default values (status, entryType, program, year, cohort, dates, purpose, learning goals, focus areas, tools)
 // Preserves formerIds and cleans data for JSON export
 
 import { getConfig } from "./config.js";
@@ -41,10 +41,10 @@ export function createStudent(folderId, existing = null) {
     githubUsername: existing?.githubUsername || null,
     status: existing?.status || "student",
     entryType: existing?.entryType || "new",
-    participation: existing?.participation || null,
     program: existing?.program || config.defaults.program,
     year: existing?.year || config.defaults.year,
     cohort: existing?.cohort || "Summer 2026",
+    purpose: existing?.purpose || null,
     joinedWebRing: existing?.joinedWebRing || null,
     joinedMentorship: existing?.joinedMentorship || null,
     firstCommitDate: existing?.firstCommitDate || null,
