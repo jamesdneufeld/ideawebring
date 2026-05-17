@@ -18,29 +18,37 @@ const LEARNING_GOAL_OPTIONS = [
 // Cohort options
 const COHORT_OPTIONS = ["Summer 2024", "Summer 2025", "Summer 2026", "Summer 2027"];
 
+// Entry type options
+const ENTRY_TYPE_OPTIONS = [
+  { value: "new", label: "New" },
+  { value: "returning", label: "Returning" },
+];
+
 export function renderTableHeader() {
   const thead = document.getElementById("tableHeader");
 
   if (!thead) return;
 
   thead.innerHTML = `
-    <table>
+    <tr>
       <th style="width: 30px;">✓</th>
       <th>Folder ID</th>
       <th>Display Name</th>
       <th>GitHub</th>
       <th>Status</th>
+      <th>Entry Type</th>
       <th>Participation</th>
-      <th>Returning</th>
       <th>Program</th>
       <th>Grad Year</th>
       <th>Cohort</th>
       <th>Joined Web Ring</th>
       <th>Joined Mentorship</th>
+      <th>First Commit</th>
+      <th>Last Commit</th>
+      <th>Total Pushes</th>
       <th>Learning Goal</th>
       <th>Focus Areas</th>
-      <th>Total Pushes</th>
-      <th>Last Commit</th>
+      <th>Tools</th>
       <th>Former IDs</th>
       <th>Tags</th>
       <th>Resume Met</th>
@@ -85,7 +93,7 @@ export function renderTable(students, onUpdate) {
     const githubInput = document.createElement("input");
     githubInput.placeholder = "github username";
     githubInput.value = student.githubUsername || "";
-    githubInput.addEventListener("change", (e) => onUpdate(idx, "githubUsername", e.target.value.trim()));
+    githubInput.addEventListener("change", (e) => onUpdate(idx, "githubUsername", e.target.value.trim() || null));
     githubCell.appendChild(githubInput);
 
     // Status dropdown
@@ -102,8 +110,21 @@ export function renderTable(students, onUpdate) {
     statusSelect.addEventListener("change", (e) => onUpdate(idx, "status", e.target.value));
     statusCell.appendChild(statusSelect);
 
+    // Entry Type dropdown (New / Returning)
+    const entryTypeCell = row.insertCell(5);
+    const entryTypeSelect = document.createElement("select");
+    ENTRY_TYPE_OPTIONS.forEach((opt) => {
+      const option = document.createElement("option");
+      option.value = opt.value;
+      option.textContent = opt.label;
+      if (student.entryType === opt.value) option.selected = true;
+      entryTypeSelect.appendChild(option);
+    });
+    entryTypeSelect.addEventListener("change", (e) => onUpdate(idx, "entryType", e.target.value));
+    entryTypeCell.appendChild(entryTypeSelect);
+
     // Participation dropdown
-    const participationCell = row.insertCell(5);
+    const participationCell = row.insertCell(6);
     const participationSelect = document.createElement("select");
     const participationOptions = [
       { value: "", label: "None" },
@@ -124,23 +145,6 @@ export function renderTable(students, onUpdate) {
       onUpdate(idx, "participation", value);
     });
     participationCell.appendChild(participationSelect);
-
-    // Returning dropdown
-    const returningCell = row.insertCell(6);
-    const returningSelect = document.createElement("select");
-    const returningOptions = [
-      { value: false, label: "New" },
-      { value: true, label: "Returning" },
-    ];
-    returningOptions.forEach((opt) => {
-      const option = document.createElement("option");
-      option.value = opt.value;
-      option.textContent = opt.label;
-      if (student.returning === opt.value) option.selected = true;
-      returningSelect.appendChild(option);
-    });
-    returningSelect.addEventListener("change", (e) => onUpdate(idx, "returning", e.target.value === "true"));
-    returningCell.appendChild(returningSelect);
 
     // Program dropdown
     const programCell = row.insertCell(7);
@@ -210,8 +214,48 @@ export function renderTable(students, onUpdate) {
     });
     joinedMentorshipCell.appendChild(joinedMentorshipInput);
 
+    // First Commit Date (date picker)
+    const firstCommitCell = row.insertCell(12);
+    const firstCommitInput = document.createElement("input");
+    firstCommitInput.type = "date";
+    firstCommitInput.style.width = "110px";
+    if (student.firstCommitDate) {
+      const dateStr = student.firstCommitDate.split("T")[0];
+      firstCommitInput.value = dateStr;
+    }
+    firstCommitInput.addEventListener("change", (e) => {
+      onUpdate(idx, "firstCommitDate", e.target.value || null);
+    });
+    firstCommitCell.appendChild(firstCommitInput);
+
+    // Last Commit Date (date picker)
+    const lastCommitCell = row.insertCell(13);
+    const lastCommitInput = document.createElement("input");
+    lastCommitInput.type = "date";
+    lastCommitInput.style.width = "110px";
+    if (student.lastCommitDate) {
+      const dateStr = student.lastCommitDate.split("T")[0];
+      lastCommitInput.value = dateStr;
+    }
+    lastCommitInput.addEventListener("change", (e) => {
+      onUpdate(idx, "lastCommitDate", e.target.value || null);
+    });
+    lastCommitCell.appendChild(lastCommitInput);
+
+    // Total Pushes (editable number)
+    const pushesCell = row.insertCell(14);
+    const pushesInput = document.createElement("input");
+    pushesInput.type = "number";
+    pushesInput.value = student.totalPushes !== undefined ? student.totalPushes : 0;
+    pushesInput.style.width = "70px";
+    pushesInput.addEventListener("change", (e) => {
+      const val = parseInt(e.target.value) || 0;
+      onUpdate(idx, "totalPushes", val);
+    });
+    pushesCell.appendChild(pushesInput);
+
     // Learning Goal dropdown
-    const learningGoalCell = row.insertCell(12);
+    const learningGoalCell = row.insertCell(15);
     const learningGoalSelect = document.createElement("select");
     LEARNING_GOAL_OPTIONS.forEach((opt) => {
       const option = document.createElement("option");
@@ -227,7 +271,7 @@ export function renderTable(students, onUpdate) {
     learningGoalCell.appendChild(learningGoalSelect);
 
     // Focus Areas (comma-separated text input)
-    const focusAreasCell = row.insertCell(13);
+    const focusAreasCell = row.insertCell(16);
     const focusAreasInput = document.createElement("input");
     focusAreasInput.type = "text";
     focusAreasInput.placeholder = "comma separated focus areas";
@@ -242,34 +286,24 @@ export function renderTable(students, onUpdate) {
     });
     focusAreasCell.appendChild(focusAreasInput);
 
-    // Total Pushes (editable number)
-    const pushesCell = row.insertCell(14);
-    const pushesInput = document.createElement("input");
-    pushesInput.type = "number";
-    pushesInput.value = student.totalPushes !== undefined ? student.totalPushes : 0;
-    pushesInput.style.width = "70px";
-    pushesInput.addEventListener("change", (e) => {
-      const val = parseInt(e.target.value) || 0;
-      onUpdate(idx, "totalPushes", val);
+    // Tools (comma-separated text input)
+    const toolsCell = row.insertCell(17);
+    const toolsInput = document.createElement("input");
+    toolsInput.type = "text";
+    toolsInput.placeholder = "comma separated tools";
+    toolsInput.value = (student.tools || []).join(", ");
+    toolsInput.style.width = "150px";
+    toolsInput.addEventListener("change", (e) => {
+      const toolsArray = e.target.value
+        .split(",")
+        .map((t) => t.trim())
+        .filter(Boolean);
+      onUpdate(idx, "tools", toolsArray);
     });
-    pushesCell.appendChild(pushesInput);
-
-    // Last Commit Date (editable date picker)
-    const lastCommitCell = row.insertCell(15);
-    const lastCommitInput = document.createElement("input");
-    lastCommitInput.type = "date";
-    lastCommitInput.style.width = "110px";
-    if (student.lastCommitDate) {
-      const dateStr = student.lastCommitDate.split("T")[0];
-      lastCommitInput.value = dateStr;
-    }
-    lastCommitInput.addEventListener("change", (e) => {
-      onUpdate(idx, "lastCommitDate", e.target.value || null);
-    });
-    lastCommitCell.appendChild(lastCommitInput);
+    toolsCell.appendChild(toolsInput);
 
     // Former IDs (comma-separated text input)
-    const formerIdsCell = row.insertCell(16);
+    const formerIdsCell = row.insertCell(18);
     const formerIdsInput = document.createElement("input");
     formerIdsInput.type = "text";
     formerIdsInput.placeholder = "comma separated former folder names";
@@ -285,7 +319,7 @@ export function renderTable(students, onUpdate) {
     formerIdsCell.appendChild(formerIdsInput);
 
     // Tags (comma-separated text input)
-    const tagsCell = row.insertCell(17);
+    const tagsCell = row.insertCell(19);
     const tagsInput = document.createElement("input");
     tagsInput.type = "text";
     tagsInput.placeholder = "comma separated tags";
@@ -300,7 +334,7 @@ export function renderTable(students, onUpdate) {
     tagsCell.appendChild(tagsInput);
 
     // Resume checkbox
-    const resumeCell = row.insertCell(18);
+    const resumeCell = row.insertCell(20);
     resumeCell.className = "checkbox-cell";
     const resumeCheckbox = document.createElement("input");
     resumeCheckbox.type = "checkbox";

@@ -36,6 +36,14 @@ const FOCUS_AREA_LABELS = {
   media_queries: "Media Queries",
 };
 
+const TOOL_LABELS = {
+  inspector: "Chrome Inspector",
+  figma: "Figma",
+  codepen: "CodePen",
+  github: "GitHub",
+  vs_code: "VS Code",
+};
+
 // ============================================================
 // END CONFIGURATION
 // ============================================================
@@ -91,6 +99,7 @@ async function loadStudents() {
 function makeEmptyActivity() {
   return {
     lastDate: null,
+    firstDate: null,
     commitCount: 0,
     commitDates: [],
     isFromAPI: false,
@@ -102,10 +111,11 @@ function makeEmptyActivity() {
 ========================= */
 
 function getStoredActivity(student) {
-  if (student?.latestPushDate) {
-    const lastSeenDays = daysSince(student.latestPushDate);
+  if (student?.lastCommitDate) {
+    const lastSeenDays = daysSince(student.lastCommitDate);
     return {
-      lastDate: student.latestPushDate,
+      lastDate: student.lastCommitDate,
+      firstDate: student.firstCommitDate,
       lastSeenDays: lastSeenDays,
       commitCount: student.totalPushes || 0,
       isFromAPI: false,
@@ -187,6 +197,7 @@ async function getActivityFromAPI(folder, student) {
 
     const result = {
       lastDate: commitDates[0].toISOString(),
+      firstDate: commitDates[commitDates.length - 1].toISOString(),
       commitCount: commits.length,
       commitDates,
       isFromAPI: true,
@@ -240,21 +251,23 @@ function getLastActiveLabel(days) {
   return `Last active: ${days} days ago`;
 }
 
+function formatDateMonthYear(dateString) {
+  if (!dateString) return null;
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", { year: "numeric", month: "short" });
+}
+
 /* =========================
    IDENTITY LABEL
 ========================= */
 
 function getIdentityLabel(student) {
-  if (student?.status === "alumni" && student?.returning) return "Returning Alumni";
-  if (student?.status === "alumni") return "Alumni";
-  if (student?.returning) return "Returning Student";
+  if (student?.status === "alumni") {
+    if (student?.entryType === "returning") return "Returning Alumni";
+    return "Alumni";
+  }
+  if (student?.entryType === "returning") return "Returning Student";
   return "New Student";
-}
-
-function formatDate(dateString) {
-  if (!dateString) return null;
-  const date = new Date(dateString);
-  return date.toLocaleDateString("en-US", { year: "numeric", month: "short" });
 }
 
 /* =========================
@@ -290,30 +303,42 @@ async function populateStudentData() {
     // Use API data if available, otherwise stored
     let lastSeenDays = null;
     let totalPushes = 0;
+    let firstCommitDate = student?.firstCommitDate;
 
     if (activity?.isFromAPI || activity?.lastDate) {
       lastSeenDays = daysSince(activity.lastDate);
       totalPushes = activity.commitCount || 0;
+      if (activity.firstDate && !firstCommitDate) {
+        firstCommitDate = activity.firstDate;
+      }
     } else if (activity?.lastSeenDays !== undefined) {
       lastSeenDays = activity.lastSeenDays;
       totalPushes = activity.commitCount || 0;
     }
 
-    const joinedDate = formatDate(student?.joinedWebRing);
-    const joinedMentorshipDate = formatDate(student?.joinedMentorship);
+    const joinedDate = formatDateMonthYear(student?.joinedWebRing);
+    const joinedMentorshipDate = formatDateMonthYear(student?.joinedMentorship);
+    const firstCommitFormatted = formatDateMonthYear(firstCommitDate);
     const identityLabel = getIdentityLabel(student);
+    const cohort = student?.cohort;
 
     const learningGoal = student?.learningGoal ? LEARNING_GOAL_LABELS[student.learningGoal] || student.learningGoal : null;
 
-    // Format focus areas (array to comma-separated string)
+    // Format focus areas
     let focusAreasText = null;
     if (student?.focusAreas && student.focusAreas.length > 0) {
       const formattedAreas = student.focusAreas.map((area) => FOCUS_AREA_LABELS[area] || area);
       focusAreasText = formattedAreas.join(" · ");
     }
 
+    // Format tools
+    let toolsText = null;
+    if (student?.tools && student.tools.length > 0) {
+      const formattedTools = student.tools.map((tool) => TOOL_LABELS[tool] || tool);
+      toolsText = formattedTools.join(" · ");
+    }
+
     const lastActiveLabel = getLastActiveLabel(lastSeenDays);
-    const cohort = student?.cohort;
 
     const programEl = link.querySelector(".student-program");
     const yearEl = link.querySelector(".student-year");
@@ -344,6 +369,11 @@ async function populateStudentData() {
       container.appendChild(createBadge("badge-focus-areas", focusAreasText));
     }
 
+    // Tools (what they use)
+    if (toolsText) {
+      container.appendChild(createBadge("badge-tools", toolsText));
+    }
+
     // Joined Web Ring
     if (joinedDate) {
       container.appendChild(createBadge("badge-joined", `Joined Web Ring: ${joinedDate}`));
@@ -352,6 +382,11 @@ async function populateStudentData() {
     // Joined Mentorship (if different from Web Ring)
     if (joinedMentorshipDate && joinedMentorshipDate !== joinedDate) {
       container.appendChild(createBadge("badge-joined-mentorship", `Joined Mentorship: ${joinedMentorshipDate}`));
+    }
+
+    // First contribution
+    if (firstCommitFormatted) {
+      container.appendChild(createBadge("badge-first-commit", `First contribution: ${firstCommitFormatted}`));
     }
 
     // Activity (Last Active + Contributions)

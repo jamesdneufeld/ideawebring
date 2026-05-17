@@ -1,6 +1,6 @@
 // js/merge/student.js
 // Student object factory — creates new student records from folder names or existing data
-// Handles default values (status, participation, returning, program, year, cohort, dates, learning goals, focus areas)
+// Handles default values (status, entryType, participation, program, year, cohort, dates, learning goals, focus areas, tools)
 // Preserves formerIds and cleans data for JSON export
 
 import { getConfig } from "./config.js";
@@ -24,27 +24,37 @@ export function createStudent(folderId, existing = null) {
       .filter(Boolean);
   }
 
+  let tools = existing?.tools || [];
+  if (typeof tools === "string" && tools.trim()) {
+    tools = tools
+      .split(",")
+      .map((t) => t.trim())
+      .filter(Boolean);
+  }
+
   // Preserve formerIds from existing student
   const formerIds = existing?.formerIds || [];
 
   return {
     id: folderId,
     displayName: existing?.displayName || toDisplayName(folderId),
-    githubUsername: existing?.githubUsername || "",
+    githubUsername: existing?.githubUsername || null,
     status: existing?.status || "student",
+    entryType: existing?.entryType || "new",
     participation: existing?.participation || null,
-    returning: existing?.returning || false,
     program: existing?.program || config.defaults.program,
     year: existing?.year || config.defaults.year,
-    totalPushes: existing?.totalPushes || 0,
-    lastCommitDate: existing?.lastCommitDate || null,
-    formerIds: formerIds,
-    // New fields
     cohort: existing?.cohort || "Summer 2026",
     joinedWebRing: existing?.joinedWebRing || null,
     joinedMentorship: existing?.joinedMentorship || null,
+    firstCommitDate: existing?.firstCommitDate || null,
+    lastCommitDate: existing?.lastCommitDate || null,
+    lastActiveSource: existing?.lastActiveSource || null,
+    totalPushes: existing?.totalPushes || 0,
     learningGoal: existing?.learningGoal || null,
     focusAreas: focusAreas,
+    tools: tools,
+    formerIds: formerIds,
     selectedForFetch: false,
     tags,
     resumeRequirementMet: existing?.resumeRequirementMet ?? config.defaults.resumeRequirementMet,
