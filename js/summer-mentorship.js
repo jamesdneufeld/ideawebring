@@ -1,5 +1,5 @@
 // summer-mentorship.js
-// Web Ring Badge System — production-safe + reliable GitHub parsing
+// Web Ring Badge System — Two-axis membership (commits + time span)
 
 const REPO_OWNER = "jamesdneufeld";
 const REPO_NAME = "ideawebring";
@@ -49,7 +49,7 @@ async function loadStudents() {
 }
 
 /* =========================
-   EMPTY FALLBACK
+   FALLBACK
 ========================= */
 
 function makeEmptyActivity() {
@@ -61,9 +61,7 @@ function makeEmptyActivity() {
 }
 
 /* =========================
-   GITHUB ACTIVITY (FIXED)
-   - Uses path parameter (reliable)
-   - Sorts dates to ensure latest commit
+   GITHUB ACTIVITY (HARDENED)
 ========================= */
 
 async function getActivity(folder) {
@@ -75,24 +73,41 @@ async function getActivity(folder) {
     const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${folder}&per_page=100`;
     const res = await fetch(url);
 
-    if (!res.ok) return makeEmptyActivity();
-
-    const data = await res.json();
-    const commits = Array.isArray(data) ? data : [];
-
-    if (!commits.length) {
+    if (!res.ok) {
       const empty = makeEmptyActivity();
       setCache(cacheKey, empty);
       return empty;
     }
 
-    // Extract dates and sort to ensure latest commit is correct
-    const commitDates = commits
-      .map((c) => new Date(c?.commit?.author?.date))
-      .filter((d) => !isNaN(d))
-      .sort((a, b) => b - a); // newest first
+    const data = await res.json();
 
-    if (!commitDates.length) return makeEmptyActivity();
+    if (!Array.isArray(data)) {
+      console.warn("Unexpected GitHub response:", data);
+      const empty = makeEmptyActivity();
+      setCache(cacheKey, empty);
+      return empty;
+    }
+
+    const commits = data;
+
+    if (commits.length === 0) {
+      const empty = makeEmptyActivity();
+      setCache(cacheKey, empty);
+      return empty;
+    }
+
+    const commitDates = commits
+      .map((c) => c?.commit?.author?.date)
+      .filter(Boolean)
+      .map((d) => new Date(d))
+      .filter((d) => !isNaN(d.getTime()))
+      .sort((a, b) => b - a);
+
+    if (commitDates.length === 0) {
+      const empty = makeEmptyActivity();
+      setCache(cacheKey, empty);
+      return empty;
+    }
 
     const result = {
       lastDate: commitDates[0].toISOString(),
@@ -102,8 +117,11 @@ async function getActivity(folder) {
 
     setCache(cacheKey, result);
     return result;
-  } catch {
-    return makeEmptyActivity();
+  } catch (err) {
+    console.warn(`GitHub fetch failed for ${folder}:`, err);
+    const empty = makeEmptyActivity();
+    setCache(cacheKey, empty);
+    return empty;
   }
 }
 
@@ -117,21 +135,47 @@ function daysSince(date) {
 }
 
 /* =========================
-   MEMBERSHIP (DETERMINISTIC)
+   MEMBERSHIP (TWO-AXIS: commits + time span)
 ========================= */
 
 function getMembership(activity) {
   const commits = activity.commitCount;
+  const commitDates = activity.commitDates || [];
 
   if (commits === 0) return "Newcomer";
   if (commits === 1) return "Newcomer";
-  if (commits >= 2 && commits < 10) return "Contributor";
-  if (commits >= 10 && commits < 30) return "Regular";
-  return "Veteran";
+
+  // Calculate active days span (first commit to last commit)
+  let activeDays = 0;
+  if (commitDates.length >= 2) {
+    const firstCommit = new Date(Math.min(...commitDates));
+    const lastCommit = new Date(Math.max(...commitDates));
+    activeDays = Math.ceil((lastCommit - firstCommit) / (1000 * 60 * 60 * 24));
+  }
+
+  // Contributor: 2+ commits but active for less than 30 days (burst activity)
+  if (commits >= 2 && activeDays < 30) return "Contributor";
+
+  // Regular: 5+ commits AND active for 30+ days
+  if (commits >= 5 && activeDays >= 30 && commits < 30) return "Regular";
+
+  // Veteran: 30+ commits AND active for 60+ days
+  if (commits >= 30 && activeDays >= 60) return "Veteran";
+
+  // Archive: has commits but last commit over 365 days ago
+  const lastDate = activity.lastDate ? new Date(activity.lastDate) : null;
+  if (lastDate && (Date.now() - lastDate) / (1000 * 60 * 60 * 24) > 365) {
+    return "Archive";
+  }
+
+  // Fallback
+  if (commits >= 2 && commits < 5) return "Contributor";
+  if (commits >= 5 && commits < 30) return "Regular";
+  return "Contributor";
 }
 
 /* =========================
-   LIFETIME SCORE (STABLE)
+   LIFETIME SCORE
 ========================= */
 
 function getLifetimeScore(activity) {
@@ -162,7 +206,7 @@ function createBadge(className, text = "", title = "") {
 }
 
 /* =========================
-   MAIN RENDER LOOP
+   RENDER
 ========================= */
 
 async function populateStudentData() {
@@ -202,7 +246,7 @@ async function populateStudentData() {
     /* LIFETIME SCORE */
     container.appendChild(createBadge("badge-lifetime", `Lifetime Score: ${stars(lifetime)}`));
 
-    /* RETURN GLOW (alumni return) */
+    /* RETURN GLOW */
     const returnGlow = lastSeenDays !== null && lastSeenDays > 365 && activity.commitCount > 0;
 
     link.classList.toggle("return-glow", returnGlow);
