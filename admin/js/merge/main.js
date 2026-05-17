@@ -247,9 +247,14 @@ function setupEventListeners() {
       // Update the student objects
       for (const { id, lastCommitDate } of results) {
         const studentIndex = currentStudents.findIndex((s) => s.id === id);
-        if (studentIndex !== -1 && lastCommitDate) {
-          currentStudents[studentIndex].lastCommitDate = lastCommitDate;
-          console.log(`Updated ${id}: ${lastCommitDate}`);
+        if (studentIndex !== -1) {
+          if (lastCommitDate) {
+            // Store the full ISO string
+            currentStudents[studentIndex].lastCommitDate = lastCommitDate;
+            console.log(`Updated ${id}: ${lastCommitDate}`);
+          } else {
+            console.log(`No commit found for ${id}`);
+          }
         }
       }
 
