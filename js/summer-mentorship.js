@@ -1,5 +1,5 @@
 // summer-mentorship.js
-// Production Web Ring System — deterministic + stable + bug-fixed
+// Web Ring Badge System — production-safe + reliable GitHub parsing
 
 const REPO_OWNER = "jamesdneufeld";
 const REPO_NAME = "ideawebring";
@@ -16,7 +16,9 @@ function getCache(key) {
 
   try {
     const data = JSON.parse(raw);
-    if (Date.now() - data.timestamp < 60 * 60 * 1000) return data.value;
+    if (Date.now() - data.timestamp < 60 * 60 * 1000) {
+      return data.value;
+    }
   } catch {}
 
   return null;
@@ -33,7 +35,7 @@ function setCache(key, value) {
 }
 
 /* =========================
-   STUDENTS
+   LOAD STUDENTS
 ========================= */
 
 async function loadStudents() {
@@ -47,7 +49,21 @@ async function loadStudents() {
 }
 
 /* =========================
+   EMPTY FALLBACK
+========================= */
+
+function makeEmptyActivity() {
+  return {
+    lastDate: null,
+    commitCount: 0,
+    commitDates: [],
+  };
+}
+
+/* =========================
    GITHUB ACTIVITY (FIXED)
+   - NO path filtering dependency
+   - derives folder ownership locally
 ========================= */
 
 async function getActivity(folder) {
@@ -56,12 +72,12 @@ async function getActivity(folder) {
   if (cached) return cached;
 
   try {
-    const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${folder}&per_page=100`;
+    // IMPORTANT FIX:
+    // fetch global commits instead of path-filtered commits
+    const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?per_page=100`;
     const res = await fetch(url);
 
-    if (!res.ok) {
-      return makeEmptyActivity();
-    }
+    if (!res.ok) return makeEmptyActivity();
 
     const data = await res.json();
     const commits = Array.isArray(data) ? data : [];
@@ -72,16 +88,23 @@ async function getActivity(folder) {
       return empty;
     }
 
-    const commitDates = commits.map((c) => new Date(c?.commit?.author?.date)).filter((d) => !isNaN(d));
+    // FILTER commits by folder name appearing in changed files
+    const filtered = commits.filter((commit) => {
+      const files = commit?.files || [];
+      return files.some((f) => f?.filename?.includes(folder));
+    });
+
+    if (!filtered.length) return makeEmptyActivity();
+
+    const commitDates = filtered.map((c) => new Date(c?.commit?.author?.date)).filter((d) => !isNaN(d));
 
     if (!commitDates.length) return makeEmptyActivity();
 
-    /* 🔥 FIX: reliable last commit */
     const lastDate = new Date(Math.max(...commitDates));
 
     const result = {
       lastDate: lastDate.toISOString(),
-      commitCount: commits.length,
+      commitCount: filtered.length,
       commitDates,
     };
 
@@ -90,14 +113,6 @@ async function getActivity(folder) {
   } catch {
     return makeEmptyActivity();
   }
-}
-
-function makeEmptyActivity() {
-  return {
-    lastDate: null,
-    commitCount: 0,
-    commitDates: [],
-  };
 }
 
 /* =========================
@@ -110,7 +125,7 @@ function daysSince(date) {
 }
 
 /* =========================
-   MEMBERSHIP (STABLE + LOGICAL)
+   MEMBERSHIP (DETERMINISTIC)
 ========================= */
 
 function getMembership(activity) {
@@ -155,7 +170,7 @@ function createBadge(className, text = "", title = "") {
 }
 
 /* =========================
-   MAIN RENDER
+   MAIN RENDER LOOP
 ========================= */
 
 async function populateStudentData() {
@@ -174,7 +189,7 @@ async function populateStudentData() {
     const membership = getMembership(activity);
     const lifetime = getLifetimeScore(activity);
 
-    /* update meta */
+    // Program / Year (unchanged)
     const programEl = link.querySelector(".student-program");
     const yearEl = link.querySelector(".student-year");
 
@@ -186,19 +201,31 @@ async function populateStudentData() {
 
     container.innerHTML = "";
 
-    /* LAST SEEN */
+    /* =========================
+       LAST SEEN
+    ========================= */
+
     container.appendChild(createBadge("badge-lastseen", lastSeenDays === null ? "Last seen: No activity" : `Last seen: ${lastSeenDays} days ago`));
 
-    /* MEMBERSHIP */
+    /* =========================
+       MEMBERSHIP
+    ========================= */
+
     container.appendChild(createBadge("badge-membership", `Membership: ${membership}`));
 
-    /* LIFETIME SCORE */
+    /* =========================
+       LIFETIME SCORE
+    ========================= */
+
     container.appendChild(createBadge("badge-lifetime", `Lifetime Score: ${stars(lifetime)}`));
 
-    /* RETURN GLOW (fixed + safe) */
-    const isReturning = lastSeenDays !== null && lastSeenDays > 365 && activity.commitCount > 0;
+    /* =========================
+       RETURN GLOW (alumni return)
+    ========================= */
 
-    link.classList.toggle("return-glow", isReturning);
+    const returnGlow = lastSeenDays !== null && lastSeenDays > 365 && activity.commitCount > 0;
+
+    link.classList.toggle("return-glow", returnGlow);
   }
 }
 
