@@ -10,7 +10,7 @@ export function renderTableHeader() {
   if (!thead) return;
 
   thead.innerHTML = `
-    <tr>
+    <table>
       <th style="width: 30px;">✓</th>
       <th>Folder ID</th>
       <th>Display Name</th>
@@ -149,7 +149,7 @@ export function renderTable(students, onUpdate) {
     yearSelect.addEventListener("change", (e) => onUpdate(idx, "year", e.target.value));
     yearCell.appendChild(yearSelect);
 
-    // Total Pushes (editable)
+    // Total Pushes (editable number input)
     const pushesCell = row.insertCell(9);
     const pushesInput = document.createElement("input");
     pushesInput.type = "number";
@@ -158,7 +158,7 @@ export function renderTable(students, onUpdate) {
     pushesInput.addEventListener("change", (e) => onUpdate(idx, "totalPushes", parseInt(e.target.value) || 0));
     pushesCell.appendChild(pushesInput);
 
-    // Last Commit Date (editable)
+    // Last Commit Date (editable date picker)
     const lastCommitCell = row.insertCell(10);
     const lastCommitInput = document.createElement("input");
     lastCommitInput.type = "date";
