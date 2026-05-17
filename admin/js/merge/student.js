@@ -26,6 +26,7 @@ export function createStudent(folderId, existing = null) {
     year: existing?.year || config.defaults.year,
     totalPushes: existing?.totalPushes || 0,
     lastCommitDate: existing?.lastCommitDate || null,
+    selectedForFetch: false,
     tags,
     resumeRequirementMet: existing?.resumeRequirementMet ?? config.defaults.resumeRequirementMet,
     notes: existing?.notes || "",
@@ -41,6 +42,6 @@ export function toDisplayName(folder) {
 }
 
 export function cleanForExport(student) {
-  const { matchRule, matchWeight, matchedToId, ...clean } = student;
+  const { matchRule, matchWeight, matchedToId, selectedForFetch, ...clean } = student;
   return clean;
 }

@@ -11,6 +11,7 @@ export function renderTableHeader() {
 
   thead.innerHTML = `
     <table>
+      <th style="width: 30px;">✓</th>
       <th>Folder ID</th>
       <th>Display Name</th>
       <th>GitHub</th>
@@ -23,7 +24,7 @@ export function renderTableHeader() {
       <th>Last Commit</th>
       <th>Tags</th>
       <th>Resume Met</th>
-    </table>
+    </tr>
   `;
 }
 
@@ -38,20 +39,29 @@ export function renderTable(students, onUpdate) {
   students.forEach((student, idx) => {
     const row = tbody.insertRow();
 
+    // Checkbox for selecting which students to update
+    const selectCell = row.insertCell(0);
+    selectCell.className = "checkbox-cell";
+    const selectCheckbox = document.createElement("input");
+    selectCheckbox.type = "checkbox";
+    selectCheckbox.checked = student.selectedForFetch || false;
+    selectCheckbox.addEventListener("change", (e) => onUpdate(idx, "selectedForFetch", e.target.checked));
+    selectCell.appendChild(selectCheckbox);
+
     // Folder ID
-    const idCell = row.insertCell(0);
+    const idCell = row.insertCell(1);
     idCell.textContent = student.id;
     idCell.style.color = "#8b949e";
 
     // Display Name
-    const nameCell = row.insertCell(1);
+    const nameCell = row.insertCell(2);
     const nameInput = document.createElement("input");
     nameInput.value = student.displayName;
     nameInput.addEventListener("change", (e) => onUpdate(idx, "displayName", e.target.value));
     nameCell.appendChild(nameInput);
 
     // GitHub
-    const githubCell = row.insertCell(2);
+    const githubCell = row.insertCell(3);
     const githubInput = document.createElement("input");
     githubInput.placeholder = "github username";
     githubInput.value = student.githubUsername || "";
@@ -59,7 +69,7 @@ export function renderTable(students, onUpdate) {
     githubCell.appendChild(githubInput);
 
     // Status dropdown
-    const statusCell = row.insertCell(3);
+    const statusCell = row.insertCell(4);
     const statusSelect = document.createElement("select");
     const statusOptions = ["student", "alumni", "withdrawn"];
     statusOptions.forEach((opt) => {
@@ -73,7 +83,7 @@ export function renderTable(students, onUpdate) {
     statusCell.appendChild(statusSelect);
 
     // Participation dropdown
-    const participationCell = row.insertCell(4);
+    const participationCell = row.insertCell(5);
     const participationSelect = document.createElement("select");
     const participationOptions = [
       { value: "", label: "None" },
@@ -96,7 +106,7 @@ export function renderTable(students, onUpdate) {
     participationCell.appendChild(participationSelect);
 
     // Returning dropdown (New / Returning)
-    const returningCell = row.insertCell(5);
+    const returningCell = row.insertCell(6);
     const returningSelect = document.createElement("select");
     const returningOptions = [
       { value: false, label: "New" },
@@ -113,7 +123,7 @@ export function renderTable(students, onUpdate) {
     returningCell.appendChild(returningSelect);
 
     // Program dropdown
-    const programCell = row.insertCell(6);
+    const programCell = row.insertCell(7);
     const programSelect = document.createElement("select");
     (config.options?.programs || ["BDes", "IxD"]).forEach((opt) => {
       const option = document.createElement("option");
@@ -126,7 +136,7 @@ export function renderTable(students, onUpdate) {
     programCell.appendChild(programSelect);
 
     // Year dropdown (Grad Year)
-    const yearCell = row.insertCell(7);
+    const yearCell = row.insertCell(8);
     const yearSelect = document.createElement("select");
     yearSelect.className = "year-input";
     (config.options?.years || ["2024", "2025", "2026", "2027", "2028"]).forEach((opt) => {
@@ -140,14 +150,14 @@ export function renderTable(students, onUpdate) {
     yearCell.appendChild(yearSelect);
 
     // Total Pushes (read-only)
-    const pushesCell = row.insertCell(8);
+    const pushesCell = row.insertCell(9);
     const pushesSpan = document.createElement("span");
     pushesSpan.textContent = student.totalPushes || "0";
     pushesSpan.style.color = "#8b949e";
     pushesCell.appendChild(pushesSpan);
 
     // Last Commit Date (read-only)
-    const lastCommitCell = row.insertCell(9);
+    const lastCommitCell = row.insertCell(10);
     const lastCommitSpan = document.createElement("span");
     if (student.lastCommitDate) {
       const date = new Date(student.lastCommitDate);
@@ -159,7 +169,7 @@ export function renderTable(students, onUpdate) {
     lastCommitCell.appendChild(lastCommitSpan);
 
     // Tags
-    const tagsCell = row.insertCell(10);
+    const tagsCell = row.insertCell(11);
     const tagsInput = document.createElement("input");
     tagsInput.type = "text";
     tagsInput.placeholder = "comma separated tags";
@@ -174,7 +184,7 @@ export function renderTable(students, onUpdate) {
     tagsCell.appendChild(tagsInput);
 
     // Resume
-    const resumeCell = row.insertCell(11);
+    const resumeCell = row.insertCell(12);
     resumeCell.className = "checkbox-cell";
     const resumeCheckbox = document.createElement("input");
     resumeCheckbox.type = "checkbox";

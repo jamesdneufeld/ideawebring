@@ -139,19 +139,53 @@ function setupEventListeners() {
     URL.revokeObjectURL(url);
   });
 
+  // Select All button
+  document.getElementById("selectAllBtn")?.addEventListener("click", () => {
+    currentStudents.forEach((student, idx) => {
+      student.selectedForFetch = true;
+    });
+    function handleUpdate(idx, field, value) {
+      currentStudents[idx][field] = value;
+      renderTable(currentStudents, handleUpdate);
+      renderPreview(currentStudents.map(cleanForExport));
+    }
+    renderTable(currentStudents, handleUpdate);
+  });
+
+  // Select None button
+  document.getElementById("selectNoneBtn")?.addEventListener("click", () => {
+    currentStudents.forEach((student, idx) => {
+      student.selectedForFetch = false;
+    });
+    function handleUpdate(idx, field, value) {
+      currentStudents[idx][field] = value;
+      renderTable(currentStudents, handleUpdate);
+      renderPreview(currentStudents.map(cleanForExport));
+    }
+    renderTable(currentStudents, handleUpdate);
+  });
+
+  // Fetch Push Counts for selected students only
   document.getElementById("fetchPushCountsBtn").addEventListener("click", async () => {
     if (!currentStudents.length) {
       alert("Please reconcile students first");
       return;
     }
 
+    const selectedStudents = currentStudents.filter((s) => s.selectedForFetch === true);
+
+    if (selectedStudents.length === 0) {
+      alert("Please check the checkbox for students you want to update, or click 'Select All'");
+      return;
+    }
+
     const btn = document.getElementById("fetchPushCountsBtn");
     const originalText = btn.textContent;
-    btn.textContent = "⟳ Fetching...";
+    btn.textContent = `⟳ Fetching ${selectedStudents.length} students...`;
     btn.disabled = true;
 
     try {
-      const counts = await fetchCommitCountsForAllStudents(currentStudents);
+      const counts = await fetchCommitCountsForAllStudents(selectedStudents);
 
       counts.forEach(({ id, commitCount, lastCommitDate }) => {
         const student = currentStudents.find((s) => s.id === id);
@@ -169,6 +203,10 @@ function setupEventListeners() {
 
       renderTable(currentStudents, handleUpdate);
       renderPreview(currentStudents.map(cleanForExport));
+
+      // Clear all selected checkboxes after fetch
+      currentStudents.forEach((s) => (s.selectedForFetch = false));
+      renderTable(currentStudents, handleUpdate);
 
       alert(`✅ Fetched push counts for ${counts.length} students`);
     } catch (err) {
