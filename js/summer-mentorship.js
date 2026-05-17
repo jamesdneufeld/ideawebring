@@ -1,5 +1,5 @@
 // summer-mentorship.js
-// Web Ring Badge System — Two-axis membership (commits + time span)
+// Web Ring Badge System — Two-axis deterministic membership (fixed)
 
 const REPO_OWNER = "jamesdneufeld";
 const REPO_NAME = "ideawebring";
@@ -135,7 +135,7 @@ function daysSince(date) {
 }
 
 /* =========================
-   MEMBERSHIP (TWO-AXIS: commits + time span)
+   MEMBERSHIP (FIXED + CONSISTENT)
 ========================= */
 
 function getMembership(activity) {
@@ -145,32 +145,23 @@ function getMembership(activity) {
   if (commits === 0) return "Newcomer";
   if (commits === 1) return "Newcomer";
 
-  // Calculate active days span (first commit to last commit)
-  let activeDays = 0;
-  if (commitDates.length >= 2) {
-    const firstCommit = new Date(Math.min(...commitDates));
-    const lastCommit = new Date(Math.max(...commitDates));
-    activeDays = Math.ceil((lastCommit - firstCommit) / (1000 * 60 * 60 * 24));
+  if (commitDates.length < 2) return "Contributor";
+
+  // FIXED: correct sorting-based activeDays calculation
+  const sorted = [...commitDates].sort((a, b) => a - b);
+
+  const activeDays = Math.ceil((sorted[sorted.length - 1] - sorted[0]) / (1000 * 60 * 60 * 24));
+
+  // Tier hierarchy (safe + deterministic)
+
+  if (commits >= 30 && activeDays >= 60) {
+    return "Veteran";
   }
 
-  // Contributor: 2+ commits but active for less than 30 days (burst activity)
-  if (commits >= 2 && activeDays < 30) return "Contributor";
-
-  // Regular: 5+ commits AND active for 30+ days
-  if (commits >= 5 && activeDays >= 30 && commits < 30) return "Regular";
-
-  // Veteran: 30+ commits AND active for 60+ days
-  if (commits >= 30 && activeDays >= 60) return "Veteran";
-
-  // Archive: has commits but last commit over 365 days ago
-  const lastDate = activity.lastDate ? new Date(activity.lastDate) : null;
-  if (lastDate && (Date.now() - lastDate) / (1000 * 60 * 60 * 24) > 365) {
-    return "Archive";
+  if (commits >= 10 && activeDays >= 30) {
+    return "Regular";
   }
 
-  // Fallback
-  if (commits >= 2 && commits < 5) return "Contributor";
-  if (commits >= 5 && commits < 30) return "Regular";
   return "Contributor";
 }
 

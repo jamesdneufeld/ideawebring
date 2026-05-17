@@ -51,6 +51,7 @@
     },
     {
       "id": "andy-poystila",
+      "formerIds": ["andy"],
       "displayName": "Andy Poystila",
       "githubUsername": "ukkop",
       "program": "BDes",
@@ -207,6 +208,7 @@
     },
     {
       "id": "jazzy-linton",
+      "formerIds": ["jazzy"],
       "displayName": "Jazzy Linton",
       "githubUsername": "jazzy7731",
       "program": "BDes",
@@ -363,6 +365,7 @@
     },
     {
       "id": "siobhan-barry",
+      "formerIds": ["siobhan"],
       "displayName": "Siobhan Barry",
       "githubUsername": "",
       "program": "BDes",
@@ -375,6 +378,7 @@
     },
     {
       "id": "sophia-pan",
+      "formerIds": ["sophia"],
       "displayName": "Sophia Pan",
       "githubUsername": "suwreal",
       "program": "BDes",
@@ -399,6 +403,7 @@
     },
     {
       "id": "taylore-lawrence",
+      "formerIds": ["taylore"],
       "displayName": "Taylore Lawrence",
       "githubUsername": "loreofthetay",
       "program": "BDes",
@@ -435,6 +440,7 @@
     },
     {
       "id": "tobin-eckstein",
+      "formerIds": ["tobin"],
       "displayName": "Tobin Eckstein",
       "githubUsername": "tobineliasart",
       "program": "BDes",
