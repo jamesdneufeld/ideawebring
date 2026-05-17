@@ -7,7 +7,7 @@ export function renderTableHeader() {
   if (!thead) return;
 
   thead.innerHTML = `
-    <tr>
+    <table>
       <th>Folder ID</th>
       <th>Display Name</th>
       <th>GitHub</th>
@@ -16,10 +16,11 @@ export function renderTableHeader() {
       <th>Returning</th>
       <th>Program</th>
       <th>Year</th>
+      <th>Total Pushes</th>
       <th>Tags</th>
       <th>Resume Met</th>
       <th>Notes</th>
-    </tr>
+    </table>
   `;
 }
 
@@ -127,8 +128,15 @@ export function renderTable(students, onUpdate) {
     yearSelect.addEventListener("change", (e) => onUpdate(idx, "year", e.target.value));
     yearCell.appendChild(yearSelect);
 
+    // Total Pushes (read-only, from GitHub)
+    const pushesCell = row.insertCell(8);
+    const pushesSpan = document.createElement("span");
+    pushesSpan.textContent = student.totalPushes || "0";
+    pushesSpan.style.color = "#8b949e";
+    pushesCell.appendChild(pushesSpan);
+
     // Tags
-    const tagsCell = row.insertCell(8);
+    const tagsCell = row.insertCell(9);
     const tagsInput = document.createElement("input");
     tagsInput.type = "text";
     tagsInput.placeholder = "comma separated tags";
@@ -143,7 +151,7 @@ export function renderTable(students, onUpdate) {
     tagsCell.appendChild(tagsInput);
 
     // Resume
-    const resumeCell = row.insertCell(9);
+    const resumeCell = row.insertCell(10);
     resumeCell.className = "checkbox-cell";
     const resumeCheckbox = document.createElement("input");
     resumeCheckbox.type = "checkbox";
@@ -152,7 +160,7 @@ export function renderTable(students, onUpdate) {
     resumeCell.appendChild(resumeCheckbox);
 
     // Notes
-    const notesCell = row.insertCell(10);
+    const notesCell = row.insertCell(11);
     const notesInput = document.createElement("input");
     notesInput.placeholder = "optional notes";
     notesInput.value = student.notes || "";

@@ -135,4 +135,47 @@ function setupEventListeners() {
   });
 }
 
+// Add this after the existing event listeners
+
+document.getElementById("fetchPushCountsBtn").addEventListener("click", async () => {
+  if (!currentStudents.length) {
+    alert("Please reconcile students first");
+    return;
+  }
+
+  const btn = document.getElementById("fetchPushCountsBtn");
+  const originalText = btn.textContent;
+  btn.textContent = "⟳ Fetching...";
+  btn.disabled = true;
+
+  try {
+    const counts = await fetchCommitCountsForAllStudents(currentStudents);
+
+    // Update currentStudents with commit counts
+    counts.forEach(({ id, commitCount }) => {
+      const student = currentStudents.find((s) => s.id === id);
+      if (student) {
+        student.totalPushes = commitCount;
+      }
+    });
+
+    // Re-render table and preview
+    function handleUpdate(idx, field, value) {
+      currentStudents[idx][field] = value;
+      renderTable(currentStudents, handleUpdate);
+      renderPreview(currentStudents.map(cleanForExport));
+    }
+
+    renderTable(currentStudents, handleUpdate);
+    renderPreview(currentStudents.map(cleanForExport));
+
+    alert(`✅ Fetched push counts for ${counts.length} students`);
+  } catch (err) {
+    alert(`❌ Error fetching push counts: ${err.message}`);
+  } finally {
+    btn.textContent = originalText;
+    btn.disabled = false;
+  }
+});
+
 init();
