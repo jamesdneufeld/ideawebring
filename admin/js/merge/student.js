@@ -25,6 +25,7 @@ export function createStudent(folderId, existing = null) {
     program: existing?.program || config.defaults.program,
     year: existing?.year || config.defaults.year,
     totalPushes: existing?.totalPushes || 0,
+    lastCommitDate: existing?.lastCommitDate || null,
     tags,
     resumeRequirementMet: existing?.resumeRequirementMet ?? config.defaults.resumeRequirementMet,
     notes: existing?.notes || "",
