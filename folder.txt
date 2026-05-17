@@ -1,6 +1,3 @@
-.git
-.vscode
-admin
 alejandra
 alex
 alexia-sogai
@@ -8,11 +5,8 @@ alyssa-cheng
 andy-poystila
 anna-burtseva
 apsara
-assets
 aurod-ashrafi
 avery-brodeur
-blank-bdes
-blank-ixd
 cameron
 cecil-susi
 emilyn
@@ -20,17 +14,12 @@ giao-nguyen
 hedia-chan
 ian-johnstone
 iona-campbell
-ixd
 jaden-prevost
-james
-james-in-class
 jazzy-linton
 jordan-mak
 kara
 kat-jung
 kendra-vermette
-learning
-log
 maren-brophy
 meghan-vogt
 mena-mcgill
