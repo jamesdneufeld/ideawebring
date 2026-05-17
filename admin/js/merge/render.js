@@ -22,6 +22,7 @@ export function renderTableHeader() {
       <th>Grad Year</th>
       <th>Total Pushes</th>
       <th>Last Commit</th>
+      <th>Former IDs</th>
       <th>Tags</th>
       <th>Resume Met</th>
     </tr>
@@ -139,7 +140,7 @@ export function renderTable(students, onUpdate) {
     const yearCell = row.insertCell(8);
     const yearSelect = document.createElement("select");
     yearSelect.className = "year-input";
-    (config.options?.years || ["2024", "2025", "2026", "2027", "2028"]).forEach((opt) => {
+    (config.options?.years || ["2024", "2025", "2026", "2027", "2028", "2029", "2030"]).forEach((opt) => {
       const option = document.createElement("option");
       option.value = opt;
       option.textContent = opt;
@@ -177,8 +178,24 @@ export function renderTable(students, onUpdate) {
     });
     lastCommitCell.appendChild(lastCommitInput);
 
+    // Former IDs (editable - comma separated)
+    const formerIdsCell = row.insertCell(11);
+    const formerIdsInput = document.createElement("input");
+    formerIdsInput.type = "text";
+    formerIdsInput.placeholder = "comma separated former folder names";
+    formerIdsInput.value = (student.formerIds || []).join(", ");
+    formerIdsInput.style.width = "150px";
+    formerIdsInput.addEventListener("change", (e) => {
+      const idsArray = e.target.value
+        .split(",")
+        .map((id) => id.trim())
+        .filter(Boolean);
+      onUpdate(idx, "formerIds", idsArray);
+    });
+    formerIdsCell.appendChild(formerIdsInput);
+
     // Tags (editable)
-    const tagsCell = row.insertCell(11);
+    const tagsCell = row.insertCell(12);
     const tagsInput = document.createElement("input");
     tagsInput.type = "text";
     tagsInput.placeholder = "comma separated tags";
@@ -193,7 +210,7 @@ export function renderTable(students, onUpdate) {
     tagsCell.appendChild(tagsInput);
 
     // Resume checkbox
-    const resumeCell = row.insertCell(12);
+    const resumeCell = row.insertCell(13);
     resumeCell.className = "checkbox-cell";
     const resumeCheckbox = document.createElement("input");
     resumeCheckbox.type = "checkbox";

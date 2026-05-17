@@ -15,6 +15,9 @@ export function createStudent(folderId, existing = null) {
       .filter(Boolean);
   }
 
+  // Preserve formerIds from existing student
+  const formerIds = existing?.formerIds || [];
+
   return {
     id: folderId,
     displayName: existing?.displayName || toDisplayName(folderId),
@@ -26,6 +29,7 @@ export function createStudent(folderId, existing = null) {
     year: existing?.year || config.defaults.year,
     totalPushes: existing?.totalPushes || 0,
     lastCommitDate: existing?.lastCommitDate || null,
+    formerIds: formerIds,
     selectedForFetch: false,
     tags,
     resumeRequirementMet: existing?.resumeRequirementMet ?? config.defaults.resumeRequirementMet,
@@ -41,6 +45,7 @@ export function toDisplayName(folder) {
 }
 
 export function cleanForExport(student) {
+  // Remove internal match fields and selectedForFetch, but KEEP formerIds
   const { matchRule, matchWeight, matchedToId, selectedForFetch, ...clean } = student;
   return clean;
 }
