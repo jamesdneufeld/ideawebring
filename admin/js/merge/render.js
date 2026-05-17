@@ -10,7 +10,7 @@ export function renderTableHeader() {
   if (!thead) return;
 
   thead.innerHTML = `
-    <table>
+    <tr>
       <th style="width: 30px;">✓</th>
       <th>Folder ID</th>
       <th>Display Name</th>
@@ -39,7 +39,7 @@ export function renderTable(students, onUpdate) {
   students.forEach((student, idx) => {
     const row = tbody.insertRow();
 
-    // Checkbox
+    // Checkbox for selecting which students to update
     const selectCell = row.insertCell(0);
     selectCell.className = "checkbox-cell";
     const selectCheckbox = document.createElement("input");
@@ -53,14 +53,14 @@ export function renderTable(students, onUpdate) {
     idCell.textContent = student.id;
     idCell.style.color = "#8b949e";
 
-    // Display Name
+    // Display Name (editable)
     const nameCell = row.insertCell(2);
     const nameInput = document.createElement("input");
     nameInput.value = student.displayName || "";
     nameInput.addEventListener("change", (e) => onUpdate(idx, "displayName", e.target.value));
     nameCell.appendChild(nameInput);
 
-    // GitHub
+    // GitHub (editable)
     const githubCell = row.insertCell(3);
     const githubInput = document.createElement("input");
     githubInput.placeholder = "github username";
@@ -105,7 +105,7 @@ export function renderTable(students, onUpdate) {
     });
     participationCell.appendChild(participationSelect);
 
-    // Returning dropdown
+    // Returning dropdown (New / Returning)
     const returningCell = row.insertCell(6);
     const returningSelect = document.createElement("select");
     const returningOptions = [
@@ -135,7 +135,7 @@ export function renderTable(students, onUpdate) {
     programSelect.addEventListener("change", (e) => onUpdate(idx, "program", e.target.value));
     programCell.appendChild(programSelect);
 
-    // Year dropdown
+    // Year dropdown (Grad Year)
     const yearCell = row.insertCell(8);
     const yearSelect = document.createElement("select");
     yearSelect.className = "year-input";
@@ -149,7 +149,7 @@ export function renderTable(students, onUpdate) {
     yearSelect.addEventListener("change", (e) => onUpdate(idx, "year", e.target.value));
     yearCell.appendChild(yearSelect);
 
-    // Total Pushes (editable number) - make sure it shows current value
+    // Total Pushes (editable number)
     const pushesCell = row.insertCell(9);
     const pushesInput = document.createElement("input");
     pushesInput.type = "number";
@@ -161,24 +161,23 @@ export function renderTable(students, onUpdate) {
     });
     pushesCell.appendChild(pushesInput);
 
-    // Last Commit Date (editable date picker) - show existing date if present
+    // Last Commit Date (editable date picker)
     const lastCommitCell = row.insertCell(10);
     const lastCommitInput = document.createElement("input");
     lastCommitInput.type = "date";
-    // Format date correctly if it exists
-    if (student.lastCommitDate) {
-      const date = new Date(student.lastCommitDate);
-      if (!isNaN(date)) {
-        lastCommitInput.value = date.toISOString().split("T")[0];
-      }
-    }
     lastCommitInput.style.width = "110px";
+    // Set the value if it exists
+    if (student.lastCommitDate) {
+      // Handle both full ISO strings and date-only strings
+      const dateStr = student.lastCommitDate.split("T")[0];
+      lastCommitInput.value = dateStr;
+    }
     lastCommitInput.addEventListener("change", (e) => {
       onUpdate(idx, "lastCommitDate", e.target.value || null);
     });
     lastCommitCell.appendChild(lastCommitInput);
 
-    // Tags
+    // Tags (editable)
     const tagsCell = row.insertCell(11);
     const tagsInput = document.createElement("input");
     tagsInput.type = "text";
