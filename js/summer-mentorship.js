@@ -62,8 +62,8 @@ function makeEmptyActivity() {
 
 /* =========================
    GITHUB ACTIVITY (FIXED)
-   - NO path filtering dependency
-   - derives folder ownership locally
+   - Uses path parameter (reliable)
+   - Sorts dates to ensure latest commit
 ========================= */
 
 async function getActivity(folder) {
@@ -72,9 +72,7 @@ async function getActivity(folder) {
   if (cached) return cached;
 
   try {
-    // IMPORTANT FIX:
-    // fetch global commits instead of path-filtered commits
-    const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?per_page=100`;
+    const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${folder}&per_page=100`;
     const res = await fetch(url);
 
     if (!res.ok) return makeEmptyActivity();
@@ -88,23 +86,17 @@ async function getActivity(folder) {
       return empty;
     }
 
-    // FILTER commits by folder name appearing in changed files
-    const filtered = commits.filter((commit) => {
-      const files = commit?.files || [];
-      return files.some((f) => f?.filename?.includes(folder));
-    });
-
-    if (!filtered.length) return makeEmptyActivity();
-
-    const commitDates = filtered.map((c) => new Date(c?.commit?.author?.date)).filter((d) => !isNaN(d));
+    // Extract dates and sort to ensure latest commit is correct
+    const commitDates = commits
+      .map((c) => new Date(c?.commit?.author?.date))
+      .filter((d) => !isNaN(d))
+      .sort((a, b) => b - a); // newest first
 
     if (!commitDates.length) return makeEmptyActivity();
 
-    const lastDate = new Date(Math.max(...commitDates));
-
     const result = {
-      lastDate: lastDate.toISOString(),
-      commitCount: filtered.length,
+      lastDate: commitDates[0].toISOString(),
+      commitCount: commits.length,
       commitDates,
     };
 
@@ -189,7 +181,7 @@ async function populateStudentData() {
     const membership = getMembership(activity);
     const lifetime = getLifetimeScore(activity);
 
-    // Program / Year (unchanged)
+    // Program / Year
     const programEl = link.querySelector(".student-program");
     const yearEl = link.querySelector(".student-year");
 
@@ -201,28 +193,16 @@ async function populateStudentData() {
 
     container.innerHTML = "";
 
-    /* =========================
-       LAST SEEN
-    ========================= */
-
+    /* LAST SEEN */
     container.appendChild(createBadge("badge-lastseen", lastSeenDays === null ? "Last seen: No activity" : `Last seen: ${lastSeenDays} days ago`));
 
-    /* =========================
-       MEMBERSHIP
-    ========================= */
-
+    /* MEMBERSHIP */
     container.appendChild(createBadge("badge-membership", `Membership: ${membership}`));
 
-    /* =========================
-       LIFETIME SCORE
-    ========================= */
-
+    /* LIFETIME SCORE */
     container.appendChild(createBadge("badge-lifetime", `Lifetime Score: ${stars(lifetime)}`));
 
-    /* =========================
-       RETURN GLOW (alumni return)
-    ========================= */
-
+    /* RETURN GLOW (alumni return) */
     const returnGlow = lastSeenDays !== null && lastSeenDays > 365 && activity.commitCount > 0;
 
     link.classList.toggle("return-glow", returnGlow);
