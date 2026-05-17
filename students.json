@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-05-16",
+  "lastUpdated": "2026-05-17",
   "students": [
     {
       "id": "alejandra",
@@ -10,6 +10,7 @@
       "returning": true,
       "program": "BDes",
       "year": "2026",
+      "totalPushes": 13,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Volunteered last summer, pushed multiple times"
@@ -23,6 +24,7 @@
       "returning": true,
       "program": "BDes",
       "year": "2026",
+      "totalPushes": 0,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Volunteered last summer, pushed at least once"
@@ -36,6 +38,7 @@
       "returning": false,
       "program": "BDes",
       "year": "2028",
+      "totalPushes": 7,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": ""
@@ -49,13 +52,13 @@
       "returning": true,
       "program": "IxD",
       "year": "2027",
+      "totalPushes": 22,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Completed required coursework Jan-May 2026"
     },
     {
       "id": "andy-poystila",
-      "formerIds": ["andy"],
       "displayName": "Andy Poystila",
       "githubUsername": "ukkop",
       "status": "alumni",
@@ -63,6 +66,7 @@
       "returning": true,
       "program": "BDes",
       "year": "2026",
+      "totalPushes": 0,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Graduated 2026"
@@ -76,6 +80,7 @@
       "returning": false,
       "program": "BDes",
       "year": "2026",
+      "totalPushes": 1,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": ""
@@ -89,6 +94,7 @@
       "returning": true,
       "program": "BDes",
       "year": "2028",
+      "totalPushes": 16,
       "tags": ["11ty", "indie-web"],
       "resumeRequirementMet": false,
       "notes": "Uses Eleventy static site generator"
@@ -102,6 +108,7 @@
       "returning": false,
       "program": "IxD",
       "year": "2027",
+      "totalPushes": 10,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Completed required webring coursework"
@@ -115,6 +122,7 @@
       "returning": false,
       "program": "IxD",
       "year": "2027",
+      "totalPushes": 15,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Completed required webring coursework"
@@ -128,6 +136,7 @@
       "returning": true,
       "program": "BDes",
       "year": "2026",
+      "totalPushes": 7,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Volunteered last summer, pushed at least once"
@@ -141,6 +150,7 @@
       "returning": true,
       "program": "IxD",
       "year": "2027",
+      "totalPushes": 22,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Completed required coursework Jan-May 2026"
@@ -154,6 +164,7 @@
       "returning": true,
       "program": "BDes",
       "year": "2026",
+      "totalPushes": 4,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Volunteered last summer, pushed at least once"
@@ -167,6 +178,7 @@
       "returning": false,
       "program": "IxD",
       "year": "2026",
+      "totalPushes": 0,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Awaiting GitHub username"
@@ -180,6 +192,7 @@
       "returning": true,
       "program": "IxD",
       "year": "2027",
+      "totalPushes": 47,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Completed required coursework Jan-May 2026"
@@ -193,6 +206,7 @@
       "returning": false,
       "program": "IxD",
       "year": "2027",
+      "totalPushes": 44,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Completed required webring coursework"
@@ -206,6 +220,7 @@
       "returning": false,
       "program": "IxD",
       "year": "2027",
+      "totalPushes": 25,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Completed required webring coursework"
@@ -219,13 +234,13 @@
       "returning": false,
       "program": "IxD",
       "year": "2027",
+      "totalPushes": 20,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Completed required webring coursework"
     },
     {
       "id": "jazzy-linton",
-      "formerIds": ["jazzy"],
       "displayName": "Jazzy Linton",
       "githubUsername": "jazzy7731",
       "status": "alumni",
@@ -233,6 +248,7 @@
       "returning": true,
       "program": "BDes",
       "year": "2024",
+      "totalPushes": 0,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Graduated 2024, volunteered last summer, pushed multiple times"
@@ -246,6 +262,7 @@
       "returning": false,
       "program": "IxD",
       "year": "2027",
+      "totalPushes": 10,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Completed required webring coursework"
@@ -259,6 +276,7 @@
       "returning": true,
       "program": "BDes",
       "year": "2026",
+      "totalPushes": 2,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Volunteered last summer, pushed at least once"
@@ -272,6 +290,7 @@
       "returning": false,
       "program": "IxD",
       "year": "2027",
+      "totalPushes": 61,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Completed required webring coursework"
@@ -285,6 +304,7 @@
       "returning": false,
       "program": "BDes",
       "year": "2026",
+      "totalPushes": 0,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Accepted invite only, never pushed"
@@ -298,6 +318,7 @@
       "returning": false,
       "program": "BDes",
       "year": "2026",
+      "totalPushes": 0,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": ""
@@ -311,6 +332,7 @@
       "returning": false,
       "program": "IxD",
       "year": "2027",
+      "totalPushes": 16,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Completed required webring coursework"
@@ -324,9 +346,10 @@
       "returning": false,
       "program": "BDes",
       "year": "2026",
+      "totalPushes": 0,
       "tags": [],
       "resumeRequirementMet": false,
-      "notes": "Invite pending — will become Participating Alumni if accepted"
+      "notes": "Invite pending â€” will become Participating Alumni if accepted"
     },
     {
       "id": "narinder",
@@ -337,6 +360,7 @@
       "returning": false,
       "program": "IxD",
       "year": "2027",
+      "totalPushes": 23,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Completed required webring coursework"
@@ -350,6 +374,7 @@
       "returning": false,
       "program": "IxD",
       "year": "2027",
+      "totalPushes": 26,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Completed required webring coursework"
@@ -363,6 +388,7 @@
       "returning": false,
       "program": "IxD",
       "year": "2027",
+      "totalPushes": 25,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": ""
@@ -376,6 +402,7 @@
       "returning": false,
       "program": "IxD",
       "year": "2026",
+      "totalPushes": 25,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Participated as required coursework"
@@ -389,13 +416,13 @@
       "returning": false,
       "program": "IxD",
       "year": "2027",
+      "totalPushes": 24,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Completed required webring coursework"
     },
     {
       "id": "siobhan-barry",
-      "formerIds": ["siobhan"],
       "displayName": "Siobhan Barry",
       "githubUsername": "",
       "status": "alumni",
@@ -403,13 +430,13 @@
       "returning": false,
       "program": "BDes",
       "year": "2026",
+      "totalPushes": 0,
       "tags": [],
       "resumeRequirementMet": false,
-      "notes": "Invite pending — will become Participating Alumni if accepted"
+      "notes": "Invite pending â€” will become Participating Alumni if accepted"
     },
     {
       "id": "sophia-pan",
-      "formerIds": ["sophia"],
       "displayName": "Sophia Pan",
       "githubUsername": "suwreal",
       "status": "alumni",
@@ -417,6 +444,7 @@
       "returning": true,
       "program": "BDes",
       "year": "2026",
+      "totalPushes": 1,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Volunteered last summer, pushed at least once"
@@ -430,13 +458,13 @@
       "returning": true,
       "program": "BDes",
       "year": "2026",
+      "totalPushes": 3,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Volunteered last summer, pushed at least once"
     },
     {
       "id": "taylore-lawrence",
-      "formerIds": ["taylore"],
       "displayName": "Taylore Lawrence",
       "githubUsername": "loreofthetay",
       "status": "student",
@@ -444,6 +472,7 @@
       "returning": true,
       "program": "BDes",
       "year": "2026",
+      "totalPushes": 0,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": ""
@@ -457,13 +486,13 @@
       "returning": false,
       "program": "IxD",
       "year": "2026",
+      "totalPushes": 28,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Completed required webring coursework"
     },
     {
       "id": "tobin-eckstein",
-      "formerIds": ["tobin"],
       "displayName": "Tobin Eckstein",
       "githubUsername": "tobineliasart",
       "status": "alumni",
@@ -471,6 +500,7 @@
       "returning": true,
       "program": "BDes",
       "year": "2024",
+      "totalPushes": 0,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Graduated 2024, rejoining"
@@ -484,6 +514,7 @@
       "returning": false,
       "program": "IxD",
       "year": "2026",
+      "totalPushes": 19,
       "tags": [],
       "resumeRequirementMet": false,
       "notes": "Completed required webring coursework"
