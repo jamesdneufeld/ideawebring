@@ -1,5 +1,6 @@
 // summer-mentorship.js
 // Web Ring Badge System — Hybrid: API first, JSON fallback
+// Only counts commits made by the student's own GitHub username
 
 // ============================================================
 // CONFIGURATION
@@ -92,6 +93,7 @@ function makeEmptyActivity() {
     lastDate: null,
     commitCount: 0,
     commitDates: [],
+    isFromAPI: false,
   };
 }
 
@@ -125,20 +127,26 @@ function getWeekNumber(date) {
 }
 
 /* =========================
-   GITHUB ACTIVITY (WITH FORMERIDS SUPPORT)
+   GITHUB ACTIVITY (WITH AUTHOR FILTERING)
 ========================= */
 
-async function getActivityFromAPI(folder, formerIds = []) {
-  const allIds = [folder, ...formerIds].filter(Boolean);
+async function getActivityFromAPI(folder, student) {
+  const allIds = [folder, ...(student?.formerIds || [])].filter(Boolean);
   const cacheKey = `activity_${folder}`;
   const cached = getCache(cacheKey);
   if (cached) return cached;
+
+  // If no GitHub username, skip API call (can't filter by author)
+  if (!student?.githubUsername || student.githubUsername.trim() === "") {
+    return null;
+  }
 
   try {
     const allCommits = [];
 
     for (const id of allIds) {
-      const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${id}&per_page=${PER_PAGE_COMMITS}`;
+      // IMPORTANT: Filter by author to only count the student's own commits
+      const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${id}&author=${student.githubUsername}&per_page=${PER_PAGE_COMMITS}`;
       const res = await fetch(url);
 
       if (res.ok) {
@@ -197,18 +205,17 @@ async function getActivityFromAPI(folder, formerIds = []) {
 ========================= */
 
 async function getActivity(folder, student) {
-  // Try API first
-  const apiActivity = await getActivityFromAPI(folder, student?.formerIds || []);
+  // Try API first (only if student has GitHub username)
+  const apiActivity = await getActivityFromAPI(folder, student);
 
   // If API returned valid data, use it
   if (apiActivity && apiActivity.lastDate) {
     return apiActivity;
   }
 
-  // If API failed, fall back to stored data from students.json
+  // If API failed or returned no data, fall back to stored data from students.json
   const storedActivity = getStoredActivity(student);
   if (storedActivity) {
-    console.log(`Using stored fallback data for ${folder}`);
     return storedActivity;
   }
 
@@ -283,7 +290,7 @@ async function populateStudentData() {
 
     const student = studentMap.get(folder);
 
-    // Get activity (API first, fallback to stored)
+    // Get activity (API first with author filtering, fallback to stored)
     const activity = await getActivity(folder, student);
 
     // Use API data if available, otherwise stored
