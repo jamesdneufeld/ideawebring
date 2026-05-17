@@ -33,8 +33,16 @@ export async function fetchFoldersFromGitHub() {
   const url = `https://api.github.com/repos/${config.repo.owner}/${config.repo.name}/contents/`;
 
   try {
+    await new Promise((r) => setTimeout(r, 1000));
+
     const res = await fetch(url);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    if (!res.ok) {
+      if (res.status === 403) {
+        throw new Error("GitHub API rate limit exceeded. Please wait a few minutes and try again, or paste folders manually.");
+      }
+      throw new Error(`HTTP ${res.status}`);
+    }
 
     const data = await res.json();
 
@@ -46,7 +54,6 @@ export async function fetchFoldersFromGitHub() {
       .filter((item) => item.type === "dir")
       .map((item) => item.name)
       .filter((name) => {
-        // Check system folders first
         if (isSystemFolder(name)) return false;
         if (name.startsWith(".")) return false;
         if (config.excludeFolders.includes(name)) return false;
@@ -67,30 +74,22 @@ export async function fetchCommitCountsForAllStudents(students) {
   const config = getConfig();
   const results = [];
 
-  // Process in batches to avoid rate limiting
-  const batchSize = 5;
+  const batchSize = 3;
   for (let i = 0; i < students.length; i += batchSize) {
     const batch = students.slice(i, i + batchSize);
     const batchResults = await Promise.all(
       batch.map(async (student) => {
         try {
-          // If no GitHub username, cannot filter by author
           if (!student.githubUsername || student.githubUsername.trim() === "") {
-            return {
-              id: student.id,
-              commitCount: 0,
-              lastCommitDate: null,
-            };
+            return { id: student.id, commitCount: 0, lastCommitDate: null };
           }
 
-          // Check current folder + all former IDs
           const allPaths = [student.id, ...(student.formerIds || [])];
           let totalCommits = 0;
           let latestCommitDate = null;
 
           for (const path of allPaths) {
-            // Fetch commits by this author in this path
-            const url = `https://api.github.com/repos/${config.repo.owner}/${config.repo.name}/commits?path=${path}&author=${student.githubUsername}&per_page=1`;
+            const url = `https://api.github.com/repos/${config.repo.owner}/${config.repo.name}/commits?path=${path}&author=${student.githubUsername}&per_page=100`;
             const res = await fetch(url);
 
             if (res.ok) {
@@ -98,7 +97,6 @@ export async function fetchCommitCountsForAllStudents(students) {
               if (Array.isArray(data) && data.length > 0) {
                 totalCommits += data.length;
 
-                // Get the commit date from the first commit (most recent)
                 const commitDate = data[0]?.commit?.author?.date;
                 if (commitDate) {
                   const thisDate = new Date(commitDate);
@@ -108,40 +106,73 @@ export async function fetchCommitCountsForAllStudents(students) {
                 }
               }
             }
+
+            await new Promise((r) => setTimeout(r, 200));
           }
 
-          // If we need total count, fetch all commits (not just first page)
-          if (totalCommits > 0) {
-            let totalCount = 0;
-            for (const path of allPaths) {
-              const countUrl = `https://api.github.com/repos/${config.repo.owner}/${config.repo.name}/commits?path=${path}&author=${student.githubUsername}&per_page=100`;
-              const countRes = await fetch(countUrl);
-              if (countRes.ok) {
-                const countData = await countRes.json();
-                totalCount += Array.isArray(countData) ? countData.length : 0;
-              }
-            }
-            totalCommits = totalCount;
-          }
-
-          return {
-            id: student.id,
-            commitCount: totalCommits,
-            lastCommitDate: latestCommitDate,
-          };
+          return { id: student.id, commitCount: totalCommits, lastCommitDate: latestCommitDate };
         } catch (err) {
           console.warn(`Failed to fetch commit count for ${student.id}:`, err);
-          return {
-            id: student.id,
-            commitCount: 0,
-            lastCommitDate: null,
-          };
+          return { id: student.id, commitCount: 0, lastCommitDate: null };
         }
       }),
     );
     results.push(...batchResults);
 
-    // Delay between batches
+    if (i + batchSize < students.length) {
+      await new Promise((r) => setTimeout(r, 1500));
+    }
+  }
+
+  return results;
+}
+
+export async function fetchLastCommitDatesForStudents(students) {
+  const config = getConfig();
+  const results = [];
+
+  const batchSize = 5;
+  for (let i = 0; i < students.length; i += batchSize) {
+    const batch = students.slice(i, i + batchSize);
+    const batchResults = await Promise.all(
+      batch.map(async (student) => {
+        try {
+          if (!student.githubUsername || student.githubUsername.trim() === "") {
+            return { id: student.id, lastCommitDate: null };
+          }
+
+          const allPaths = [student.id, ...(student.formerIds || [])];
+          let latestCommitDate = null;
+
+          for (const path of allPaths) {
+            const url = `https://api.github.com/repos/${config.repo.owner}/${config.repo.name}/commits?path=${path}&author=${student.githubUsername}&per_page=1`;
+            const res = await fetch(url);
+
+            if (res.ok) {
+              const data = await res.json();
+              if (Array.isArray(data) && data.length > 0) {
+                const commitDate = data[0]?.commit?.author?.date;
+                if (commitDate) {
+                  const thisDate = new Date(commitDate);
+                  if (!latestCommitDate || thisDate > new Date(latestCommitDate)) {
+                    latestCommitDate = commitDate;
+                  }
+                }
+              }
+            }
+
+            await new Promise((r) => setTimeout(r, 200));
+          }
+
+          return { id: student.id, lastCommitDate: latestCommitDate };
+        } catch (err) {
+          console.warn(`Failed to fetch last commit for ${student.id}:`, err);
+          return { id: student.id, lastCommitDate: null };
+        }
+      }),
+    );
+    results.push(...batchResults);
+
     if (i + batchSize < students.length) {
       await new Promise((r) => setTimeout(r, 500));
     }
