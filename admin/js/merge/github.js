@@ -2,6 +2,7 @@
 // Fetches students.json from GitHub repo, fetches folder list from repo contents, and fetches commit counts (total pushes) for all students
 // Uses batch processing to avoid GitHub API rate limits
 // Commit counts check both current folder and all formerIds (for renamed folders)
+// Also fetches last commit date for each student
 
 import { getConfig } from "./config.js";
 import { isSystemFolder } from "../../lib/system.js";
@@ -75,28 +76,66 @@ export async function fetchCommitCountsForAllStudents(students) {
         try {
           // If no GitHub username, cannot filter by author
           if (!student.githubUsername || student.githubUsername.trim() === "") {
-            return { id: student.id, commitCount: 0 };
+            return {
+              id: student.id,
+              commitCount: 0,
+              lastCommitDate: null,
+            };
           }
 
           // Check current folder + all former IDs
           const allPaths = [student.id, ...(student.formerIds || [])];
           let totalCommits = 0;
+          let latestCommitDate = null;
 
           for (const path of allPaths) {
-            // Use path (folder name), not github username for the path parameter
-            const url = `https://api.github.com/repos/${config.repo.owner}/${config.repo.name}/commits?path=${path}&author=${student.githubUsername}&per_page=100`;
+            // Fetch commits by this author in this path
+            const url = `https://api.github.com/repos/${config.repo.owner}/${config.repo.name}/commits?path=${path}&author=${student.githubUsername}&per_page=1`;
             const res = await fetch(url);
 
             if (res.ok) {
               const data = await res.json();
-              totalCommits += Array.isArray(data) ? data.length : 0;
+              if (Array.isArray(data) && data.length > 0) {
+                totalCommits += data.length;
+
+                // Get the commit date from the first commit (most recent)
+                const commitDate = data[0]?.commit?.author?.date;
+                if (commitDate) {
+                  const thisDate = new Date(commitDate);
+                  if (!latestCommitDate || thisDate > new Date(latestCommitDate)) {
+                    latestCommitDate = commitDate;
+                  }
+                }
+              }
             }
           }
 
-          return { id: student.id, commitCount: totalCommits };
+          // If we need total count, fetch all commits (not just first page)
+          if (totalCommits > 0) {
+            let totalCount = 0;
+            for (const path of allPaths) {
+              const countUrl = `https://api.github.com/repos/${config.repo.owner}/${config.repo.name}/commits?path=${path}&author=${student.githubUsername}&per_page=100`;
+              const countRes = await fetch(countUrl);
+              if (countRes.ok) {
+                const countData = await countRes.json();
+                totalCount += Array.isArray(countData) ? countData.length : 0;
+              }
+            }
+            totalCommits = totalCount;
+          }
+
+          return {
+            id: student.id,
+            commitCount: totalCommits,
+            lastCommitDate: latestCommitDate,
+          };
         } catch (err) {
           console.warn(`Failed to fetch commit count for ${student.id}:`, err);
-          return { id: student.id, commitCount: 0 };
+          return {
+            id: student.id,
+            commitCount: 0,
+            lastCommitDate: null,
+          };
         }
       }),
     );
