@@ -1,10 +1,14 @@
 // js/merge/main.js
+// Main entry point — orchestrates the entire merge tool workflow
+// Sets up event listeners for all UI buttons (Fetch JSON, Upload, Fetch Folders, Reconcile, Download, Fetch Push Counts)
+// Handles the reconciliation pipeline and student data updates
 
 import { loadConfig } from "./config.js";
 import { fetchStudentsFromGitHub, fetchFoldersFromGitHub, fetchCommitCountsForAllStudents } from "./github.js";
 import { reconcile } from "./reconcile.js";
 import { renderTableHeader, renderTable, updateUIFromConfig, showWarning, hideWarning, showEditor, renderPreview } from "./render.js";
 import { cleanForExport } from "./student.js";
+import { isSystemFolder } from "../../lib/system.js";
 
 let existingStudents = [];
 let currentStudents = [];
@@ -79,7 +83,8 @@ function setupEventListeners() {
       .getElementById("folderInput")
       .value.split("\n")
       .map((f) => f.trim())
-      .filter((f) => f && !f.startsWith("#"));
+      .filter((f) => f && !f.startsWith("#"))
+      .filter((f) => !isSystemFolder(f));
 
     if (!folders.length) {
       alert("Please load or paste folder names first");

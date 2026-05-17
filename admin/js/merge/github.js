@@ -1,5 +1,9 @@
 // js/merge/github.js
+// Fetches students.json from GitHub repo, fetches folder list from repo contents, and fetches commit counts (total pushes) for all students
+// Uses batch processing to avoid GitHub API rate limits
+
 import { getConfig } from "./config.js";
+import { isSystemFolder } from "../../lib/system.js";
 
 export async function fetchStudentsFromGitHub() {
   const config = getConfig();
@@ -40,8 +44,10 @@ export async function fetchFoldersFromGitHub() {
       .filter((item) => item.type === "dir")
       .map((item) => item.name)
       .filter((name) => {
-        if (config.excludeFolders.includes(name)) return false;
+        // Check system folders first
+        if (isSystemFolder(name)) return false;
         if (name.startsWith(".")) return false;
+        if (config.excludeFolders.includes(name)) return false;
         return true;
       })
       .sort();
@@ -66,7 +72,7 @@ export async function fetchCommitCountsForAllStudents(students) {
     const batchResults = await Promise.all(
       batch.map(async (student) => {
         try {
-          const url = `https://api.github.com/repos/${config.repo.owner}/${config.repo.name}/commits?path=${student.id}&per_page=1`;
+          const url = `https://api.github.com/repos/${config.repo.owner}/${config.repo.name}/commits?path=${student.id}&per_page=100`;
           const res = await fetch(url);
 
           if (!res.ok) {
@@ -74,13 +80,7 @@ export async function fetchCommitCountsForAllStudents(students) {
           }
 
           const data = await res.json();
-          // GitHub API returns an array of commits, length is total count (up to per_page)
-          // For accurate count, we need to check the Link header or fetch more
-          // Simpler: fetch with per_page=100 and count
-          const countUrl = `https://api.github.com/repos/${config.repo.owner}/${config.repo.name}/commits?path=${student.id}&per_page=100`;
-          const countRes = await fetch(countUrl);
-          const countData = await countRes.json();
-          const commitCount = Array.isArray(countData) ? countData.length : 0;
+          const commitCount = Array.isArray(data) ? data.length : 0;
 
           return { id: student.id, commitCount };
         } catch (err) {

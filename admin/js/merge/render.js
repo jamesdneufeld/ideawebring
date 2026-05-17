@@ -1,4 +1,7 @@
 // js/merge/render.js
+// UI rendering — builds the editable student table (headers, rows, inputs, dropdowns, checkboxes)
+// Updates preview JSON, shows/hides warning messages and editor section
+
 import { getConfig } from "./config.js";
 
 export function renderTableHeader() {

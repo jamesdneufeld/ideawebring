@@ -1,4 +1,7 @@
 // js/merge/reconcile.js
+// Core reconciliation engine — takes folder list and existing students, applies matching rules, creates new student objects
+// Returns summary counts (high/match/none) for UI feedback
+
 import { getConfig } from "./config.js";
 import { findBestMatch } from "./matching.js";
 import { createStudent } from "./student.js";

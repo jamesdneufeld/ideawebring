@@ -1,4 +1,7 @@
 // js/merge/student.js
+// Student object factory — creates new student records from folder names or existing data
+// Handles default values (status, participation, returning, program, year) and cleans data for JSON export
+
 import { getConfig } from "./config.js";
 
 export function createStudent(folderId, existing = null) {

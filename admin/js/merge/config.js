@@ -1,4 +1,6 @@
 // js/merge/config.js
+// Loads and stores configuration from config.json (repo settings, exclude folders, defaults, match rules, UI text)
+// Provides getConfig() for other modules to access the configuration
 
 let CONFIG = {
   repo: { owner: "jamesdneufeld", name: "ideawebring" },

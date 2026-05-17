@@ -1,5 +1,8 @@
 // lib/student.js
-// Pure data transformations — safe pipeline version
+// Dashboard data pipeline — normalizes raw JSON from students.json, adds computed fields (portfolioUrl), and enriches with GitHub activity data
+// NOT used by the merge tool — only used by the public dashboard (summer-coding-mentorship.html and dashboard.html)
+// Transforms raw student data into display-ready objects with activity status, last commit date, and engagement scores
+//
 
 export function normalizeStudent(raw) {
   return {
