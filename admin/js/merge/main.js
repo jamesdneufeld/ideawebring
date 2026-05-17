@@ -141,7 +141,7 @@ function setupEventListeners() {
 
   // Select All button
   document.getElementById("selectAllBtn")?.addEventListener("click", () => {
-    currentStudents.forEach((student, idx) => {
+    currentStudents.forEach((student) => {
       student.selectedForFetch = true;
     });
     function handleUpdate(idx, field, value) {
@@ -154,7 +154,7 @@ function setupEventListeners() {
 
   // Select None button
   document.getElementById("selectNoneBtn")?.addEventListener("click", () => {
-    currentStudents.forEach((student, idx) => {
+    currentStudents.forEach((student) => {
       student.selectedForFetch = false;
     });
     function handleUpdate(idx, field, value) {
@@ -219,12 +219,15 @@ function setupEventListeners() {
 
   // Fetch Last Commit Dates for selected students only
   document.getElementById("fetchLastCommitBtn")?.addEventListener("click", async () => {
+    console.log("Fetch Last Commit button clicked");
+
     if (!currentStudents.length) {
       alert("Please reconcile students first");
       return;
     }
 
     const selectedStudents = currentStudents.filter((s) => s.selectedForFetch === true);
+    console.log("Selected students:", selectedStudents.length);
 
     if (selectedStudents.length === 0) {
       alert("Please check the checkbox for students you want to update, or click 'Select All'");
@@ -237,12 +240,15 @@ function setupEventListeners() {
     btn.disabled = true;
 
     try {
+      console.log("Calling fetchLastCommitDatesForStudents...");
       const results = await fetchLastCommitDatesForStudents(selectedStudents);
+      console.log("Results:", results);
 
       results.forEach(({ id, lastCommitDate }) => {
         const student = currentStudents.find((s) => s.id === id);
         if (student && lastCommitDate) {
           student.lastCommitDate = lastCommitDate;
+          console.log(`Updated ${id}: ${lastCommitDate}`);
         }
       });
 
@@ -257,6 +263,7 @@ function setupEventListeners() {
 
       alert(`✅ Fetched last commit dates for ${results.length} students`);
     } catch (err) {
+      console.error("Error:", err);
       alert(`❌ Error fetching last commit dates: ${err.message}`);
     } finally {
       btn.textContent = originalText;

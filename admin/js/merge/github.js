@@ -131,13 +131,18 @@ export async function fetchLastCommitDatesForStudents(students) {
   const config = getConfig();
   const results = [];
 
+  console.log(`fetchLastCommitDatesForStudents called with ${students.length} students`);
+
   const batchSize = 5;
   for (let i = 0; i < students.length; i += batchSize) {
     const batch = students.slice(i, i + batchSize);
     const batchResults = await Promise.all(
       batch.map(async (student) => {
         try {
+          console.log(`Fetching last commit for ${student.id} (${student.githubUsername})`);
+
           if (!student.githubUsername || student.githubUsername.trim() === "") {
+            console.log(`  No GitHub username for ${student.id}`);
             return { id: student.id, lastCommitDate: null };
           }
 
@@ -146,6 +151,7 @@ export async function fetchLastCommitDatesForStudents(students) {
 
           for (const path of allPaths) {
             const url = `https://api.github.com/repos/${config.repo.owner}/${config.repo.name}/commits?path=${path}&author=${student.githubUsername}&per_page=1`;
+            console.log(`  Checking path: ${path}`);
             const res = await fetch(url);
 
             if (res.ok) {
@@ -153,20 +159,26 @@ export async function fetchLastCommitDatesForStudents(students) {
               if (Array.isArray(data) && data.length > 0) {
                 const commitDate = data[0]?.commit?.author?.date;
                 if (commitDate) {
+                  console.log(`    Found commit: ${commitDate}`);
                   const thisDate = new Date(commitDate);
                   if (!latestCommitDate || thisDate > new Date(latestCommitDate)) {
                     latestCommitDate = commitDate;
                   }
                 }
+              } else {
+                console.log(`    No commits found in ${path}`);
               }
+            } else {
+              console.log(`    API returned ${res.status} for ${path}`);
             }
 
             await new Promise((r) => setTimeout(r, 200));
           }
 
+          console.log(`  Final last commit for ${student.id}: ${latestCommitDate || "none"}`);
           return { id: student.id, lastCommitDate: latestCommitDate };
         } catch (err) {
-          console.warn(`Failed to fetch last commit for ${student.id}:`, err);
+          console.error(`Failed to fetch last commit for ${student.id}:`, err);
           return { id: student.id, lastCommitDate: null };
         }
       }),
@@ -178,5 +190,6 @@ export async function fetchLastCommitDatesForStudents(students) {
     }
   }
 
+  console.log(`fetchLastCommitDatesForStudents complete. Results:`, results);
   return results;
 }
