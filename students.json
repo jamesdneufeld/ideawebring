@@ -59,6 +59,7 @@
     },
     {
       "id": "andy-poystila",
+      "formerIds": ["andy"],
       "displayName": "Andy Poystila",
       "githubUsername": "ukkop",
       "status": "alumni",
@@ -241,6 +242,7 @@
     },
     {
       "id": "jazzy-linton",
+      "formerIds": ["jazzy"],
       "displayName": "Jazzy Linton",
       "githubUsername": "jazzy7731",
       "status": "alumni",
@@ -465,6 +467,7 @@
     },
     {
       "id": "taylore-lawrence",
+      "formerIds": ["taylore"],
       "displayName": "Taylore Lawrence",
       "githubUsername": "loreofthetay",
       "status": "student",
@@ -493,6 +496,7 @@
     },
     {
       "id": "tobin-eckstein",
+      "formerIds": ["tobin"],
       "displayName": "Tobin Eckstein",
       "githubUsername": "tobineliasart",
       "status": "alumni",
