@@ -1,5 +1,5 @@
 // summer-mentorship.js
-// Web Ring Badge System — Two-axis deterministic membership with formerIds support
+// Web Ring Badge System — Explicit cohortStatus for membership
 
 const REPO_OWNER = "jamesdneufeld";
 const REPO_NAME = "ideawebring";
@@ -151,10 +151,21 @@ function daysSince(date) {
 }
 
 /* =========================
-   MEMBERSHIP (TWO-AXIS + ARCHIVE STATE)
+   MEMBERSHIP (EXPLICIT COHORT STATUS FIRST)
 ========================= */
 
-function getMembership(activity) {
+function getMembership(activity, student) {
+  // If explicit cohort status exists, use it
+  if (student?.cohortStatus) {
+    const status = student.cohortStatus;
+    if (status === "newcomer") return "Newcomer";
+    if (status === "returning") return "Regular";
+    if (status === "alumni") return "Alumni";
+    if (status === "inactive") return "Archive";
+    if (status === "withdrawn") return "Archive";
+  }
+
+  // Fallback to Git-based inference (for students without cohortStatus)
   const commits = activity.commitCount;
   const commitDates = activity.commitDates || [];
 
@@ -164,7 +175,6 @@ function getMembership(activity) {
   if (commitDates.length < 2) return "Contributor";
 
   const sorted = [...commitDates].sort((a, b) => a - b);
-
   const firstDate = sorted[0];
   const lastDate = sorted[sorted.length - 1];
 
@@ -198,7 +208,6 @@ function getLifetimeScore(activity) {
   if (commits === 0) return 0;
   if (dates.length < 2) return 1;
 
-  // Filter out invalid dates - ensure each is a Date object
   const validDates = dates.filter((d) => d && d instanceof Date && !isNaN(d.getTime()));
 
   if (validDates.length < 2) return 1;
@@ -275,7 +284,7 @@ async function populateStudentData() {
     const activity = await getActivity(folder, student?.formerIds || []);
 
     const lastSeenDays = daysSince(activity.lastDate);
-    const membership = getMembership(activity);
+    const membership = getMembership(activity, student);
     const lifetime = getLifetimeScore(activity);
 
     const programEl = link.querySelector(".student-program");
