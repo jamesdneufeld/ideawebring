@@ -113,9 +113,19 @@ button:hover {
 }
 
 #studentTable {
-  min-width: 2400px;
+  min-width: 2800px;
   width: 100%;
   border-collapse: collapse;
+}
+
+/* Sortable header styling */
+th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+th.sortable:hover {
+  background: #1c2128;
 }
 
 /* Table headers - smaller font */
