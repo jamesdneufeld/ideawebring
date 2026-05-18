@@ -72,8 +72,18 @@ const COLUMNS = [
   { key: "resumeMet", label: "Resume Met", sortable: true },
 ];
 
+// Sort state
 let currentSortColumn = null;
 let currentSortDirection = "asc";
+
+export function setSortState(column, direction) {
+  currentSortColumn = column;
+  currentSortDirection = direction;
+}
+
+export function getSortState() {
+  return { column: currentSortColumn, direction: currentSortDirection };
+}
 
 export function renderTableHeader(onSort) {
   const thead = document.getElementById("tableHeader");
@@ -98,7 +108,8 @@ export function renderTableHeader(onSort) {
   // Add click event listeners to sortable headers
   if (onSort) {
     document.querySelectorAll("#tableHeader th.sortable").forEach((th) => {
-      th.addEventListener("click", () => {
+      th.removeEventListener("click", th._sortHandler);
+      th._sortHandler = () => {
         const column = th.dataset.column;
         if (currentSortColumn === column) {
           currentSortDirection = currentSortDirection === "asc" ? "desc" : "asc";
@@ -107,8 +118,8 @@ export function renderTableHeader(onSort) {
           currentSortDirection = "asc";
         }
         onSort(currentSortColumn, currentSortDirection);
-        renderTableHeader(onSort);
-      });
+      };
+      th.addEventListener("click", th._sortHandler);
     });
   }
 }
