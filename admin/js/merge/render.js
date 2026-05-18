@@ -133,9 +133,9 @@ export function renderTable(students, onUpdate) {
     selectCheckbox.addEventListener("change", (e) => onUpdate(idx, "selectedForFetch", e.target.checked));
     selectCell.appendChild(selectCheckbox);
 
-    // Column 1: Folder ID (read-only)
+    // Column 1: Folder ID with folder icon (read-only)
     const idCell = row.insertCell(1);
-    idCell.textContent = student.id;
+    idCell.innerHTML = `📁 ${student.id}`;
     idCell.style.color = "#8b949e";
 
     // Column 2: Display Name (editable)
