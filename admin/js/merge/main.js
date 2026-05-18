@@ -2,22 +2,51 @@
 // Main entry point — orchestrates the entire merge tool workflow
 // Sets up event listeners for all UI buttons (Fetch JSON, Upload, Fetch Folders, Reconcile, Download, Fetch Push Counts, Fetch Last Commit Dates, Fetch First Commit Dates)
 // Handles the reconciliation pipeline and student data updates
+// Supports column sorting by clicking table headers
 
 import { loadConfig } from "./config.js";
 import { fetchStudentsFromGitHub, fetchFoldersFromGitHub, fetchCommitCountsForAllStudents, fetchLastCommitDatesForStudents, fetchFirstCommitDatesForStudents } from "./github.js";
 import { reconcile } from "./reconcile.js";
-import { renderTableHeader, renderTable, updateUIFromConfig, showWarning, hideWarning, showEditor, renderPreview } from "./render.js";
+import { renderTableHeader, renderTable, updateUIFromConfig, showWarning, hideWarning, showEditor, renderPreview, sortStudents, setSortState, getSortState } from "./render.js";
 import { cleanForExport } from "./student.js";
 import { isSystemFolder } from "../../lib/system.js";
 
 let existingStudents = [];
 let currentStudents = [];
+let sortedStudents = [];
+
+// Handle update to a student field (maintains sort order)
+function handleUpdate(idx, field, value) {
+  currentStudents[idx][field] = value;
+
+  // Re-apply current sort after update
+  const sortState = getSortState();
+  if (sortState.column && currentStudents.length) {
+    sortedStudents = sortStudents(currentStudents, sortState.column, sortState.direction);
+  } else {
+    sortedStudents = [...currentStudents];
+  }
+
+  renderTable(sortedStudents, handleUpdate);
+  renderPreview(currentStudents.map(cleanForExport));
+}
 
 async function init() {
   await loadConfig();
 
   updateUIFromConfig();
-  renderTableHeader();
+
+  // Define sort callback for table header clicks
+  function onSortColumn(column, direction) {
+    setSortState(column, direction);
+    if (currentStudents.length) {
+      sortedStudents = sortStudents(currentStudents, column, direction);
+      renderTable(sortedStudents, handleUpdate);
+      renderPreview(currentStudents.map(cleanForExport));
+    }
+  }
+
+  renderTableHeader(onSortColumn);
   setupEventListeners();
 }
 
@@ -94,6 +123,7 @@ function setupEventListeners() {
     const { students, summary } = reconcile(folders, existingStudents);
 
     currentStudents = students;
+    sortedStudents = [...currentStudents];
 
     if (summary.hasMissing) {
       showWarning(`
@@ -107,14 +137,7 @@ function setupEventListeners() {
       hideWarning();
     }
 
-    function handleUpdate(idx, field, value) {
-      currentStudents[idx][field] = value;
-
-      renderTable(currentStudents, handleUpdate);
-      renderPreview(currentStudents.map(cleanForExport));
-    }
-
-    renderTable(currentStudents, handleUpdate);
+    renderTable(sortedStudents, handleUpdate);
     renderPreview(currentStudents.map(cleanForExport));
 
     showEditor();
@@ -144,12 +167,15 @@ function setupEventListeners() {
     currentStudents.forEach((student) => {
       student.selectedForFetch = true;
     });
-    function handleUpdate(idx, field, value) {
-      currentStudents[idx][field] = value;
-      renderTable(currentStudents, handleUpdate);
-      renderPreview(currentStudents.map(cleanForExport));
+    // Re-render with current sort
+    const sortState = getSortState();
+    if (sortState.column && currentStudents.length) {
+      sortedStudents = sortStudents(currentStudents, sortState.column, sortState.direction);
+    } else {
+      sortedStudents = [...currentStudents];
     }
-    renderTable(currentStudents, handleUpdate);
+    renderTable(sortedStudents, handleUpdate);
+    renderPreview(currentStudents.map(cleanForExport));
   });
 
   // Select None button
@@ -157,12 +183,15 @@ function setupEventListeners() {
     currentStudents.forEach((student) => {
       student.selectedForFetch = false;
     });
-    function handleUpdate(idx, field, value) {
-      currentStudents[idx][field] = value;
-      renderTable(currentStudents, handleUpdate);
-      renderPreview(currentStudents.map(cleanForExport));
+    // Re-render with current sort
+    const sortState = getSortState();
+    if (sortState.column && currentStudents.length) {
+      sortedStudents = sortStudents(currentStudents, sortState.column, sortState.direction);
+    } else {
+      sortedStudents = [...currentStudents];
     }
-    renderTable(currentStudents, handleUpdate);
+    renderTable(sortedStudents, handleUpdate);
+    renderPreview(currentStudents.map(cleanForExport));
   });
 
   // Fetch Push Counts for selected students only
@@ -195,18 +224,21 @@ function setupEventListeners() {
         }
       });
 
-      function handleUpdate(idx, field, value) {
-        currentStudents[idx][field] = value;
-        renderTable(currentStudents, handleUpdate);
-        renderPreview(currentStudents.map(cleanForExport));
+      // Re-sort after updates
+      const sortState = getSortState();
+      if (sortState.column && currentStudents.length) {
+        sortedStudents = sortStudents(currentStudents, sortState.column, sortState.direction);
+      } else {
+        sortedStudents = [...currentStudents];
       }
 
-      renderTable(currentStudents, handleUpdate);
+      renderTable(sortedStudents, handleUpdate);
       renderPreview(currentStudents.map(cleanForExport));
 
       // Clear all selected checkboxes after fetch
       currentStudents.forEach((s) => (s.selectedForFetch = false));
-      renderTable(currentStudents, handleUpdate);
+      sortedStudents = sortStudents(currentStudents, sortState.column || "displayName", sortState.direction || "asc");
+      renderTable(sortedStudents, handleUpdate);
 
       alert(`✅ Fetched push counts for ${counts.length} students`);
     } catch (err) {
@@ -251,13 +283,15 @@ function setupEventListeners() {
         }
       }
 
-      function handleUpdate(idx, field, value) {
-        currentStudents[idx][field] = value;
-        renderTable(currentStudents, handleUpdate);
-        renderPreview(currentStudents.map(cleanForExport));
+      // Re-sort after updates
+      const sortState = getSortState();
+      if (sortState.column && currentStudents.length) {
+        sortedStudents = sortStudents(currentStudents, sortState.column, sortState.direction);
+      } else {
+        sortedStudents = [...currentStudents];
       }
 
-      renderTable(currentStudents, handleUpdate);
+      renderTable(sortedStudents, handleUpdate);
       renderPreview(currentStudents.map(cleanForExport));
 
       alert(`✅ Fetched last commit dates for ${results.length} students`);
@@ -304,13 +338,15 @@ function setupEventListeners() {
         }
       }
 
-      function handleUpdate(idx, field, value) {
-        currentStudents[idx][field] = value;
-        renderTable(currentStudents, handleUpdate);
-        renderPreview(currentStudents.map(cleanForExport));
+      // Re-sort after updates
+      const sortState = getSortState();
+      if (sortState.column && currentStudents.length) {
+        sortedStudents = sortStudents(currentStudents, sortState.column, sortState.direction);
+      } else {
+        sortedStudents = [...currentStudents];
       }
 
-      renderTable(currentStudents, handleUpdate);
+      renderTable(sortedStudents, handleUpdate);
       renderPreview(currentStudents.map(cleanForExport));
 
       alert(`✅ Fetched first commit dates for ${results.length} students`);
