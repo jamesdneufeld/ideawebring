@@ -1,10 +1,10 @@
 // js/merge/main.js
 // Main entry point — orchestrates the entire merge tool workflow
-// Sets up event listeners for all UI buttons (Fetch JSON, Upload, Fetch Folders, Reconcile, Download, Fetch Push Counts, Fetch Last Commit Dates)
+// Sets up event listeners for all UI buttons (Fetch JSON, Upload, Fetch Folders, Reconcile, Download, Fetch Push Counts, Fetch Last Commit Dates, Fetch First Commit Dates)
 // Handles the reconciliation pipeline and student data updates
 
 import { loadConfig } from "./config.js";
-import { fetchStudentsFromGitHub, fetchFoldersFromGitHub, fetchCommitCountsForAllStudents, fetchLastCommitDatesForStudents } from "./github.js";
+import { fetchStudentsFromGitHub, fetchFoldersFromGitHub, fetchCommitCountsForAllStudents, fetchLastCommitDatesForStudents, fetchFirstCommitDatesForStudents } from "./github.js";
 import { reconcile } from "./reconcile.js";
 import { renderTableHeader, renderTable, updateUIFromConfig, showWarning, hideWarning, showEditor, renderPreview } from "./render.js";
 import { cleanForExport } from "./student.js";
@@ -240,32 +240,23 @@ function setupEventListeners() {
     btn.disabled = true;
 
     try {
-      console.log("Calling fetchLastCommitDatesForStudents...");
       const results = await fetchLastCommitDatesForStudents(selectedStudents);
       console.log("Results:", results);
 
-      // Update the student objects
       for (const { id, lastCommitDate } of results) {
         const studentIndex = currentStudents.findIndex((s) => s.id === id);
-        if (studentIndex !== -1) {
-          if (lastCommitDate) {
-            // Store the full ISO string
-            currentStudents[studentIndex].lastCommitDate = lastCommitDate;
-            console.log(`Updated ${id}: ${lastCommitDate}`);
-          } else {
-            console.log(`No commit found for ${id}`);
-          }
+        if (studentIndex !== -1 && lastCommitDate) {
+          currentStudents[studentIndex].lastCommitDate = lastCommitDate;
+          console.log(`Updated ${id}: ${lastCommitDate}`);
         }
       }
 
-      // Force a complete re-render of the table
       function handleUpdate(idx, field, value) {
         currentStudents[idx][field] = value;
         renderTable(currentStudents, handleUpdate);
         renderPreview(currentStudents.map(cleanForExport));
       }
 
-      // Re-render the entire table to show updated dates
       renderTable(currentStudents, handleUpdate);
       renderPreview(currentStudents.map(cleanForExport));
 
@@ -273,6 +264,59 @@ function setupEventListeners() {
     } catch (err) {
       console.error("Error:", err);
       alert(`❌ Error fetching last commit dates: ${err.message}`);
+    } finally {
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }
+  });
+
+  // Fetch First Commit Dates for selected students only
+  document.getElementById("fetchFirstCommitBtn")?.addEventListener("click", async () => {
+    console.log("Fetch First Commit button clicked");
+
+    if (!currentStudents.length) {
+      alert("Please reconcile students first");
+      return;
+    }
+
+    const selectedStudents = currentStudents.filter((s) => s.selectedForFetch === true);
+    console.log("Selected students:", selectedStudents.length);
+
+    if (selectedStudents.length === 0) {
+      alert("Please check the checkbox for students you want to update, or click 'Select All'");
+      return;
+    }
+
+    const btn = document.getElementById("fetchFirstCommitBtn");
+    const originalText = btn.textContent;
+    btn.textContent = `⟳ Fetching ${selectedStudents.length}...`;
+    btn.disabled = true;
+
+    try {
+      const results = await fetchFirstCommitDatesForStudents(selectedStudents);
+      console.log("Results:", results);
+
+      for (const { id, firstCommitDate } of results) {
+        const studentIndex = currentStudents.findIndex((s) => s.id === id);
+        if (studentIndex !== -1 && firstCommitDate) {
+          currentStudents[studentIndex].firstCommitDate = firstCommitDate;
+          console.log(`Updated first commit for ${id}: ${firstCommitDate}`);
+        }
+      }
+
+      function handleUpdate(idx, field, value) {
+        currentStudents[idx][field] = value;
+        renderTable(currentStudents, handleUpdate);
+        renderPreview(currentStudents.map(cleanForExport));
+      }
+
+      renderTable(currentStudents, handleUpdate);
+      renderPreview(currentStudents.map(cleanForExport));
+
+      alert(`✅ Fetched first commit dates for ${results.length} students`);
+    } catch (err) {
+      console.error("Error:", err);
+      alert(`❌ Error fetching first commit dates: ${err.message}`);
     } finally {
       btn.textContent = originalText;
       btn.disabled = false;
