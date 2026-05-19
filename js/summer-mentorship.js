@@ -28,6 +28,7 @@ const PURPOSE_LABELS = {
   indie_web: "Indie Web Explorer",
   portfolio: "Portfolio Building",
   career_prep: "Career Prep",
+  coursework: "Required Coursework",
 };
 
 const LEARNING_STAGE_LABELS = {
@@ -300,7 +301,7 @@ function formatDateMonthYear(dateString) {
 }
 
 /* =========================
-   IDENTITY LABEL
+   IDENTITY LABEL (UPDATED)
 ========================= */
 
 function getIdentityLabel(student) {
@@ -308,8 +309,10 @@ function getIdentityLabel(student) {
     if (student?.entryType === "returning") return "Returning Alumni";
     return "Alumni";
   }
-  if (student?.entryType === "returning") return "Returning Student";
-  return "New Student";
+  if (student?.entryType === "returning") return "Returning Participant";
+  if (student?.entryType === "coursework") return "Coursework Participant";
+  if (student?.entryType === "past") return "Past Participant";
+  return "New to Web Ring";
 }
 
 /* =========================
@@ -331,10 +334,10 @@ function getHumanLabel(value, labelMap) {
    UI
 ========================= */
 
-function createBadge(className, text = "", title = "") {
+function createBadge(className, text, title = "") {
   const li = document.createElement("li");
   li.className = `badge ${className}`;
-  if (text) li.textContent = text;
+  li.textContent = text;
   if (title) li.title = title;
   return li;
 }
@@ -409,35 +412,35 @@ async function populateStudentData() {
 
     container.innerHTML = "";
 
-    // Identity badge
-    container.appendChild(createBadge("badge-identity", identityLabel));
+    // Identity badge (labeled)
+    container.appendChild(createBadge("badge-identity", `Status: ${identityLabel}`));
 
-    // Cohort (if available)
+    // Cohort (labeled)
     if (cohort) {
-      container.appendChild(createBadge("badge-cohort", cohort));
+      container.appendChild(createBadge("badge-cohort", `Cohort: ${cohort}`));
     }
 
-    // Purpose (primary reason for joining)
+    // Purpose (labeled)
     if (purpose) {
-      container.appendChild(createBadge("badge-purpose", purpose));
+      container.appendChild(createBadge("badge-purpose", `Goal: ${purpose}`));
     }
 
-    // Learning Stage
+    // Learning Stage (labeled)
     if (learningStage) {
-      container.appendChild(createBadge("badge-learning-stage", learningStage));
+      container.appendChild(createBadge("badge-learning-stage", `Stage: ${learningStage}`));
     }
 
-    // Focus areas (what they're working on)
+    // Focus areas (labeled)
     if (focusAreasText) {
-      container.appendChild(createBadge("badge-focus-areas", focusAreasText));
+      container.appendChild(createBadge("badge-focus-areas", `Learning: ${focusAreasText}`));
     }
 
-    // Tools (what they use)
+    // Tools (labeled)
     if (toolsText) {
-      container.appendChild(createBadge("badge-tools", toolsText));
+      container.appendChild(createBadge("badge-tools", `Tools: ${toolsText}`));
     }
 
-    // Joined Web Ring
+    // Joined Web Ring (already has label)
     if (joinedDate) {
       container.appendChild(createBadge("badge-joined", `Joined Web Ring: ${joinedDate}`));
     }
@@ -447,7 +450,7 @@ async function populateStudentData() {
       container.appendChild(createBadge("badge-joined-mentorship", `Joined Mentorship: ${joinedMentorshipDate}`));
     }
 
-    // First contribution
+    // First contribution (labeled)
     if (firstCommitFormatted) {
       container.appendChild(createBadge("badge-first-commit", `First contribution: ${firstCommitFormatted}`));
     }
