@@ -18,8 +18,16 @@ let sortedStudents = [];
 // Handle update to a student field (maintains sort order)
 
 function handleUpdate(idx, field, value) {
-  console.log(`🔧 handleUpdate called: idx=${idx}, field=${field}, value=${value}, student=${currentStudents[idx]?.id}`);
-  currentStudents[idx][field] = value;
+  // Get the student from the sorted array
+  const student = sortedStudents[idx];
+  if (!student) return;
+
+  // Find the actual student in currentStudents by id
+  const actualIndex = currentStudents.findIndex((s) => s.id === student.id);
+  if (actualIndex === -1) return;
+
+  console.log(`🔧 handleUpdate: updating ${student.id} field ${field} to ${value}`);
+  currentStudents[actualIndex][field] = value;
 
   // Re-apply current sort after update
   const sortState = getSortState();
