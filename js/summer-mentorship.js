@@ -270,20 +270,20 @@ async function populateStudentData() {
 
     // 8 grid items in order:
     // Row 1: STATUS | GOAL
-    container.appendChild(createGridItem("STATUS", identityLabel, "status"));
-    container.appendChild(createGridItem("GOAL", purpose, "goal"));
+    container.appendChild(createGridItem("Status", identityLabel, "status"));
+    container.appendChild(createGridItem("Goal", purpose, "goal"));
 
     // Row 2: COHORT | FOCUS
-    container.appendChild(createGridItem("COHORT", cohort, "cohort"));
-    container.appendChild(createGridItem("FOCUS", focusText, "focus"));
+    container.appendChild(createGridItem("Cohort", cohort, "cohort"));
+    container.appendChild(createGridItem("Focus", focusText, "focus"));
 
     // Row 3: Joined Web Ring | LAST ACTIVE
     container.appendChild(createGridItem("Joined Web Ring", joinedDate || "—", "joined"));
-    container.appendChild(createGridItem("LAST ACTIVE", lastActiveLabel, "last-active"));
+    container.appendChild(createGridItem("Last Active", lastActiveLabel, "last-active"));
 
     // Row 4: FIRST PUSH | TOTAL PUSHES
-    container.appendChild(createGridItem("FIRST PUSH", firstCommitFormatted || "—", "first-push"));
-    container.appendChild(createGridItem("TOTAL PUSHES", totalPushes.toString(), "total-pushes"));
+    container.appendChild(createGridItem("First Push", firstCommitFormatted || "—", "first-push"));
+    container.appendChild(createGridItem("Total Pushes", totalPushes.toString(), "total-pushes"));
 
     const returnGlow = lastSeenDays !== null && lastSeenDays > RETURN_GLOW_DAYS && totalPushes > 0;
     link.classList.toggle("return-glow", returnGlow);
