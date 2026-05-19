@@ -16,7 +16,9 @@ let currentStudents = [];
 let sortedStudents = [];
 
 // Handle update to a student field (maintains sort order)
+
 function handleUpdate(idx, field, value) {
+  console.log(`🔧 handleUpdate called: idx=${idx}, field=${field}, value=${value}, student=${currentStudents[idx]?.id}`);
   currentStudents[idx][field] = value;
 
   // Re-apply current sort after update
