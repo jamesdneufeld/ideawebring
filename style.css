@@ -93,7 +93,7 @@ h3 {
   color: var(--text-inverse);
   padding-bottom: 0.5rem;
   border-bottom: 1px dotted white;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 p,
@@ -457,9 +457,9 @@ a:hover {
   margin: 0 0 0.75rem 0;
   padding: 0;
   list-style: none;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.25rem;
   border-bottom: 1px dotted white;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .student-program,
@@ -485,6 +485,22 @@ a:hover {
   margin: 0;
 }
 
+.grid-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-label {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+.grid-value {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
 /* Each JS-generated line */
 .student-line {
   font-size: 0.85rem;
@@ -508,11 +524,6 @@ a:hover {
   font-size: 0.95rem;
   font-weight: 600;
   opacity: 1;
-}
-
-/* Make Lifetime Score slightly more visible */
-.student-line:last-child {
-  letter-spacing: 0.05em;
 }
 
 /* ===========================================================

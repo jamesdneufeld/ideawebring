@@ -1,23 +1,17 @@
 // summer-mentorship.js
 // Web Ring Badge System — Hybrid: API first, JSON fallback
-// Only counts commits made by the student's own GitHub username
 
 // ============================================================
 // CONFIGURATION
 // ============================================================
 
-// GitHub repository settings
 const REPO_OWNER = "jamesdneufeld";
 const REPO_NAME = "ideawebring";
 
-// Cache settings
-const CACHE_TTL_HOURS = 12; // How long to cache GitHub data (hours)
-const PER_PAGE_COMMITS = 100; // Number of commits to fetch per API call
+const CACHE_TTL_HOURS = 12;
+const PER_PAGE_COMMITS = 100;
+const RETURN_GLOW_DAYS = 365;
 
-// UI thresholds
-const RETURN_GLOW_DAYS = 365; // Days after which a returning student gets the glow effect
-
-// Lookup tables for human-readable labels
 const PURPOSE_LABELS = {
   learning_basics: "Learning HTML & CSS",
   learning_foundations: "Building Core Concepts",
@@ -28,62 +22,26 @@ const PURPOSE_LABELS = {
   indie_web: "Indie Web Explorer",
   portfolio: "Portfolio Building",
   career_prep: "Career Prep",
-};
-
-const LEARNING_STAGE_LABELS = {
-  early: "Early Stage",
-  developing: "Developing",
-  advanced: "Advanced",
+  coursework: "Required Coursework",
 };
 
 const FOCUS_AREA_LABELS = {
-  // Layout & Design
-  layout_foundations: "Layout Foundations",
-  responsive_design: "Responsive Design",
-  flexbox_layouts: "Flexbox Layouts",
-  flexbox_confident: "Confident with Flexbox",
-  css_grid: "CSS Grid",
-  positioning: "CSS Positioning",
-  flexbox: "Flexbox",
-
-  // Core Concepts
   box_model: "The Box Model",
   media_queries: "Media Queries",
-  semantic_html: "Semantic HTML",
-  accessibility: "Accessibility",
-
-  // Development Tools
+  flexbox: "Flexbox",
+  flexbox_layouts: "Flexbox Layouts",
+  flexbox_confident: "Confident with Flexbox",
+  layout_foundations: "Layout Foundations",
+  responsive_design: "Responsive Design",
   debugging_tools: "Debugging Tools",
   inspector: "Browser Inspector",
-  dev_tools: "Developer Tools",
-
-  // Styling & Design
-  color_theory: "Color Theory",
-  typography: "Typography",
-  animations: "CSS Animations",
-  transitions: "CSS Transitions",
-
-  // Student-specific notes
-  box_model_unclear: "Learning the Box Model",
-  media_queries_confusing: "Exploring Media Queries",
-  new_to_html: "New to HTML & CSS",
-  inspector_user: "Uses Browser Inspector",
-
-  // Additional mappings
-  layout: "Layout Design",
-  responsive: "Responsive Design",
-  debugging: "Debugging Techniques",
 };
 
 const TOOL_LABELS = {
   inspector: "Chrome Inspector",
-  figma: "Figma",
-  codepen: "CodePen",
   github: "GitHub",
   vs_code: "VS Code",
-  vscode: "VS Code",
-  git: "Git",
-  terminal: "Terminal/Command Line",
+  codepen: "CodePen",
 };
 
 // ============================================================
@@ -92,37 +50,21 @@ const TOOL_LABELS = {
 
 let studentsData = [];
 
-/* =========================
-   CACHE HELPERS
-========================= */
-
 function getCache(key) {
   const raw = localStorage.getItem(key);
   if (!raw) return null;
-
   try {
     const data = JSON.parse(raw);
     if (Date.now() - data.timestamp < CACHE_TTL_HOURS * 60 * 60 * 1000) {
       return data.value;
     }
   } catch {}
-
   return null;
 }
 
 function setCache(key, value) {
-  localStorage.setItem(
-    key,
-    JSON.stringify({
-      value,
-      timestamp: Date.now(),
-    }),
-  );
+  localStorage.setItem(key, JSON.stringify({ value, timestamp: Date.now() }));
 }
-
-/* =========================
-   LOAD STUDENTS
-========================= */
 
 async function loadStudents() {
   try {
@@ -134,31 +76,15 @@ async function loadStudents() {
   }
 }
 
-/* =========================
-   FALLBACK
-========================= */
-
 function makeEmptyActivity() {
-  return {
-    lastDate: null,
-    firstDate: null,
-    commitCount: 0,
-    commitDates: [],
-    isFromAPI: false,
-  };
+  return { lastDate: null, firstDate: null, commitCount: 0, commitDates: [], isFromAPI: false };
 }
-
-/* =========================
-   GET STORED ACTIVITY FROM JSON (FALLBACK)
-========================= */
 
 function getStoredActivity(student) {
   if (student?.lastCommitDate) {
-    const lastSeenDays = daysSince(student.lastCommitDate);
     return {
       lastDate: student.lastCommitDate,
       firstDate: student.firstCommitDate,
-      lastSeenDays: lastSeenDays,
       commitCount: student.totalPushes || 0,
       isFromAPI: false,
     };
@@ -166,46 +92,24 @@ function getStoredActivity(student) {
   return null;
 }
 
-/* =========================
-   ISO WEEK HELPER
-========================= */
-
-function getWeekNumber(date) {
-  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-  const dayNum = d.getUTCDay() || 7;
-  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-  return Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
-}
-
-/* =========================
-   GITHUB ACTIVITY (WITH AUTHOR FILTERING)
-========================= */
-
 async function getActivityFromAPI(folder, student) {
   const allIds = [folder, ...(student?.formerIds || [])].filter(Boolean);
   const cacheKey = `activity_${folder}`;
   const cached = getCache(cacheKey);
   if (cached) return cached;
 
-  // If no GitHub username, skip API call (can't filter by author)
   if (!student?.githubUsername || student.githubUsername.trim() === "") {
     return null;
   }
 
   try {
     const allCommits = [];
-
     for (const id of allIds) {
-      // IMPORTANT: Filter by author to only count the student's own commits
       const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${id}&author=${student.githubUsername}&per_page=${PER_PAGE_COMMITS}`;
       const res = await fetch(url);
-
       if (res.ok) {
         const data = await res.json();
-        if (Array.isArray(data)) {
-          allCommits.push(...data);
-        }
+        if (Array.isArray(data)) allCommits.push(...data);
       }
     }
 
@@ -223,7 +127,6 @@ async function getActivityFromAPI(folder, student) {
     }
 
     const commits = Array.from(uniqueCommits.values());
-
     const commitDates = commits
       .map((c) => c?.commit?.author?.date)
       .filter(Boolean)
@@ -244,7 +147,6 @@ async function getActivityFromAPI(folder, student) {
       commitDates,
       isFromAPI: true,
     };
-
     setCache(cacheKey, result);
     return result;
   } catch (err) {
@@ -253,44 +155,24 @@ async function getActivityFromAPI(folder, student) {
   }
 }
 
-/* =========================
-   GET ACTIVITY (HYBRID: API FIRST, FALLBACK TO STORED)
-========================= */
-
 async function getActivity(folder, student) {
-  // Try API first (only if student has GitHub username)
   const apiActivity = await getActivityFromAPI(folder, student);
-
-  // If API returned valid data, use it
-  if (apiActivity && apiActivity.lastDate) {
-    return apiActivity;
-  }
-
-  // If API failed or returned no data, fall back to stored data from students.json
+  if (apiActivity && apiActivity.lastDate) return apiActivity;
   const storedActivity = getStoredActivity(student);
-  if (storedActivity) {
-    return storedActivity;
-  }
-
-  // If all fails, return empty
+  if (storedActivity) return storedActivity;
   return makeEmptyActivity();
 }
-
-/* =========================
-   TIME HELPERS
-========================= */
 
 function daysSince(date) {
   if (!date) return null;
   return Math.floor((Date.now() - new Date(date)) / (1000 * 60 * 60 * 24));
 }
 
-// Simplified handcrafted style
 function getLastActiveLabel(days) {
   if (days === null) return "No activity";
-  if (days === 0) return "Last active: Today";
-  if (days === 1) return "Last active: Yesterday";
-  return `Last active: ${days} days ago`;
+  if (days === 0) return "Today";
+  if (days === 1) return "Yesterday";
+  return `${days} days ago`;
 }
 
 function formatDateMonthYear(dateString) {
@@ -299,49 +181,43 @@ function formatDateMonthYear(dateString) {
   return date.toLocaleDateString("en-US", { year: "numeric", month: "short" });
 }
 
-/* =========================
-   IDENTITY LABEL
-========================= */
-
 function getIdentityLabel(student) {
   if (student?.status === "alumni") {
     if (student?.entryType === "returning") return "Returning Alumni";
     return "Alumni";
   }
-  if (student?.entryType === "returning") return "Returning Student";
-  return "New Student";
+  if (student?.entryType === "returning") return "Returning Participant";
+  if (student?.entryType === "coursework") return "Coursework Participant";
+  if (student?.entryType === "past") return "Past Participant";
+  return "New to Web Ring";
 }
-
-/* =========================
-   HELPER: GET HUMAN-READABLE LABEL
-========================= */
 
 function getHumanLabel(value, labelMap) {
   if (!value) return null;
-  // If it's an array, map each item
   if (Array.isArray(value)) {
     const mapped = value.map((item) => labelMap[item] || item);
     return mapped.filter(Boolean);
   }
-  // If it's a string, return mapped or original
   return labelMap[value] || value;
 }
 
-/* =========================
-   UI
-========================= */
+function createGridItem(label, value, className = "") {
+  const div = document.createElement("div");
+  div.className = `grid-item ${className}`;
 
-function createBadge(className, text = "", title = "") {
-  const li = document.createElement("li");
-  li.className = `badge ${className}`;
-  if (text) li.textContent = text;
-  if (title) li.title = title;
-  return li;
+  const labelSpan = document.createElement("span");
+  labelSpan.className = "grid-label";
+  labelSpan.textContent = label;
+
+  const valueSpan = document.createElement("span");
+  valueSpan.className = "grid-value";
+  valueSpan.textContent = value || "—";
+
+  div.appendChild(labelSpan);
+  div.appendChild(valueSpan);
+
+  return div;
 }
-
-/* =========================
-   RENDER
-========================= */
 
 async function populateStudentData() {
   await loadStudents();
@@ -351,13 +227,10 @@ async function populateStudentData() {
 
   for (const link of links) {
     const folder = link.dataset.folder || link.getAttribute("href").replace(/\/$/, "").toLowerCase();
-
     const student = studentMap.get(folder);
 
-    // Get activity (API first with author filtering, fallback to stored)
     const activity = await getActivity(folder, student);
 
-    // Use API data if available, otherwise stored
     let lastSeenDays = null;
     let totalPushes = 0;
     let firstCommitDate = student?.firstCommitDate;
@@ -374,27 +247,13 @@ async function populateStudentData() {
     }
 
     const joinedDate = formatDateMonthYear(student?.joinedWebRing);
-    const joinedMentorshipDate = formatDateMonthYear(student?.joinedMentorship);
     const firstCommitFormatted = formatDateMonthYear(firstCommitDate);
     const identityLabel = getIdentityLabel(student);
-    const cohort = student?.cohort;
+    const cohort = student?.cohort || "Summer 2026";
 
-    const purpose = getHumanLabel(student?.purpose, PURPOSE_LABELS);
-    const learningStage = getHumanLabel(student?.learning_stage, LEARNING_STAGE_LABELS);
-
-    // Format focus areas using lookup table
-    let focusAreasText = null;
-    if (student?.focusAreas && student.focusAreas.length > 0) {
-      const formattedAreas = student.focusAreas.map((area) => FOCUS_AREA_LABELS[area] || area);
-      focusAreasText = formattedAreas.join(" · ");
-    }
-
-    // Format tools using lookup table
-    let toolsText = null;
-    if (student?.tools && student.tools.length > 0) {
-      const formattedTools = student.tools.map((tool) => TOOL_LABELS[tool] || tool);
-      toolsText = formattedTools.join(" · ");
-    }
+    const purpose = getHumanLabel(student?.purpose, PURPOSE_LABELS) || "—";
+    const focusAreas = getHumanLabel(student?.focusAreas, FOCUS_AREA_LABELS);
+    const focusText = focusAreas ? focusAreas.join(" · ") : "—";
 
     const lastActiveLabel = getLastActiveLabel(lastSeenDays);
 
@@ -409,57 +268,23 @@ async function populateStudentData() {
 
     container.innerHTML = "";
 
-    // Identity badge
-    container.appendChild(createBadge("badge-identity", identityLabel));
+    // 8 grid items in order:
+    // Row 1: STATUS | GOAL
+    container.appendChild(createGridItem("Status", identityLabel, "status"));
+    container.appendChild(createGridItem("Goal", purpose, "goal"));
 
-    // Cohort (if available)
-    if (cohort) {
-      container.appendChild(createBadge("badge-cohort", cohort));
-    }
+    // Row 2: COHORT | FOCUS
+    container.appendChild(createGridItem("Cohort", cohort, "cohort"));
+    container.appendChild(createGridItem("Focus", focusText, "focus"));
 
-    // Purpose (primary reason for joining)
-    if (purpose) {
-      container.appendChild(createBadge("badge-purpose", purpose));
-    }
+    // Row 3: Joined Web Ring | LAST ACTIVE
+    container.appendChild(createGridItem("Joined Web Ring", joinedDate || "—", "joined"));
+    container.appendChild(createGridItem("Last Active", lastActiveLabel, "last-active"));
 
-    // Learning Stage
-    if (learningStage) {
-      container.appendChild(createBadge("badge-learning-stage", learningStage));
-    }
+    // Row 4: FIRST PUSH | TOTAL PUSHES
+    container.appendChild(createGridItem("First Push", firstCommitFormatted || "—", "first-push"));
+    container.appendChild(createGridItem("Total Pushes", totalPushes.toString(), "total-pushes"));
 
-    // Focus areas (what they're working on)
-    if (focusAreasText) {
-      container.appendChild(createBadge("badge-focus-areas", focusAreasText));
-    }
-
-    // Tools (what they use)
-    if (toolsText) {
-      container.appendChild(createBadge("badge-tools", toolsText));
-    }
-
-    // Joined Web Ring
-    if (joinedDate) {
-      container.appendChild(createBadge("badge-joined", `Joined Web Ring: ${joinedDate}`));
-    }
-
-    // Joined Mentorship (if different from Web Ring)
-    if (joinedMentorshipDate && joinedMentorshipDate !== joinedDate) {
-      container.appendChild(createBadge("badge-joined-mentorship", `Joined Mentorship: ${joinedMentorshipDate}`));
-    }
-
-    // First contribution
-    if (firstCommitFormatted) {
-      container.appendChild(createBadge("badge-first-commit", `First contribution: ${firstCommitFormatted}`));
-    }
-
-    // Activity (Last Active + Contributions)
-    let activityText = lastActiveLabel;
-    if (totalPushes > 0) {
-      activityText += ` · ${totalPushes} contribution${totalPushes !== 1 ? "s" : ""}`;
-    }
-    container.appendChild(createBadge("badge-activity", activityText));
-
-    // Return glow
     const returnGlow = lastSeenDays !== null && lastSeenDays > RETURN_GLOW_DAYS && totalPushes > 0;
     link.classList.toggle("return-glow", returnGlow);
   }
