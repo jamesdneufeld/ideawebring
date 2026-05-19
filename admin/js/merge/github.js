@@ -181,6 +181,8 @@ export async function fetchLastCommitDatesForStudents(students) {
   return results;
 }
 
+// SIMPLIFIED: Fetches first commit date using a single API call per student
+// Gets up to 100 commits and takes the oldest from that set
 export async function fetchFirstCommitDatesForStudents(students) {
   const config = getConfig();
   const results = [];
@@ -199,37 +201,20 @@ export async function fetchFirstCommitDatesForStudents(students) {
           let earliestCommitDate = null;
 
           for (const path of allPaths) {
-            // To get oldest commit, we need to paginate to the last page
-            // First, get the first page to check if commits exist
-            const url = `https://api.github.com/repos/${config.repo.owner}/${config.repo.name}/commits?path=${path}&author=${student.githubUsername}&per_page=1`;
+            // Fetch up to 100 commits (most recent first by default)
+            const url = `https://api.github.com/repos/${config.repo.owner}/${config.repo.name}/commits?path=${path}&author=${student.githubUsername}&per_page=100`;
             const res = await fetch(url);
 
             if (res.ok) {
               const data = await res.json();
               if (Array.isArray(data) && data.length > 0) {
-                // Get the link header to find the last page
-                const linkHeader = res.headers.get("link");
-                let lastPageUrl = url;
-
-                if (linkHeader && linkHeader.includes('rel="last"')) {
-                  const lastPageMatch = linkHeader.match(/<([^>]+)>;\s*rel="last"/);
-                  if (lastPageMatch) {
-                    lastPageUrl = lastPageMatch[1];
-                  }
-                }
-
-                // Fetch the last page (oldest commits)
-                const lastRes = await fetch(lastPageUrl);
-                if (lastRes.ok) {
-                  const lastData = await lastRes.json();
-                  if (Array.isArray(lastData) && lastData.length > 0) {
-                    const commitDate = lastData[lastData.length - 1]?.commit?.author?.date;
-                    if (commitDate) {
-                      const thisDate = new Date(commitDate);
-                      if (!earliestCommitDate || thisDate < new Date(earliestCommitDate)) {
-                        earliestCommitDate = commitDate;
-                      }
-                    }
+                // The last commit in the array is the oldest among these 100
+                const oldestCommitInBatch = data[data.length - 1];
+                const commitDate = oldestCommitInBatch?.commit?.author?.date;
+                if (commitDate) {
+                  const thisDate = new Date(commitDate);
+                  if (!earliestCommitDate || thisDate < new Date(earliestCommitDate)) {
+                    earliestCommitDate = commitDate;
                   }
                 }
               }
