@@ -139,6 +139,31 @@
       "tags": ["11ty", "indie-web"],
       "resumeRequirementMet": false
     },
+
+    {
+      "id": "arren-eriyat",
+      "displayName": "Arren Eriyat",
+      "githubUsername": null,
+      "status": "alumni",
+      "entryType": "new",
+      "program": "BDes",
+      "year": "2025",
+      "cohort": "Summer 2026",
+      "purpose": "null",
+      "joinedWebRing": "null",
+      "joinedMentorship": "2026-05-19",
+      "firstCommitDate": null,
+      "lastCommitDate": null,
+      "lastActiveSource": null,
+      "totalPushes": 0,
+      "learningGoal": null,
+      "focusAreas": [],
+      "tools": ["null"],
+      "formerIds": [],
+      "tags": [],
+      "resumeRequirementMet": false
+    },
+
     {
       "id": "aurod-ashrafi",
       "displayName": "Aurod Ashrafi",
