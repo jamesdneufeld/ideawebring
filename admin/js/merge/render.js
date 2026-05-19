@@ -6,7 +6,7 @@
 import { getConfig } from "./config.js";
 
 // Grad year options
-const YEAR_OPTIONS = ["2024", "2025", "2026", "2027", "2028", "2029"];
+const YEAR_OPTIONS = ["2024", "2025", "2026", "2027", "2028", "2029", "2030"];
 
 // Learning goal options (from signup form)
 const LEARNING_GOAL_OPTIONS = [
