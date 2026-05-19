@@ -28,6 +28,7 @@ const PURPOSE_OPTIONS = [
   { value: "indie_web", label: "Indie Web Explorer" },
   { value: "portfolio", label: "Portfolio Building" },
   { value: "career_prep", label: "Career Prep" },
+  { value: "coursework", label: "Required Coursework" },
 ];
 
 // Cohort options
