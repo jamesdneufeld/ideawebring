@@ -485,6 +485,11 @@ a:hover {
   margin: 0;
 }
 
+.grid-item {
+  display: flex;
+  flex-direction: column;
+}
+
 .grid-label {
   text-transform: uppercase;
   font-size: 0.8rem;
