@@ -1,23 +1,17 @@
 // summer-mentorship.js
 // Web Ring Badge System — Hybrid: API first, JSON fallback
-// Only counts commits made by the student's own GitHub username
 
 // ============================================================
 // CONFIGURATION
 // ============================================================
 
-// GitHub repository settings
 const REPO_OWNER = "jamesdneufeld";
 const REPO_NAME = "ideawebring";
 
-// Cache settings
-const CACHE_TTL_HOURS = 12; // How long to cache GitHub data (hours)
-const PER_PAGE_COMMITS = 100; // Number of commits to fetch per API call
+const CACHE_TTL_HOURS = 12;
+const PER_PAGE_COMMITS = 100;
+const RETURN_GLOW_DAYS = 365;
 
-// UI thresholds
-const RETURN_GLOW_DAYS = 365; // Days after which a returning student gets the glow effect
-
-// Lookup tables for human-readable labels
 const PURPOSE_LABELS = {
   learning_basics: "Learning HTML & CSS",
   learning_foundations: "Building Core Concepts",
@@ -31,49 +25,23 @@ const PURPOSE_LABELS = {
   coursework: "Required Coursework",
 };
 
-const LEARNING_STAGE_LABELS = {
-  early: "Early Stage",
-  developing: "Developing",
-  advanced: "Advanced",
-};
-
 const FOCUS_AREA_LABELS = {
-  layout_foundations: "Layout Foundations",
-  responsive_design: "Responsive Design",
-  flexbox_layouts: "Flexbox Layouts",
-  flexbox_confident: "Confident with Flexbox",
-  css_grid: "CSS Grid",
-  positioning: "CSS Positioning",
-  flexbox: "Flexbox",
   box_model: "The Box Model",
   media_queries: "Media Queries",
-  semantic_html: "Semantic HTML",
-  accessibility: "Accessibility",
+  flexbox: "Flexbox",
+  flexbox_layouts: "Flexbox Layouts",
+  flexbox_confident: "Confident with Flexbox",
+  layout_foundations: "Layout Foundations",
+  responsive_design: "Responsive Design",
   debugging_tools: "Debugging Tools",
   inspector: "Browser Inspector",
-  dev_tools: "Developer Tools",
-  color_theory: "Color Theory",
-  typography: "Typography",
-  animations: "CSS Animations",
-  transitions: "CSS Transitions",
-  box_model_unclear: "Learning the Box Model",
-  media_queries_confusing: "Exploring Media Queries",
-  new_to_html: "New to HTML & CSS",
-  inspector_user: "Uses Browser Inspector",
-  layout: "Layout Design",
-  responsive: "Responsive Design",
-  debugging: "Debugging Techniques",
 };
 
 const TOOL_LABELS = {
   inspector: "Chrome Inspector",
-  figma: "Figma",
-  codepen: "CodePen",
   github: "GitHub",
   vs_code: "VS Code",
-  vscode: "VS Code",
-  git: "Git",
-  terminal: "Terminal/Command Line",
+  codepen: "CodePen",
 };
 
 // ============================================================
@@ -82,37 +50,21 @@ const TOOL_LABELS = {
 
 let studentsData = [];
 
-/* =========================
-   CACHE HELPERS
-========================= */
-
 function getCache(key) {
   const raw = localStorage.getItem(key);
   if (!raw) return null;
-
   try {
     const data = JSON.parse(raw);
     if (Date.now() - data.timestamp < CACHE_TTL_HOURS * 60 * 60 * 1000) {
       return data.value;
     }
   } catch {}
-
   return null;
 }
 
 function setCache(key, value) {
-  localStorage.setItem(
-    key,
-    JSON.stringify({
-      value,
-      timestamp: Date.now(),
-    }),
-  );
+  localStorage.setItem(key, JSON.stringify({ value, timestamp: Date.now() }));
 }
-
-/* =========================
-   LOAD STUDENTS
-========================= */
 
 async function loadStudents() {
   try {
@@ -124,53 +76,21 @@ async function loadStudents() {
   }
 }
 
-/* =========================
-   FALLBACK
-========================= */
-
 function makeEmptyActivity() {
-  return {
-    lastDate: null,
-    firstDate: null,
-    commitCount: 0,
-    commitDates: [],
-    isFromAPI: false,
-  };
+  return { lastDate: null, firstDate: null, commitCount: 0, commitDates: [], isFromAPI: false };
 }
-
-/* =========================
-   GET STORED ACTIVITY FROM JSON (FALLBACK)
-========================= */
 
 function getStoredActivity(student) {
   if (student?.lastCommitDate) {
-    const lastSeenDays = daysSince(student.lastCommitDate);
     return {
       lastDate: student.lastCommitDate,
       firstDate: student.firstCommitDate,
-      lastSeenDays: lastSeenDays,
       commitCount: student.totalPushes || 0,
       isFromAPI: false,
     };
   }
   return null;
 }
-
-/* =========================
-   ISO WEEK HELPER
-========================= */
-
-function getWeekNumber(date) {
-  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-  const dayNum = d.getUTCDay() || 7;
-  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-  return Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
-}
-
-/* =========================
-   GITHUB ACTIVITY (WITH AUTHOR FILTERING)
-========================= */
 
 async function getActivityFromAPI(folder, student) {
   const allIds = [folder, ...(student?.formerIds || [])].filter(Boolean);
@@ -184,16 +104,12 @@ async function getActivityFromAPI(folder, student) {
 
   try {
     const allCommits = [];
-
     for (const id of allIds) {
       const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${id}&author=${student.githubUsername}&per_page=${PER_PAGE_COMMITS}`;
       const res = await fetch(url);
-
       if (res.ok) {
         const data = await res.json();
-        if (Array.isArray(data)) {
-          allCommits.push(...data);
-        }
+        if (Array.isArray(data)) allCommits.push(...data);
       }
     }
 
@@ -211,7 +127,6 @@ async function getActivityFromAPI(folder, student) {
     }
 
     const commits = Array.from(uniqueCommits.values());
-
     const commitDates = commits
       .map((c) => c?.commit?.author?.date)
       .filter(Boolean)
@@ -232,7 +147,6 @@ async function getActivityFromAPI(folder, student) {
       commitDates,
       isFromAPI: true,
     };
-
     setCache(cacheKey, result);
     return result;
   } catch (err) {
@@ -241,28 +155,13 @@ async function getActivityFromAPI(folder, student) {
   }
 }
 
-/* =========================
-   GET ACTIVITY (HYBRID: API FIRST, FALLBACK TO STORED)
-========================= */
-
 async function getActivity(folder, student) {
   const apiActivity = await getActivityFromAPI(folder, student);
-
-  if (apiActivity && apiActivity.lastDate) {
-    return apiActivity;
-  }
-
+  if (apiActivity && apiActivity.lastDate) return apiActivity;
   const storedActivity = getStoredActivity(student);
-  if (storedActivity) {
-    return storedActivity;
-  }
-
+  if (storedActivity) return storedActivity;
   return makeEmptyActivity();
 }
-
-/* =========================
-   TIME HELPERS
-========================= */
 
 function daysSince(date) {
   if (!date) return null;
@@ -271,9 +170,9 @@ function daysSince(date) {
 
 function getLastActiveLabel(days) {
   if (days === null) return "No activity";
-  if (days === 0) return "Last active: Today";
-  if (days === 1) return "Last active: Yesterday";
-  return `Last active: ${days} days ago`;
+  if (days === 0) return "Today";
+  if (days === 1) return "Yesterday";
+  return `${days} days ago`;
 }
 
 function formatDateMonthYear(dateString) {
@@ -281,10 +180,6 @@ function formatDateMonthYear(dateString) {
   const date = new Date(dateString);
   return date.toLocaleDateString("en-US", { year: "numeric", month: "short" });
 }
-
-/* =========================
-   IDENTITY LABEL
-========================= */
 
 function getIdentityLabel(student) {
   if (student?.status === "alumni") {
@@ -297,10 +192,6 @@ function getIdentityLabel(student) {
   return "New to Web Ring";
 }
 
-/* =========================
-   HELPER: GET HUMAN-READABLE LABEL
-========================= */
-
 function getHumanLabel(value, labelMap) {
   if (!value) return null;
   if (Array.isArray(value)) {
@@ -310,32 +201,23 @@ function getHumanLabel(value, labelMap) {
   return labelMap[value] || value;
 }
 
-/* =========================
-   CREATE BADGE WITH LABEL + VALUE
-========================= */
-
-function createBadge(className, label, value, title = "") {
-  const li = document.createElement("li");
-  li.className = `badge ${className}`;
+function createGridItem(label, value, className = "") {
+  const div = document.createElement("div");
+  div.className = `grid-item ${className}`;
 
   const labelSpan = document.createElement("span");
-  labelSpan.className = "label";
-  labelSpan.textContent = label + ": ";
+  labelSpan.className = "grid-label";
+  labelSpan.textContent = label;
 
   const valueSpan = document.createElement("span");
-  valueSpan.className = "value";
+  valueSpan.className = "grid-value";
   valueSpan.textContent = value || "—";
 
-  li.appendChild(labelSpan);
-  li.appendChild(valueSpan);
+  div.appendChild(labelSpan);
+  div.appendChild(valueSpan);
 
-  if (title) li.title = title;
-  return li;
+  return div;
 }
-
-/* =========================
-   RENDER
-========================= */
 
 async function populateStudentData() {
   await loadStudents();
@@ -369,9 +251,9 @@ async function populateStudentData() {
     const identityLabel = getIdentityLabel(student);
     const cohort = student?.cohort || "Summer 2026";
 
-    const purpose = getHumanLabel(student?.purpose, PURPOSE_LABELS);
+    const purpose = getHumanLabel(student?.purpose, PURPOSE_LABELS) || "—";
     const focusAreas = getHumanLabel(student?.focusAreas, FOCUS_AREA_LABELS);
-    const tools = getHumanLabel(student?.tools, TOOL_LABELS);
+    const focusText = focusAreas ? focusAreas.join(" · ") : "—";
 
     const lastActiveLabel = getLastActiveLabel(lastSeenDays);
 
@@ -386,23 +268,23 @@ async function populateStudentData() {
 
     container.innerHTML = "";
 
-    // Row 1: Status | Cohort
-    container.appendChild(createBadge("status", "Status", identityLabel));
-    container.appendChild(createBadge("cohort", "Cohort", cohort));
+    // 8 grid items in order:
+    // Row 1: STATUS | GOAL
+    container.appendChild(createGridItem("STATUS", identityLabel, "status"));
+    container.appendChild(createGridItem("GOAL", purpose, "goal"));
 
-    // Row 2: Goal | Focus
-    container.appendChild(createBadge("goal", "Goal", purpose || "—"));
-    container.appendChild(createBadge("focus", "Focus", focusAreas ? focusAreas.join(" · ") : "—"));
+    // Row 2: COHORT | FOCUS
+    container.appendChild(createGridItem("COHORT", cohort, "cohort"));
+    container.appendChild(createGridItem("FOCUS", focusText, "focus"));
 
-    // Row 3: Joined Web Ring | First Push
-    container.appendChild(createBadge("joined", "Joined Web Ring", joinedDate || "—"));
-    container.appendChild(createBadge("first-push", "First Push", firstCommitFormatted || "—"));
+    // Row 3: Joined Web Ring | LAST ACTIVE
+    container.appendChild(createGridItem("Joined Web Ring", joinedDate || "—", "joined"));
+    container.appendChild(createGridItem("LAST ACTIVE", lastActiveLabel, "last-active"));
 
-    // Row 4: Last Active | Total Pushes
-    container.appendChild(createBadge("last-active", "Last Active", lastActiveLabel));
-    container.appendChild(createBadge("total-pushes", "Total Pushes", totalPushes.toString()));
+    // Row 4: FIRST PUSH | TOTAL PUSHES
+    container.appendChild(createGridItem("FIRST PUSH", firstCommitFormatted || "—", "first-push"));
+    container.appendChild(createGridItem("TOTAL PUSHES", totalPushes.toString(), "total-pushes"));
 
-    // Return glow
     const returnGlow = lastSeenDays !== null && lastSeenDays > RETURN_GLOW_DAYS && totalPushes > 0;
     link.classList.toggle("return-glow", returnGlow);
   }
