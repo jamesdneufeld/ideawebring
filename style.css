@@ -484,6 +484,9 @@ a:hover {
   font-weight: 300;
   margin: 0;
 }
+.value {
+  font-weight: 600;
+}
 
 /* Each JS-generated line */
 .student-line {
@@ -508,11 +511,6 @@ a:hover {
   font-size: 0.95rem;
   font-weight: 600;
   opacity: 1;
-}
-
-/* Make Lifetime Score slightly more visible */
-.student-line:last-child {
-  letter-spacing: 0.05em;
 }
 
 /* ===========================================================
