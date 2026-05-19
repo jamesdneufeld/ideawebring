@@ -1,5 +1,5 @@
 /* Typography imported from Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jacquard+12&display=swap");
 
 html {
   box-sizing: border-box;
@@ -11,17 +11,21 @@ html {
   box-sizing: inherit;
 }
 
-/* Styling Variables */
-:root {
-  --accent-color: #00799b;
-  --body-typeface: serif;
-  --main-heading: serif;
-  --gradient: linear-gradient(45deg, #ffcdbd, #ffe9f1, #24aadb, #ca5b00, #a3604f);
+.jacquard-12-regular {
+  font-family: "Jacquard 12", system-ui;
+  font-weight: 400;
+  font-style: normal;
 }
 
-body {
+/* Styling Variables */
+:root {
+  --accent-color: #000000;
+  --body-typeface: "Jacquard 12", system-ui;
+  --main-heading: "Jacquard 12", system-ui;
+}
+.body {
+  background-color: var(--accent-color);
   font-family: var(--body-typeface);
-  color: rgb(135, 54, 0);
   display: flex;
   flex-direction: column;
 }
@@ -31,8 +35,6 @@ img {
   max-width: 100%;
   height: auto;
 }
-
-/* Dragable divs - hard and idk how this could work */
 
 /* Typography */
 
@@ -57,16 +59,16 @@ p {
 }
 
 .hero-headline {
-  color: rgb(0, 100, 181);
+  color: rgb(0, 0, 0);
 }
 
 /* Hyperlink Styles */
 a {
   text-decoration: none;
-  color: #444;
+  color: #ffffff;
 }
 a:hover {
-  color: #111;
+  color: #84ff00;
 }
 
 p {
@@ -83,18 +85,6 @@ p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-size: 600%;
-  background-image: var(--gradient);
-  animation: bg-animation 120s infinite alternate;
-}
-
-@keyframes bg-animation {
-  0% {
-    background-position: 0%;
-  }
-  100% {
-    background-position: 100%;
-  }
 }
 
 .hero-headline-wrapper {
@@ -118,16 +108,15 @@ p {
    =========================================================== */
 
 .webring {
-  font-family: "Rubik", sans-serif;
+  font-family: "Jacquard-12", sans-serif;
   display: inline-flex;
   align-items: center;
   gap: 0.625rem; /* space between items */
-  background: linear-gradient(135deg, #6a5af9, #f95a8a);
+  background: #195843;
   padding: 0.5rem 1rem;
   border-radius: 1.5rem;
   font-weight: 600;
   font-size: 0.95rem;
-  color: white;
   box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.15);
   justify-content: center;
   margin-bottom: 1rem;
@@ -137,7 +126,6 @@ p {
 .webring-previous,
 .webring-next,
 .webring-hub {
-  color: white;
   text-decoration: none;
   padding: 0.25rem 0.5rem;
   border-radius: 1rem;
@@ -147,12 +135,12 @@ p {
 .webring-previous:hover,
 .webring-next:hover,
 .webring-hub:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: #195843;
 }
 
 /* Divider between links */
 .divider {
-  color: rgba(255, 255, 255, 0.7);
+  background: #195843;
   font-weight: 400;
 }
 
@@ -174,12 +162,12 @@ p {
   display: inline-flex;
   align-items: center;
   gap: 0.625rem;
-  background: linear-gradient(135deg, #6a5af9, #f95a8a);
+  background: #195843;
   padding: 0.5rem 1rem;
   border-radius: 1.5rem;
   font-weight: 600;
   font-size: 0.95rem;
-  color: white;
+
   box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.15);
   justify-content: center;
   margin-bottom: 1rem;
