@@ -5,3 +5,67 @@ body {
   font-family: "Rubik", sans-serif;
   padding: 1rem;
 }
+.nav {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border: 1px solid black;
+  justify-content: space-around;
+}
+@media (min-width: 768px) {
+  .nav {
+    flex-direction: row;
+  }
+}
+.resume-header h1 {
+  font-size: 72px;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+.resume-header {
+  background: #ce8cf6;
+  padding: 5rem;
+}
+
+.contact p {
+  font-size: 24px;
+  color: #ffffff;
+}
+.subhead {
+  width: 250px;
+}
+
+.subhead h2 {
+  font-size: 40px;
+  color: #3b002f;
+}
+
+.S1 {
+  display: flex;
+  background: antiquewhite;
+  padding: 5rem;
+  flex-direction: row;
+}
+.names {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-size: 24px;
+}
+.details {
+  font-size: 15px;
+  color: #53058a;
+  padding: 2rem;
+}
+.info {
+  flex-direction: column;
+  flex: 1;
+}
+.job-duties {
+  padding-left: 30px;
+}
+
+.job-duty-item {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
