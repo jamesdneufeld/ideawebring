@@ -5,6 +5,9 @@
 
 import { getConfig } from "./config.js";
 
+// Grad year options
+const YEAR_OPTIONS = ["2024", "2025", "2026", "2027", "2028", "2029"];
+
 // Learning goal options (from signup form)
 const LEARNING_GOAL_OPTIONS = [
   { value: "", label: "—" },
@@ -12,7 +15,6 @@ const LEARNING_GOAL_OPTIONS = [
   { value: "portfolio", label: "Portfolio Building" },
   { value: "indie_web", label: "Indie Web Explorer" },
   { value: "career_prep", label: "Career Prep" },
-  { value: "returning_practice", label: "Returning for Practice" },
   { value: "learning_html_css", label: "Learning HTML & CSS" },
 ];
 
@@ -32,7 +34,7 @@ const PURPOSE_OPTIONS = [
 ];
 
 // Cohort options
-const COHORT_OPTIONS = ["Summer 2024", "Summer 2025", "Summer 2026", "Summer 2027"];
+const COHORT_OPTIONS = ["Summer 2024", "Summer 2025", "Summer 2026", "Summer 2027", "Summer 2028"];
 
 // Entry type options
 const ENTRY_TYPE_OPTIONS = [
@@ -94,7 +96,7 @@ export function renderTableHeader(onSort) {
   if (!thead) return;
 
   thead.innerHTML = `
-    <tr>
+    <table>
       ${COLUMNS.map(
         (col) => `
         <th style="${col.width ? `width: ${col.width};` : ""}" 
@@ -105,7 +107,7 @@ export function renderTableHeader(onSort) {
         </th>
       `,
       ).join("")}
-    </tr>
+    </table>
   `;
 
   // Add click event listeners to sortable headers
@@ -207,12 +209,11 @@ export function renderTable(students, onUpdate) {
     programSelect.addEventListener("change", (e) => onUpdate(idx, "program", e.target.value));
     programCell.appendChild(programSelect);
 
-    // Column 7: Year dropdown (WITH DEBUG LOGGING)
+    // Column 7: Year dropdown
     const yearCell = row.insertCell(7);
     const yearSelect = document.createElement("select");
     yearSelect.className = "year-input";
-    const yearOptions = config.options?.years || ["2024", "2025", "2026", "2027", "2028", "2029"];
-    yearOptions.forEach((opt) => {
+    YEAR_OPTIONS.forEach((opt) => {
       const option = document.createElement("option");
       option.value = opt;
       option.textContent = opt;
