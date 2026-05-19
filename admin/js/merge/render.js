@@ -215,8 +215,10 @@ export function renderTable(students, onUpdate) {
       if (student.year === opt) option.selected = true;
       yearSelect.appendChild(option);
     });
-    yearSelect.addEventListener("change", (e) => onUpdate(idx, "year", e.target.value));
-    yearCell.appendChild(yearSelect);
+    yearSelect.addEventListener("change", (e) => {
+      console.log("Year change event fired, new value:", e.target.value);
+      onUpdate(idx, "year", e.target.value);
+    });
 
     // Column 8: Cohort dropdown
     const cohortCell = row.insertCell(8);
