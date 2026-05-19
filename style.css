@@ -93,7 +93,7 @@ h3 {
   color: var(--text-inverse);
   padding-bottom: 0.5rem;
   border-bottom: 1px dotted white;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 p,
@@ -457,9 +457,9 @@ a:hover {
   margin: 0 0 0.75rem 0;
   padding: 0;
   list-style: none;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.25rem;
   border-bottom: 1px dotted white;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .student-program,
