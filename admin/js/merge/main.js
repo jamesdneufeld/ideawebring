@@ -1,19 +1,62 @@
 // js/merge/main.js
+// Main entry point — orchestrates the entire merge tool workflow
+// Sets up event listeners for all UI buttons (Fetch JSON, Upload, Fetch Folders, Reconcile, Download, Fetch Push Counts, Fetch Last Commit Dates, Fetch First Commit Dates)
+// Handles the reconciliation pipeline and student data updates
+// Supports column sorting by clicking table headers
 
 import { loadConfig } from "./config.js";
-import { fetchStudentsFromGitHub, fetchFoldersFromGitHub } from "./github.js";
+import { fetchStudentsFromGitHub, fetchFoldersFromGitHub, fetchCommitCountsForAllStudents, fetchLastCommitDatesForStudents, fetchFirstCommitDatesForStudents } from "./github.js";
 import { reconcile } from "./reconcile.js";
-import { renderTableHeader, renderTable, updateUIFromConfig, showWarning, hideWarning, showEditor, renderPreview } from "./render.js";
+import { renderTableHeader, renderTable, updateUIFromConfig, showWarning, hideWarning, showEditor, renderPreview, sortStudents, setSortState, getSortState } from "./render.js";
 import { cleanForExport } from "./student.js";
+import { isSystemFolder } from "../../lib/system.js";
 
 let existingStudents = [];
 let currentStudents = [];
+let sortedStudents = [];
+
+// Handle update to a student field (maintains sort order)
+
+function handleUpdate(idx, field, value) {
+  // Get the student from the sorted array
+  const student = sortedStudents[idx];
+  if (!student) return;
+
+  // Find the actual student in currentStudents by id
+  const actualIndex = currentStudents.findIndex((s) => s.id === student.id);
+  if (actualIndex === -1) return;
+
+  console.log(`🔧 handleUpdate: updating ${student.id} field ${field} to ${value}`);
+  currentStudents[actualIndex][field] = value;
+
+  // Re-apply current sort after update
+  const sortState = getSortState();
+  if (sortState.column && currentStudents.length) {
+    sortedStudents = sortStudents(currentStudents, sortState.column, sortState.direction);
+  } else {
+    sortedStudents = [...currentStudents];
+  }
+
+  renderTable(sortedStudents, handleUpdate);
+  renderPreview(currentStudents.map(cleanForExport));
+}
 
 async function init() {
   await loadConfig();
 
   updateUIFromConfig();
-  renderTableHeader();
+
+  // Define sort callback for table header clicks
+  function onSortColumn(column, direction) {
+    setSortState(column, direction);
+    if (currentStudents.length) {
+      sortedStudents = sortStudents(currentStudents, column, direction);
+      renderTable(sortedStudents, handleUpdate);
+      renderPreview(currentStudents.map(cleanForExport));
+    }
+  }
+
+  renderTableHeader(onSortColumn);
   setupEventListeners();
 }
 
@@ -79,7 +122,8 @@ function setupEventListeners() {
       .getElementById("folderInput")
       .value.split("\n")
       .map((f) => f.trim())
-      .filter((f) => f && !f.startsWith("#"));
+      .filter((f) => f && !f.startsWith("#"))
+      .filter((f) => !isSystemFolder(f));
 
     if (!folders.length) {
       alert("Please load or paste folder names first");
@@ -89,6 +133,7 @@ function setupEventListeners() {
     const { students, summary } = reconcile(folders, existingStudents);
 
     currentStudents = students;
+    sortedStudents = [...currentStudents];
 
     if (summary.hasMissing) {
       showWarning(`
@@ -102,14 +147,7 @@ function setupEventListeners() {
       hideWarning();
     }
 
-    function handleUpdate(idx, field, value) {
-      currentStudents[idx][field] = value;
-
-      renderTable(currentStudents, handleUpdate);
-      renderPreview(currentStudents.map(cleanForExport));
-    }
-
-    renderTable(currentStudents, handleUpdate);
+    renderTable(sortedStudents, handleUpdate);
     renderPreview(currentStudents.map(cleanForExport));
 
     showEditor();
@@ -132,6 +170,203 @@ function setupEventListeners() {
     a.click();
 
     URL.revokeObjectURL(url);
+  });
+
+  // Select All button
+  document.getElementById("selectAllBtn")?.addEventListener("click", () => {
+    currentStudents.forEach((student) => {
+      student.selectedForFetch = true;
+    });
+    // Re-render with current sort
+    const sortState = getSortState();
+    if (sortState.column && currentStudents.length) {
+      sortedStudents = sortStudents(currentStudents, sortState.column, sortState.direction);
+    } else {
+      sortedStudents = [...currentStudents];
+    }
+    renderTable(sortedStudents, handleUpdate);
+    renderPreview(currentStudents.map(cleanForExport));
+  });
+
+  // Select None button
+  document.getElementById("selectNoneBtn")?.addEventListener("click", () => {
+    currentStudents.forEach((student) => {
+      student.selectedForFetch = false;
+    });
+    // Re-render with current sort
+    const sortState = getSortState();
+    if (sortState.column && currentStudents.length) {
+      sortedStudents = sortStudents(currentStudents, sortState.column, sortState.direction);
+    } else {
+      sortedStudents = [...currentStudents];
+    }
+    renderTable(sortedStudents, handleUpdate);
+    renderPreview(currentStudents.map(cleanForExport));
+  });
+
+  // Fetch Push Counts for selected students only
+  document.getElementById("fetchPushCountsBtn").addEventListener("click", async () => {
+    if (!currentStudents.length) {
+      alert("Please reconcile students first");
+      return;
+    }
+
+    const selectedStudents = currentStudents.filter((s) => s.selectedForFetch === true);
+
+    if (selectedStudents.length === 0) {
+      alert("Please check the checkbox for students you want to update, or click 'Select All'");
+      return;
+    }
+
+    const btn = document.getElementById("fetchPushCountsBtn");
+    const originalText = btn.textContent;
+    btn.textContent = `⟳ Fetching ${selectedStudents.length} students...`;
+    btn.disabled = true;
+
+    try {
+      const counts = await fetchCommitCountsForAllStudents(selectedStudents);
+
+      counts.forEach(({ id, commitCount, lastCommitDate }) => {
+        const student = currentStudents.find((s) => s.id === id);
+        if (student) {
+          student.totalPushes = commitCount;
+          if (lastCommitDate) student.lastCommitDate = lastCommitDate;
+        }
+      });
+
+      // Re-sort after updates
+      const sortState = getSortState();
+      if (sortState.column && currentStudents.length) {
+        sortedStudents = sortStudents(currentStudents, sortState.column, sortState.direction);
+      } else {
+        sortedStudents = [...currentStudents];
+      }
+
+      renderTable(sortedStudents, handleUpdate);
+      renderPreview(currentStudents.map(cleanForExport));
+
+      // Clear all selected checkboxes after fetch
+      currentStudents.forEach((s) => (s.selectedForFetch = false));
+      sortedStudents = sortStudents(currentStudents, sortState.column || "displayName", sortState.direction || "asc");
+      renderTable(sortedStudents, handleUpdate);
+
+      alert(`✅ Fetched push counts for ${counts.length} students`);
+    } catch (err) {
+      alert(`❌ Error fetching push counts: ${err.message}`);
+    } finally {
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }
+  });
+
+  // Fetch Last Commit Dates for selected students only
+  document.getElementById("fetchLastCommitBtn")?.addEventListener("click", async () => {
+    console.log("Fetch Last Commit button clicked");
+
+    if (!currentStudents.length) {
+      alert("Please reconcile students first");
+      return;
+    }
+
+    const selectedStudents = currentStudents.filter((s) => s.selectedForFetch === true);
+    console.log("Selected students:", selectedStudents.length);
+
+    if (selectedStudents.length === 0) {
+      alert("Please check the checkbox for students you want to update, or click 'Select All'");
+      return;
+    }
+
+    const btn = document.getElementById("fetchLastCommitBtn");
+    const originalText = btn.textContent;
+    btn.textContent = `⟳ Fetching ${selectedStudents.length}...`;
+    btn.disabled = true;
+
+    try {
+      const results = await fetchLastCommitDatesForStudents(selectedStudents);
+      console.log("Results:", results);
+
+      for (const { id, lastCommitDate } of results) {
+        const studentIndex = currentStudents.findIndex((s) => s.id === id);
+        if (studentIndex !== -1 && lastCommitDate) {
+          currentStudents[studentIndex].lastCommitDate = lastCommitDate;
+          console.log(`Updated ${id}: ${lastCommitDate}`);
+        }
+      }
+
+      // Re-sort after updates
+      const sortState = getSortState();
+      if (sortState.column && currentStudents.length) {
+        sortedStudents = sortStudents(currentStudents, sortState.column, sortState.direction);
+      } else {
+        sortedStudents = [...currentStudents];
+      }
+
+      renderTable(sortedStudents, handleUpdate);
+      renderPreview(currentStudents.map(cleanForExport));
+
+      alert(`✅ Fetched last commit dates for ${results.length} students`);
+    } catch (err) {
+      console.error("Error:", err);
+      alert(`❌ Error fetching last commit dates: ${err.message}`);
+    } finally {
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }
+  });
+
+  // Fetch First Commit Dates for selected students only
+  document.getElementById("fetchFirstCommitBtn")?.addEventListener("click", async () => {
+    console.log("Fetch First Commit button clicked");
+
+    if (!currentStudents.length) {
+      alert("Please reconcile students first");
+      return;
+    }
+
+    const selectedStudents = currentStudents.filter((s) => s.selectedForFetch === true);
+    console.log("Selected students:", selectedStudents.length);
+
+    if (selectedStudents.length === 0) {
+      alert("Please check the checkbox for students you want to update, or click 'Select All'");
+      return;
+    }
+
+    const btn = document.getElementById("fetchFirstCommitBtn");
+    const originalText = btn.textContent;
+    btn.textContent = `⟳ Fetching ${selectedStudents.length}...`;
+    btn.disabled = true;
+
+    try {
+      const results = await fetchFirstCommitDatesForStudents(selectedStudents);
+      console.log("Results:", results);
+
+      for (const { id, firstCommitDate } of results) {
+        const studentIndex = currentStudents.findIndex((s) => s.id === id);
+        if (studentIndex !== -1 && firstCommitDate) {
+          currentStudents[studentIndex].firstCommitDate = firstCommitDate;
+          console.log(`Updated first commit for ${id}: ${firstCommitDate}`);
+        }
+      }
+
+      // Re-sort after updates
+      const sortState = getSortState();
+      if (sortState.column && currentStudents.length) {
+        sortedStudents = sortStudents(currentStudents, sortState.column, sortState.direction);
+      } else {
+        sortedStudents = [...currentStudents];
+      }
+
+      renderTable(sortedStudents, handleUpdate);
+      renderPreview(currentStudents.map(cleanForExport));
+
+      alert(`✅ Fetched first commit dates for ${results.length} students`);
+    } catch (err) {
+      console.error("Error:", err);
+      alert(`❌ Error fetching first commit dates: ${err.message}`);
+    } finally {
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }
   });
 }
 

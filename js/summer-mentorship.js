@@ -1,21 +1,63 @@
 // summer-mentorship.js
-// Web Ring Badge System - Learning continuity model
+// Web Ring Badge System — Hybrid: API first, JSON fallback
+
+// ============================================================
+// CONFIGURATION
+// ============================================================
 
 const REPO_OWNER = "jamesdneufeld";
 const REPO_NAME = "ideawebring";
 
-let studentsData = [];
+const CACHE_TTL_HOURS = 12;
+const PER_PAGE_COMMITS = 100;
+const RETURN_GLOW_DAYS = 365;
 
-/* =========================
-   CACHE
-========================= */
+const PURPOSE_LABELS = {
+  learning_basics: "Learning HTML & CSS",
+  learning_foundations: "Building Core Concepts",
+  learning_responsive: "Exploring Responsive Design",
+  practice_build: "Building Projects",
+  practice_refine: "Refining Skills",
+  explorer: "Confident with DevTools",
+  indie_web: "Indie Web Explorer",
+  portfolio: "Portfolio Building",
+  career_prep: "Career Prep",
+  coursework: "Required Coursework",
+};
+
+const FOCUS_AREA_LABELS = {
+  box_model: "The Box Model",
+  media_queries: "Media Queries",
+  flexbox: "Flexbox",
+  flexbox_layouts: "Flexbox Layouts",
+  flexbox_confident: "Confident with Flexbox",
+  layout_foundations: "Layout Foundations",
+  responsive_design: "Responsive Design",
+  debugging_tools: "Debugging Tools",
+  inspector: "Browser Inspector",
+};
+
+const TOOL_LABELS = {
+  inspector: "Chrome Inspector",
+  github: "GitHub",
+  vs_code: "VS Code",
+  codepen: "CodePen",
+};
+
+// ============================================================
+// END CONFIGURATION
+// ============================================================
+
+let studentsData = [];
 
 function getCache(key) {
   const raw = localStorage.getItem(key);
   if (!raw) return null;
   try {
     const data = JSON.parse(raw);
-    if (Date.now() - data.timestamp < 60 * 60 * 1000) return data.value;
+    if (Date.now() - data.timestamp < CACHE_TTL_HOURS * 60 * 60 * 1000) {
+      return data.value;
+    }
   } catch {}
   return null;
 }
@@ -23,94 +65,6 @@ function getCache(key) {
 function setCache(key, value) {
   localStorage.setItem(key, JSON.stringify({ value, timestamp: Date.now() }));
 }
-
-/* =========================
-   WEEK HELPER
-========================= */
-
-function getWeekNumber(date) {
-  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-  const dayNum = d.getUTCDay() || 7;
-  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-  return Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
-}
-
-/* =========================
-   GITHUB ACTIVITY
-========================= */
-
-async function getActivity(folder) {
-  const cacheKey = `activity_${folder}`;
-  const cached = getCache(cacheKey);
-  if (cached) return cached;
-
-  try {
-    const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${folder}&per_page=100`;
-    const res = await fetch(url);
-
-    if (!res.ok) {
-      return {
-        days: null,
-        commitCount: 0,
-        activeYears: 0,
-        activeWeeks: 0,
-        returnedAfterYear: false,
-      };
-    }
-
-    const data = await res.json();
-    const commits = Array.isArray(data) ? data : [];
-
-    const lastDate = commits[0]?.commit?.author?.date || null;
-
-    let days = null;
-    let returnedAfterYear = false;
-
-    if (lastDate) {
-      const last = new Date(lastDate);
-      const now = new Date();
-      days = Math.floor((now - last) / (1000 * 60 * 60 * 24));
-
-      // return glow trigger
-      returnedAfterYear = days >= 365 && commits.length > 0;
-    }
-
-    const years = new Set();
-    const weeks = new Set();
-
-    commits.forEach((c) => {
-      const d = new Date(c?.commit?.author?.date);
-      if (!isNaN(d)) {
-        years.add(d.getFullYear());
-        weeks.add(`${d.getFullYear()}-W${getWeekNumber(d)}`);
-      }
-    });
-
-    const result = {
-      days,
-      commitCount: commits.length,
-      activeYears: years.size,
-      activeWeeks: weeks.size,
-      returnedAfterYear,
-    };
-
-    setCache(cacheKey, result);
-    return result;
-  } catch {
-    return {
-      days: null,
-      commitCount: 0,
-      activeYears: 0,
-      activeWeeks: 0,
-      returnedAfterYear: false,
-    };
-  }
-}
-
-/* =========================
-   STUDENT DATA
-========================= */
 
 async function loadStudents() {
   try {
@@ -122,54 +76,148 @@ async function loadStudents() {
   }
 }
 
-/* =========================
-   MEMBERSHIP SYSTEM
-========================= */
-
-function getMembership(activity) {
-  const commits = activity.commitCount;
-  const years = activity.activeYears;
-  const weeks = activity.activeWeeks;
-
-  if (years === 0 && commits === 0) return "Archive";
-  if (commits <= 1) return "Newcomer";
-  if (commits <= 15) return "Contributor";
-  if (years >= 2 && commits > 15 && weeks > 6) return "Regular";
-  if (years >= 3 || (years >= 2 && commits > 30)) return "Veteran";
-
-  return "Contributor";
+function makeEmptyActivity() {
+  return { lastDate: null, firstDate: null, commitCount: 0, commitDates: [], isFromAPI: false };
 }
 
-/* =========================
-   LIFETIME SCORE (0–5)
-========================= */
-
-function getLifetimeScore(activity) {
-  let score = 0;
-
-  if (activity.commitCount >= 1) score = 1;
-  if (activity.commitCount >= 5) score = 2;
-  if (activity.commitCount >= 15) score = 3;
-  if (activity.commitCount >= 30) score = 4;
-  if (activity.activeYears >= 2 && activity.commitCount >= 20) score = 5;
-
-  return score;
+function getStoredActivity(student) {
+  if (student?.lastCommitDate) {
+    return {
+      lastDate: student.lastCommitDate,
+      firstDate: student.firstCommitDate,
+      commitCount: student.totalPushes || 0,
+      isFromAPI: false,
+    };
+  }
+  return null;
 }
 
-/* =========================
-   UI HELPERS
-========================= */
+async function getActivityFromAPI(folder, student) {
+  const allIds = [folder, ...(student?.formerIds || [])].filter(Boolean);
+  const cacheKey = `activity_${folder}`;
+  const cached = getCache(cacheKey);
+  if (cached) return cached;
 
-function createLine(text) {
-  const li = document.createElement("li");
-  li.className = "student-line";
-  li.textContent = text;
-  return li;
+  if (!student?.githubUsername || student.githubUsername.trim() === "") {
+    return null;
+  }
+
+  try {
+    const allCommits = [];
+    for (const id of allIds) {
+      const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${id}&author=${student.githubUsername}&per_page=${PER_PAGE_COMMITS}`;
+      const res = await fetch(url);
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data)) allCommits.push(...data);
+      }
+    }
+
+    if (allCommits.length === 0) {
+      const empty = makeEmptyActivity();
+      setCache(cacheKey, empty);
+      return empty;
+    }
+
+    const uniqueCommits = new Map();
+    for (const commit of allCommits) {
+      if (commit?.sha && !uniqueCommits.has(commit.sha)) {
+        uniqueCommits.set(commit.sha, commit);
+      }
+    }
+
+    const commits = Array.from(uniqueCommits.values());
+    const commitDates = commits
+      .map((c) => c?.commit?.author?.date)
+      .filter(Boolean)
+      .map((d) => new Date(d))
+      .filter((d) => !isNaN(d.getTime()))
+      .sort((a, b) => b - a);
+
+    if (commitDates.length === 0) {
+      const empty = makeEmptyActivity();
+      setCache(cacheKey, empty);
+      return empty;
+    }
+
+    const result = {
+      lastDate: commitDates[0].toISOString(),
+      firstDate: commitDates[commitDates.length - 1].toISOString(),
+      commitCount: commits.length,
+      commitDates,
+      isFromAPI: true,
+    };
+    setCache(cacheKey, result);
+    return result;
+  } catch (err) {
+    console.warn(`GitHub fetch failed for ${folder}:`, err);
+    return null;
+  }
 }
 
-/* =========================
-   MAIN RENDER
-========================= */
+async function getActivity(folder, student) {
+  const apiActivity = await getActivityFromAPI(folder, student);
+  if (apiActivity && apiActivity.lastDate) return apiActivity;
+  const storedActivity = getStoredActivity(student);
+  if (storedActivity) return storedActivity;
+  return makeEmptyActivity();
+}
+
+function daysSince(date) {
+  if (!date) return null;
+  return Math.floor((Date.now() - new Date(date)) / (1000 * 60 * 60 * 24));
+}
+
+function getLastActiveLabel(days) {
+  if (days === null) return "No activity";
+  if (days === 0) return "Today";
+  if (days === 1) return "Yesterday";
+  return `${days} days ago`;
+}
+
+function formatDateMonthYear(dateString) {
+  if (!dateString) return null;
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", { year: "numeric", month: "short" });
+}
+
+function getIdentityLabel(student) {
+  if (student?.status === "alumni") {
+    if (student?.entryType === "returning") return "Returning Alumni";
+    return "Alumni";
+  }
+  if (student?.entryType === "returning") return "Returning Participant";
+  if (student?.entryType === "coursework") return "Coursework Participant";
+  if (student?.entryType === "past") return "Past Participant";
+  return "New to Web Ring";
+}
+
+function getHumanLabel(value, labelMap) {
+  if (!value) return null;
+  if (Array.isArray(value)) {
+    const mapped = value.map((item) => labelMap[item] || item);
+    return mapped.filter(Boolean);
+  }
+  return labelMap[value] || value;
+}
+
+function createGridItem(label, value, className = "") {
+  const div = document.createElement("div");
+  div.className = `grid-item ${className}`;
+
+  const labelSpan = document.createElement("span");
+  labelSpan.className = "grid-label";
+  labelSpan.textContent = label;
+
+  const valueSpan = document.createElement("span");
+  valueSpan.className = "grid-value";
+  valueSpan.textContent = value || "—";
+
+  div.appendChild(labelSpan);
+  div.appendChild(valueSpan);
+
+  return div;
+}
 
 async function populateStudentData() {
   await loadStudents();
@@ -179,55 +227,66 @@ async function populateStudentData() {
 
   for (const link of links) {
     const folder = link.dataset.folder || link.getAttribute("href").replace(/\/$/, "").toLowerCase();
-
     const student = studentMap.get(folder);
+
+    const activity = await getActivity(folder, student);
+
+    let lastSeenDays = null;
+    let totalPushes = 0;
+    let firstCommitDate = student?.firstCommitDate;
+
+    if (activity?.isFromAPI || activity?.lastDate) {
+      lastSeenDays = daysSince(activity.lastDate);
+      totalPushes = activity.commitCount || 0;
+      if (activity.firstDate && !firstCommitDate) {
+        firstCommitDate = activity.firstDate;
+      }
+    } else if (activity?.lastSeenDays !== undefined) {
+      lastSeenDays = activity.lastSeenDays;
+      totalPushes = activity.commitCount || 0;
+    }
+
+    const joinedDate = formatDateMonthYear(student?.joinedWebRing);
+    const firstCommitFormatted = formatDateMonthYear(firstCommitDate);
+    const identityLabel = getIdentityLabel(student);
+    const cohort = student?.cohort || "Summer 2026";
+
+    const purpose = getHumanLabel(student?.purpose, PURPOSE_LABELS) || "—";
+    const focusAreas = getHumanLabel(student?.focusAreas, FOCUS_AREA_LABELS);
+    const focusText = focusAreas ? focusAreas.join(" · ") : "—";
+
+    const lastActiveLabel = getLastActiveLabel(lastSeenDays);
+
+    const programEl = link.querySelector(".student-program");
+    const yearEl = link.querySelector(".student-year");
+
+    if (programEl && student?.program) programEl.textContent = student.program;
+    if (yearEl && student?.year) yearEl.textContent = student.year;
 
     const container = link.querySelector(".student-badges");
     if (!container) continue;
 
     container.innerHTML = "";
 
-    const activity = await getActivity(folder);
+    // 8 grid items in order:
+    // Row 1: STATUS | GOAL
+    container.appendChild(createGridItem("Status", identityLabel, "status"));
+    container.appendChild(createGridItem("Goal", purpose, "goal"));
 
-    /* =========================
-       RETURN GLOW
-    ========================= */
+    // Row 2: COHORT | FOCUS
+    container.appendChild(createGridItem("Cohort", cohort, "cohort"));
+    container.appendChild(createGridItem("Focus", focusText, "focus"));
 
-    if (activity.returnedAfterYear) {
-      link.classList.add("student-return");
-    } else {
-      link.classList.remove("student-return");
-    }
+    // Row 3: Joined Web Ring | LAST ACTIVE
+    container.appendChild(createGridItem("Joined Web Ring", joinedDate || "—", "joined"));
+    container.appendChild(createGridItem("Last Active", lastActiveLabel, "last-active"));
 
-    /* =========================
-       META (RESTORED)
-    ========================= */
+    // Row 4: FIRST PUSH | TOTAL PUSHES
+    container.appendChild(createGridItem("First Push", firstCommitFormatted || "—", "first-push"));
+    container.appendChild(createGridItem("Total Pushes", totalPushes.toString(), "total-pushes"));
 
-    const programEl = link.querySelector(".student-program");
-    const yearEl = link.querySelector(".student-year");
-
-    if (programEl && student?.program) {
-      programEl.textContent = student.program;
-    }
-
-    if (yearEl && student?.year) {
-      yearEl.textContent = student.year;
-    }
-
-    /* =========================
-       OUTPUT (3 LINES ONLY)
-    ========================= */
-
-    const membership = getMembership(activity);
-    const lifetime = getLifetimeScore(activity);
-
-    const stars = "★".repeat(lifetime) + "☆".repeat(5 - lifetime);
-
-    container.appendChild(createLine(activity.days !== null ? `Last seen: ${activity.days} days ago` : "Last seen: No activity"));
-
-    container.appendChild(createLine(`Membership: ${membership}`));
-
-    container.appendChild(createLine(`Lifetime Score: ${stars}`));
+    const returnGlow = lastSeenDays !== null && lastSeenDays > RETURN_GLOW_DAYS && totalPushes > 0;
+    link.classList.toggle("return-glow", returnGlow);
   }
 }
 

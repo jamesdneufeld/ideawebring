@@ -103,33 +103,61 @@ button:hover {
   margin-bottom: 0.5rem;
 }
 
-/* Tables */
+/* Tables - with horizontal scroll */
 .student-table {
   margin-top: 1rem;
   overflow-x: auto;
-  max-height: 500px;
   overflow-y: auto;
+  max-height: 500px;
+  width: 100%;
 }
 
-table {
+#studentTable {
+  min-width: 2800px;
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.7rem;
 }
 
-th,
-td {
+/* Sortable header styling */
+th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+th.sortable:hover {
+  background: #1c2128;
+}
+
+/* Table headers - smaller font */
+th {
+  background: #0d0f12;
+  color: #8b949e;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 600;
+  font-size: 0.7rem;
+  position: sticky;
+  top: 0;
   padding: 0.5rem;
   text-align: left;
   border-bottom: 1px solid #21262d;
 }
 
-th {
-  background: #0d0f12;
-  color: #8b949e;
-  font-weight: normal;
-  position: sticky;
-  top: 0;
+/* All table cells - sans-serif */
+td {
+  padding: 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid #21262d;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.75rem;
+}
+
+/* First column (Folder ID) - sans-serif */
+#studentTable td:first-child {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.75rem;
+  padding: 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid #21262d;
 }
 
 /* Form controls inside table */
@@ -140,7 +168,7 @@ td select {
   color: #e6edf3;
   padding: 0.3rem 0.5rem;
   border-radius: 4px;
-  font-family: monospace;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   width: 100%;
   margin-bottom: 0;
   font-size: 0.7rem;
@@ -158,7 +186,6 @@ td select {
 }
 
 /* Badges */
-
 .confidence-match {
   background: #d2992220;
   color: #d29922;

@@ -1,4 +1,7 @@
 // js/merge/matching.js
+// Identity matching logic for reconciling folder names with existing student records
+// Uses ranked rules (exact match, normalized match, github username match) to find best match with confidence levels
+
 import { getConfig } from "./config.js";
 
 export function normalize(str) {

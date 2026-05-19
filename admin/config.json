@@ -5,17 +5,15 @@
     "name": "ideawebring",
     "branch": "main"
   },
-  "excludeFolders": [".git", ".vscode", "admin", "assets", "blank-bdes", "blank-ixd", "ixd", "james", "james-in-class", "learning", "log"],
+  "excludeFolders": [".git", ".vscode", "admin", "js", "css", "lib", "assets", "blank-bdes", "blank-ixd", "ixd", "james", "james-in-class", "learning", "log"],
   "defaults": {
     "program": "BDes",
     "year": "2026",
-    "status": "active",
     "resumeRequirementMet": false
   },
   "options": {
     "programs": ["BDes", "IxD"],
-    "years": ["2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032"],
-    "statuses": ["active", "inactive", "alumni"]
+    "years": ["2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032"]
   },
   "matchRules": [
     { "name": "exact", "weight": 100 },
