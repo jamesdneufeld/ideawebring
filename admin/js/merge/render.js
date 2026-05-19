@@ -204,21 +204,25 @@ export function renderTable(students, onUpdate) {
     programSelect.addEventListener("change", (e) => onUpdate(idx, "program", e.target.value));
     programCell.appendChild(programSelect);
 
-    // Column 7: Year dropdown
+    // Column 7: Year dropdown (WITH DEBUG LOGGING)
     const yearCell = row.insertCell(7);
     const yearSelect = document.createElement("select");
     yearSelect.className = "year-input";
-    (config.options?.years || ["2024", "2025", "2026", "2027", "2028", "2029"]).forEach((opt) => {
+    const yearOptions = config.options?.years || ["2024", "2025", "2026", "2027", "2028", "2029"];
+    yearOptions.forEach((opt) => {
       const option = document.createElement("option");
       option.value = opt;
       option.textContent = opt;
-      if (student.year === opt) option.selected = true;
+      if (String(student.year) === String(opt)) {
+        option.selected = true;
+      }
       yearSelect.appendChild(option);
     });
     yearSelect.addEventListener("change", (e) => {
-      console.log("Year change event fired, new value:", e.target.value);
+      console.log(`📅 Year change event for ${student.id}: ${student.year} → ${e.target.value}`);
       onUpdate(idx, "year", e.target.value);
     });
+    yearCell.appendChild(yearSelect);
 
     // Column 8: Cohort dropdown
     const cohortCell = row.insertCell(8);
