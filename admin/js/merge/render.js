@@ -38,6 +38,8 @@ const COHORT_OPTIONS = ["Summer 2024", "Summer 2025", "Summer 2026", "Summer 202
 const ENTRY_TYPE_OPTIONS = [
   { value: "new", label: "New" },
   { value: "returning", label: "Returning" },
+  { value: "past", label: "Past Participant" },
+  { value: "coursework", label: "Coursework Participant" },
 ];
 
 // Learning stage options
