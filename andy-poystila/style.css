@@ -11,12 +11,6 @@ html {
   box-sizing: inherit;
 }
 
-.jacquard-12-regular {
-  font-family: "Jacquard 12", system-ui;
-  font-weight: 400;
-  font-style: normal;
-}
-
 /* Styling Variables */
 :root {
   --accent-color: #000000;
@@ -52,10 +46,11 @@ h2 {
 }
 
 p {
-  font-size: 1.625rem;
+  font-size: 2rem;
   font-family: var(--body-typeface);
   margin-bottom: 0.2rem;
   line-height: 1.2;
+  font-weight: 400;
 }
 
 .hero-headline {
@@ -80,6 +75,7 @@ p {
 /* Hero */
 
 .hero {
+  background-image: url(andy-poystila/assets/andy-poystila_lily-pad_background.jpg);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -108,16 +104,15 @@ p {
    =========================================================== */
 
 .webring {
-  font-family: "Jacquard-12", sans-serif;
+  font-family: "Jacquard 12", system-ui;
   display: inline-flex;
   align-items: center;
   gap: 0.625rem; /* space between items */
   background: #195843;
   padding: 0.5rem 1rem;
-  border-radius: 1.5rem;
-  font-weight: 600;
-  font-size: 0.95rem;
-  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.15);
+  font-weight: 400;
+  font-size: 2rem;
+
   justify-content: center;
   margin-bottom: 1rem;
 }
@@ -127,8 +122,10 @@ p {
 .webring-next,
 .webring-hub {
   text-decoration: none;
+  font-weight: 400;
+  font-size: 2rem;
   padding: 0.25rem 0.5rem;
-  border-radius: 1rem;
+
   transition: background 0.3s;
 }
 
@@ -141,7 +138,10 @@ p {
 /* Divider between links */
 .divider {
   background: #195843;
+  color: #ffffff;
   font-weight: 400;
+  font-weight: 400;
+  font-size: 2rem;
 }
 
 /* ===========================================================
@@ -164,20 +164,13 @@ p {
   gap: 0.625rem;
   background: #195843;
   padding: 0.5rem 1rem;
-  border-radius: 1.5rem;
   font-weight: 600;
-  font-size: 0.95rem;
-
-  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.15);
+  font-size: 1.6rem;
+  color: #ffffff;
   justify-content: center;
   margin-bottom: 1rem;
   font-variant-numeric: tabular-nums;
   cursor: default;
   user-select: none;
   transition: background 0.3s; /* Add transition for smooth hover */
-}
-
-/* Match the webring nav hover exactly */
-.page-counter:hover {
-  background: rgba(255, 255, 255, 0.2);
 }
