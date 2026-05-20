@@ -11,17 +11,19 @@ html {
   box-sizing: inherit;
 }
 
-/* Styling Variables */
-:root {
-  --accent-color: #000000;
-  --body-typeface: "Jacquard 12", system-ui;
-  --main-heading: "Jacquard 12", system-ui;
-}
-.body {
-  background-color: var(--accent-color);
+body {
   font-family: var(--body-typeface);
-  display: flex;
-  flex-direction: column;
+  min-height: 100vh;
+}
+
+.pond-bg {
+  background-repeat: no-repeat;
+  min-height: 80vh;
+  background-image: url(andy-poystila/assets/andy-poystila_lily-pad_background.jpg);
+  background-size: 1920px;
+  background-position: top center;
+  background-color: 000;
+  background-origin: content-box, border-box;
 }
 
 /* Making all images responsive */
@@ -53,17 +55,13 @@ p {
   font-weight: 400;
 }
 
-.hero-headline {
-  color: rgb(0, 0, 0);
-}
-
 /* Hyperlink Styles */
 a {
   text-decoration: none;
-  color: #ffffff;
+  color: #cfff97;
 }
 a:hover {
-  color: #84ff00;
+  color: #32ca4e;
 }
 
 p {
@@ -75,7 +73,6 @@ p {
 /* Hero */
 
 .hero {
-  background-image: url(andy-poystila/assets/andy-poystila_lily-pad_background.jpg);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -125,7 +122,6 @@ p {
   font-weight: 400;
   font-size: 2rem;
   padding: 0.25rem 0.5rem;
-
   transition: background 0.3s;
 }
 
