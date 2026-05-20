@@ -853,6 +853,29 @@
       "formerIds": [],
       "tags": [],
       "resumeRequirementMet": false
+    },
+    {
+      "id": "vylan-tran",
+      "displayName": "Vylan Tran",
+      "githubUsername": null,
+      "status": "alumni",
+      "entryType": "new",
+      "program": "BDes",
+      "year": "2024",
+      "cohort": "Summer 2026",
+      "purpose": null,
+      "joinedWebRing": null,
+      "joinedMentorship": null,
+      "firstCommitDate": null,
+      "lastCommitDate": null,
+      "lastActiveSource": null,
+      "totalPushes": 0,
+      "learningGoal": null,
+      "focusAreas": [],
+      "tools": [],
+      "formerIds": [],
+      "tags": [],
+      "resumeRequirementMet": false
     }
   ]
 }
