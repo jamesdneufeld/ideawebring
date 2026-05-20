@@ -137,6 +137,10 @@ code {
   padding: 0.125rem 0.25rem;
 }
 
+.badge-wrapper {
+  text-align: center;
+}
+
 .subheading {
   color: var(--text-secondary);
 }
