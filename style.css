@@ -119,6 +119,14 @@ em {
   font-style: italic;
   font-weight: 400;
 }
+
+code {
+  font-family: monospace;
+  background: rgba(236, 233, 233, 0.9);
+  border-radius: 0.5rem;
+  padding: 0.125rem 0.25rem;
+}
+
 .subheading {
   color: var(--text-secondary);
 }
