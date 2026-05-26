@@ -247,7 +247,10 @@ html {
   flex-direction: column;
   gap: 5rem;
 }
-
+/*draw*/
+.draw {
+  text-align: center;
+}
 @media (min-width: 768px) {
   .profile {
     margin-bottom: 2rem;
