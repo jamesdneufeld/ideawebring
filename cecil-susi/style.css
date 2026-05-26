@@ -15,6 +15,7 @@ html {
   /* colours */
   --darkred: rgb(163, 40, 40);
   --cream: rgb(255, 209, 196);
+  --lightorange: rgb(232, 139, 96);
   --orange: rgb(190, 87, 19);
   --goldyellow: rgb(238, 181, 131);
   --darkbrown: rgb(66, 36, 36);
@@ -63,6 +64,11 @@ ul {
   padding: 1.5rem;
 }
 
+.subheading {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+}
+
 /* INDEX STYLES (Web Ring) */
 .hero {
   padding: 2rem;
@@ -92,19 +98,17 @@ ul {
   border-radius: 2rem;
 }
 
-.hero-tagline {
-  font-size: 1.5rem;
-  margin-top: 2rem;
-}
-
-.hero-desc {
+.bodytext {
   font-family: var(--bodyfont);
-  background: var(--darkbrown);
   font-size: 1rem;
   color: var(--cream);
   padding: 0.75rem;
   margin-bottom: 1rem;
   border-radius: 1rem;
+}
+
+.darkbg {
+  background: var(--darkbrown);
 }
 
 .ring-links {
@@ -116,14 +120,18 @@ ul {
   font-family: var(--headerfont);
 }
 
-.link-buttons,
-.about-links {
+.link-buttons {
   background: var(--darkred);
   justify-content: center;
   text-align: center;
   padding: 1rem;
   margin: 1rem;
   border-radius: 1.5rem;
+}
+
+.sm-link {
+  font-size: 1rem;
+  margin: 0.5rem;
 }
 
 /* ABOUT STYLES */
@@ -141,20 +149,7 @@ ul {
   border-radius: 2rem;
 }
 
-.about-desc {
-  font-family: var(--bodyfont);
-  font-size: 1rem;
-  color: var(--cream);
-  padding: 0.75rem;
-}
-
-.about-links {
-  font-size: 1rem;
-  margin: 0.5rem;
-}
-
 /* RESUME STYLES */
-/* header styles */
 .resume-header {
   background: var(--darkred);
   padding: 2rem;
@@ -178,67 +173,40 @@ ul {
   margin-top: 1.5rem;
 }
 
-/* education & project section styles */
-.eduproject-wrapper {
-  background: rgb(238, 181, 131);
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
+/* resume section header styles */
 
-.eduproject-header {
+.res-section-header {
   font-family: var(--headerfont);
-  font-weight: 400;
-  background: rgb(190, 87, 19);
-  color: rgb(238, 181, 131);
   font-size: var(--resheader-mobile);
   margin-bottom: 1.5rem;
   padding: 1rem;
 }
-
+.orange {
+  background: var(--orange);
+  color: var(--goldyellow);
+}
+.red {
+  background: var(--darkred);
+  color: var(--lightorange);
+}
 .years {
   font-style: italic;
   padding-top: 0.5rem;
   padding-bottom: 1.25rem;
 }
 
-/* technical skills section styles */
-.skills-wrapper {
-  background: rgb(232, 139, 96);
+/* resume wrapper styles */
+.res-wrapper {
   padding: 1rem;
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
 }
-
-.skills-header {
-  font-family: var(--headerfont);
-  font-weight: 400;
-  background: var(--darkred);
-  color: rgb(232, 139, 96);
-  font-size: var(--resheader-mobile);
-  margin-bottom: 1.5rem;
-  padding: 1rem;
+.yellow-wrap {
+  background: var(--goldyellow);
 }
-
-/* work experience section styles */
-.work-wrapper {
-  background: rgb(238, 181, 131);
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
-
-.work-header {
-  font-family: var(--headerfont);
-  font-weight: 400;
-  background: var(--orange);
-  color: var(--goldyellow);
-  font-size: var(--resheader-mobile);
-  margin-bottom: 1.5rem;
-  padding: 1rem;
+.lightorange-wrap {
+  background: var(--lightorange);
 }
 
 .bulleted-item {
@@ -269,13 +237,12 @@ ul {
     font-size: var(--largetitle);
     flex-direction: row;
   }
-  .hero-tagline {
+  .subheading {
     font-size: 2rem;
     flex-direction: row;
   }
-  .hero-desc {
+  .bodytext {
     font-size: 1.5rem;
-    flex-direction: row;
   }
   .ring-links {
     font-size: 2rem;
@@ -290,22 +257,12 @@ ul {
   .aboutcontent {
     max-width: 50%;
   }
-  .about-desc {
-    font-size: 1.5rem;
-  }
 
   /* RESUME STYLES */
-  .eduproject-wrapper,
-  .work-wrapper,
-  .skills-wrapper {
+  .res-wrapper {
     flex-direction: row;
   }
-  .education,
-  .projects,
-  .jobs,
-  .freelance,
-  .hard-skills,
-  .soft-skills {
+  .res-section {
     width: 50%;
   }
 }

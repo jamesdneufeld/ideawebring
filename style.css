@@ -1,6 +1,7 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Momo+Trust+Display&display=swap");
 
 /* ===========================================================
    CSS BASE STYLES
@@ -27,15 +28,16 @@ html {
 
 :root {
   --accent-color: #555;
-  --body-typeface: "Rubik", sans-serif;
+  --body-typeface: "Lexend", sans-serif;
   --main-heading: "Staatliches", cursive;
-  --subheading: "Syne", sans-serif;
+  --subheading: "Momo Trust Display", sans-serif;
   --gradient: linear-gradient(45deg, rgb(36, 170, 219), #0c779e);
   --color-yellow: #ffc83d;
   --color-blue-dark: #0c779e;
   --color-blue-light: rgb(36, 170, 219);
   --color-white: #fff;
   --color-black: #111;
+  --color-purple: #3a10e5;
   --color-gray-dark: #222;
   --color-gray-medium: #555;
   --color-gray-light: #666;
@@ -88,18 +90,38 @@ h2 {
 h3 {
   font-size: 2rem;
   font-family: var(--subheading);
-  margin-bottom: 1.5rem;
   color: var(--text-inverse);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dotted white;
+  margin-bottom: 0.25rem;
+}
+
+h4 {
+  font-size: 2rem;
+  line-height: 1.4;
+  font-weight: 100;
+  font-family: monospace;
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.session-heading {
+  color: var(--color-purple);
 }
 
 p,
 li {
-  font-size: 1.325rem;
+  font-size: 1.2rem;
   font-family: var(--body-typeface);
   line-height: 1.3;
   margin-bottom: 1rem;
 }
 
+pre {
+  padding: 2rem;
+  font-family: monospace;
+  text-align: center;
+}
 strong {
   font-weight: 600;
 }
@@ -107,8 +129,60 @@ em {
   font-style: italic;
   font-weight: 400;
 }
+
+code {
+  font-family: monospace;
+  background: rgba(247, 238, 245, 0.9);
+  border-radius: 0.5rem;
+  padding: 0.125rem 0.25rem;
+}
+
+.badge-wrapper {
+  text-align: center;
+}
+
 .subheading {
   color: var(--text-secondary);
+}
+
+.site-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: var(--gradient);
+  animation: bg-animation 120s infinite alternate;
+}
+
+.site-nav {
+  width: 100%;
+}
+.nav-list {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.site-nav-item {
+  padding: 1rem;
+  margin: 0;
+}
+.site-nav-link {
+  display: inline-block;
+  background: var(--color-yellow);
+  color: var(--color-gray-dark);
+  font-size: 0.8rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid black;
+  border-radius: 1rem;
+  transition: all 0.15s ease-in-out;
+}
+
+.site-nav-link:hover {
+  background: var(--color-purple);
+  color: var(--color-white);
+  cursor: pointer;
+  transform: translate(-4px, -8px);
+  box-shadow: 8px 8px 0 0 black;
 }
 
 /* ===========================================================
@@ -125,21 +199,25 @@ a:hover {
   color: var(--text-secondary);
 }
 
+.dark-links {
+  color: var(--color-purple);
+}
 .navigation-link {
-  display: block;
+  display: inline-block;
   font-size: 1.225rem;
   font-family: var(--body-typeface);
   margin-bottom: 1rem;
   line-height: 1.2;
-  padding: 1rem 2rem;
   border-radius: 2rem;
-  border: 3px solid var(--color-white);
   background: var(--color-blue-light);
-  text-align: center;
+  transition: all 0.15s ease-in-out;
 }
 .navigation-link:hover {
-  background: var(--bg-primary);
-  border: 3px solid var(--color-blue-light);
+  background: var(--color-purple);
+  color: var(--color-white);
+  cursor: pointer;
+  transform: translate(-4px, -8px);
+  box-shadow: 8px 8px 0 0 black;
 }
 
 /* ===========================================================
@@ -184,38 +262,34 @@ a:hover {
 }
 
 .container {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-evenly;
-  margin-bottom: 2rem;
-  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 1rem;
+  padding-top: 2rem;
 }
 
 /* Reusable content container for centered text blocks */
 .text-section {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  text-align: left;
   width: 85%;
 }
 
+.text-section-center {
+  text-align: center;
+  width: 85%;
+}
 /* ===========================================================
    PAGE SECTIONS - HERO & CONTENT BLOCKS
    =========================================================== */
 
 .intro-section {
-  min-height: 95vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-size: 600%;
+  background-size: 400%;
   background-image: var(--gradient);
   animation: bg-animation 120s infinite alternate;
   padding: 3rem;
@@ -229,28 +303,27 @@ a:hover {
   }
 }
 .hero-headline-wrapper {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
   width: 85%;
   color: var(--text-inverse);
 }
 
-.hero-headline {
+.hero-headline,
+.hero-subhead {
   color: var(--text-inverse);
+}
+.hero-text {
+  font-size: 1.4rem;
 }
 
 /* ===========================================================
    CONTENT SECTION GROUPS
    =========================================================== */
 
-.explore-ring,
+.curriculum-anchor,
 .concept-section,
 .process-section,
 .about-project,
+.tools-skills,
 .project-log-teaser {
   min-height: 100vh;
   display: flex;
@@ -262,6 +335,7 @@ a:hover {
   padding: 3rem;
 }
 
+.explore-ring,
 .methodology-section,
 .how-it-works {
   min-height: 100vh;
@@ -345,14 +419,15 @@ a:hover {
 }
 
 /* Student groups */
-.student-group {
+.student-group,
+.session {
   width: 100%;
   background: rgba(255, 255, 255, 0.9);
-  border-radius: 12px;
+  border-radius: 1rem;
   padding: 1.5rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
 }
 
 /* Mentor group - distinct styling */
@@ -364,6 +439,166 @@ a:hover {
   border: 1px solid rgba(52, 152, 219, 0.3);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   margin-bottom: 1.5rem;
+}
+
+/* ===========================================================
+   SUMMER CODING MENTORSHIP — CLEAN IDENTITY CARDS
+   =========================================================== */
+
+.student {
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------------------------
+   CARD CONTAINER
+---------------------------- */
+
+.navigation-link {
+  width: 100%;
+  display: block;
+  flex: 1;
+  text-decoration: none;
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  background: var(--color-blue-light);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.navigation-link:hover {
+  transform: translate(-4px, -8px);
+  box-shadow: 8px 8px 0 0 black;
+}
+
+/* ---------------------------
+   META (program/year row)
+---------------------------- */
+
+.student-meta {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0 0 0.75rem 0;
+  padding: 0;
+  list-style: none;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px dotted white;
+  margin-bottom: 1rem;
+}
+
+.student-program,
+.student-year {
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+/* ---------------------------
+   TEXT LINES (NEW SYSTEM)
+---------------------------- */
+
+.student-badges {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 0.5fr;
+  gap: 0.5rem;
+}
+.badge {
+  font-size: 0.9rem;
+  font-weight: 300;
+  margin: 0;
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-label {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+.grid-value {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Each JS-generated line */
+.student-line {
+  font-size: 0.85rem;
+  color: white;
+  opacity: 0.9;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Label emphasis (Name / Last Seen / etc) */
+.student-line::first-letter {
+  font-weight: 600;
+}
+
+/* ---------------------------
+   OPTIONAL SUBTLE HIERARCHY
+---------------------------- */
+
+/* Make "Name" feel strongest */
+.student-line:first-child {
+  font-size: 0.95rem;
+  font-weight: 600;
+  opacity: 1;
+}
+
+/* ===========================================================
+   RETURNING STUDENT GLOW (1+ YEAR GAP RETURN)
+   =========================================================== */
+
+.student-return {
+  position: relative;
+}
+
+/* soft outer glow */
+.student-return::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 0.75rem;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.18), transparent 60%);
+  filter: blur(6px);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* subtle animated pulse */
+@keyframes returnPulse {
+  0% {
+    opacity: 0.4;
+    transform: scale(0.99);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.4;
+    transform: scale(0.99);
+  }
+}
+
+.student-return::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  animation: returnPulse 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* ===========================================================

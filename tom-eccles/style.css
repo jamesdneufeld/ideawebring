@@ -7,83 +7,273 @@ html {
 *:after {
   box-sizing: inherit;
 }
-/* Typography imported from Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Quicksand:wght@300..700&display=swap");
+:root {
+  --font-display: "Orbitron", sans-serif;
+  --font-body: "Inter", sans-serif;
 
+  --text-main: rgba(255, 255, 255, 0.92);
+  --text-muted: rgba(255, 255, 255, 0.7);
+}
 body {
-  font-family: "Quicksand", sans-serif;
+  font-family: var(--font-body);
+  color: var(--text-main);
   line-height: 1.6;
-  margin: auto;
-  max-width: 43.75rem; /* Keeps content readable on large screens */
-  padding: 1.25rem;
-  color: #333;
+
+  background-image: url("https://i.pinimg.com/1200x/ab/18/4a/ab184ac73b413c9864126ce440e8b085.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: #f2e9ff;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+
+  padding: 3rem 4rem;
+  max-width: 600px;
+  text-align: center;
+
+  background: rgba(80, 40, 140, 0.35);
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(220, 190, 255, 0.6);
+  box-shadow: 0 0 25px rgba(160, 120, 255, 0.6);
+}
+.webring-page {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-image: url("https://i.pinimg.com/1200x/42/89/3a/42893a28b94e35f8a28df39eaae5da11.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.webring-page h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6rem, 4rem);
+  font-weight: 600;
+  letter-spacing: 0.15rem;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.webring-page h2 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.webring-page a,
+.webring-page button {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.15rem;
+  text-transform: uppercase;
+}
+.dance-gif-container1 {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+}
+.dance-gif-container2 {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+}
+
+.resume-container {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
 h1 {
-  font-size: 3rem;
-}
-h1,
-h2,
-h3 {
-  font-family: "Lexend", sans-serif;
-  color: #000;
+  position: center;
+  top: 2rem;
+  font-size: 1.25rem;
+  letter-spacing: 0.15rem;
+  text-transform: uppercase;
+  opacity: 0.85;
 }
 
-header {
-  border-bottom: 0.125rem solid #333;
-  padding-bottom: 0.625rem;
-  margin-bottom: 1.25rem;
+.hero-text {
+  font-size: 2.2rem;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+}
+
+.hero-sub {
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+p {
+  margin: 0;
+}
+
+.index-sub {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+.resume-page {
+  font-family: var(--font-body);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.resume-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.resume-page h1 {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  letter-spacing: 0.1rem;
+  margin-bottom: 0.25rem;
+}
+.resume-page h2 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.12rem;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.company-school-role {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+.resume-header h1 {
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.15rem;
+  margin-bottom: 0.5rem;
+}
+.dates {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+.resume-page p,
+.resume-page li {
+  font-size: 0.95rem;
+  line-height: 1.65;
 }
 
 section {
-  margin-bottom: 1.25rem;
+  background: rgba(80, 40, 140, 0.35);
+  border: 1px solid rgba(220, 190, 255, 0.6);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 20px rgba(160, 120, 255, 0.4);
+
+  padding: 1.75rem;
+  margin-bottom: 2rem;
 }
-/* Class specific styles*/
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  background: salmon;
-}
-.job h3,
-.degree h3 {
-  margin-bottom: 0;
+
+section h2 {
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.12rem;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
 }
 
 .company-school-role {
-  color: blue;
-  font-size: 1.5rem;
-  text-transform: uppercase;
-}
-.dates {
-  font-style: italic;
-  color: #777;
-  margin-top: 0;
-  margin-bottom: 0.625rem;
+  font-weight: 600;
 }
 
+.dates {
+  font-size: 0.85rem;
+  opacity: 0.75;
+  margin-bottom: 0.5rem;
+}
+
+.wrapper {
+  display: flex;
+  gap: 2.5rem;
+  align-items: stretch;
+}
+.experience {
+  flex: 2;
+}
+
+.education,
+.skills {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
 ul {
-  padding-left: 1.25rem;
+  padding-left: 1.2rem;
 }
 
 li {
-  margin-bottom: 0.313rem;
+  margin-bottom: 0.6rem;
+  line-height: 1.5;
 }
 
-.resume-heading {
-  color: #fff;
+.job {
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+.home-button {
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.6rem 1.2rem;
+
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.85rem;
+  letter-spacing: 0.12rem;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  color: #ffffff;
+
+  background: rgba(120, 80, 200, 0.35);
+  border: 1px solid rgba(220, 190, 255, 0.7);
+  backdrop-filter: blur(6px);
+
+  box-shadow: 0 0 18px rgba(160, 120, 255, 0.5);
+  transition: all 0.25s ease;
+  z-index: 1000;
 }
 
-.summary {
-  background: lightseagreen;
+.index-links {
+  padding: 0.6rem 1.2rem;
+  text-decoration: none;
+  color: #ffffff;
+
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(120, 80, 200, 0.3);
+
+  transition: all 0.25s ease;
 }
-.education {
-  background: lightblue;
+
+.index-links:hover {
+  background: rgba(170, 120, 255, 0.6);
+  box-shadow: 0 0 12px rgba(200, 160, 255, 0.9);
+  transform: translateY(-2px);
 }
-.experience {
-  background: lightblue;
-}
-.skills {
-  background: lightblue;
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  h1 {
+    font-size: 1.777rem;
+  }
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -96,10 +286,20 @@ li {
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   h1 {
-    font-size: 5rem;
+    font-size: 3.157rem;
   }
-  .wrapper {
-    display: flex;
-    flex-direction: row;
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  h1 {
+    font-size: 4.209rem;
+  }
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+  h1 {
+    font-size: 5.61rem;
   }
 }

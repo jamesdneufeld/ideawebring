@@ -1,0 +1,61 @@
+---
+layout: template.njk
+title: acornwitch
+description: welcome to the lair of the acorn witch
+nesting: "../"
+---
+
+
+        <section>
+          <h1>.: Welcome to my cozy forest <span class="ascii-sidebar">｡◕‿◕｡</span> :.</h1>
+          
+          <p>
+            <img class="update-icon" src="../img/sakura-icon.png">
+            <b>04-20-2026 (1:16 am)</b><br>
+            I figured out how to install Eleventy and generate my pages with a template! Thank you to petrapixel's <a href="https://petrapixel.neocities.org/coding/eleventy-tutorial#running-eleventy" target="_blank">tutorial</a>. Now my development process will be streamlined. 
+          </p>
+
+          <p>Previously, I would use simple PHP to include my headers and footers on every page. This required me to build all my site files in PHP. For example, 
+            <code>index.html</code> would become <code>index.php</code>. Then, using a single line of PHP, I would essentially "tell" the page to automatically include the code I wanted.</p>
+          
+          <p>For example, I made a file called <code>header.php</code>, which contained all the code that needed to be written before the contents of the page. Similarly, a page called <code>footer.php</code> would contain the code that is written after the contents. So all my content pages would look like this (prior to upload on server): </p>
+
+          <p><code>
+      &lt;? include ("/home/content/layout/header.php") ?&gt; <br>
+
+      Page contents (written in html) <br>
+
+      &lt;? include ("/home/content/layout/footer.php") ?&gt;
+
+          </code></p>
+
+          <p>This was simple enough for my 11-year-old brain. At this point I was already using paid shared hosting for my website, which supported dynamic content such as PHP. However, this method requires <code>index.php</code> to fetch <code>header.php</code> and <code>footer.php</code> and load them into the page every time you accessed <code>index.php</code>. For a small personal website, the load time wasn't much of an issue, at least not enough for me to notice.</p>
+
+          <p>The advantage of a static site generator (SSG) is that all the HTML for header and footer is automatically injected into my content pages <i>before</i> it's uploaded to the server. So when you visit <code>index.html</code>, load time is faster since you're no longer asking the page to fetch the header and footer code. And you don't need to use PHP, which isn't supported on platforms like GitHub Pages or Neocities.</p>
+
+          <p>The backend of how this all works is a bit more complicated, and requires being comfortable with writing commands into a terminal. But I'm slowly getting the hang of it, and it's a lot of fun. :)</p>
+
+          <p><img src="../img/11ty.png"></p>
+          
+          <p>
+            <img class="update-icon" src="../img/sakura-icon.png">
+            <b>03-04-2026</b> <br>
+            hiiiii my name is apsara. i'm an illustrator who also builds websites for fun. this site's design is a nod to the old web that i grew up in. 
+          </p>
+          <p>  
+            i want to experiment
+            with using a static site generator (eleventy) to avoid having to
+            update my header and footer on every single page. normally i'd use php but github pages doesn't support dynamic content. javascript is another option, but that would exclude visitors who have it turned off.
+            </p>
+
+            <p>
+            expect this page to break while I'm working lolol
+            </p>
+
+            <p>you can check out my <a href="https://apsara-coefficneou.netlify.app" target="_blank">portfolio</a> here (tap the white squirrel if you're on mobile). it's kinda broken and has a lot of placeholder images...</p>
+
+        </section>
+
+
+
+       
