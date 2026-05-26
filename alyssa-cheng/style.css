@@ -98,6 +98,10 @@ button {
 a {
   color: antiquewhite;
 }
+pre {
+  font-family: monospace;
+  color: antiquewhite;
+}
 .resume-nav {
   display: flex;
   flex-direction: row;
@@ -120,7 +124,8 @@ a {
   border-radius: 2rem;
   padding: 2rem;
 }
-.link-container {
+.link-container,
+.ascii-art-container {
   margin-bottom: 1.5rem;
 }
 .welcome-msg {
