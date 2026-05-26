@@ -96,8 +96,7 @@ button {
   font-size: 1.2rem;
 }
 a {
-  text-decoration: none;
-  color: #235c7e;
+  color: antiquewhite;
 }
 .resume-nav {
   display: flex;
@@ -121,6 +120,9 @@ a {
   border-radius: 2rem;
   padding: 2rem;
 }
+.link-container {
+  margin-bottom: 1.5rem;
+}
 .welcome-msg {
   color: antiquewhite;
   font-size: 1.4rem;
@@ -132,6 +134,10 @@ a {
   justify-content: center;
   flex-direction: column;
 }
+.nav-link {
+  color: #235c7e;
+  text-decoration: none;
+}
 .pg-link {
   margin: 0.25rem;
   background-color: #f9f8f7;
@@ -141,6 +147,13 @@ a {
 }
 .pg-link:hover {
   background-color: #94bebb;
+}
+.link-desc {
+  color: antiquewhite;
+  margin-bottom: 1rem;
+}
+.ext-link:hover {
+  color: #94bebb;
 }
 
 /* Small devices (landscape phones, 576px and up) */
