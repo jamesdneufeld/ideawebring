@@ -118,9 +118,11 @@ li {
 }
 
 pre {
-  padding: 2rem;
+  font-size: 0.2rem;
+  padding: 0;
   font-family: monospace;
-  text-align: center;
+  text-align: left;
+  margin-bottom: 2rem;
 }
 strong {
   font-weight: 600;
@@ -690,4 +692,13 @@ a:hover {
 /* Match the webring nav hover exactly */
 .page-counter:hover {
   background: rgba(255, 255, 255, 0.2);
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  pre {
+    font-size: 1rem;
+    padding: 2rem;
+    text-align: center;
+  }
 }
