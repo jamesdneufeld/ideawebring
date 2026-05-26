@@ -3,22 +3,35 @@
 
 body {
   font-family: "Rubik", sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  color: white;
-  background-color: cornflowerblue;
+  color: #1e0b70;
+  background-color: #f3f3f3;
+  margin: 0;
 }
 
-.box {
-  width: 25%;
-  min-height: 20rem;
-  background: radial-gradient(
-    circle,
-    rgba(30, 11, 112, 0.64) 0%,
-    rgba(175, 94, 255, 1) 100%
-  );
-  margin-bottom: 1rem;
+
+h1 {
+  font-family: "rubik", sans-serif;
+  font-weight: bold;
+  font-size: 50px;
+  line-height: 80px;
+  padding-bottom: 10px;
+}
+
+h2 {
+  font-weight: normal;
+  font-size: 25px;
+}
+
+.block-title { 
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.flex-margin-1col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 1080px;
 }
