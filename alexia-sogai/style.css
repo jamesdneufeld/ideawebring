@@ -21,7 +21,7 @@ h2 {
   font-weight: bold;
   font-size: 25px;
   text-decoration: underline;
-  margin-bottom: 0.3rem;
+  padding-bottom: 5px;
 }
 
 h3 {
@@ -29,11 +29,11 @@ h3 {
   font-style: italic;
   color: #1e0b70;
   font-size: 18px;
-  margin-bottom: 0.3rem;
+  padding-bottom: 0.3rem;
 }
 
 p {
-  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
   color: #1e0b70;
 }
 
