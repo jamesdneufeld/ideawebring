@@ -1,5 +1,5 @@
 /* Typography imported from Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jacquard+12&display=swap");
 
 html {
   box-sizing: border-box;
@@ -11,19 +11,19 @@ html {
   box-sizing: inherit;
 }
 
-/* Styling Variables */
-:root {
-  --accent-color: #00799b;
-  --body-typeface: serif;
-  --main-heading: serif;
-  --gradient: linear-gradient(45deg, #ffcdbd, #ffe9f1, #24aadb, #ca5b00, #a3604f);
-}
-
 body {
   font-family: var(--body-typeface);
-  color: rgb(135, 54, 0);
-  display: flex;
-  flex-direction: column;
+  min-height: 100vh;
+}
+
+.pond-bg {
+  background-repeat: no-repeat;
+  min-height: 80vh;
+  background-image: url(andy-poystila/assets/andy-poystila_lily-pad_background.jpg);
+  background-size: 1920px;
+  background-position: top center;
+  background-color: 000;
+  background-origin: content-box, border-box;
 }
 
 /* Making all images responsive */
@@ -31,8 +31,6 @@ img {
   max-width: 100%;
   height: auto;
 }
-
-/* Dragable divs - hard and idk how this could work */
 
 /* Typography */
 
@@ -50,23 +48,20 @@ h2 {
 }
 
 p {
-  font-size: 1.625rem;
+  font-size: 2rem;
   font-family: var(--body-typeface);
   margin-bottom: 0.2rem;
   line-height: 1.2;
-}
-
-.hero-headline {
-  color: rgb(0, 100, 181);
+  font-weight: 400;
 }
 
 /* Hyperlink Styles */
 a {
   text-decoration: none;
-  color: #444;
+  color: #cfff97;
 }
 a:hover {
-  color: #111;
+  color: #32ca4e;
 }
 
 p {
@@ -83,18 +78,6 @@ p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-size: 600%;
-  background-image: var(--gradient);
-  animation: bg-animation 120s infinite alternate;
-}
-
-@keyframes bg-animation {
-  0% {
-    background-position: 0%;
-  }
-  100% {
-    background-position: 100%;
-  }
 }
 
 .hero-headline-wrapper {
@@ -118,17 +101,15 @@ p {
    =========================================================== */
 
 .webring {
-  font-family: "Rubik", sans-serif;
+  font-family: "Jacquard 12", system-ui;
   display: inline-flex;
   align-items: center;
   gap: 0.625rem; /* space between items */
-  background: linear-gradient(135deg, #6a5af9, #f95a8a);
+  background: #195843;
   padding: 0.5rem 1rem;
-  border-radius: 1.5rem;
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: white;
-  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.15);
+  font-weight: 400;
+  font-size: 2rem;
+
   justify-content: center;
   margin-bottom: 1rem;
 }
@@ -137,23 +118,26 @@ p {
 .webring-previous,
 .webring-next,
 .webring-hub {
-  color: white;
   text-decoration: none;
+  font-weight: 400;
+  font-size: 2rem;
   padding: 0.25rem 0.5rem;
-  border-radius: 1rem;
   transition: background 0.3s;
 }
 
 .webring-previous:hover,
 .webring-next:hover,
 .webring-hub:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: #195843;
 }
 
 /* Divider between links */
 .divider {
-  color: rgba(255, 255, 255, 0.7);
+  background: #195843;
+  color: #ffffff;
   font-weight: 400;
+  font-weight: 400;
+  font-size: 2rem;
 }
 
 /* ===========================================================
@@ -174,22 +158,15 @@ p {
   display: inline-flex;
   align-items: center;
   gap: 0.625rem;
-  background: linear-gradient(135deg, #6a5af9, #f95a8a);
+  background: #195843;
   padding: 0.5rem 1rem;
-  border-radius: 1.5rem;
   font-weight: 600;
-  font-size: 0.95rem;
-  color: white;
-  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.15);
+  font-size: 1.6rem;
+  color: #ffffff;
   justify-content: center;
   margin-bottom: 1rem;
   font-variant-numeric: tabular-nums;
   cursor: default;
   user-select: none;
   transition: background 0.3s; /* Add transition for smooth hover */
-}
-
-/* Match the webring nav hover exactly */
-.page-counter:hover {
-  background: rgba(255, 255, 255, 0.2);
 }

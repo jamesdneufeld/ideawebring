@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Web Ring Admin · Merge Engine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/admin.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1 id="pageTitle">🕸️ Web Ring · Merge Engine</h1>
+      <div id="pageSubhead" class="subhead">Loading configuration...</div>
+
+      <!-- Step 1: Load existing JSON -->
+      <div class="card">
+        <h3>📥 Step 1: Load existing students.json (your source of truth)</h3>
+        <div class="button-group">
+          <button id="fetchStudentsBtn" class="btn-primary">🌐 Fetch from Repo</button>
+          <button id="uploadBtn" class="btn-secondary">📁 Upload Local File</button>
+        </div>
+        <input type="file" id="upload" accept="application/json" style="display: none" />
+        <div id="uploadStatus" class="status-message"></div>
+      </div>
+
+      <!-- Step 2: Get folder list -->
+      <div class="card">
+        <h3>📁 Step 2: Get current student folders</h3>
+
+        <button id="fetchFoldersBtn" class="btn-primary full-width">🌐 Fetch Student Folders from Repo</button>
+        <div id="excludeHint" class="exclude-list"></div>
+
+        <input type="file" id="folderFile" accept=".txt" />
+        <button id="loadTxtBtn" class="btn-secondary full-width">📄 Load from .txt file</button>
+
+        <div class="divider">— or —</div>
+
+        <textarea id="folderInput" placeholder="Paste folder names manually, one per line"></textarea>
+
+        <button id="reconcileBtn" class="btn-primary">🔄 Reconcile & Edit</button>
+      </div>
+
+      <!-- Step 3: Editor -->
+      <div id="editorSection" class="hidden">
+        <div class="card">
+          <h3>✏️ Step 3: Edit student data (static metadata only)</h3>
+          <div id="warningBox" class="warning hidden"></div>
+          <div class="student-table">
+            <table id="studentTable">
+              <thead id="tableHeader"></thead>
+              <tbody id="studentTableBody"></tbody>
+            </table>
+          </div>
+          <div style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap">
+            <button id="downloadBtn">💾 Download students.json</button>
+            <button id="fetchPushCountsBtn" class="btn-secondary">📊 Fetch Selected Push Counts</button>
+            <button id="fetchLastCommitBtn" class="btn-secondary">📅 Fetch Selected Last Commit Dates</button>
+            <button id="fetchFirstCommitBtn" class="btn-secondary">🌟 Fetch Selected First Commit Dates</button>
+            <button id="selectAllBtn" class="btn-secondary">☑️ Select All</button>
+            <button id="selectNoneBtn" class="btn-secondary">⬜ Select None</button>
+          </div>
+        </div>
+        <div class="card">
+          <h3>📄 Preview</h3>
+          <pre id="output">{}</pre>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="js/merge/main.js"></script>
+  </body>
+</html>

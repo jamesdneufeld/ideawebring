@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>IDEA Web Ring · Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="dashboard-header">
+        <h1>🕸️ IDEA Web Ring · Admin Dashboard</h1>
+        <div class="subhead">Student overview — powered by students.json</div>
+      </div>
+
+      <!-- ✅ STATS CONTAINER (FIXED: matches render.js) -->
+      <div id="stats" class="stats-bar"></div>
+
+      <div class="toolbar">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="🔍 Search by name, folder, or GitHub..." />
+        </div>
+
+        <div class="filter-group">
+          <button class="sort-btn" data-sort="name">Sort: Name ↕</button>
+          <button class="sort-btn" data-sort="status">Sort: Status</button>
+          <button class="sort-btn" data-sort="activity">Sort: Activity</button>
+        </div>
+
+        <div>
+          <button class="action-btn" id="exportCSVBtn">📊 Export CSV</button>
+          <button class="action-btn" id="refreshBtn">🔄 Refresh Activity</button>
+        </div>
+      </div>
+
+      <!-- Status filters -->
+      <div id="statusFilterGroup" class="filter-group">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="active">Active</button>
+        <button class="filter-btn" data-filter="alumni">Alumni</button>
+        <button class="filter-btn" data-filter="withdrawn">Withdrawn</button>
+        <button class="filter-btn" data-filter="no-github">Missing GitHub</button>
+        <button class="filter-btn" data-filter="resume-ready">Resume Ready</button>
+
+        <!-- 🔥 NEW (matches your GitHub system logic) -->
+        <button class="filter-btn" data-filter="recent">Recent</button>
+        <button class="filter-btn" data-filter="dormant">At Risk (30+ days)</button>
+        <button class="filter-btn" data-filter="low-engagement">Low Engagement</button>
+      </div>
+
+      <!-- Student grid -->
+      <div id="studentGrid" class="student-grid">
+        <div class="no-results loading">Loading students...</div>
+      </div>
+
+      <div class="footer">
+        <span>📁 Data source: students.json</span>
+        <span>🕸️ IDEA Web Ring Dashboard v3.0 (Modular)</span>
+      </div>
+    </div>
+
+    <script type="module" src="js/dashboard.js"></script>
+  </body>
+</html>

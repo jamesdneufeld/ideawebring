@@ -1,7 +1,164 @@
 /* Typography imported from Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-body {
-  font-family: "Rubik", sans-serif;
+* {
   padding: 1rem;
+  margin: 0.5rem;
+  box-sizing: border-box;
+}
+:root {
+  --primary-color: #5682b1;
+  --text-color: #ffe8db;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: black;
+  color: #ffe8db;
+  padding: 1rem;
+}
+.description {
+  font-size: 1rem;
+  font-weight: 250;
+  color: #cccccc;
+}
+.intro {
+  font-weight: 350;
+  color: #cccccc;
+  padding-bottom: 0.5rem;
+}
+.resume_title {
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+html {
+  font-size: 15px;
+}
+.container {
+  max-width: 1000px;
+  width: 90%;
+  margin: 0 auto;
+  display: grid;
+  padding: 5 rem;
+  background-color: black;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+.container_profile {
+  max-width: 1000px;
+  width: 90%;
+  margin: 0 auto;
+  display: grid;
+  padding: 5 rem;
+  background-color: black;
+  gap: 4rem;
+}
+.profile {
+  display: grid;
+}
+.group-1 {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+.group-2 {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+.group-3 {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+@media (min-width: 768px) {
+  .profile {
+    margin-bottom: 2rem;
+    grid-template-columns: 1fr;
+  }
+}
+/*laptop*/
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    padding: 3rem;
+    gap: 2rem;
+  }
+}
+
+/* profile */
+.profile_name_last {
+  color: #ffe8db;
+  font-weight: 200;
+  font-size: clamp(1.5rem, 8vw, 3rem);
+  text-transform: uppercase;
+  display: block;
+}
+.profile_name_first {
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 15vw, 7rem);
+  text-transform: uppercase;
+  display: block;
+}
+.profile_title {
+  font-size: 1.3rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  padding-bottom: 1rem;
+}
+
+/* core skills*/
+.list {
+  margin-top: 2rem;
+  margin-left: 2rem;
+  line-height: 2;
+}
+
+/*education*/
+.edu_item {
+  margin-top: 2rem;
+}
+
+.item_date {
+  font-size: 1rem;
+  color: #cccccc;
+  font-weight: 300;
+}
+
+.item_title {
+  font-size: 1.3rem;
+  color: white;
+  font-weight: 500;
+  margin: 0.8rem 0;
+}
+
+.item_subtitle {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #cccccc;
+  margin-bottom: 1rem;
+}
+
+/*experience*/
+.exp_item {
+  margin-top: 2rem;
+}
+
+/*interest*/
+.interest_items {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.interest_item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
