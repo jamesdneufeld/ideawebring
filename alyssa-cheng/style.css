@@ -70,6 +70,15 @@ p {
   padding: 1rem;
 }
 
+.link-container {
+  margin-bottom: 0.5rem;
+}
+
+.link-item {
+  margin-bottom: 0.5rem;
+  color: antiquewhite;
+}
+
 /* More specific class styles */
 
 .index-contents,
