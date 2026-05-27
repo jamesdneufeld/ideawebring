@@ -11,6 +11,44 @@
     <div class="index-contents">
       <header class="index-header">
         <h1>Links ✧˖°.</h1>
+        <div>
+          <svg width="0" height="0">
+            <defs>
+              <filter id="distortionText">
+                <feTurbulence
+                  type="turbulence"
+                  baseFrequency="0.0144 0.02"
+                  numOctaves="1"
+                  seed="20"
+                  stitchTiles="stitch"
+                  result="noise"
+                ></feTurbulence>
+                <feDisplacementMap
+                  in="SourceGraphic"
+                  in2="noise"
+                  xChannelSelector="A"
+                  yChannelSelector="G"
+                  scale="15"
+                ></feDisplacementMap>
+              </filter>
+            </defs>
+          </svg>
+
+          <h2 class="distorted-text">Design Games</h2>
+        </div>
+        <!-- CSS -->
+        <style>
+          .distorted-text {
+            font-family: sans-serif;
+            font-size: clamp(2rem, 8vw, 4rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-align: center;
+            line-height: 1;
+            filter: url(#distortionText);
+          }
+        </style>
       </header>
       <body>
         <p>
@@ -62,6 +100,9 @@
           </button>
           <button class="pg-link">
             <a class="nav-link" href="resume.html">My Resume</a>
+          </button>
+          <button class="pg-link">
+            <a class="nav-link" href="ascii-art.html">ASCII Art</a>
           </button>
           <button class="pg-link">
             <a class="nav-link" href="../aurod-ashrafi/">Aurod</a>
