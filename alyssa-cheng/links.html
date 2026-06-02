@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Alyssa Cheng — IXD 108 - Coding for Designers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./reset.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <section class="index">
+    <div class="index-contents">
+      <header class="index-header">
+        <h1>Links ✧˖°.</h1>
+        <div>
+          <svg width="0" height="0">
+            <defs>
+              <filter id="distortionText">
+                <feTurbulence
+                  type="turbulence"
+                  baseFrequency="0.0144 0.02"
+                  numOctaves="1"
+                  seed="20"
+                  stitchTiles="stitch"
+                  result="noise"
+                ></feTurbulence>
+                <feDisplacementMap
+                  in="SourceGraphic"
+                  in2="noise"
+                  xChannelSelector="A"
+                  yChannelSelector="G"
+                  scale="15"
+                ></feDisplacementMap>
+              </filter>
+            </defs>
+          </svg>
+
+          <h2 class="distorted-text">Design Games</h2>
+        </div>
+        <!-- CSS -->
+        <style>
+          .distorted-text {
+            font-family: sans-serif;
+            font-size: clamp(2rem, 8vw, 4rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-align: center;
+            line-height: 1;
+            filter: url(#distortionText);
+          }
+        </style>
+      </header>
+      <body>
+        <p>
+          hi, i've compiled a few links to some online design games / exercises!
+          please enjoy (◕‿◕)
+        </p>
+        <div class="link-container">
+          <ul>
+            <li class="link-desc">
+              <a
+                class="ext-link"
+                href="https://shape.method.ac/"
+                target="_blank"
+                >SHAPETYPE</a
+              >: edit the bezier curves to create the letterforms
+            </li>
+            <li class="link-desc">
+              <a
+                class="ext-link"
+                href="https://avark.agency/designers-eye"
+                target="_blank"
+                >It's Centred That</a
+              >: train your eye to centre items
+            </li>
+            <li class="link-desc">
+              <a
+                class="ext-link"
+                href="https://type.method.ac/#"
+                target="_blank"
+                >KERNTYPE</a
+              >: game to practice kerning
+            </li>
+            <li class="link-desc">
+              <a
+                class="ext-link"
+                href="https://color.method.ac/"
+                target="_blank"
+                >Color</a
+              >: color matching game
+            </li>
+            <li class="link-desc">
+              <a
+                class="ext-link"
+                href="https://boolean.method.ac/"
+                target="_blank"
+                >The Boolean Game</a
+              >: practice making vector images using union, subtract etc.
+            </li>
+            <li class="link-desc">
+              <a
+                class="ext-link"
+                href="https://bezier.method.ac/"
+                target="_blank"
+                >The Bézier Game</a
+              >: pen tool practice
+            </li>
+            <li class="link-desc">
+              <a
+                class="ext-link"
+                href="https://ilovetypography.com/2020/07/01/the-font-game/"
+                target="_blank"
+                >The Font Game</a
+              >: what fonts can you recognize?
+            </li>
+            <li class="link-desc">
+              <a
+                class="ext-link"
+                href="https://betterwebtype.com/triangle/"
+                target="_blank"
+                >Better Web Type</a
+              >: adjust type attributes according to best practices for web type
+            </li>
+            <li class="link-desc">
+              <a
+                class="ext-link"
+                href="https://yizzle.com/whatthehex/?n=2"
+                target="_blank"
+                >What The Hex?</a
+              >: choose the corresponding colour to the hex code provided
+            </li>
+          </ul>
+        </div>
+        <div class="webring-nav">
+          <button class="pg-link">
+            <a class="nav-link" href="../tom-eccles/">←Tom</a>
+          </button>
+          <button class="pg-link">
+            <a class="nav-link" href="index.html">Home</a>
+          </button>
+          <button class="pg-link">
+            <a class="nav-link" href="resume.html">My Resume</a>
+          </button>
+          <button class="pg-link">
+            <a class="nav-link" href="ascii-art.html">ASCII Art</a>
+          </button>
+          <button class="pg-link">
+            <a class="nav-link" href="../aurod-ashrafi/">Aurod→</a>
+          </button>
+        </div>
+      </body>
+    </div>
+  </section>
+</html>

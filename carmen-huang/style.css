@@ -1,0 +1,91 @@
+/* Global & Mobile Typography
+
+████████ ██    ██ ██████   ██████   ██████  ██████   █████  ██████  ██   ██ ██    ██ 
+   ██     ██  ██  ██   ██ ██    ██ ██       ██   ██ ██   ██ ██   ██ ██   ██  ██  ██  
+   ██      ████   ██████  ██    ██ ██   ███ ██████  ███████ ██████  ███████   ████   
+   ██       ██    ██      ██    ██ ██    ██ ██   ██ ██   ██ ██      ██   ██    ██    
+   ██       ██    ██       ██████   ██████  ██   ██ ██   ██ ██      ██   ██    ██    
+                                                                                    
+
+*/
+
+/* Typography imported from Google Fonts */
+
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Instrument+Serif:ital@0;1&display=swap");
+
+body {
+  font-family: "DM Sans", sans-serif;
+  font-size: 1.5rem;
+}
+
+h1 {
+  font-family: "Instrument Serif", serif;
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  color: #2244bf;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+/* Hero 
+
+██   ██ ███████ ██████   ██████  
+██   ██ ██      ██   ██ ██    ██ 
+███████ █████   ██████  ██    ██ 
+██   ██ ██      ██   ██ ██    ██ 
+██   ██ ███████ ██   ██  ██████  
+                                 
+*/
+
+.hero {
+  background-image: url(assets/white-paper-texture.jpg);
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.hero-card {
+  background-color: rgb(237, 245, 255);
+  border-radius: 2rem;
+  min-width: 100vh;
+}
+
+.hero-header {
+  text-align: center;
+  flex-direction: column;
+  padding: 5rem 5rem 2rem 5rem;
+}
+
+.ascii-canvas {
+  font-family: monospace;
+  font-size: 1rem;
+  text-align: center;
+  color: #2244bf;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.navigation-item {
+  padding: 1rem;
+  margin: 1.5rem;
+  background-color: #2244bf;
+  color: aliceblue;
+  border-radius: 1rem;
+}
+
+.link-list {
+  text-align: left;
+  padding: 1rem;
+  margin-left: 6.5rem;
+}
