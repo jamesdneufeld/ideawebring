@@ -86,6 +86,25 @@ body {
   margin-bottom: 10px;
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+.topic {
+  aspect-ratio: 1/1;
+  border: 3rem;
+  flex-direction: column;
+  background-color: #e8d1ffe7;
+  justify-content: space-between;
+  padding: 2rem;
+}
+/*how do i change the font size and style? this doesnt affect anything so far
+.topic-name {
+  font-size: large;
+  font-weight: 400;
+}*/
+
 @media (min-width: 768px) {
   .nav {
     flex-direction: row;
@@ -102,4 +121,50 @@ body {
   .resume-subheader {
     flex-direction: row;
   }
+}
+
+/* AI sugestion/ questions::
+-how do i fix the overflow?
+-what is this: transition: all 0.3s ease;
+ -what does this part do? Remove the default triangle arrow in Chrome/Safari 
+.interactive-card summary::-webkit-details-marker {
+  display: none;
+}
+.interactive-card summary {
+  list-style: none;
+}
+-
+*/
+.card-container {
+  max-width: 400px;
+  margin: 2rem;
+}
+
+.interactive-card {
+  background: #e8d1ffe7;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  /*transition: all 0.3s ease;*/
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background-color: #e8d1ffe7;
+  cursor: pointer;
+}
+
+.card-content {
+  padding: 1.5rem;
+  border-top: 1px solid #e8d1ffe7;
+  color: #495057;
+  /*height: auto;*/
+}
+
+.icon {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
