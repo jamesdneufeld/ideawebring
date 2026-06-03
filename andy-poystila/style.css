@@ -14,13 +14,23 @@ html {
 body {
   font-family: var(--body-typeface);
   min-height: 100vh;
+  background: url(assets/andy-poystila_lily-pad_background.jpg);
+  background-size: cover;
+  background-position: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 #sticky-dock {
   position: sticky;
-  top: 1%;
+  top: 1;
   bottom: 1;
   z-index: 0;
+}
+
+#lily-leaf {
+  position: absolute;
+  z-index: 2;
 }
 
 #background {
@@ -31,9 +41,8 @@ body {
   z-index: -1;
 }
 
-/* Making all images responsive */
 img {
-  z-index: +1;
+  z-index: 1;
 }
 
 /* Typography */
