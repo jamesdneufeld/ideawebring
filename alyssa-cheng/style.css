@@ -125,7 +125,8 @@ pre {
   padding: 2rem;
 }
 .link-container,
-.ascii-art-container {
+.ascii-art-container,
+.badges {
   margin-bottom: 1.5rem;
 }
 .welcome-msg {
