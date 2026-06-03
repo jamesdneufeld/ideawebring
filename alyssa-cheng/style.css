@@ -72,13 +72,40 @@ p {
 
 /* More specific class styles */
 
-.index-contents,
+button {
+  font-family: "Lato", sans-serif;
+  font-size: 1.2rem;
+}
+a {
+  color: antiquewhite;
+}
+pre {
+  font-family: monospace;
+  color: antiquewhite;
+}
+
+.backdrop {
+  background-image: url(../alyssa-cheng/the-banks-of-the-oise.png);
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.gen-container,
 .main-nav {
   display: flex;
   flex-direction: column;
   text-align: center;
   border-radius: 2rem;
   width: 90%;
+}
+
+.gen-container {
+  background: #235c7e;
+  border-radius: 2rem;
+  padding: 2rem;
 }
 
 .para-md {
@@ -91,17 +118,6 @@ p {
   margin-bottom: 1rem;
 }
 
-button {
-  font-family: "Lato", sans-serif;
-  font-size: 1.2rem;
-}
-a {
-  color: antiquewhite;
-}
-pre {
-  font-family: monospace;
-  color: antiquewhite;
-}
 .resume-nav {
   display: flex;
   flex-direction: row;
@@ -111,19 +127,7 @@ pre {
   background: #235c7e;
   padding: 2rem;
 }
-.index {
-  background-image: url(../alyssa-cheng/the-banks-of-the-oise.png);
-  background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-.index-contents {
-  background: #235c7e;
-  border-radius: 2rem;
-  padding: 2rem;
-}
+
 .link-container,
 .ascii-art-container,
 .badges {
@@ -171,7 +175,7 @@ pre {
   .webring-nav {
     flex-direction: row;
   }
-  .index-contents,
+  .gen-container,
   .main-nav {
     width: 60%;
   }
