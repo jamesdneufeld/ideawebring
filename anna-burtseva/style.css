@@ -1,8 +1,14 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
 
-* {
-  outline: 1px solid red;
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 
 body {
@@ -17,6 +23,16 @@ body {
   justify-content: space-around;
 }
 
+.navigation {
+  width: 50%;
+  display: flex;
+  background: pink;
+}
+
+.nav-link {
+  padding: 1rem;
+}
+
 .resume-header h1 {
   font-size: 72px;
   font-style: italic;
@@ -28,28 +44,30 @@ body {
 }
 .resume-subheader {
   display: flex;
+  width: 100%;
   flex-direction: column;
-  background: orangered;
+  background: hotpink;
   justify-content: space-between;
+  padding: 2rem;
 }
 .contact {
+  width: 50%;
+  background: orangered;
   font-size: 1.5rem;
   color: #ffffff;
   margin-bottom: 1rem;
 }
 .subhead {
-  width: 250px;
-}
-
-.subhead h2 {
-  font-size: 40px;
-  color: #3b002f;
+  font-size: 2rem;
+  color: purple;
+  line-height: 1;
+  margin-bottom: 1rem;
 }
 
 .S1 {
   display: flex;
   background: antiquewhite;
-  padding: 5rem;
+  padding: 1rem;
   flex-direction: row;
 }
 .names {
@@ -86,19 +104,26 @@ body {
   margin-bottom: 10px;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+.card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .topic {
-  aspect-ratio: 1/1;
-  border: 3rem;
-  flex-direction: column;
+  width: 100%;
+  border: 2px solid orange;
   background-color: #e8d1ffe7;
-  justify-content: space-between;
   padding: 2rem;
+  margin-bottom: 1rem;
 }
+
+.card-number {
+  display: block;
+  font-size: 5rem;
+  color: white;
+  margin-bottom: 1rem;
+}
+
 /*how do i change the font size and style? this doesnt affect anything so far
 .topic-name {
   font-size: large;
@@ -106,6 +131,13 @@ body {
 }*/
 
 @media (min-width: 768px) {
+  .card-container {
+    flex-direction: row;
+  }
+
+  .topic {
+    width: 23%;
+  }
   .nav {
     flex-direction: row;
   }
@@ -120,6 +152,9 @@ body {
   }
   .resume-subheader {
     flex-direction: row;
+  }
+  .S1 {
+    padding: 5rem;
   }
 }
 
@@ -136,8 +171,7 @@ body {
 -
 */
 .card-container {
-  max-width: 400px;
-  margin: 2rem;
+  width: 100%;
 }
 
 .interactive-card {
