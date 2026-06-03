@@ -1,8 +1,14 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Staatliches&display=swap");
 
-* {
-  outline: 1px solid red;
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 
 body {
@@ -17,6 +23,16 @@ body {
   justify-content: space-around;
 }
 
+.navigation {
+  width: 50%;
+  display: flex;
+  background: pink;
+}
+
+.nav-link {
+  padding: 1rem;
+}
+
 .resume-header h1 {
   font-size: 72px;
   font-style: italic;
@@ -28,28 +44,30 @@ body {
 }
 .resume-subheader {
   display: flex;
+  width: 100%;
   flex-direction: column;
-  background: orangered;
+  background: hotpink;
   justify-content: space-between;
+  padding: 2rem;
 }
 .contact {
+  width: 50%;
+  background: orangered;
   font-size: 1.5rem;
   color: #ffffff;
   margin-bottom: 1rem;
 }
 .subhead {
-  width: 250px;
-}
-
-.subhead h2 {
-  font-size: 40px;
-  color: #3b002f;
+  font-size: 2rem;
+  color: purple;
+  line-height: 1;
+  margin-bottom: 1rem;
 }
 
 .S1 {
   display: flex;
   background: antiquewhite;
-  padding: 5rem;
+  padding: 1rem;
   flex-direction: row;
 }
 .names {
@@ -86,7 +104,40 @@ body {
   margin-bottom: 10px;
 }
 
+.card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.topic {
+  width: 100%;
+  border: 2px solid orange;
+  background-color: #e8d1ffe7;
+  padding: 2rem;
+  margin-bottom: 1rem;
+}
+
+.card-number {
+  display: block;
+  font-size: 5rem;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+/*how do i change the font size and style? this doesnt affect anything so far
+.topic-name {
+  font-size: large;
+  font-weight: 400;
+}*/
+
 @media (min-width: 768px) {
+  .card-container {
+    flex-direction: row;
+  }
+
+  .topic {
+    width: 23%;
+  }
   .nav {
     flex-direction: row;
   }
@@ -102,4 +153,52 @@ body {
   .resume-subheader {
     flex-direction: row;
   }
+  .S1 {
+    padding: 5rem;
+  }
+}
+
+/* AI sugestion/ questions::
+-how do i fix the overflow?
+-what is this: transition: all 0.3s ease;
+ -what does this part do? Remove the default triangle arrow in Chrome/Safari 
+.interactive-card summary::-webkit-details-marker {
+  display: none;
+}
+.interactive-card summary {
+  list-style: none;
+}
+-
+*/
+.card-container {
+  width: 100%;
+}
+
+.interactive-card {
+  background: #e8d1ffe7;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  /*transition: all 0.3s ease;*/
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background-color: #e8d1ffe7;
+  cursor: pointer;
+}
+
+.card-content {
+  padding: 1.5rem;
+  border-top: 1px solid #e8d1ffe7;
+  color: #495057;
+  /*height: auto;*/
+}
+
+.icon {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
