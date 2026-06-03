@@ -16,20 +16,19 @@ body {
   min-height: 100vh;
 }
 
-.pond-bg {
-  background-repeat: no-repeat;
-  min-height: 80vh;
-  background-image: url(andy-poystila/assets/andy-poystila_lily-pad_background.jpg);
-  background-size: 1920px;
-  background-position: top center;
-  background-color: 000;
-  background-origin: content-box, border-box;
+#background {
+  width: max-content;
+  position: initial;
+  background-size: cover;
+  overflow-y: scroll;
+  z-index:
+    0,
+    -1;
 }
 
 /* Making all images responsive */
 img {
-  max-width: 100%;
-  height: auto;
+  z-index: 1;
 }
 
 /* Typography */
