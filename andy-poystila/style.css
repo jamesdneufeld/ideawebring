@@ -14,22 +14,35 @@ html {
 body {
   font-family: var(--body-typeface);
   min-height: 100vh;
-}
-
-.pond-bg {
+  background: url(assets/andy-poystila_lily-pad_background.jpg);
+  background-size: cover;
+  background-position: 100%;
   background-repeat: no-repeat;
-  min-height: 80vh;
-  background-image: url(andy-poystila/assets/andy-poystila_lily-pad_background.jpg);
-  background-size: 1920px;
-  background-position: top center;
-  background-color: 000;
-  background-origin: content-box, border-box;
+  background-attachment: fixed;
 }
 
-/* Making all images responsive */
+#sticky-dock {
+  position: sticky;
+  top: 1;
+  bottom: 1;
+  z-index: 0;
+}
+
+#lily-leaf {
+  position: absolute;
+  z-index: 2;
+}
+
+#background {
+  width: max-content;
+  position: initial;
+  background-size: cover;
+  overflow-y: scroll;
+  z-index: -1;
+}
+
 img {
-  max-width: 100%;
-  height: auto;
+  z-index: 1;
 }
 
 /* Typography */
@@ -109,7 +122,7 @@ p {
   padding: 0.5rem 1rem;
   font-weight: 400;
   font-size: 2rem;
-
+  z-index: 2;
   justify-content: center;
   margin-bottom: 1rem;
 }
