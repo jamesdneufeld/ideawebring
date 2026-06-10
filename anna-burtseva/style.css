@@ -126,7 +126,12 @@ body {
 }
 pre {
   font-family: monospace;
-  font-size: 0.2rem;
+  /*font-size: 0.2rem;*/
+  color: #280058;
+}
+.center {
+  display: flex;
+  justify-content: center;
 }
 
 @media (min-width: 768px) {
