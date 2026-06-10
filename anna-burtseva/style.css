@@ -58,10 +58,12 @@ body {
   margin-bottom: 1rem;
 }
 .subhead {
-  font-size: 2rem;
+  font-size: 2vw;
   color: purple;
   line-height: 1;
   margin-bottom: 1rem;
+  flex: 1;
+  background: yellowgreen;
 }
 
 .S1 {
@@ -106,6 +108,8 @@ body {
 
 .card-container {
   display: flex;
+  width: 100%;
+  background: lemonchiffon;
   flex-direction: column;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -116,6 +120,8 @@ body {
   background-color: #e8d1ffe7;
   padding: 2rem;
   margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-number {
@@ -138,9 +144,17 @@ pre {
   .card-container {
     flex-direction: row;
   }
+  .topic {
+    width: 46%;
+    background: blue;
+  }
+}
 
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
   .topic {
     width: 23%;
+    background: hotpink;
   }
   .nav {
     flex-direction: row;
