@@ -19,6 +19,15 @@ body {
 section {
   background: antiquewhite;
 }
+
+.img,
+svg {
+  max-width: 100%;
+  height: auto;
+  vertical-align: top;
+  object-fit: cover;
+}
+
 h1 {
   font-weight: 900;
   font-style: italic;
@@ -53,24 +62,6 @@ p {
   font-size: 1.2rem;
   line-height: 1.4rem;
 }
-.job-duties {
-  list-style-type: disc;
-  margin-left: 1.5rem;
-  margin-bottom: 1.4rem;
-
-  color: #235c7e;
-}
-.job-duty-item {
-  margin-bottom: 0.5rem;
-}
-
-.edu,
-.exp,
-.skills {
-  padding: 1rem;
-}
-
-/* More specific class styles */
 
 button {
   font-family: "Lato", sans-serif;
@@ -84,8 +75,10 @@ pre {
   color: antiquewhite;
 }
 
+/* More specific class styles */
+
 .backdrop {
-  background-image: url(../alyssa-cheng/the-banks-of-the-oise.png);
+  background-image: url(../alyssa-cheng/assets/the-banks-of-the-oise.png);
   background-size: cover;
   display: flex;
   flex-direction: column;
@@ -94,19 +87,14 @@ pre {
   min-height: 100vh;
 }
 
-.gen-container,
-.main-nav {
+.gen-container {
   display: flex;
   flex-direction: column;
   text-align: center;
   border-radius: 2rem;
   width: 90%;
   margin: 2rem;
-}
-
-.gen-container {
   background: #235c7e;
-  border-radius: 2rem;
   padding: 2rem;
 }
 
@@ -120,16 +108,30 @@ pre {
   margin-bottom: 1rem;
 }
 
-.resume-nav {
+.test {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
-}
-.resume-header {
-  background: #235c7e;
-  padding: 2rem;
+  width: 60%;
+  background-color: #235c7e;
 }
 
+.container-columns {
+  display: flex;
+  flex-direction: row;
+}
+
+.one-third {
+  width: 33.33%;
+  padding: 1rem;
+}
+
+.two-thirds {
+  text-align: left;
+  width: 66.66%;
+  padding: 1rem;
+}
+
+.container-columns,
 .link-container,
 .ascii-art-container,
 .badges {
@@ -160,12 +162,41 @@ pre {
 .pg-link:hover {
   background-color: #94bebb;
 }
+
 .link-desc {
   color: antiquewhite;
   margin-bottom: 1rem;
 }
 .ext-link:hover {
   color: #94bebb;
+}
+
+/* Resume-Specific Style */
+
+.job-duties {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+  margin-bottom: 1.4rem;
+  color: #235c7e;
+}
+.job-duty-item {
+  margin-bottom: 0.5rem;
+}
+
+.edu,
+.exp,
+.skills {
+  padding: 1rem;
+}
+
+.resume-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.resume-header {
+  background: #235c7e;
+  padding: 2rem;
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -177,8 +208,7 @@ pre {
   .webring-nav {
     flex-direction: row;
   }
-  .gen-container,
-  .main-nav {
+  .gen-container {
     width: 60%;
   }
 }
@@ -218,8 +248,7 @@ pre {
   .skills-main {
     width: 80%;
   }
-  .index-contents,
-  .main-nav {
+  .index-contents {
     width: 55%;
   }
 }
