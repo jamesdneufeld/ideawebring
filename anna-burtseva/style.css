@@ -20,6 +20,7 @@ body {
   padding: 0.7rem;
   border: 2px solid rgb(63, 0, 118);
   border-radius: 30%;
+  display: inline-block;
   /*  WHY IS THE SIZE IF THE BOX DIFFERENT ON THE HOME AND LINK PAGES? */
 }
 .nav {
@@ -40,13 +41,13 @@ body {
   padding: 1rem;
 }
 
-.resume-header h1 {
-  font-size: 72px;
+.title {
+  font-size: 4.5rem;
   font-style: italic;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
   color: #d6d0e9;
 }
-.resume-header {
+.header {
   background: #6e2e69;
   padding: 5rem;
 }
@@ -138,13 +139,14 @@ body {
   flex: 1;
 }
 /* how to apply topic settings to other pages and oly change colors? */
+
 .plum {
   background-color: #6e2e69;
 }
 .rose {
   background-color: #c5aba5;
 }
-.lavander {
+.lavender {
   background-color: #d6d0e9;
 }
 .golden {
@@ -164,6 +166,19 @@ body {
   margin-bottom: 1rem;
   flex: 1;
   /* background: yellowgreen; */
+}
+
+/* Text colors in Cards */
+
+.light {
+  color: lightgoldenrodyellow;
+}
+.dark {
+  color: black;
+}
+.card-footer {
+  background: lightsalmon;
+  display: block;
 }
 
 .card-number {
