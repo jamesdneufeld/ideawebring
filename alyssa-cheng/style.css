@@ -29,6 +29,10 @@ iframe {
   object-fit: contain;
 }
 
+iframe {
+  margin-bottom: 1rem;
+}
+
 .max-text-width {
   max-width: 60ch;
 }
@@ -42,16 +46,14 @@ h1 {
 }
 h2 {
   font-weight: 700;
-  font-style: normal;
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
   color: antiquewhite;
 }
 h3 {
-  font-weight: 700;
-  font-style: normal;
+  font-weight: 500;
   font-size: 1.5rem;
-  margin-bottom: 0.3rem;
+  margin-bottom: 1.2rem;
   color: antiquewhite;
 }
 h4 {
@@ -62,9 +64,9 @@ h4 {
   margin-bottom: 0.4rem;
 }
 p {
-  margin-bottom: 1.5rem;
-  color: #94bebb;
-  font-size: 1.2rem;
+  margin-bottom: 1.6rem;
+  color: #abd7d3;
+  font-size: 1rem;
   line-height: 1.4rem;
 }
 
@@ -76,6 +78,7 @@ a {
   color: antiquewhite;
 }
 pre {
+  font-size: 0.5rem;
   font-family: monospace;
   color: antiquewhite;
 }
@@ -83,13 +86,15 @@ pre {
 /* More specific class styles */
 
 .backdrop {
-  background-image: url(../alyssa-cheng/assets/the-banks-of-the-oise.png);
+  /* background-image: url(../alyssa-cheng/assets/the-banks-of-the-oise.png); */
   background-size: cover;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .gen-container {
@@ -103,19 +108,26 @@ pre {
   padding: 2rem;
 }
 
-.para-md {
-  font-size: 1.3rem;
-  color: #6777b6;
-}
 .para-sm {
   color: #6777b6;
   font-size: 1rem;
   margin-bottom: 1rem;
 }
 
+.para-xs {
+  color: #abd7d3;
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.tags {
+  font-style: italic;
+}
+
 .grid-container {
   width: 90%;
   display: grid;
+  gap: 1.5rem;
   grid-template-columns: 100%;
 }
 
@@ -142,6 +154,7 @@ pre {
 }
 
 .container-columns,
+.grid-container,
 .link-container,
 .ascii-art-container,
 .badges {
@@ -169,7 +182,7 @@ pre {
   border-radius: 0.25rem;
 }
 .pg-link:hover {
-  background-color: #94bebb;
+  background-color: #abd7d3;
 }
 
 .link-desc {
@@ -177,7 +190,16 @@ pre {
   margin-bottom: 1rem;
 }
 .ext-link:hover {
-  color: #94bebb;
+  color: #abd7d3;
+}
+
+.music-artist {
+  font-style: italic;
+  text-decoration: none;
+}
+
+.music-artist:hover {
+  color: #abd7d3;
 }
 
 /* Resume-Specific Style */
@@ -186,6 +208,11 @@ pre {
   color: #235c7e;
 }
 
+.inst-name {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
 .job-duties {
   list-style-type: disc;
   margin-left: 1.5rem;
@@ -241,9 +268,15 @@ pre {
     font-size: 4rem;
   }
 
+  p {
+    font-size: 1.2rem;
+  }
+
+  pre {
+    font-size: 1rem;
+  }
+
   .grid-container {
-    width: 80%;
-    column-gap: 1.5rem;
     grid-template-columns: 1fr 1fr 1fr;
   }
 
