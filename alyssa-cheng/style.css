@@ -20,12 +20,17 @@ section {
   background: antiquewhite;
 }
 
-.img,
-svg {
+img,
+svg,
+iframe {
   max-width: 100%;
   height: auto;
   vertical-align: top;
-  object-fit: cover;
+  object-fit: contain;
+}
+
+.max-text-width {
+  max-width: 60ch;
 }
 
 h1 {
@@ -40,20 +45,20 @@ h2 {
   font-style: normal;
   font-size: 2rem;
   margin-bottom: 2rem;
-  color: #235c7e;
+  color: antiquewhite;
 }
 h3 {
   font-weight: 700;
   font-style: normal;
   font-size: 1.5rem;
   margin-bottom: 0.3rem;
-  color: #235c7e;
+  color: antiquewhite;
 }
 h4 {
   font-weight: 500;
   font-style: italic;
   font-size: 1.5rem;
-  color: #235c7e;
+  color: antiquewhite;
   margin-bottom: 0.4rem;
 }
 p {
@@ -108,11 +113,10 @@ pre {
   margin-bottom: 1rem;
 }
 
-.test {
-  display: flex;
-  flex-direction: row;
-  width: 60%;
-  background-color: #235c7e;
+.grid-container {
+  width: 90%;
+  display: grid;
+  grid-template-columns: 100%;
 }
 
 .container-columns {
@@ -120,9 +124,15 @@ pre {
   flex-direction: row;
 }
 
+.music-container {
+  text-align: left;
+  background-color: #235c7e;
+  padding: 1.2em;
+  border-radius: 2rem;
+}
+
 .one-third {
   width: 33.33%;
-  padding: 1rem;
 }
 
 .two-thirds {
@@ -138,7 +148,6 @@ pre {
   margin-bottom: 1.5rem;
 }
 .welcome-msg {
-  color: antiquewhite;
   font-size: 1.4rem;
   margin-bottom: 1rem;
 }
@@ -173,6 +182,10 @@ pre {
 
 /* Resume-Specific Style */
 
+.dark {
+  color: #235c7e;
+}
+
 .job-duties {
   list-style-type: disc;
   margin-left: 1.5rem;
@@ -201,6 +214,10 @@ pre {
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
+  .grid-container {
+    width: 90%;
+    grid-template-columns: 100%;
+  }
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -209,8 +226,13 @@ pre {
     flex-direction: row;
   }
   .gen-container {
-    width: 60%;
+    width: 80%;
   }
+}
+
+.grid-container {
+  width: 80%;
+  grid-template-columns: 100%;
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -218,6 +240,13 @@ pre {
   h1 {
     font-size: 4rem;
   }
+
+  .grid-container {
+    width: 80%;
+    column-gap: 1.5rem;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
   .welcome-msg {
     font-size: 1.8rem;
   }
@@ -229,6 +258,7 @@ pre {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    color: #235c7e;
   }
   .edu,
   .exp,
