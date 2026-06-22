@@ -10,6 +10,15 @@ html {
   box-sizing: inherit;
 }
 
+/* Variables */
+:root {
+  /* Typography */
+  /* Core Colours */
+  /* Backgrounds */
+  /* Headings */
+  /* Components */
+}
+
 /* General Styles */
 
 body {
@@ -64,10 +73,10 @@ h4 {
   margin-bottom: 0.4rem;
 }
 p {
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.2rem;
   color: #abd7d3;
   font-size: 1rem;
-  line-height: 1.4rem;
+  line-height: 1.8rem;
 }
 
 button {
@@ -86,15 +95,18 @@ pre {
 /* More specific class styles */
 
 .backdrop {
-  /* background-image: url(../alyssa-cheng/assets/the-banks-of-the-oise.png); */
-  background-size: cover;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+}
+
+.home {
+  background-image: url(../alyssa-cheng/assets/the-banks-of-the-oise.png);
+  background-size: cover;
+  margin-bottom: 0rem;
 }
 
 .gen-container {
@@ -118,6 +130,7 @@ pre {
   color: #abd7d3;
   font-size: 1rem;
   margin-bottom: 0.8rem;
+  line-height: 1.4rem;
 }
 
 .tags {
@@ -200,6 +213,10 @@ pre {
 
 .music-artist:hover {
   color: #abd7d3;
+}
+
+.spotify-embed {
+  min-height: 10rem;
 }
 
 /* Resume-Specific Style */
