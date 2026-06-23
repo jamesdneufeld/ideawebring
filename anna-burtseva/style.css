@@ -15,6 +15,14 @@ body {
   font-family: "Rubik", sans-serif;
   padding: 1rem;
 }
+.link {
+  background-color: white;
+  padding: 0.7rem;
+  border: 2px solid rgb(63, 0, 118);
+  border-radius: 30%;
+  display: inline-block;
+  /*  WHY IS THE SIZE IF THE BOX DIFFERENT ON THE HOME AND LINK PAGES? */
+}
 .nav {
   display: flex;
   flex-direction: column;
@@ -33,13 +41,14 @@ body {
   padding: 1rem;
 }
 
-.resume-header h1 {
-  font-size: 72px;
+.title {
+  font-size: 4.5rem;
   font-style: italic;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
+  color: #d6d0e9;
 }
-.resume-header {
-  background: #ce8cf6;
+.header {
+  background: #6e2e69;
   padding: 5rem;
 }
 .resume-subheader {
@@ -62,6 +71,7 @@ body {
   color: purple;
   line-height: 1;
   margin-bottom: 1rem;
+  margin-right: 1rem;
 }
 
 .S1 {
@@ -83,7 +93,7 @@ body {
 }
 .details {
   font-size: 1rem;
-  color: #53058a;
+  color: #6e2e69;
   padding: 2rem;
 }
 
@@ -106,8 +116,11 @@ body {
 
 .card-container {
   display: flex;
+  width: 100%;
+  background: lemonchiffon;
   flex-direction: column;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .topic {
   width: 100%;
@@ -115,6 +128,57 @@ body {
   background-color: #e8d1ffe7;
   padding: 2rem;
   margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.hexcode {
+  font-size: 1vw;
+  color: white;
+  line-height: 1;
+  margin-bottom: 1rem;
+  flex: 1;
+}
+/* how to apply topic settings to other pages and oly change colors? */
+
+.plum {
+  background-color: #6e2e69;
+}
+.rose {
+  background-color: #c5aba5;
+}
+.lavender {
+  background-color: #d6d0e9;
+}
+.golden {
+  background-color: #edb100;
+}
+.moss {
+  background-color: #335e00;
+}
+.crimson {
+  background-color: #7e000b;
+}
+
+.card-subhead {
+  font-size: 2vw;
+  color: purple;
+  line-height: 1;
+  margin-bottom: 1rem;
+  flex: 1;
+  /* background: yellowgreen; */
+}
+
+/* Text colors in Cards */
+
+.light {
+  color: lightgoldenrodyellow;
+}
+.dark {
+  color: black;
+}
+.card-footer {
+  background: lightsalmon;
+  display: block;
 }
 
 .card-number {
@@ -123,18 +187,28 @@ body {
   color: white;
   margin-bottom: 1rem;
 }
-
-/*how do i change the font size and style? this doesnt affect anything so far
-.topic-name {
-  font-size: large;
-  font-weight: 400;
-}*/
+pre {
+  font-family: monospace;
+  /*font-size: 0.2rem;*/
+  color: #280058;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  margin-left: 25%;
+}
 
 @media (min-width: 768px) {
   .card-container {
     flex-direction: row;
   }
+  .topic {
+    width: 46%;
+  }
+}
 
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
   .topic {
     width: 23%;
   }
@@ -144,7 +218,6 @@ body {
 
   .names {
     flex-direction: row;
-    background: pink;
   }
 
   .company {
@@ -156,49 +229,4 @@ body {
   .S1 {
     padding: 5rem;
   }
-}
-
-/* AI sugestion/ questions::
--how do i fix the overflow?
--what is this: transition: all 0.3s ease;
- -what does this part do? Remove the default triangle arrow in Chrome/Safari 
-.interactive-card summary::-webkit-details-marker {
-  display: none;
-}
-.interactive-card summary {
-  list-style: none;
-}
--
-*/
-.card-container {
-  width: 100%;
-}
-
-.interactive-card {
-  background: #e8d1ffe7;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  /*transition: all 0.3s ease;*/
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem;
-  background-color: #e8d1ffe7;
-  cursor: pointer;
-}
-
-.card-content {
-  padding: 1.5rem;
-  border-top: 1px solid #e8d1ffe7;
-  color: #495057;
-  /*height: auto;*/
-}
-
-.icon {
-  font-size: 1.5rem;
-  font-weight: bold;
 }

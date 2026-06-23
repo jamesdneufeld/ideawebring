@@ -10,6 +10,15 @@ html {
   box-sizing: inherit;
 }
 
+/* Variables */
+:root {
+  /* Typography */
+  /* Core Colours */
+  /* Backgrounds */
+  /* Headings */
+  /* Components */
+}
+
 /* General Styles */
 
 body {
@@ -19,6 +28,24 @@ body {
 section {
   background: antiquewhite;
 }
+
+img,
+svg,
+iframe {
+  max-width: 100%;
+  height: auto;
+  vertical-align: top;
+  object-fit: contain;
+}
+
+iframe {
+  margin-bottom: 1rem;
+}
+
+.max-text-width {
+  max-width: 60ch;
+}
+
 h1 {
   font-weight: 900;
   font-style: italic;
@@ -28,49 +55,29 @@ h1 {
 }
 h2 {
   font-weight: 700;
-  font-style: normal;
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  color: #235c7e;
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  color: antiquewhite;
 }
 h3 {
-  font-weight: 700;
-  font-style: normal;
+  font-weight: 500;
   font-size: 1.5rem;
-  margin-bottom: 0.3rem;
-  color: #235c7e;
+  margin-bottom: 1.2rem;
+  color: antiquewhite;
 }
 h4 {
   font-weight: 500;
   font-style: italic;
   font-size: 1.5rem;
-  color: #235c7e;
+  color: antiquewhite;
   margin-bottom: 0.4rem;
 }
 p {
-  margin-bottom: 1.5rem;
-  color: #94bebb;
-  font-size: 1.2rem;
-  line-height: 1.4rem;
+  margin-bottom: 1.2rem;
+  color: #abd7d3;
+  font-size: 1rem;
+  line-height: 1.8rem;
 }
-.job-duties {
-  list-style-type: disc;
-  margin-left: 1.5rem;
-  margin-bottom: 1.4rem;
-
-  color: #235c7e;
-}
-.job-duty-item {
-  margin-bottom: 0.5rem;
-}
-
-.edu,
-.exp,
-.skills {
-  padding: 1rem;
-}
-
-/* More specific class styles */
 
 button {
   font-family: "Lato", sans-serif;
@@ -80,63 +87,93 @@ a {
   color: antiquewhite;
 }
 pre {
+  font-size: 0.5rem;
   font-family: monospace;
   color: antiquewhite;
 }
 
+/* More specific class styles */
+
 .backdrop {
-  background-image: url(../alyssa-cheng/the-banks-of-the-oise.png);
-  background-size: cover;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  margin-bottom: 1.5rem;
 }
 
-.gen-container,
-.main-nav {
+.home {
+  background-image: url(../alyssa-cheng/assets/the-banks-of-the-oise.png);
+  background-size: cover;
+  margin-bottom: 0rem;
+}
+
+.gen-container {
   display: flex;
   flex-direction: column;
   text-align: center;
   border-radius: 2rem;
   width: 90%;
   margin: 2rem;
-}
-
-.gen-container {
   background: #235c7e;
-  border-radius: 2rem;
   padding: 2rem;
 }
 
-.para-md {
-  font-size: 1.3rem;
-  color: #6777b6;
-}
 .para-sm {
   color: #6777b6;
   font-size: 1rem;
   margin-bottom: 1rem;
 }
 
-.resume-nav {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-}
-.resume-header {
-  background: #235c7e;
-  padding: 2rem;
+.para-xs {
+  color: #abd7d3;
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+  line-height: 1.4rem;
 }
 
+.tags {
+  font-style: italic;
+}
+
+.grid-container {
+  width: 90%;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 100%;
+}
+
+.container-columns {
+  display: flex;
+  flex-direction: row;
+}
+
+.music-container {
+  text-align: left;
+  background-color: #235c7e;
+  padding: 1.2em;
+  border-radius: 2rem;
+}
+
+.one-third {
+  width: 33.33%;
+}
+
+.two-thirds {
+  text-align: left;
+  width: 66.66%;
+  padding: 1rem;
+}
+
+.container-columns,
+.grid-container,
 .link-container,
 .ascii-art-container,
 .badges {
   margin-bottom: 1.5rem;
 }
 .welcome-msg {
-  color: antiquewhite;
   font-size: 1.4rem;
   margin-bottom: 1rem;
 }
@@ -158,18 +195,73 @@ pre {
   border-radius: 0.25rem;
 }
 .pg-link:hover {
-  background-color: #94bebb;
+  background-color: #abd7d3;
 }
+
 .link-desc {
   color: antiquewhite;
   margin-bottom: 1rem;
 }
 .ext-link:hover {
-  color: #94bebb;
+  color: #abd7d3;
+}
+
+.music-artist {
+  font-style: italic;
+  text-decoration: none;
+}
+
+.music-artist:hover {
+  color: #abd7d3;
+}
+
+.spotify-embed {
+  min-height: 10rem;
+}
+
+/* Resume-Specific Style */
+
+.dark {
+  color: #235c7e;
+}
+
+.inst-name {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.job-duties {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+  margin-bottom: 1.4rem;
+  color: #235c7e;
+}
+.job-duty-item {
+  margin-bottom: 0.5rem;
+}
+
+.edu,
+.exp,
+.skills {
+  padding: 1rem;
+}
+
+.resume-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.resume-header {
+  background: #235c7e;
+  padding: 2rem;
 }
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
+  .grid-container {
+    width: 90%;
+    grid-template-columns: 100%;
+  }
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -177,10 +269,14 @@ pre {
   .webring-nav {
     flex-direction: row;
   }
-  .gen-container,
-  .main-nav {
-    width: 60%;
+  .gen-container {
+    width: 80%;
   }
+}
+
+.grid-container {
+  width: 80%;
+  grid-template-columns: 100%;
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -188,6 +284,19 @@ pre {
   h1 {
     font-size: 4rem;
   }
+
+  p {
+    font-size: 1.2rem;
+  }
+
+  pre {
+    font-size: 1rem;
+  }
+
+  .grid-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
   .welcome-msg {
     font-size: 1.8rem;
   }
@@ -199,6 +308,7 @@ pre {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    color: #235c7e;
   }
   .edu,
   .exp,
@@ -218,8 +328,7 @@ pre {
   .skills-main {
     width: 80%;
   }
-  .index-contents,
-  .main-nav {
+  .index-contents {
     width: 55%;
   }
 }
