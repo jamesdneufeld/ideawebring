@@ -23,14 +23,9 @@ body {
 
 #sticky-dock {
   position: sticky;
-  top: 1;
+  top: 0;
   bottom: 1;
   z-index: 0;
-}
-
-#lily-leaf {
-  position: absolute;
-  z-index: 2;
 }
 
 #background {
@@ -70,10 +65,15 @@ p {
 
 /* Hyperlink Styles */
 a {
+  z-index: 1;
+  font-size: 3.5rem;
   text-decoration: none;
   color: #cfff97;
 }
 a:hover {
+  z-index: 1;
+  font-size: 3rem;
+  rotate: 30deg;
   color: #32ca4e;
 }
 
@@ -182,4 +182,78 @@ p {
   cursor: default;
   user-select: none;
   transition: background 0.3s; /* Add transition for smooth hover */
+}
+
+.lilypad {
+  display: inline-block;
+}
+
+.pad01 {
+  position: absolute;
+  left: 830px;
+  top: 270px;
+  z-index: 1;
+}
+
+.pad02 {
+  position: absolute;
+  left: 1150px;
+  top: 275px;
+  z-index: 1;
+}
+
+.pad03 {
+  position: absolute;
+  left: 1570px;
+  top: 470px;
+  z-index: 1;
+}
+
+.pad04 {
+  position: absolute;
+  left: 1260px;
+  top: 490px;
+  z-index: 1;
+}
+
+.pad05 {
+  position: absolute;
+  left: 1370px;
+  top: 850px;
+  z-index: 1;
+}
+
+.pad06 {
+  position: absolute;
+  left: 830px;
+  top: 650px;
+  z-index: 1;
+}
+
+.pad07 {
+  position: absolute;
+  left: 850px;
+  top: 940px;
+  z-index: 1;
+}
+
+.pad08 {
+  position: absolute;
+  left: 1260px;
+  top: 1015px;
+  z-index: 1;
+}
+
+.lily01 {
+  position: absolute;
+  left: 830px;
+  top: 650px;
+  z-index: 1;
+}
+
+.lily02 {
+  position: absolute;
+  left: 830px;
+  top: 650px;
+  z-index: 1;
 }
