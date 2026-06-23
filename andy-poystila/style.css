@@ -73,7 +73,8 @@ a {
 a:hover {
   z-index: 1;
   font-size: 3rem;
-  rotate: 30deg;
+  size-adjust: 3rem;
+  rotate: 5deg;
   color: #32ca4e;
 }
 
@@ -115,15 +116,15 @@ p {
 
 .webring {
   font-family: "Jacquard 12", system-ui;
-  display: inline-flex;
+  justify-content: end;
+  display: inline-block;
   align-items: center;
-  gap: 0.625rem; /* space between items */
+  gap: 0.725rem; /* space between items */
   background: #195843;
   padding: 0.5rem 1rem;
   font-weight: 400;
   font-size: 2rem;
-  z-index: 2;
-  justify-content: center;
+  z-index: 1;
   margin-bottom: 1rem;
 }
 
@@ -141,7 +142,7 @@ p {
 .webring-previous:hover,
 .webring-next:hover,
 .webring-hub:hover {
-  background: #195843;
+  size-adjust: 1rem;
 }
 
 /* Divider between links */
@@ -151,6 +152,7 @@ p {
   font-weight: 400;
   font-weight: 400;
   font-size: 2rem;
+  align-items: center;
 }
 
 /* ===========================================================
@@ -204,40 +206,54 @@ p {
 
 .pad03 {
   position: absolute;
-  left: 1570px;
-  top: 470px;
+  left: 1437px;
+  top: 417px;
   z-index: 1;
 }
 
 .pad04 {
+  position: absolute;
+  left: 1437px;
+  top: 417px;
+  z-index: 1;
+}
+
+.pad05 {
   position: absolute;
   left: 1260px;
   top: 490px;
   z-index: 1;
 }
 
-.pad05 {
+.pad06 {
   position: absolute;
   left: 1370px;
   top: 850px;
   z-index: 1;
 }
 
-.pad06 {
+.pad07 {
   position: absolute;
   left: 830px;
   top: 650px;
   z-index: 1;
 }
 
-.pad07 {
+.pad08 {
   position: absolute;
   left: 850px;
   top: 940px;
   z-index: 1;
 }
 
-.pad08 {
+.pad09 {
+  position: absolute;
+  left: 1260px;
+  top: 1015px;
+  z-index: 1;
+}
+
+.pad10 {
   position: absolute;
   left: 1260px;
   top: 1015px;
