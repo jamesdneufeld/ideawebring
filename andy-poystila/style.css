@@ -35,7 +35,7 @@ body {
   width: max-content;
   position: initial;
   background-size: cover;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   z-index: -1;
 }
 
