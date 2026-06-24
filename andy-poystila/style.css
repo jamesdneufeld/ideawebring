@@ -1,6 +1,9 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Jacquard+12&display=swap");
 
+/* File for animation effects that make elements move (e.g., flying) */
+@import url("make-something-fly.css");
+
 html {
   box-sizing: border-box;
   scroll-behavior: smooth;
