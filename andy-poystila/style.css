@@ -7,6 +7,7 @@
 html {
   box-sizing: border-box;
   scroll-behavior: smooth;
+  background-color: #000;
 }
 *,
 *:before,
@@ -24,12 +25,16 @@ body {
   background-attachment: fixed;
 }
 
-#sticky-dock {
+.web-ring-menu {
+  border: 10px solid white;
+}
+
+/* #sticky-dock {
   position: sticky;
   top: 0;
   bottom: 1;
   z-index: 0;
-}
+} */
 
 #background {
   width: max-content;
@@ -39,8 +44,11 @@ body {
   z-index: -1;
 }
 
+/* Essential for responsive images on every website */
 img {
-  z-index: 1;
+  max-width: 100%;
+  height: auto;
+  border: 2px solid red;
 }
 
 /* Typography */
@@ -189,90 +197,125 @@ p {
   transition: background 0.3s; /* Add transition for smooth hover */
 }
 
-.lilypad {
-  display: inline-block;
+/* Mobile Layout */
+.pond {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-width: 100vh;
 }
 
-.pad01 {
+/* .pad01 {
   position: absolute;
   left: 830px;
   top: 270px;
   z-index: 1;
-}
+} */
 
-.pad02 {
+/* .pad02 {
   position: absolute;
   left: 1150px;
   top: 275px;
   z-index: 1;
-}
+} */
 
-.pad03 {
+/* .pad03 {
   position: absolute;
   left: 1437px;
   top: 417px;
   z-index: 1;
-}
+} */
 
-.pad04 {
+/* .pad04 {
   position: absolute;
   left: 1437px;
   top: 417px;
   z-index: 1;
-}
+} */
 
-.pad05 {
+/* .pad05 {
   position: absolute;
   left: 1260px;
   top: 490px;
   z-index: 1;
-}
+} */
 
-.pad06 {
-  position: absolute;
-  left: 1370px;
-  top: 850px;
-  z-index: 1;
-}
-
-.pad07 {
+/* .pad07 {
   position: absolute;
   left: 830px;
   top: 650px;
   z-index: 1;
-}
+} */
 
-.pad08 {
+/* .pad08 {
   position: absolute;
   left: 850px;
   top: 940px;
   z-index: 1;
-}
+} */
 
-.pad09 {
+/* .pad09 {
   position: absolute;
   left: 1260px;
   top: 1015px;
   z-index: 1;
-}
+} */
 
-.pad10 {
+/* .pad10 {
   position: absolute;
   left: 1260px;
   top: 1015px;
   z-index: 1;
-}
+} */
 
-.lily01 {
+/* .lily01 {
   position: absolute;
   left: 830px;
   top: 650px;
   z-index: 1;
-}
+} */
 
-.lily02 {
+/* .lily02 {
   position: absolute;
   left: 830px;
   top: 650px;
   z-index: 1;
+} */
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .pond {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  .pad01 {
+    grid-column: 4/6;
+    grid-row: 3/4;
+    border: 2px solid purple;
+  }
+
+  .pad02 {
+    grid-column: 8/9;
+    grid-row: 6/7;
+    border: 2px solid yellow;
+  }
+
+  .pad06 {
+    width: 100%;
+    grid-column: 2/5;
+    grid-row: 2/4;
+    border: 2px solid pink;
+    /* position: absolute;
+  left: 1370px;
+  top: 850px;
+  z-index: 1; */
+  }
+
+  .pad08 {
+    width: 100%;
+    grid-column: 18/20;
+    grid-row: 4/5;
+    background: orange;
+  }
 }
