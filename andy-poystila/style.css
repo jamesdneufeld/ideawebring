@@ -1,9 +1,13 @@
 /* Typography imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Jacquard+12&display=swap");
 
+/* File for animation effects that make elements move (e.g., flying) */
+@import url("make-something-fly.css");
+
 html {
   box-sizing: border-box;
   scroll-behavior: smooth;
+  background-color: #000;
 }
 *,
 *:before,
@@ -21,28 +25,23 @@ body {
   background-attachment: fixed;
 }
 
-#sticky-dock {
-  position: sticky;
-  top: 1;
-  bottom: 1;
-  z-index: 0;
-}
-
-#lily-leaf {
-  position: absolute;
-  z-index: 2;
+.web-ring-menu {
+  border: 10px solid white;
 }
 
 #background {
   width: max-content;
   position: initial;
   background-size: cover;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   z-index: -1;
 }
 
+/* Essential for responsive images on every website */
 img {
-  z-index: 1;
+  max-width: 100%;
+  height: auto;
+  border: 2px solid red;
 }
 
 /* Typography */
@@ -70,10 +69,16 @@ p {
 
 /* Hyperlink Styles */
 a {
+  z-index: 1;
+  font-size: 3.5rem;
   text-decoration: none;
   color: #cfff97;
 }
 a:hover {
+  z-index: 1;
+  font-size: 3rem;
+  size-adjust: 3rem;
+  rotate: 5deg;
   color: #32ca4e;
 }
 
@@ -115,15 +120,15 @@ p {
 
 .webring {
   font-family: "Jacquard 12", system-ui;
-  display: inline-flex;
+  justify-content: end;
+  display: inline-block;
   align-items: center;
-  gap: 0.625rem; /* space between items */
+  gap: 0.725rem; /* space between items */
   background: #195843;
   padding: 0.5rem 1rem;
   font-weight: 400;
   font-size: 2rem;
-  z-index: 2;
-  justify-content: center;
+  z-index: 1;
   margin-bottom: 1rem;
 }
 
@@ -141,7 +146,7 @@ p {
 .webring-previous:hover,
 .webring-next:hover,
 .webring-hub:hover {
-  background: #195843;
+  size-adjust: 1rem;
 }
 
 /* Divider between links */
@@ -151,6 +156,7 @@ p {
   font-weight: 400;
   font-weight: 400;
   font-size: 2rem;
+  align-items: center;
 }
 
 /* ===========================================================
@@ -182,4 +188,132 @@ p {
   cursor: default;
   user-select: none;
   transition: background 0.3s; /* Add transition for smooth hover */
+}
+
+/* Mobile Layout */
+.pond {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-width: 100vh;
+}
+
+/* .pad01 {
+  position: absolute;
+  left: 830px;
+  top: 270px;
+  z-index: 1;
+} */
+
+/* .pad02 {
+  position: absolute;
+  left: 1150px;
+  top: 275px;
+  z-index: 1;
+} */
+
+/* .pad03 {
+  position: absolute;
+  left: 1437px;
+  top: 417px;
+  z-index: 1;
+} */
+
+/* .pad04 {
+  position: absolute;
+  left: 1437px;
+  top: 417px;
+  z-index: 1;
+} */
+
+/* .pad05 {
+  position: absolute;
+  left: 1260px;
+  top: 490px;
+  z-index: 1;
+} */
+
+/* .pad07 {
+  position: absolute;
+  left: 830px;
+  top: 650px;
+  z-index: 1;
+} */
+
+/* .pad08 {
+  position: absolute;
+  left: 850px;
+  top: 940px;
+  z-index: 1;
+} */
+
+/* .pad09 {
+  position: absolute;
+  left: 1260px;
+  top: 1015px;
+  z-index: 1;
+} */
+
+/* .pad10 {
+  position: absolute;
+  left: 1260px;
+  top: 1015px;
+  z-index: 1;
+} */
+
+/* .lily01 {
+  position: absolute;
+  left: 830px;
+  top: 650px;
+  z-index: 1;
+} */
+
+/* .lily02 {
+  position: absolute;
+  left: 830px;
+  top: 650px;
+  z-index: 1;
+} */
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .pond {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  .pad01 {
+    grid-column: 4/6;
+    grid-row: 3/4;
+    border: 2px solid purple;
+  }
+
+  .pad02 {
+    grid-column: 3/5;
+    grid-row: 3/4;
+    background-color: #32ca4e;
+  }
+
+  .pad06 {
+    width: 100%;
+    grid-column: 2/5;
+    grid-row: 2/4;
+    border: 2px solid pink;
+    /* position: absolute;
+  left: 1370px;
+  top: 850px;
+  z-index: 1; */
+  }
+
+  .pad08 {
+    width: 100%;
+    grid-column: 18/20;
+    grid-row: 4/5;
+    background: orange;
+  }
+
+  .dock {
+    grid-column: 1/12;
+    grid-row: 4/20;
+  }
 }
