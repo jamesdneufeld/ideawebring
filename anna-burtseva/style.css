@@ -171,13 +171,12 @@ body {
 /* Text colors in Cards */
 
 .light {
-  color: lightgoldenrodyellow;
+  color: #d6d0e9;
 }
 .dark {
-  color: black;
+  color: #6e2e69;
 }
 .card-footer {
-  background: lightsalmon;
   display: block;
 }
 
