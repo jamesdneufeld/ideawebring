@@ -4,13 +4,13 @@
 
 .flier > * {
   /* Adjust animation duration to change the element’s speed */
-  animation: fly 10s linear infinite;
+  animation: fly 20s linear infinite;
   pointer-events: none !important;
   top: 0;
   left: 0;
   transform: translateX(-320%) translateY(-320%) rotateZ(0);
   position: fixed;
-  animation-delay: 160s;
+  animation-delay: 20s;
   z-index: 999999;
   width: 5rem;
 }
@@ -20,7 +20,7 @@
     represents a path the element follows across the screen. */
 
 .ghost {
-  animation: fly 160s linear infinite;
+  animation: fly 20s linear infinite;
   top: 0;
   left: 0;
   position: fixed;
