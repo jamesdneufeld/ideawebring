@@ -20,8 +20,8 @@ body {
   padding: 0.7rem;
   border: 2px solid rgb(63, 0, 118);
   border-radius: 30%;
+  corner-shape: superellipse(1.64);
   display: inline-block;
-  /*  WHY IS THE SIZE IF THE BOX DIFFERENT ON THE HOME AND LINK PAGES? */
 }
 .nav {
   display: flex;
@@ -34,7 +34,6 @@ body {
 .navigation {
   width: 50%;
   display: flex;
-  background: pink;
 }
 
 .nav-link {
@@ -55,13 +54,11 @@ body {
   display: flex;
   width: 100%;
   flex-direction: column;
-  background: hotpink;
   justify-content: space-between;
   padding: 2rem;
 }
 .contact {
   width: 50%;
-  background: orangered;
   font-size: 1.5rem;
   color: #ffffff;
   margin-bottom: 1rem;
@@ -85,7 +82,6 @@ body {
   justify-content: space-between;
   flex-direction: column;
   font-size: 24px;
-  background: lemonchiffon;
 }
 
 .company {
@@ -117,7 +113,6 @@ body {
 .card-container {
   display: flex;
   width: 100%;
-  background: lemonchiffon;
   flex-direction: column;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -169,7 +164,9 @@ body {
 }
 
 /* Text colors in Cards */
-
+.white {
+  color: #ffffff;
+}
 .light {
   color: #d6d0e9;
 }
@@ -196,7 +193,119 @@ pre {
   justify-content: center;
   margin-left: 25%;
 }
+.music-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.music-title {
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: #6e2e69;
+  padding: 1rem;
+}
+.music-ascii {
+  padding: 3rem;
+}
+.music-box {
+  padding: 2rem;
+  border: solid #6e2e69 1rem;
+  border-radius: 11%;
+  border-block-style: revert-layer;
+  corner-shape: superellipse(-2);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  text-align: center;
+  align-items: flex-start;
+}
+.music-link {
+  background-color: antiquewhite;
+  padding: 0.7rem;
+  border: 0.5rem solid rgb(255, 162, 0);
+  border-radius: 17%;
+  corner-shape: superellipse(-1.5);
+  display: inline-block;
+}
+.comment {
+  padding: 1rem;
+  font-size: 1.5rem;
+  color: #15084f;
+}
+.B0 {
+  background-color: rgb(0, 174, 222);
+}
+.size1 {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  width: 100%;
+}
 
+.ascii-art {
+  font-family: monospace;
+  font-size: 6px; /* Try 6–10px */
+  line-height: 0.9;
+  white-space: pre;
+  color: #ffffff;
+}
+.B1 {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 2rem;
+  background-color: rgb(0, 174, 222);
+}
+.b-text {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 2rem;
+}
+.b-header {
+  font-size: 3rem;
+  font-weight: 600;
+  padding-bottom: 1.5rem;
+  color: #ffffff;
+}
+.b-line {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 6rem;
+}
+.b-audio {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  /* align-items: center; */
+}
+.extra {
+  padding-bottom: 2rem;
+  color: #ffffff;
+}
+.b-audio audio {
+  width: 60%;
+}
+.b-top {
+  display: flex;
+  width: 100%;
+  background: rgba(190, 49, 120, 0.754);
+  justify-content: space-between;
+  padding: 2rem;
+}
+.b-link {
+  background-color: white;
+  padding: 0.7rem;
+  border: 2px solid rgb(63, 0, 118);
+  border-radius: 30%;
+  display: inline-block;
+}
+/* EXPLORING BORDERS */
+
+/* MEDIA */
 @media (min-width: 768px) {
   .card-container {
     flex-direction: row;
