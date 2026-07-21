@@ -38,12 +38,9 @@ iframe {
   object-fit: contain;
 }
 
-iframe {
+iframe,
+.about-img {
   margin-bottom: 1rem;
-}
-
-.max-text-width {
-  max-width: 60ch;
 }
 
 h1 {
@@ -94,9 +91,16 @@ pre {
 
 /* More specific class styles */
 
-.backdrop {
+.backdrop,
+.gen-container,
+.currently-doing,
+.container-columns,
+.webring-nav {
   display: flex;
   flex-direction: column;
+}
+
+.backdrop {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -109,9 +113,12 @@ pre {
   margin-bottom: 0rem;
 }
 
+.brutalist-page {
+  font-family: "Courier New", Courier, monospace;
+  padding: 0rem 11rem 3rem 11rem;
+}
+
 .gen-container {
-  display: flex;
-  flex-direction: column;
   text-align: center;
   border-radius: 2rem;
   width: 90%;
@@ -144,12 +151,7 @@ pre {
   grid-template-columns: 100%;
 }
 
-.container-columns {
-  display: flex;
-  flex-direction: row;
-}
-
-.music-container {
+.grid-item {
   text-align: left;
   background-color: #235c7e;
   padding: 1.2em;
@@ -157,31 +159,48 @@ pre {
 }
 
 .one-third {
-  width: 33.33%;
+  width: 100%;
 }
 
 .two-thirds {
   text-align: left;
-  width: 66.66%;
-  padding: 1rem;
+  width: 100%;
 }
 
 .container-columns,
 .grid-container,
 .link-container,
 .ascii-art-container,
-.badges {
+.badges,
+.card,
+.currently-doing {
   margin-bottom: 1.5rem;
 }
+.currently-doing {
+  max-width: 90%;
+}
+
+.card {
+  padding: 2rem;
+  background-color: #235c7e;
+  border-radius: 1.5rem;
+}
+
+.scoop {
+  corner-shape: scoop;
+}
+
+.thumbnail {
+  min-height: 4rem;
+}
+
 .welcome-msg {
   font-size: 1.4rem;
   margin-bottom: 1rem;
 }
 .webring-nav {
-  display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
 }
 .nav-link {
   color: #235c7e;
@@ -219,11 +238,24 @@ pre {
   min-height: 10rem;
 }
 
-/* Resume-Specific Style */
-
+.about-img {
+  border-radius: 2rem;
+}
 .dark {
   color: #235c7e;
 }
+
+.plain {
+  font-family: "Courier New", Courier, monospace;
+  color: #235c7e;
+  text-decoration: none;
+  font-style: normal;
+}
+
+.brutalist-header {
+  padding: 5rem 11rem 0rem 11rem;
+}
+/* Resume-Specific Style */
 
 .inst-name {
   font-size: 1.6rem;
@@ -262,6 +294,14 @@ pre {
     width: 90%;
     grid-template-columns: 100%;
   }
+
+  .container-columns {
+    flex-direction: column;
+  }
+  .one-third,
+  .two-thirds {
+    width: 100%;
+  }
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -277,6 +317,23 @@ pre {
 .grid-container {
   width: 80%;
   grid-template-columns: 100%;
+}
+
+.container-columns {
+  flex-direction: row;
+}
+.one-third {
+  width: 33.33%;
+  padding-right: 2rem;
+}
+
+.two-thirds {
+  width: 66.66%;
+  padding-left: 0rem;
+  padding-right: 0rem;
+}
+
+.about-img {
 }
 
 /* Large devices (desktops, 992px and up) */
