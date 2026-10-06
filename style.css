@@ -79,7 +79,7 @@ h1 {
 }
 
 h2 {
-  font-size: 2.25rem;
+  font-size: 1.5rem;
   font-family: var(--subheading);
   font-weight: 500;
   margin-bottom: 1.5rem;
@@ -163,6 +163,7 @@ code {
   width: 100%;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 .site-nav-item {
   padding: 1rem;
@@ -265,7 +266,7 @@ a:hover {
 
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: 1fr;
   grid-auto-rows: 1fr;
   gap: 1rem;
   padding-top: 2rem;
@@ -334,7 +335,7 @@ a:hover {
   justify-content: center;
   background: var(--bg-secondary);
   color: var(--text-secondary);
-  padding: 3rem;
+  padding: 0.5rem;
 }
 
 .explore-ring,
@@ -347,7 +348,7 @@ a:hover {
   justify-content: center;
   background-image: var(--bg-accent);
   color: var(--text-inverse);
-  padding: 3rem;
+  padding: 0.5rem;
 }
 .what-is-webring,
 .student-hub,
@@ -359,7 +360,7 @@ a:hover {
   align-items: center;
   background: var(--bg-primary);
   color: var(--text-primary);
-  padding: 3rem;
+  padding: 0.5rem;
 }
 
 /* Special sections */
@@ -696,9 +697,29 @@ a:hover {
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+  h2 {
+    font-size: 2.25rem;
+  }
   pre {
     font-size: 1rem;
     padding: 2rem;
     text-align: center;
+    text-fit: shrink;
+    width: 100%;
+  }
+
+  .curriculum-anchor,
+  .concept-section,
+  .process-section,
+  .about-project,
+  .tools-skills,
+  .project-log-teaser,
+  .explore-ring,
+  .methodology-section,
+  .how-it-works,
+  .what-is-webring,
+  .student-hub,
+  .reflection-section {
+    padding: 3rem;
   }
 }
