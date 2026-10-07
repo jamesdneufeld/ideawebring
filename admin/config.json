@@ -5,7 +5,7 @@
     "name": "ideawebring",
     "branch": "main"
   },
-  "excludeFolders": [".git", ".vscode", "admin", "js", "css", "lib", "assets", "blank-bdes", "blank-ixd", "ixd", "james", "james-in-class", "learning", "log"],
+  "excludeFolders": [".git", ".vscode", "admin", "js", "css", "lib", "assets", "blank-bdes", "blank-ixd", "ixd", "james", "james-in-class", "learning", "log", "badges"],
   "defaults": {
     "program": "BDes",
     "year": "2026",
